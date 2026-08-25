@@ -1,0 +1,11 @@
+.DS_Store
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+
+# Local assessment artifact; do not publish in repository history.
+similarity check.pdf
+
+# Large regenerable diagnostic trace (over GitHub's 100 MB file limit).
+results/stage2_diagnostic/sensing_diagnostics.csv

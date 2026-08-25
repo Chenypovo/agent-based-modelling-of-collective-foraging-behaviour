@@ -1,0 +1,15 @@
+{
+  "analysis_seconds": 9.20332020799998,
+  "autodl_used": false,
+  "cpu_only": true,
+  "gpu_used": false,
+  "machine": "x86_64",
+  "model_rules_changed": false,
+  "notice": "Stage 2A diagnostic only \u2014 no model rules or parameters changed.",
+  "parameters_changed": false,
+  "platform": "macOS-27.0-x86_64-i386-64bit",
+  "python": "3.9.4",
+  "simulation_seconds": 133.487926334,
+  "test_summary": "43 passed in 2.31s",
+  "total_seconds": 142.69157208299998
+}

@@ -1,0 +1,10 @@
+{
+  "autodl_used": false,
+  "cpu_only": true,
+  "gpu_used": false,
+  "machine": "x86_64",
+  "platform": "macOS-27.0-x86_64-i386-64bit",
+  "python": "3.9.4",
+  "simulation_seconds": 88.971189625,
+  "total_seconds_before_report": 92.303851834
+}

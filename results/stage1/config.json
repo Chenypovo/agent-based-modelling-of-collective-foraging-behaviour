@@ -1,0 +1,15 @@
+{
+  "cell_size": 0.6,
+  "gamma": 0.2,
+  "models": [
+    "srw",
+    "fcrw",
+    "zw"
+  ],
+  "output_dir": "results/stage1",
+  "repetitions": 50,
+  "seed": 20260824,
+  "step_size": 0.6,
+  "steps": 2000,
+  "theta_deg": 60.0
+}

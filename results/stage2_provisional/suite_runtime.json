@@ -1,0 +1,45 @@
+{
+  "autodl_used": false,
+  "cpu_only": true,
+  "gpu_used": false,
+  "paper_scale": {
+    "arena_size": 300.0,
+    "cumulative_deliveries": 363,
+    "final_counts": "0/19/81",
+    "first_delivery_time": 1583,
+    "first_food_discovery_time": 913,
+    "n_ants": 100,
+    "nematic_order_psi": 0.6400746980766642,
+    "orientation_order_phi": -0.032578152773163366,
+    "simulation_seconds": 88.971189625,
+    "steps": 10000,
+    "total_seconds": 92.303851834,
+    "transition_counts": {
+      "follower_to_transporter": 381,
+      "forager_to_follower": 99,
+      "forager_to_transporter": 1,
+      "transporter_to_follower": 363
+    }
+  },
+  "pilot": {
+    "arena_size": 45.0,
+    "cumulative_deliveries": 87,
+    "final_counts": "0/4/6",
+    "first_delivery_time": 91,
+    "first_food_discovery_time": 49,
+    "n_ants": 10,
+    "nematic_order_psi": 0.861801141937573,
+    "orientation_order_phi": 0.610937781668927,
+    "simulation_seconds": 0.8185789579999998,
+    "steps": 1000,
+    "total_seconds": 1.8104850829999997,
+    "transition_counts": {
+      "follower_to_transporter": 90,
+      "forager_to_follower": 9,
+      "forager_to_transporter": 1,
+      "transporter_to_follower": 87
+    }
+  },
+  "suite_total_seconds": 94.19436558299999,
+  "test_summary": "32 passed in 2.20s"
+}
