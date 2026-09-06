@@ -8,10 +8,12 @@ import hashlib
 import os
 import platform
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
 import time
+from datetime import datetime, timezone
 from dataclasses import replace
 from pathlib import Path
 
@@ -27,10 +29,12 @@ from .stage2c_analysis import (
 )
 from .stage2c_checkpoint import (
     atomic_write, behavioural_config, digest_bytes,
-    hash_value, initial_identity, load_checkpoint, read_json,
-    save_checkpoint, write_json,
+    hash_value, initial_identity, load_checkpoint, load_shared_seed_artifact,
+    read_json, save_checkpoint, save_field_artifact, save_shared_seed_artifact, write_json,
+    storage_only_measurement,
 )
 from .stage2c_streaming import StreamingSimulation
+from .stage2c_storage import HistoryStore
 
 PREREGISTRATION_COMMIT = "25994defe0b61e04fa03f3977cd65a2b9a61e640"
 IMPLEMENTATION_COMMIT = "f216ed88b9ab35b88627d1b34473245f16a0559e"
@@ -151,19 +155,62 @@ def directory_bytes(path: Path) -> int:
     return sum(p.stat().st_size for p in path.rglob("*") if p.is_file()) if path.exists() else 0
 
 
+def retained_study_bytes(path: Path) -> int:
+    """Long-term bytes only; active checkpoint/history overlap is separate."""
+    total = 0
+    items = Path(path).rglob("*") if Path(path).exists() else ()
+    for item in items:
+        if not item.is_file():
+            continue
+        parts = item.relative_to(path).parts
+        if "completed" not in parts and (
+                item.name in ("checkpoint-0.zip", "checkpoint-1.zip")
+                or "history" in parts
+                or any(part.startswith("completion-") for part in parts)):
+            continue
+        total += item.stat().st_size
+    return total
+
+
 def resource_projection(*, elapsed_seconds: float, stored_bytes: int, remaining_runs: int,
-                        run_seconds: float | None, run_bytes: int | None,
-                        analysis_seconds: float = 600.0, analysis_bytes: int = 20_000_000,
-                        checkpoint_overlap_bytes: int = 0, pilot_observed: bool = False) -> dict:
-    values = (elapsed_seconds, stored_bytes, remaining_runs, analysis_seconds, analysis_bytes, checkpoint_overlap_bytes)
+                        run_seconds: float | None,
+                        retained_completed_run_bytes: int | None,
+                        retained_checkpoint_bytes_per_completed_run: int | None,
+                        shared_seed_artifact_bytes: int | None,
+                        remaining_shared_seed_artifacts: int,
+                        active_checkpoint_overlap_bytes: int | None,
+                        final_analysis_allowance_bytes: int = 20_000_000,
+                        completion_publication_overlap_bytes: int = 0,
+                        analysis_seconds: float = 600.0,
+                        pilot_observed: bool = False,
+                        assumptions: list[str] | None = None,
+                        measurement_status: dict | None = None) -> dict:
+    values = (elapsed_seconds, stored_bytes, remaining_runs, analysis_seconds,
+              final_analysis_allowance_bytes, completion_publication_overlap_bytes,
+              remaining_shared_seed_artifacts)
     if any(not np.isfinite(v) or v < 0 for v in values) or remaining_runs > 40:
         raise ValueError("invalid resource accounting")
-    known = (run_seconds is not None and run_bytes is not None and np.isfinite(run_seconds)
-             and np.isfinite(run_bytes) and run_seconds > 0 and run_bytes > 0)
-    projected_time = elapsed_seconds + SAFETY_FACTOR * remaining_runs * run_seconds + analysis_seconds if known else None
-    projected_bytes = stored_bytes + SAFETY_FACTOR * remaining_runs * run_bytes + analysis_bytes + checkpoint_overlap_bytes if known else None
+    time_known = run_seconds is not None and np.isfinite(run_seconds) and run_seconds > 0
+    storage_inputs = (retained_completed_run_bytes,
+                      retained_checkpoint_bytes_per_completed_run,
+                      shared_seed_artifact_bytes, active_checkpoint_overlap_bytes)
+    storage_known = all(value is not None and np.isfinite(value) and value >= 0
+                        for value in storage_inputs)
+    projected_time = (elapsed_seconds + SAFETY_FACTOR * remaining_runs * run_seconds
+                      + analysis_seconds) if time_known else None
+    projected_bytes = None
+    if storage_known:
+        per_run_retained = (retained_completed_run_bytes
+                            + retained_checkpoint_bytes_per_completed_run)
+        projected_bytes = (
+            stored_bytes
+            + SAFETY_FACTOR * remaining_runs * per_run_retained
+            + remaining_shared_seed_artifacts * shared_seed_artifact_bytes
+            + active_checkpoint_overlap_bytes
+            + completion_publication_overlap_bytes
+            + final_analysis_allowance_bytes)
     reasons = []
-    if not known:
+    if not time_known or not storage_known:
         reasons.append("projection_unresolved")
     if projected_time is not None and (projected_time > TIME_LIMIT or elapsed_seconds >= TIME_LIMIT):
         reasons.append("four_hour_limit")
@@ -171,32 +218,85 @@ def resource_projection(*, elapsed_seconds: float, stored_bytes: int, remaining_
         reasons.append("two_gb_limit")
     return {"action": "pause" if reasons else "continue", "reasons": reasons,
             "safety_factor": SAFETY_FACTOR, "elapsed_seconds": elapsed_seconds, "stored_bytes": stored_bytes,
-            "remaining_runs": remaining_runs, "per_run_seconds": run_seconds, "per_run_bytes": run_bytes,
-            "analysis_seconds_allowance": analysis_seconds, "analysis_bytes_allowance": analysis_bytes,
-            "checkpoint_overlap_bytes": checkpoint_overlap_bytes,
+            "remaining_runs": remaining_runs, "per_run_seconds": run_seconds,
+            "retained_completed_run_bytes": retained_completed_run_bytes,
+            "retained_checkpoint_bytes_per_completed_run": retained_checkpoint_bytes_per_completed_run,
+            "shared_seed_artifact_bytes": shared_seed_artifact_bytes,
+            "remaining_shared_seed_artifacts": remaining_shared_seed_artifacts,
+            "active_checkpoint_overlap_bytes": active_checkpoint_overlap_bytes,
+            "completion_publication_overlap_bytes": completion_publication_overlap_bytes,
+            "analysis_seconds_allowance": analysis_seconds,
+            "final_analysis_allowance_bytes": final_analysis_allowance_bytes,
             "projected_total_seconds": projected_time, "projected_peak_additional_bytes": projected_bytes,
             "time_limit_seconds": TIME_LIMIT, "storage_limit_bytes": STORAGE_LIMIT,
+            "calculation_formula": (
+                "stored_bytes + safety_factor * remaining_runs * "
+                "(retained_completed_run_bytes + retained_checkpoint_bytes_per_completed_run) + "
+                "remaining_shared_seed_artifacts * shared_seed_artifact_bytes + "
+                "active_checkpoint_overlap_bytes + completion_publication_overlap_bytes + "
+                "final_analysis_allowance_bytes"),
+            "assumptions": assumptions or [],
+            "measurement_status": measurement_status or {},
             "current_machine_pilot_observed": pilot_observed,
             "basis": "current_completed_runs" if pilot_observed else "historical_only_no_current_machine_pilot",
             "cpu_only": True, "gpu_used": False, "autodl_used": False, "external_costs": 0}
 
 
-def historical_resources(root: Path) -> dict:
+def historical_resources(root: Path, storage_measurement: dict) -> dict:
     old = read_json(root / "results/stage2b_local_geometry/runtime.json")
     sizes = {}
     for folder in ("results/stage2_provisional", "results/stage2b_local_geometry"):
         # Top-level artifacts are comparable full-run outputs; pilot subfolders are not.
         sizes[folder] = sum(p.stat().st_size for p in (root / folder).iterdir() if p.is_file())
-    config = ColonyConfig.paper_scale()
-    cells = int(np.ceil(config.arena_size / config.pheromone.cell_size)) ** 2
-    # Uncompressed numeric upper allowance for a live state; compression is not assumed.
-    checkpoint_allowance = 8 * config.n_ants * config.steps + 24 * cells + 16 * config.n_ants * (config.steps + 1)
     largest = max(sizes.values())
-    run_bytes = largest + 2 * checkpoint_allowance
+    legacy_checkpoint_allowance = 30_001_600
+    legacy_run_bytes = largest + 2 * legacy_checkpoint_allowance
+
+    def largest_file(*names: str) -> int:
+        paths = [root / name for name in names]
+        return max(path.stat().st_size for path in paths if path.is_file())
+
+    retained_components = {
+        "metrics_history_proxy": largest_file(
+            "results/stage2_provisional/metrics.csv",
+            "results/stage2b_local_geometry/metrics.csv"),
+        "agent_state_samples_proxy": largest_file(
+            "results/stage2_provisional/agent_states.csv"),
+        "role_specific_observations_proxy": largest_file(
+            "results/stage2b_local_geometry/role_specific_order.csv"),
+        "events_proxy": largest_file(
+            "results/stage2_provisional/events.csv",
+            "results/stage2b_local_geometry/events.csv"),
+        "completed_transport_proxy": largest_file(
+            "results/stage2b_local_geometry/transport_path_efficiency.csv"),
+        "final_agents_proxy": largest_file(
+            "results/stage2_provisional/final_agents.csv",
+            "results/stage2b_local_geometry/final_agents.csv"),
+        "dense_final_field_storage_fixture": storage_measurement[
+            "synthetic_dense_final_field_bytes"],
+        "receipts_config_hashes_and_manifests_allowance": 1_000_000,
+    }
+    retained_completed = sum(retained_components.values())
     return {"run_seconds": max(old["baseline_replay_seconds"], old["paper_simulation_seconds"]),
-            "run_bytes": run_bytes, "checkpoint_overlap_bytes": checkpoint_allowance,
-            "historical_artifact_sizes": sizes, "checkpoint_numeric_bytes_allowance": checkpoint_allowance,
-            "storage_assumption": "historical output plus two uncompressed numeric checkpoint slots; preliminary, includes no compression credit"}
+            "legacy_run_bytes": legacy_run_bytes,
+            "legacy_projected_peak_additional_bytes": (
+                legacy_run_bytes * 40 * SAFETY_FACTOR + legacy_checkpoint_allowance
+                + 20_000_000),
+            "legacy_checkpoint_numeric_bytes_allowance": legacy_checkpoint_allowance,
+            "retained_completed_run_bytes": retained_completed,
+            "retained_checkpoint_bytes_per_completed_run": storage_measurement[
+                "synthetic_max_completed_checkpoint_bytes"],
+            "shared_seed_artifact_bytes": storage_measurement["shared_seed_artifact_bytes"],
+            "active_checkpoint_overlap_bytes": storage_measurement[
+                "active_checkpoint_overlap_bytes"],
+            "completion_publication_overlap_bytes": retained_completed,
+            "retained_completed_components": retained_components,
+            "historical_artifact_sizes": sizes,
+            "checkpoint_numeric_bytes_allowance": legacy_checkpoint_allowance,
+            "storage_assumption": (
+                "historical category measurements bound retained tables; full-shape non-zero "
+                "storage fixtures measure the production lossless checkpoint format; the 1.5 "
+                "factor remains applied to every remaining run's retained output and checkpoint")}
 
 
 def new_progress(identity: dict) -> dict:
@@ -205,6 +305,8 @@ def new_progress(identity: dict) -> dict:
             "runs": [{"seed": s, "rule": r, "status": "planned", "reason": "not_started",
                       "time": 0, "checkpoint": None, "checkpoint_sha256": None,
                       "checkpoint_generation": 0, "elapsed_seconds": 0.0,
+                      "history_manifest": None, "history_manifest_sha256": None,
+                      "shared_seed_artifact": None, "shared_seed_artifact_sha256": None,
                       "initial_identity": None, "attempts": []} for s in SEEDS for r in RULES]}
 
 
@@ -219,30 +321,68 @@ def _publish_checkpoint(run_dir: Path, simulation: StreamingSimulation, entry: d
     generation = entry["checkpoint_generation"] + 1
     # Keep the referenced slot intact until the other slot and pointer are durable.
     filename = f"checkpoint-{generation % 2}.zip"
+    history = HistoryStore(run_dir / "history")
+    previous_manifest = run_dir / entry["history_manifest"] if entry["history_manifest"] else None
+    manifest_path, manifest_checksum, _ = history.commit(
+        simulation, generation, previous_manifest=previous_manifest)
+    target = run_dir / filename
+    if target.exists() and entry["checkpoint"] != filename:
+        # The other slot remains the last referenced checkpoint while this stale
+        # target is removed, so atomic publication peaks at exactly two slots.
+        target.unlink()
     start = time.perf_counter()
-    checksum = save_checkpoint(run_dir / filename, simulation, identity)
+    shared = run_dir.parent / "shared_seed_artifact.zip"
+    checksum = save_checkpoint(
+        target, simulation, identity, shared_artifact=shared,
+        history_manifest=manifest_path, initial=entry["initial_identity"])
     simulation.runtime_counters["checkpoint_seconds"] += time.perf_counter() - start
     simulation.runtime_counters["checkpoint_count"] += 1
     entry.update(checkpoint=filename, checkpoint_sha256=checksum,
-                 checkpoint_generation=generation, time=simulation.time)
+                 checkpoint_generation=generation, time=simulation.time,
+                 history_manifest=str(manifest_path.relative_to(run_dir)),
+                 history_manifest_sha256=manifest_checksum,
+                 shared_seed_artifact=os.path.relpath(shared, start=run_dir),
+                 shared_seed_artifact_sha256=sha256(shared))
     persist()
+
+
+def _artifact_hashes(directory: Path) -> dict:
+    return {str(path.relative_to(directory)): sha256(path)
+            for path in sorted(directory.rglob("*"))
+            if path.is_file() and path.name != "receipt.json"}
 
 
 def _completed_record(completed: Path, config: ColonyConfig, identity: dict) -> dict:
     receipt = read_json(completed / "receipt.json")
     if receipt["identity"] != identity or receipt["config_hash"] != hash_value(behavioural_config(config)):
         raise ValueError("completed run configuration/code identity mismatch")
-    actual = {p.name: sha256(p) for p in completed.iterdir() if p.is_file() and p.name != "receipt.json"}
+    actual = _artifact_hashes(completed)
     if actual != receipt["artifact_hashes"]:
         raise ValueError("completed run artifacts changed or missing")
+    shared = completed.parent.parent / "shared_seed_artifact.zip"
+    if not shared.is_file() or sha256(shared) != receipt["shared_seed_artifact_sha256"]:
+        raise ValueError("completed run shared seed artifact changed or missing")
     row = read_json(completed / "result.json")
     if (row["seed"], row["rule"], row["status"]) != (config.seed, config.follower_direction_rule, "completed"):
         raise ValueError("completed run receipt identity mismatch")
     return row
 
 
+def _bind_completed_entry(entry: dict, completed: Path, config: ColonyConfig) -> None:
+    receipt = read_json(completed / "receipt.json")
+    entry.update(
+        status="completed", reason="verified_completed_receipt", time=config.steps,
+        checkpoint="completed/" + receipt["final_checkpoint"],
+        checkpoint_sha256=receipt["final_checkpoint_sha256"],
+        checkpoint_generation=receipt["checkpoint_generation"],
+        history_manifest="completed/" + receipt["history_manifest"],
+        history_manifest_sha256=receipt["history_manifest_sha256"],
+        shared_seed_artifact=receipt["shared_seed_artifact"],
+        shared_seed_artifact_sha256=receipt["shared_seed_artifact_sha256"])
+
+
 def _write_completed(run_dir: Path, simulation: StreamingSimulation, identity: dict,
-                     initial: dict) -> dict:
+                     initial: dict, entry: dict) -> tuple[dict, dict]:
     completed = run_dir / "completed"
     if completed.exists():
         raise FileExistsError("completed run must not be overwritten")
@@ -262,26 +402,38 @@ def _write_completed(run_dir: Path, simulation: StreamingSimulation, identity: d
                   for event in simulation._event_records)
         for name in simulation.transition_counts}
     stage = Path(tempfile.mkdtemp(prefix="completion-", dir=run_dir))
-    frames = {"metrics.csv": result.metrics, "agent_states.csv": result.agent_states,
-              "final_agents.csv": result.final_agents, "events.csv": result.events,
-              "role_specific_order.csv": pd.DataFrame(simulation.role_rows),
-              "completed_transport.csv": pd.DataFrame(simulation.completed_transport)}
-    for name, frame in frames.items():
-        atomic_write(stage / name, frame.to_csv(index=False, lineterminator="\n").encode(), replace=False)
+    final_generation = entry["checkpoint_generation"] + 1
+    manifest, manifest_checksum = HistoryStore.write_completed(
+        stage, simulation, final_generation)
+    atomic_write(stage / "final_agents.csv",
+                 result.final_agents.to_csv(index=False, lineterminator="\n").encode(), replace=False)
     write_json(stage / "result.json", row, replace=False)
     write_json(stage / "config.json", simulation.config.to_dict(), replace=False)
     write_json(stage / "diagnostic_accumulators.json", simulation.diagnostic_evidence(), replace=False)
     write_json(stage / "transition_counts.json", simulation.transition_counts, replace=False)
-    indices = np.argwhere(simulation.field.intensity > 0)
-    import io
-    buffer = io.BytesIO()
-    np.savez_compressed(buffer, indices=indices, intensity=simulation.field.intensity[indices[:, 0], indices[:, 1]])
-    atomic_write(stage / "final_pheromone.npz", buffer.getvalue(), replace=False)
-    receipt = {"identity": identity, "config_hash": row["config_hash"],
-               "artifact_hashes": {p.name: sha256(p) for p in stage.iterdir()}}
+    field_path = stage / "final_pheromone.npz"
+    save_field_artifact(field_path, simulation.field)
+    shared = run_dir.parent / "shared_seed_artifact.zip"
+    final_checkpoint = stage / "final_checkpoint.zip"
+    final_checksum = save_checkpoint(
+        final_checkpoint, simulation, identity, shared_artifact=shared,
+        history_manifest=manifest, initial=initial, external_field=field_path)
+    receipt = {
+        "identity": identity,
+        "config_hash": row["config_hash"],
+        "completion_time_utc": datetime.now(timezone.utc).isoformat(),
+        "checkpoint_generation": final_generation,
+        "final_checkpoint": "final_checkpoint.zip",
+        "final_checkpoint_sha256": final_checksum,
+        "history_manifest": str(manifest.relative_to(stage)),
+        "history_manifest_sha256": manifest_checksum,
+        "shared_seed_artifact": os.path.relpath(shared, start=completed),
+        "shared_seed_artifact_sha256": sha256(shared),
+    }
+    receipt["artifact_hashes"] = _artifact_hashes(stage)
     write_json(stage / "receipt.json", receipt, replace=False)
     os.rename(stage, completed)
-    return row
+    return row, receipt
 
 
 def run_one(config: ColonyConfig, run_dir: Path, identity: dict, entry: dict, *,
@@ -302,7 +454,7 @@ def run_one(config: ColonyConfig, run_dir: Path, identity: dict, entry: dict, *,
         row = _completed_record(run_dir / "completed", config, identity)
         if entry["status"] != "completed":
             # Recover a crash after the atomic directory rename, never rerun it.
-            entry.update(status="completed", reason="verified_completed_receipt", time=config.steps)
+            _bind_completed_entry(entry, run_dir / "completed", config)
             persist()
         return row
     if entry["status"] == "completed":
@@ -339,8 +491,28 @@ def run_one(config: ColonyConfig, run_dir: Path, identity: dict, entry: dict, *,
 
     try:
         if simulation is None:
-            simulation = StreamingSimulation(config, late_window=late_window)
-            entry["initial_identity"] = initial_identity(simulation)
+            shared_path = run_dir.parent / "shared_seed_artifact.zip"
+            if shared_path.exists():
+                shared = load_shared_seed_artifact(
+                    shared_path, config, identity,
+                    expected_sha256=entry.get("shared_seed_artifact_sha256"))
+                simulation = StreamingSimulation(
+                    config, late_window=late_window, initial_agents=shared["ants"],
+                    turn_schedules=shared["turn_schedules"])
+                entry["initial_identity"] = initial_identity(simulation)
+                if entry["initial_identity"] != shared["initial_identity"]:
+                    raise ValueError("shared seed artifact did not recreate its initial state")
+                shared_checksum = shared["sha256"]
+            else:
+                simulation = StreamingSimulation(config, late_window=late_window)
+                entry["initial_identity"] = initial_identity(simulation)
+                shared_checksum, shared_initial = save_shared_seed_artifact(
+                    shared_path, simulation, identity)
+                if shared_initial != entry["initial_identity"]:
+                    raise RuntimeError("shared seed artifact identity changed during publication")
+            entry.update(
+                shared_seed_artifact=os.path.relpath(shared_path, start=run_dir),
+                shared_seed_artifact_sha256=shared_checksum)
             if expected_initial is not None and entry["initial_identity"] != expected_initial:
                 raise ValueError("paired initial state or turn schedule mismatch before first step")
             account()
@@ -358,12 +530,27 @@ def run_one(config: ColonyConfig, run_dir: Path, identity: dict, entry: dict, *,
                     return None
             if boundary_observer is not None:
                 boundary_observer(simulation, entry)
-        row = _write_completed(run_dir, simulation, identity, entry["initial_identity"])
+        row, receipt = _write_completed(
+            run_dir, simulation, identity, entry["initial_identity"], entry)
         account()
         transition(entry, "completed", "complete_horizon_and_engineering_checks")
         entry["time"] = simulation.time
+        entry.update(
+            checkpoint="completed/" + receipt["final_checkpoint"],
+            checkpoint_sha256=receipt["final_checkpoint_sha256"],
+            checkpoint_generation=receipt["checkpoint_generation"],
+            history_manifest="completed/" + receipt["history_manifest"],
+            history_manifest_sha256=receipt["history_manifest_sha256"],
+            shared_seed_artifact=receipt["shared_seed_artifact"],
+            shared_seed_artifact_sha256=receipt["shared_seed_artifact_sha256"])
         entry["attempts"][-1]["status"] = "completed"
         persist()
+        for name in ("checkpoint-0.zip", "checkpoint-1.zip"):
+            path = run_dir / name
+            if path.exists():
+                path.unlink()
+        if (run_dir / "history").exists():
+            shutil.rmtree(run_dir / "history")
         return row
     except (KeyboardInterrupt, SystemExit):
         account()
@@ -429,7 +616,17 @@ class Study:
         self.root, self.output = root.resolve(), output.resolve()
         validate_output(self.root, self.output)
         self.identity = build_identity(self.root, self.output)
-        self.history = historical_resources(self.root)
+        preflight_path = self.output / "storage_preflight.json"
+        if preflight_path.exists():
+            self.storage_measurement = read_json(preflight_path)
+            if self.storage_measurement.get("source_hash") != self.identity["source_hash"]:
+                raise ValueError("storage-only preflight source identity mismatch")
+        else:
+            with tempfile.TemporaryDirectory(prefix="stage2c-storage-only-") as temporary:
+                self.storage_measurement = storage_only_measurement(
+                    ColonyConfig.paper_scale(), self.identity, Path(temporary))
+            self.storage_measurement["source_hash"] = self.identity["source_hash"]
+        self.history = historical_resources(self.root, self.storage_measurement)
         self.progress_path = self.output / "checkpoint/progress_manifest.json"
         self.configurations = [c for seed in SEEDS for c in config_pair(seed, self.output)]
         self.rows = planned_rows()
@@ -456,6 +653,7 @@ class Study:
                 raise FileExistsError("output has files but no recognised progress manifest")
             self.progress = new_progress(self.identity)
             self.output.mkdir(parents=True, exist_ok=True)
+            write_json(preflight_path, self.storage_measurement, replace=False)
             write_json(self.output / "seed_manifest.json", seed_manifest(), replace=False)
             write_json(self.output / "config_manifest.json", {
                 "identity": self.identity, "configurations": self._config_entries(),
@@ -494,7 +692,7 @@ class Study:
             if completed.exists():
                 self.rows[index] = _completed_record(completed, config, self.identity)
                 if entry["status"] != "completed":
-                    entry.update(status="completed", reason="verified_completed_receipt", time=config.steps)
+                    _bind_completed_entry(entry, completed, config)
             else:
                 self.rows[index]["status"] = entry["status"]
                 for metric in self.rows[index]["metrics"].values():
@@ -503,21 +701,68 @@ class Study:
     def resources(self):
         self.persist()
         done = [r for r in self.progress["runs"] if r["status"] == "completed"]
-        samples = [(r["elapsed_seconds"], directory_bytes(Path(c.output_dir)))
-                   for r, c in zip(self.progress["runs"], self.configurations) if r["status"] == "completed"]
+        samples = []
+        for entry, config in zip(self.progress["runs"], self.configurations):
+            if entry["status"] != "completed":
+                continue
+            completed = Path(config.output_dir) / "completed"
+            checkpoint = completed / "final_checkpoint.zip"
+            samples.append({
+                "seconds": entry["elapsed_seconds"],
+                "retained_output_bytes": directory_bytes(completed) - checkpoint.stat().st_size,
+                "retained_checkpoint_bytes": checkpoint.stat().st_size,
+            })
         pilot_observed = all(r["status"] == "completed" for r in self.progress["runs"][:2])
-        seconds = max((x[0] for x in samples), default=self.history["run_seconds"])
-        size = max((x[1] for x in samples), default=self.history["run_bytes"])
+        seconds = max((sample["seconds"] for sample in samples),
+                      default=self.history["run_seconds"])
+        retained_output = max(
+            (sample["retained_output_bytes"] for sample in samples),
+            default=self.history["retained_completed_run_bytes"])
+        retained_checkpoint = max(
+            (sample["retained_checkpoint_bytes"] for sample in samples),
+            default=self.history["retained_checkpoint_bytes_per_completed_run"])
         # Use historical bound until the entire first pair is available.
         if not pilot_observed:
-            seconds, size = max(seconds, self.history["run_seconds"]), max(size, self.history["run_bytes"])
+            seconds = max(seconds, self.history["run_seconds"])
+            retained_output = max(
+                retained_output, self.history["retained_completed_run_bytes"])
+            retained_checkpoint = max(
+                retained_checkpoint,
+                self.history["retained_checkpoint_bytes_per_completed_run"])
         validation_path = self.output / "engineering_validation.json"
         test_bytes = read_json(validation_path)["temporary_artifact_bytes"] if validation_path.exists() else 0
+        shared_remaining = sum(
+            not (self.output / "runs" / str(seed) / "shared_seed_artifact.zip").is_file()
+            for seed in SEEDS)
         projection = resource_projection(elapsed_seconds=self.progress["elapsed_seconds"],
-            stored_bytes=directory_bytes(self.output) + test_bytes, remaining_runs=40 - len(done),
-            run_seconds=seconds, run_bytes=size, checkpoint_overlap_bytes=self.history["checkpoint_overlap_bytes"],
-            pilot_observed=pilot_observed)
+            stored_bytes=retained_study_bytes(self.output) + test_bytes,
+            remaining_runs=40 - len(done), run_seconds=seconds,
+            retained_completed_run_bytes=retained_output,
+            retained_checkpoint_bytes_per_completed_run=retained_checkpoint,
+            shared_seed_artifact_bytes=self.history["shared_seed_artifact_bytes"],
+            remaining_shared_seed_artifacts=shared_remaining,
+            active_checkpoint_overlap_bytes=self.history["active_checkpoint_overlap_bytes"],
+            completion_publication_overlap_bytes=self.history[
+                "completion_publication_overlap_bytes"],
+            pilot_observed=pilot_observed,
+            assumptions=[
+                "only one active run can hold two rotating checkpoint slots",
+                "each completed run retains one compact final checkpoint",
+                "baseline and PCA share one initial-state and turn-schedule artifact per seed",
+                "incremental history chunks are consolidated on completed publication",
+                "the 1.5 safety factor applies to every remaining run's retained output and checkpoint",
+                "final analysis and figures retain a separate fixed allowance",
+            ],
+            measurement_status={
+                "runtime": "historical_only_no_current_machine_pilot" if not pilot_observed else "current_completed_pair",
+                "retained_completed_run_bytes": "historical_category_proxy" if not pilot_observed else "current_completed_run_measured",
+                "retained_checkpoint_bytes_per_completed_run": self.storage_measurement["measurement_status"] if not pilot_observed else "current_completed_run_measured",
+                "shared_seed_artifact_bytes": self.storage_measurement["measurement_status"],
+                "active_checkpoint_overlap_bytes": self.storage_measurement["measurement_status"],
+                "stored_bytes": "current_filesystem_measured_excluding_active_transient_files",
+            })
         projection.update(historical_evidence=self.history, environment=self.identity["environment"],
+                          storage_only_preflight=self.storage_measurement,
                           per_run=[{"seed": entry["seed"], "rule": entry["rule"], "status": entry["status"],
                                     "elapsed_seconds": entry["elapsed_seconds"], "time_step": entry["time"],
                                     "retained_bytes": directory_bytes(Path(config.output_dir))}

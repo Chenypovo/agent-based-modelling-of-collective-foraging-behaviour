@@ -65,6 +65,16 @@ class StreamingSimulation(ColonySimulation):
             self._observed_decision = decision
         return decision
 
+    def _record_state(self) -> None:
+        """Retain registered tables, not redundant per-run spatial snapshots."""
+        super()._record_state()
+        # Stage 2C preregisters sampled agent rows and final field evidence, but
+        # no per-run spatial snapshot files.  The base snapshots duplicate those
+        # records and the full field; removing only these output copies cannot
+        # affect movement, transitions, metrics, RNG order or update order.
+        self._snapshots.clear()
+        self._pheromone_snapshots.clear()
+
     def _move_follower(self, ant: Ant) -> None:
         self._observing_ant = ant.ant_id
         self._observed_decision = None

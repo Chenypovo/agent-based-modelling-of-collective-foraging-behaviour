@@ -7,6 +7,7 @@ import json
 import os
 import subprocess
 import sys
+import zipfile
 from copy import deepcopy
 from dataclasses import replace
 from pathlib import Path
@@ -35,6 +36,7 @@ from colony.stage2c_checkpoint import (
     load_checkpoint, read_json, save_checkpoint, state_fingerprint,
 )
 from colony.stage2c_streaming import StreamingSimulation, measurement
+from colony.stage2c_storage import HistoryStore, sha256_file
 
 ROOT = Path(__file__).resolve().parents[1]
 IDENTITY = {"preregistration_commit": PREREGISTRATION_COMMIT,
@@ -75,6 +77,11 @@ def simulation(config, cls=StreamingSimulation, *, artificial=False):
 def frame_bytes(result):
     return {name: getattr(result, name).to_csv(index=False, lineterminator="\n").encode()
             for name in ("metrics", "agent_states", "final_agents", "events")}
+
+
+def completed_bytes(folder):
+    return {str(path.relative_to(folder)): path.read_bytes()
+            for path in folder.rglob("*") if path.is_file() and path.name != "receipt.json"}
 
 
 def test_seed_manifest_exact_and_no_exploratory():
@@ -317,14 +324,103 @@ def test_runner_status_resume_no_duplicate_or_overwrite(small, tmp_path, rule, i
     fresh, _ = run_fixture(config, tmp_path / "straight", fresh_entry, resume=False)
     assert resumed == fresh
     assert entry["status"] == "completed" and statuses[-1] == "completed"
-    for path in (tmp_path / "straight/completed").iterdir():
-        assert path.read_bytes() == (tmp_path / "resume/completed" / path.name).read_bytes()
-    snapshot = {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in (tmp_path / "resume/completed").iterdir()}
+    assert completed_bytes(tmp_path / "straight/completed") == completed_bytes(
+        tmp_path / "resume/completed")
+    snapshot = {str(p.relative_to(tmp_path / "resume/completed")): (p.read_bytes(), p.stat().st_mtime_ns)
+                for p in (tmp_path / "resume/completed").rglob("*") if p.is_file()}
     reused, _ = run_fixture(config, tmp_path / "resume", entry, resume=True)
     assert reused == resumed
-    assert snapshot == {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in (tmp_path / "resume/completed").iterdir()}
+    assert snapshot == {
+        str(p.relative_to(tmp_path / "resume/completed")): (p.read_bytes(), p.stat().st_mtime_ns)
+        for p in (tmp_path / "resume/completed").rglob("*") if p.is_file()}
     with pytest.raises(ValueError):
         transition(entry, "running", "attempted overwrite")
+
+
+def test_pair_shares_one_seed_artifact_without_republication(small, tmp_path):
+    seed_root = tmp_path / "runs" / str(small.seed)
+    entries = new_progress(IDENTITY)["runs"][:2]
+    identities = []
+    shared_snapshot = None
+    for rule, entry in zip(RULES, entries):
+        config = replace(small, follower_direction_rule=rule)
+        row, _ = run_fixture(config, seed_root / rule, entry, resume=False)
+        identities.append(row["initial_identity"])
+        shared = seed_root / "shared_seed_artifact.zip"
+        current = (shared.read_bytes(), shared.stat().st_mtime_ns)
+        if shared_snapshot is None:
+            shared_snapshot = current
+        else:
+            assert current == shared_snapshot
+        receipt = read_json(seed_root / rule / "completed/receipt.json")
+        assert receipt["shared_seed_artifact_sha256"] == sha256_file(shared)
+    assert identities[0] == identities[1]
+    assert len(list(seed_root.glob("shared_seed_artifact.zip"))) == 1
+
+
+def test_shared_artifact_hash_mismatch_refuses_resume(small, tmp_path):
+    entry = new_progress(IDENTITY)["runs"][0]
+
+    def interrupt(sim, state):
+        if sim.time == 23:
+            raise KeyboardInterrupt
+
+    run_dir = tmp_path / "runs" / str(small.seed) / RULES[0]
+    run_fixture(small, run_dir, entry, resume=False, boundary_observer=interrupt)
+    shared = run_dir.parent / "shared_seed_artifact.zip"
+    shared.write_bytes(shared.read_bytes() + b"corrupt")
+    with pytest.raises(ValueError, match="shared seed artifact checksum mismatch"):
+        load_checkpoint(run_dir / entry["checkpoint"], small, IDENTITY,
+                        expected_sha256=entry["checkpoint_sha256"])
+
+
+def test_chunk_corruption_refuses_resume(small, tmp_path):
+    entry = new_progress(IDENTITY)["runs"][0]
+
+    def interrupt(sim, state):
+        if sim.time == 23:
+            raise KeyboardInterrupt
+
+    run_dir = tmp_path / "corrupt-chunk"
+    run_fixture(small, run_dir, entry, resume=False, boundary_observer=interrupt)
+    chunk = next((run_dir / "history/chunks/metrics").glob("*.json"))
+    chunk.write_bytes(chunk.read_bytes() + b"corrupt")
+    with pytest.raises(ValueError, match="history chunk checksum mismatch"):
+        load_checkpoint(run_dir / entry["checkpoint"], small, IDENTITY,
+                        expected_sha256=entry["checkpoint_sha256"])
+
+
+def test_incremental_chunks_resume_without_duplicate_or_missing_rows(small, tmp_path):
+    entry = new_progress(IDENTITY)["runs"][0]
+
+    def interrupt(sim, state):
+        if sim.time == 37:
+            raise KeyboardInterrupt
+
+    run_dir = tmp_path / "chunk-resume"
+    run_fixture(small, run_dir, entry, resume=False, boundary_observer=interrupt)
+    row, _ = run_fixture(small, run_dir, entry, resume=True)
+    receipt = read_json(run_dir / "completed/receipt.json")
+    manifest = run_dir / "completed" / receipt["history_manifest"]
+    frames = HistoryStore(manifest.parent.parent).frames(manifest)
+    assert frames["metrics"].time.tolist() == list(range(small.steps + 1))
+    assert frames["role_specific_observations"].time.tolist() == list(range(small.steps + 1))
+    assert not frames["metrics"].duplicated("time").any()
+    assert len(frames["events"]) == sum(row["transition_counts"].values())
+    assert frames["events"].time.is_monotonic_increasing
+    assert row["status"] == "completed"
+
+
+def test_completed_final_checkpoint_restores_complete_state(small, tmp_path):
+    entry = new_progress(IDENTITY)["runs"][0]
+    expected, _ = run_fixture(small, tmp_path / "final-checkpoint", entry, resume=False)
+    checkpoint = tmp_path / "final-checkpoint" / entry["checkpoint"]
+    restored = load_checkpoint(
+        checkpoint, small, IDENTITY, expected_sha256=entry["checkpoint_sha256"])
+    assert restored.time == small.steps
+    assert restored.endpoint_metrics() == expected["metrics"]
+    assert len(restored._metric_rows) == small.steps + 1
+    assert len(list((tmp_path / "final-checkpoint/completed").glob("final_checkpoint.zip"))) == 1
 
 
 def test_engineering_failure_distinguished_and_same_seed_recovery(small, tmp_path):
@@ -483,16 +579,56 @@ def test_zero_denominator_missing_samples_and_partial_no_final_verdict():
 def test_resource_projection_fixed_factor_and_all_costs():
     assert SAFETY_FACTOR == 1.5
     estimate = resource_projection(elapsed_seconds=100, stored_bytes=1000, remaining_runs=38,
-        run_seconds=120, run_bytes=1000000, analysis_seconds=20, analysis_bytes=2000, checkpoint_overlap_bytes=3000)
+        run_seconds=120, retained_completed_run_bytes=1_000_000,
+        retained_checkpoint_bytes_per_completed_run=2_000_000,
+        shared_seed_artifact_bytes=500_000, remaining_shared_seed_artifacts=19,
+        active_checkpoint_overlap_bytes=3_000_000,
+        completion_publication_overlap_bytes=250_000,
+        analysis_seconds=20, final_analysis_allowance_bytes=2000)
     assert estimate["projected_total_seconds"] == 100 + 1.5 * 38 * 120 + 20
-    assert estimate["projected_peak_additional_bytes"] == 1000 + 1.5 * 38 * 1000000 + 2000 + 3000
+    assert estimate["projected_peak_additional_bytes"] == (
+        1000 + 1.5 * 38 * 3_000_000 + 19 * 500_000 + 3_000_000 + 250_000 + 2000)
     assert estimate["action"] == "continue"
     assert estimate["current_machine_pilot_observed"] is False
+    assert estimate["safety_factor"] == 1.5
 
 
-@pytest.mark.parametrize("seconds,bytes_,reason", [(300, 1, "four_hour_limit"), (1, 40000000, "two_gb_limit"), (None, None, "projection_unresolved")])
+def test_transient_checkpoint_overlap_is_included_once_not_per_run():
+    arguments = dict(
+        elapsed_seconds=0, stored_bytes=100, remaining_runs=40, run_seconds=1,
+        retained_completed_run_bytes=1000,
+        retained_checkpoint_bytes_per_completed_run=2000,
+        shared_seed_artifact_bytes=3000, remaining_shared_seed_artifacts=20,
+        final_analysis_allowance_bytes=4000,
+        completion_publication_overlap_bytes=5000)
+    first = resource_projection(**arguments, active_checkpoint_overlap_bytes=6000)
+    second = resource_projection(**arguments, active_checkpoint_overlap_bytes=6001)
+    assert second["projected_peak_additional_bytes"] - first["projected_peak_additional_bytes"] == 1
+    assert first["projected_peak_additional_bytes"] == (
+        100 + 1.5 * 40 * (1000 + 2000) + 20 * 3000 + 6000 + 5000 + 4000)
+
+
+def test_completed_retention_is_checkpoint_plus_long_term_artifacts():
+    result = resource_projection(
+        elapsed_seconds=0, stored_bytes=0, remaining_runs=2, run_seconds=1,
+        retained_completed_run_bytes=7, retained_checkpoint_bytes_per_completed_run=11,
+        shared_seed_artifact_bytes=0, remaining_shared_seed_artifacts=0,
+        active_checkpoint_overlap_bytes=0, final_analysis_allowance_bytes=0)
+    assert result["projected_peak_additional_bytes"] == 1.5 * 2 * (7 + 11)
+    assert "retained_completed_run_bytes" in result["calculation_formula"]
+
+
+@pytest.mark.parametrize("seconds,bytes_,reason", [
+    (300, 1, "four_hour_limit"), (1, 40_000_000, "two_gb_limit"),
+    (None, None, "projection_unresolved")])
 def test_resource_pause_without_scope_change(seconds, bytes_, reason):
-    result = resource_projection(elapsed_seconds=0, stored_bytes=0, remaining_runs=40, run_seconds=seconds, run_bytes=bytes_)
+    result = resource_projection(
+        elapsed_seconds=0, stored_bytes=0, remaining_runs=40, run_seconds=seconds,
+        retained_completed_run_bytes=bytes_,
+        retained_checkpoint_bytes_per_completed_run=0 if bytes_ is not None else None,
+        shared_seed_artifact_bytes=0 if bytes_ is not None else None,
+        remaining_shared_seed_artifacts=20,
+        active_checkpoint_overlap_bytes=0 if bytes_ is not None else None)
     assert result["action"] == "pause" and reason in result["reasons"]
     assert result["remaining_runs"] == 40 and result["external_costs"] == 0
     assert result["autodl_used"] is False
@@ -510,6 +646,12 @@ def test_resource_pause_preserves_valid_checkpoint(small, tmp_path):
     resumed = load_checkpoint(tmp_path / "paused" / entry["checkpoint"], small, IDENTITY,
                               expected_sha256=entry["checkpoint_sha256"])
     assert resumed.time == 10
+    slots = sorted((tmp_path / "paused").glob("checkpoint-*.zip"))
+    assert len(slots) == 2
+    with zipfile.ZipFile(tmp_path / "paused" / entry["checkpoint"]) as archive:
+        metadata = json.loads(archive.read("metadata.json"))
+    assert metadata["storage_layout"] == "compact_referenced_v2"
+    assert "turn_schedules" not in [item[0] for item in metadata["state"]["items"]]
 
 
 def test_dry_run_no_simulation_or_initialisation(tmp_path, monkeypatch):
@@ -526,6 +668,25 @@ def test_dry_run_no_simulation_or_initialisation(tmp_path, monkeypatch):
     manifest = read_json(tmp_path / "dry-run/config_manifest.json")
     assert manifest["identity"]["preregistration_commit"] == PREREGISTRATION_COMMIT
     assert manifest["identity"]["stage2b_implementation_commit"] == IMPLEMENTATION_COMMIT
+    runtime = result["runtime"]
+    required = {
+        "retained_completed_run_bytes",
+        "retained_checkpoint_bytes_per_completed_run",
+        "shared_seed_artifact_bytes",
+        "active_checkpoint_overlap_bytes",
+        "final_analysis_allowance_bytes",
+        "remaining_runs", "safety_factor", "projected_peak_additional_bytes",
+        "storage_limit_bytes", "calculation_formula", "assumptions",
+        "measurement_status",
+    }
+    assert required <= runtime.keys()
+    preflight = runtime["storage_only_preflight"]
+    assert preflight["simulation_steps_executed"] == 0
+    assert preflight["scientific_seed_used"] is False
+    assert preflight["storage_fixture_seed"] not in SEEDS
+    assert preflight["synthetic_max_active_checkpoint_bytes"] > preflight["initial_checkpoint_bytes"]
+    assert preflight["uncompressed_numeric_bytes"]["travel_paths"] > 0
+    assert runtime["safety_factor"] == 1.5
 
 
 def test_cli_dry_run_only(tmp_path):
@@ -537,6 +698,13 @@ def test_cli_dry_run_only(tmp_path):
     assert evidence["mode"] == "dry-run" and evidence["planned_runs"] == 40
     assert not evidence["final_verdict_available"]
     assert not (output / "runs").exists()
+
+
+def test_runner_always_forces_matplotlib_agg():
+    python_entry = (ROOT / "scripts/run_stage2c.py").read_text()
+    shell_entry = (ROOT / "run_stage2c.sh").read_text()
+    assert 'os.environ["MPLBACKEND"] = "Agg"' in python_entry
+    assert 'export MPLBACKEND=Agg' in shell_entry
 
 
 def test_analyse_refuses_incomplete_study_without_running(tmp_path, monkeypatch):
