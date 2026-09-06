@@ -11,6 +11,7 @@ import io
 import json
 import os
 import tempfile
+import time
 import zipfile
 from dataclasses import fields, is_dataclass, replace
 from pathlib import Path
@@ -228,12 +229,13 @@ def initial_identity(simulation: StreamingSimulation) -> dict:
             "rng_state": simulation.rng_state}
 
 
-def _archive_bytes(metadata: dict, arrays: dict[str, bytes]) -> bytes:
+def _archive_bytes(metadata: dict, arrays: dict[str, bytes], *,
+                   compression: int = zipfile.ZIP_DEFLATED) -> bytes:
     buffer = io.BytesIO()
-    with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+    with zipfile.ZipFile(buffer, "w", compression=compression) as archive:
         def write(name: str, data: bytes) -> None:
             info = zipfile.ZipInfo(name, date_time=(1980, 1, 1, 0, 0, 0))
-            info.compress_type = zipfile.ZIP_DEFLATED
+            info.compress_type = compression
             info.external_attr = 0o600 << 16
             archive.writestr(info, data)
 
@@ -353,26 +355,34 @@ def _compact_state(simulation: StreamingSimulation, *, external_field: bool = Fa
     return state
 
 
-def checkpoint_bytes_from_state(state: dict, metadata: dict) -> bytes:
-    """Use the production codec for storage-only sizing without running steps."""
+def checkpoint_bytes_from_state(state: dict, metadata: dict, *, completed: bool = False) -> bytes:
+    """Stable, lossless ZIP; only completed checkpoints pay the LZMA cost.
+
+    Member payloads, hashes and schema are identical to the DEFLATE format.
+    ZIP member headers identify the compression method to the common reader.
+    """
     codec = StateCodec()
     packed = codec.pack(state)
     complete = dict(metadata, state=packed,
                     array_hashes={name: digest_bytes(data) for name, data in codec.arrays.items()})
-    return _archive_bytes(complete, codec.arrays)
+    return _archive_bytes(complete, codec.arrays,
+                          compression=zipfile.ZIP_LZMA if completed else zipfile.ZIP_DEFLATED)
 
 
 def save_checkpoint(path: Path, simulation: StreamingSimulation, identity: dict, *,
                     shared_artifact: Path | None = None,
                     history_manifest: Path | None = None,
                     initial: dict | None = None,
-                    external_field: Path | None = None) -> str:
+                    external_field: Path | None = None,
+                    completed: bool = False) -> str:
     if simulation._observing_ant is not None or simulation._observed_decision is not None:
         raise ValueError("checkpoint only at a complete step boundary")
     simulation._assert_invariants()
     compact = shared_artifact is not None or history_manifest is not None
     if compact and (shared_artifact is None or history_manifest is None or initial is None):
         raise ValueError("compact checkpoint requires shared artifact, history manifest and initial identity")
+    if completed and (not compact or external_field is None or simulation.time != simulation.config.steps):
+        raise ValueError("completed compression requires final state and all retained artifact references")
     path = Path(path)
     metadata = {
         "schema_version": SCHEMA_VERSION,
@@ -405,17 +415,14 @@ def save_checkpoint(path: Path, simulation: StreamingSimulation, identity: dict,
         state = _compact_state(simulation, external_field=external_field is not None)
     else:
         state = dict(vars(simulation))
-    data = checkpoint_bytes_from_state(state, metadata)
+    data = checkpoint_bytes_from_state(state, metadata, completed=completed)
     atomic_write(path, data)
     return digest_bytes(data)
 
 
-def load_checkpoint(path: Path, config: ColonyConfig, identity: dict,
-                    *, expected_sha256: str | None = None,
-                    shared_artifact: Path | None = None,
-                    history_manifest: Path | None = None) -> StreamingSimulation:
-    path = Path(path)
-    data = Path(path).read_bytes()
+def _read_checkpoint_state(data: bytes, config: ColonyConfig, identity: dict,
+                           *, expected_sha256: str | None = None) -> tuple[dict, dict]:
+    """Common verified decoder for DEFLATE/LZMA and storage-only timing."""
     if expected_sha256 is not None and digest_bytes(data) != expected_sha256:
         raise ValueError("checkpoint checksum mismatch")
     with zipfile.ZipFile(io.BytesIO(data)) as archive:
@@ -440,8 +447,19 @@ def load_checkpoint(path: Path, config: ColonyConfig, identity: dict,
             if digest_bytes(raw) != expected:
                 raise ValueError("checkpoint array checksum mismatch")
             codec.arrays[name] = raw
-        restored = object.__new__(StreamingSimulation)
-        restored.__dict__.update(codec.unpack(metadata["state"]))
+        return metadata, codec.unpack(metadata["state"])
+
+
+def load_checkpoint(path: Path, config: ColonyConfig, identity: dict,
+                    *, expected_sha256: str | None = None,
+                    shared_artifact: Path | None = None,
+                    history_manifest: Path | None = None) -> StreamingSimulation:
+    path = Path(path)
+    metadata, state = _read_checkpoint_state(
+        path.read_bytes(), config, identity, expected_sha256=expected_sha256)
+    compact = metadata.get("storage_layout") == "compact_referenced_v2"
+    restored = object.__new__(StreamingSimulation)
+    restored.__dict__.update(state)
     if compact:
         shared_artifact = Path(shared_artifact) if shared_artifact is not None else _resolve_reference(
             path, metadata["shared_artifact"]["reference"])
@@ -624,7 +642,34 @@ def storage_only_measurement(config: ColonyConfig, identity: dict, directory: Pa
         "reference": "final_pheromone.npz", "sha256": digest_bytes(final_field)})
     final_state = dict(maximal_state)
     final_state.pop("field")
-    final_checkpoint = checkpoint_bytes_from_state(final_state, final_metadata)
+    # Both formats use the same production writer/verified decoder. The fixture
+    # has no scientific timeline, so time only archive decoding, not simulation
+    # restoration or endpoint calculation. Reference restoration is tested with
+    # bounded engineering runs separately.
+    timings = {}
+    checkpoints = {}
+    for name, completed in (("legacy_deflate", False), ("completed_lzma", True)):
+        started = time.perf_counter()
+        data = checkpoint_bytes_from_state(final_state, final_metadata, completed=completed)
+        timings[name + "_encode_seconds"] = time.perf_counter() - started
+        checksum = digest_bytes(data)
+        started = time.perf_counter()
+        _, decoded_state = _read_checkpoint_state(
+            data, fixture, fixture_identity, expected_sha256=checksum)
+        timings[name + "_read_seconds"] = time.perf_counter() - started
+        if ant_state_identity(decoded_state["ants"]) != ant_state_identity(maximal_ants):
+            raise ValueError("storage fixture ant state did not round trip losslessly")
+        checkpoints[name] = data
+    final_checkpoint = checkpoints["completed_lzma"]
+    with zipfile.ZipFile(io.BytesIO(checkpoints["legacy_deflate"])) as old_archive, \
+            zipfile.ZipFile(io.BytesIO(final_checkpoint)) as new_archive:
+        if old_archive.namelist() != new_archive.namelist() or any(
+                old_archive.read(name) != new_archive.read(name) for name in old_archive.namelist()):
+            raise ValueError("completed compression changed checkpoint member content")
+        member_sizes = [{"name": item.filename, "raw_bytes": item.file_size,
+                         "legacy_deflate_bytes": old_archive.getinfo(item.filename).compress_size,
+                         "completed_lzma_bytes": item.compress_size}
+                        for item in new_archive.infolist()]
 
     uncompressed = {
         "turn_schedule": int(schedules.nbytes),
@@ -645,6 +690,18 @@ def storage_only_measurement(config: ColonyConfig, identity: dict, directory: Pa
         "initial_checkpoint_bytes": len(initial_checkpoint),
         "synthetic_max_active_checkpoint_bytes": len(active_checkpoint),
         "synthetic_max_completed_checkpoint_bytes": len(final_checkpoint),
+        "legacy_completed_checkpoint_bytes": len(checkpoints["legacy_deflate"]),
+        "completed_checkpoint_compression": "deterministic_zip_lzma",
+        "completed_checkpoint_members": member_sizes,
+        "completed_checkpoint_timing": dict(timings,
+            read_scope="whole_archive_sha256_metadata_identity_array_hashes_and_state_decode",
+            allowance_seconds=timings["completed_lzma_encode_seconds"]
+                              + timings["completed_lzma_read_seconds"]),
+        "completed_checkpoint_members_byte_exact": True,
+        "completed_fixture_arrays_all_nonzero": all(
+            np.all(ant.travel_path != 0) and np.all(ant.return_waypoints != 0)
+            for ant in maximal_ants) and bool(np.all(maximal_field.intensity != 0))
+            and bool(np.all(maximal_field.direction_sum != 0)),
         "synthetic_dense_final_field_bytes": len(final_field),
         "active_checkpoint_overlap_bytes": 2 * len(active_checkpoint),
         "uncompressed_numeric_bytes": uncompressed,

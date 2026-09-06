@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 import os
 import subprocess
+import struct
 import sys
 import zipfile
 from copy import deepcopy
@@ -32,7 +34,8 @@ from colony.stage2c_analysis import (
     seed_manifest, write_comparison_figures, write_metric_tables,
 )
 from colony.stage2c_checkpoint import (
-    atomic_write, behavioural_config, hash_value, initial_identity, json_bytes,
+    STORAGE_FIXTURE_SEED, _archive_bytes, atomic_write, behavioural_config,
+    digest_bytes, hash_value, initial_identity, json_bytes,
     load_checkpoint, read_json, save_checkpoint, state_fingerprint,
 )
 from colony.stage2c_streaming import StreamingSimulation, measurement
@@ -49,6 +52,7 @@ def forbid_paper_scale(monkeypatch):
     original = ColonySimulation.__init__
 
     def guarded(self, config, **kwargs):
+        assert config.seed not in SEEDS, "registered scientific seeds are forbidden in tests"
         assert not (config.n_ants >= 100 and config.steps >= 10000), "paper-scale run is forbidden in tests"
         return original(self, config, **kwargs)
 
@@ -57,10 +61,18 @@ def forbid_paper_scale(monkeypatch):
 
 @pytest.fixture
 def small(tmp_path):
-    return ColonyConfig(n_ants=6, arena_size=10.0, steps=80, seed=SEEDS[0],
+    return ColonyConfig(n_ants=6, arena_size=10.0, steps=80, seed=STORAGE_FIXTURE_SEED,
                         nest=SiteConfig((1.5, 5.0), 1.0), food=SiteConfig((7.0, 5.0), 1.0),
                         movement=MovementConfig(theta_deg=0.0), snapshot_steps=(20, 60, 80),
                         agent_state_interval=5, output_dir=str(tmp_path / "small-output"))
+
+
+def fixture_progress():
+    """Reuse the progress schema with isolated, non-registered engineering seeds."""
+    progress = new_progress(IDENTITY)
+    for entry in progress["runs"]:
+        entry["seed"] = STORAGE_FIXTURE_SEED
+    return progress
 
 
 def artificial_start(config):
@@ -118,7 +130,7 @@ def test_initial_state_schedule_same_pair_and_reproducible_different_seed(small)
     first = initial_identity(simulation(small))
     pca = initial_identity(simulation(replace(small, follower_direction_rule=RULES[1])))
     repeat = initial_identity(simulation(small))
-    other = initial_identity(simulation(replace(small, seed=SEEDS[1], movement=MovementConfig())))
+    other = initial_identity(simulation(replace(small, seed=STORAGE_FIXTURE_SEED + 1, movement=MovementConfig())))
     assert first == pca == repeat
     assert other["initial_state_hash"] != first["initial_state_hash"]
     # Nonzero turns are needed to check the stochastic schedule rather than a constant fixture.
@@ -267,7 +279,7 @@ def test_config_corruption_and_timeline_mismatch_refused(small, tmp_path):
     path = tmp_path / "checkpoint.zip"
     save_checkpoint(path, sim, IDENTITY)
     with pytest.raises(ValueError, match="configuration mismatch"):
-        load_checkpoint(path, replace(small, seed=SEEDS[1]), IDENTITY)
+        load_checkpoint(path, replace(small, seed=STORAGE_FIXTURE_SEED + 1), IDENTITY)
     with pytest.raises(ValueError, match="checksum mismatch"):
         load_checkpoint(path, small, IDENTITY, expected_sha256="wrong")
     sim._metric_rows.append(sim._metric_rows[0])
@@ -307,7 +319,7 @@ def run_fixture(config, directory, entry, **kwargs):
 def test_runner_status_resume_no_duplicate_or_overwrite(small, tmp_path, rule, interrupt_at):
     config = replace(small, follower_direction_rule=rule)
     index = RULES.index(rule)
-    entry = new_progress(IDENTITY)["runs"][index]
+    entry = fixture_progress()["runs"][index]
 
     def interrupt(sim, state):
         if sim.time == interrupt_at:
@@ -320,12 +332,16 @@ def test_runner_status_resume_no_duplicate_or_overwrite(small, tmp_path, rule, i
     with pytest.raises(ValueError, match="--resume"):
         run_fixture(config, tmp_path / "resume", entry, resume=False)
     resumed, statuses = run_fixture(config, tmp_path / "resume", entry, resume=True)
-    fresh_entry = new_progress(IDENTITY)["runs"][index]
+    fresh_entry = fixture_progress()["runs"][index]
     fresh, _ = run_fixture(config, tmp_path / "straight", fresh_entry, resume=False)
     assert resumed == fresh
     assert entry["status"] == "completed" and statuses[-1] == "completed"
     assert completed_bytes(tmp_path / "straight/completed") == completed_bytes(
         tmp_path / "resume/completed")
+    final = tmp_path / "resume/completed/final_checkpoint.zip"
+    with zipfile.ZipFile(final) as archive:
+        assert all(item.compress_type == zipfile.ZIP_LZMA for item in archive.infolist())
+    assert final.read_bytes() == (tmp_path / "straight/completed/final_checkpoint.zip").read_bytes()
     snapshot = {str(p.relative_to(tmp_path / "resume/completed")): (p.read_bytes(), p.stat().st_mtime_ns)
                 for p in (tmp_path / "resume/completed").rglob("*") if p.is_file()}
     reused, _ = run_fixture(config, tmp_path / "resume", entry, resume=True)
@@ -339,7 +355,7 @@ def test_runner_status_resume_no_duplicate_or_overwrite(small, tmp_path, rule, i
 
 def test_pair_shares_one_seed_artifact_without_republication(small, tmp_path):
     seed_root = tmp_path / "runs" / str(small.seed)
-    entries = new_progress(IDENTITY)["runs"][:2]
+    entries = fixture_progress()["runs"][:2]
     identities = []
     shared_snapshot = None
     for rule, entry in zip(RULES, entries):
@@ -359,7 +375,7 @@ def test_pair_shares_one_seed_artifact_without_republication(small, tmp_path):
 
 
 def test_shared_artifact_hash_mismatch_refuses_resume(small, tmp_path):
-    entry = new_progress(IDENTITY)["runs"][0]
+    entry = fixture_progress()["runs"][0]
 
     def interrupt(sim, state):
         if sim.time == 23:
@@ -375,7 +391,7 @@ def test_shared_artifact_hash_mismatch_refuses_resume(small, tmp_path):
 
 
 def test_chunk_corruption_refuses_resume(small, tmp_path):
-    entry = new_progress(IDENTITY)["runs"][0]
+    entry = fixture_progress()["runs"][0]
 
     def interrupt(sim, state):
         if sim.time == 23:
@@ -391,7 +407,7 @@ def test_chunk_corruption_refuses_resume(small, tmp_path):
 
 
 def test_incremental_chunks_resume_without_duplicate_or_missing_rows(small, tmp_path):
-    entry = new_progress(IDENTITY)["runs"][0]
+    entry = fixture_progress()["runs"][0]
 
     def interrupt(sim, state):
         if sim.time == 37:
@@ -412,7 +428,7 @@ def test_incremental_chunks_resume_without_duplicate_or_missing_rows(small, tmp_
 
 
 def test_completed_final_checkpoint_restores_complete_state(small, tmp_path):
-    entry = new_progress(IDENTITY)["runs"][0]
+    entry = fixture_progress()["runs"][0]
     expected, _ = run_fixture(small, tmp_path / "final-checkpoint", entry, resume=False)
     checkpoint = tmp_path / "final-checkpoint" / entry["checkpoint"]
     restored = load_checkpoint(
@@ -423,8 +439,93 @@ def test_completed_final_checkpoint_restores_complete_state(small, tmp_path):
     assert len(list((tmp_path / "final-checkpoint/completed").glob("final_checkpoint.zip"))) == 1
 
 
+@pytest.mark.parametrize("compression", [zipfile.ZIP_DEFLATED, zipfile.ZIP_LZMA])
+def test_completed_formats_keep_all_integrity_and_size_checks(small, tmp_path, compression):
+    entry = fixture_progress()["runs"][0]
+    run_dir = tmp_path / "formats"
+    expected, _ = run_fixture(small, run_dir, entry, resume=False)
+    checkpoint = run_dir / entry["checkpoint"]
+    current = checkpoint.read_bytes()
+    with zipfile.ZipFile(io.BytesIO(current)) as archive:
+        metadata = json.loads(archive.read("metadata.json"))
+        arrays = {name: archive.read(name) for name in metadata["array_hashes"]}
+    # The old production DEFLATE writer has exactly these members and headers.
+    data = _archive_bytes(metadata, arrays, compression=compression)
+    checkpoint.write_bytes(data)
+    checksum = digest_bytes(data)
+
+    def load(**kwargs):
+        return load_checkpoint(checkpoint, small, IDENTITY,
+                               expected_sha256=sha256_file(checkpoint), **kwargs)
+
+    restored = load()
+    assert restored.time == small.steps and restored.endpoint_metrics() == expected["metrics"]
+    reencoded = tmp_path / "formats/completed/reencoded.zip"
+    save_checkpoint(reencoded, restored, IDENTITY,
+                    shared_artifact=run_dir.parent / "shared_seed_artifact.zip",
+                    history_manifest=run_dir / entry["history_manifest"],
+                    initial=entry["initial_identity"],
+                    external_field=run_dir / "completed/final_pheromone.npz", completed=True)
+    # Restoring from either format and re-saving retains every state/member bit.
+    assert reencoded.read_bytes() == current
+
+    checkpoint.write_bytes(data + b"corrupt")
+    with pytest.raises(ValueError, match="checkpoint checksum mismatch"):
+        load_checkpoint(checkpoint, small, IDENTITY, expected_sha256=checksum)
+    checkpoint.write_bytes(data)
+    for key in ("source_hash", "input_hash", "preregistration_commit"):
+        with pytest.raises(ValueError, match="identity mismatch"):
+            load_checkpoint(checkpoint, small, dict(IDENTITY, **{key: "changed"}),
+                            expected_sha256=checksum)
+    with pytest.raises(ValueError, match="configuration mismatch"):
+        load_checkpoint(checkpoint, replace(small, memory_stride=4), IDENTITY,
+                        expected_sha256=checksum)
+
+    for key, replacement, message in (
+            ("seed", small.seed + 1, "seed/rule mismatch"),
+            ("rule", RULES[1], "seed/rule mismatch"),
+            ("array_hashes", dict(metadata["array_hashes"], **{next(iter(arrays)): "0" * 64}),
+             "array checksum mismatch")):
+        checkpoint.write_bytes(_archive_bytes(dict(metadata, **{key: replacement}), arrays,
+                                              compression=compression))
+        with pytest.raises(ValueError, match=message):
+            load()
+    # Corrupt a payload while preserving valid ZIP CRC and whole-archive SHA.
+    bad_arrays = dict(arrays)
+    name = next(iter(arrays))
+    bad_arrays[name] = arrays[name][:-1] + bytes([arrays[name][-1] ^ 1])
+    checkpoint.write_bytes(_archive_bytes(metadata, bad_arrays, compression=compression))
+    with pytest.raises(ValueError, match="array checksum mismatch"):
+        load()
+
+    # Forged central-directory size exercises the 1 GB guard without allocating
+    # a huge decompression fixture. The whole-file hash is deliberately valid.
+    oversized = bytearray(data)
+    central_header = oversized.rfind(b"PK\x01\x02")
+    assert central_header >= 0
+    struct.pack_into("<I", oversized, central_header + 24, 1_000_000_001)
+    checkpoint.write_bytes(oversized)
+    with pytest.raises(ValueError, match="expands beyond the local format bound"):
+        load()
+    checkpoint.write_bytes(data)
+
+    for path, message in (
+            (run_dir.parent / "shared_seed_artifact.zip", "shared seed artifact checksum mismatch"),
+            (run_dir / entry["history_manifest"], "history manifest checksum mismatch"),
+            (run_dir / "completed/final_pheromone.npz", "external pheromone field checksum mismatch"),
+            (run_dir / "completed/events.csv", "completed history artifact checksum mismatch")):
+        original = path.read_bytes()
+        try:
+            path.write_bytes(original + b"corrupt")
+            with pytest.raises(ValueError, match=message):
+                load()
+        finally:
+            path.write_bytes(original)
+    assert load().endpoint_metrics() == expected["metrics"]
+
+
 def test_engineering_failure_distinguished_and_same_seed_recovery(small, tmp_path):
-    entry = new_progress(IDENTITY)["runs"][0]
+    entry = fixture_progress()["runs"][0]
 
     def broken(sim, state):
         if sim.time == 13:
@@ -432,7 +533,7 @@ def test_engineering_failure_distinguished_and_same_seed_recovery(small, tmp_pat
 
     with pytest.raises(RuntimeError):
         run_fixture(small, tmp_path / "failed", entry, resume=False, boundary_observer=broken)
-    assert entry["status"] == "engineering_failed" and entry["seed"] == SEEDS[0]
+    assert entry["status"] == "engineering_failed" and entry["seed"] == STORAGE_FIXTURE_SEED
     assert entry["time"] == 10
     row, _ = run_fixture(small, tmp_path / "failed", entry, resume=True)
     assert row["status"] == "completed"
@@ -441,7 +542,7 @@ def test_engineering_failure_distinguished_and_same_seed_recovery(small, tmp_pat
 
 def test_scientific_zero_delivery_is_completed_not_engineering_failure(small, tmp_path):
     config = replace(small, food=SiteConfig((9.5, 9.5), 0.01), movement=MovementConfig(theta_deg=0), n_ants=1)
-    entry = new_progress(IDENTITY)["runs"][0]
+    entry = fixture_progress()["runs"][0]
     row, _ = run_fixture(config, tmp_path / "zero", entry, resume=False)
     assert entry["status"] == "completed" and row["engineering_valid"]
     assert row["metrics"]["first_pheromone_recruitment_time"]["value"] is None
@@ -452,7 +553,7 @@ def test_scientific_zero_delivery_is_completed_not_engineering_failure(small, tm
 
 
 def test_output_context_and_candidate_audit(small, tmp_path):
-    entry = new_progress(IDENTITY)["runs"][0]
+    entry = fixture_progress()["runs"][0]
     row, _ = run_fixture(small, tmp_path / "context", entry, resume=False)
     folder = tmp_path / "context/completed"
     metrics = pd.read_csv(folder / "metrics.csv")
@@ -593,6 +694,22 @@ def test_resource_projection_fixed_factor_and_all_costs():
     assert estimate["safety_factor"] == 1.5
 
 
+@pytest.mark.parametrize("overhead", [10.0, 100.0, None, float("nan"), -1.0])
+def test_completed_compression_time_cannot_bypass_resource_gate(overhead):
+    result = resource_projection(
+        elapsed_seconds=100, stored_bytes=0, remaining_runs=40, run_seconds=150,
+        completed_checkpoint_seconds=overhead,
+        retained_completed_run_bytes=1, retained_checkpoint_bytes_per_completed_run=1,
+        shared_seed_artifact_bytes=1, remaining_shared_seed_artifacts=20,
+        active_checkpoint_overlap_bytes=1)
+    if overhead is not None and np.isfinite(overhead) and overhead >= 0:
+        assert result["projected_total_seconds"] == 100 + 1.5 * 40 * (150 + overhead) + 600
+        assert result["action"] == ("pause" if overhead == 100 else "continue")
+    else:
+        assert result["projected_total_seconds"] is None
+        assert "projection_unresolved" in result["reasons"]
+
+
 def test_transient_checkpoint_overlap_is_included_once_not_per_run():
     arguments = dict(
         elapsed_seconds=0, stored_bytes=100, remaining_runs=40, run_seconds=1,
@@ -635,7 +752,7 @@ def test_resource_pause_without_scope_change(seconds, bytes_, reason):
 
 
 def test_resource_pause_preserves_valid_checkpoint(small, tmp_path):
-    entry = new_progress(IDENTITY)["runs"][0]
+    entry = fixture_progress()["runs"][0]
 
     def resource():
         return {"action": "pause" if entry["time"] >= 10 else "continue"}
@@ -650,6 +767,7 @@ def test_resource_pause_preserves_valid_checkpoint(small, tmp_path):
     assert len(slots) == 2
     with zipfile.ZipFile(tmp_path / "paused" / entry["checkpoint"]) as archive:
         metadata = json.loads(archive.read("metadata.json"))
+        assert all(item.compress_type == zipfile.ZIP_DEFLATED for item in archive.infolist())
     assert metadata["storage_layout"] == "compact_referenced_v2"
     assert "turn_schedules" not in [item[0] for item in metadata["state"]["items"]]
 
@@ -658,7 +776,10 @@ def test_dry_run_no_simulation_or_initialisation(tmp_path, monkeypatch):
     def forbidden(*args, **kwargs):
         raise AssertionError("dry-run started or initialised a simulation")
     monkeypatch.setattr(ColonySimulation, "run", forbidden)
+    monkeypatch.setattr(ColonySimulation, "__init__", forbidden)
+    monkeypatch.setattr(ColonySimulation, "step", forbidden)
     monkeypatch.setattr(StreamingSimulation, "__init__", forbidden)
+    monkeypatch.setattr(StreamingSimulation, "endpoint_metrics", forbidden)
     result = dry_run(ROOT, tmp_path / "dry-run")
     assert not result["simulation_started"] and not result["scientific_metrics_generated"]
     assert result["runtime"]["current_machine_pilot_observed"] is False
@@ -683,7 +804,22 @@ def test_dry_run_no_simulation_or_initialisation(tmp_path, monkeypatch):
     preflight = runtime["storage_only_preflight"]
     assert preflight["simulation_steps_executed"] == 0
     assert preflight["scientific_seed_used"] is False
-    assert preflight["storage_fixture_seed"] not in SEEDS
+    assert preflight["storage_fixture_seed"] == STORAGE_FIXTURE_SEED == 991337
+    assert preflight["completed_fixture_arrays_all_nonzero"]
+    assert preflight["completed_checkpoint_members_byte_exact"]
+    assert preflight["legacy_completed_checkpoint_bytes"] == 19_684_283
+    assert preflight["synthetic_max_completed_checkpoint_bytes"] <= 17_000_000
+    assert runtime["projected_peak_additional_bytes"] <= 1_975_000_000
+    assert runtime["projected_total_seconds"] < 14_400
+    assert runtime["action"] == "continue"
+    timing = preflight["completed_checkpoint_timing"]
+    assert runtime["completed_checkpoint_seconds_allowance"] == (
+        timing["completed_lzma_encode_seconds"] + timing["completed_lzma_read_seconds"])
+    assert timing["completed_lzma_encode_seconds"] > 0
+    assert timing["completed_lzma_read_seconds"] > 0
+    planned = pd.read_csv(tmp_path / "dry-run/per_seed_metrics.csv")
+    assert planned.status.eq("planned").all() and planned.late_window_mean_psi.isna().all()
+    assert not (tmp_path / "dry-run/runs").exists()
     assert preflight["synthetic_max_active_checkpoint_bytes"] > preflight["initial_checkpoint_bytes"]
     assert preflight["uncompressed_numeric_bytes"]["travel_paths"] > 0
     assert runtime["safety_factor"] == 1.5
@@ -745,6 +881,7 @@ d['movement']=MovementConfig(**d['movement']);d['pheromone']=PheromoneConfig(**d
 d['nest']=SiteConfig(tuple(d['nest']['center']),d['nest']['radius']);d['food']=SiteConfig(tuple(d['food']['center']),d['food']['radius'])
 d['snapshot_steps']=tuple(d['snapshot_steps'])
 assert d['n_ants'] < 100 and d['steps'] < 10000
+assert d['seed'] not in range(20260901, 20260921)
 s=ColonySimulation(ColonyConfig(**d));r=s.run()
 h={n:hashlib.sha256(getattr(r,n).to_csv(index=False,lineterminator='\\n').encode()).hexdigest() for n in ['metrics','agent_states','final_agents','events']}
 h['intensity']=hashlib.sha256(s.field.intensity.tobytes()).hexdigest();h['direction_sum']=hashlib.sha256(s.field.direction_sum.tobytes()).hexdigest()
@@ -784,7 +921,7 @@ def test_follower_late_window_eligibility_and_mean_match_full(small):
 
 
 def test_paired_initial_mismatch_stops_before_first_step(small, tmp_path, monkeypatch):
-    entry = new_progress(IDENTITY)["runs"][0]
+    entry = fixture_progress()["runs"][0]
     monkeypatch.setattr(ColonySimulation, "step", lambda *a: pytest.fail("mismatched initialisation reached a step"))
     with pytest.raises(ValueError, match="before first step"):
         run_one(small, tmp_path / "mismatch", IDENTITY, entry, resume=False,
@@ -809,7 +946,7 @@ def test_unidentified_output_not_overwritten(tmp_path):
 
 
 def test_completed_receipt_tampering_refused(small, tmp_path):
-    entry = new_progress(IDENTITY)["runs"][0]
+    entry = fixture_progress()["runs"][0]
     run_fixture(small, tmp_path / "complete", entry, resume=False)
     path = tmp_path / "complete/completed/events.csv"
     path.write_bytes(path.read_bytes() + b"tampered\n")
@@ -818,7 +955,7 @@ def test_completed_receipt_tampering_refused(small, tmp_path):
 
 
 def test_completed_receipt_recovers_crash_without_rerun(small, tmp_path, monkeypatch):
-    entry = new_progress(IDENTITY)["runs"][0]
+    entry = fixture_progress()["runs"][0]
     expected, _ = run_fixture(small, tmp_path / "complete", entry, resume=False)
     entry["status"] = "running"  # Simulate rename succeeded but progress publication was lost.
     monkeypatch.setattr(StreamingSimulation, "__init__", lambda *a, **k: pytest.fail("completed run was restarted"))

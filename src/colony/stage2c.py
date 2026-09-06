@@ -182,6 +182,7 @@ def resource_projection(*, elapsed_seconds: float, stored_bytes: int, remaining_
                         final_analysis_allowance_bytes: int = 20_000_000,
                         completion_publication_overlap_bytes: int = 0,
                         analysis_seconds: float = 600.0,
+                        completed_checkpoint_seconds: float | None = 0.0,
                         pilot_observed: bool = False,
                         assumptions: list[str] | None = None,
                         measurement_status: dict | None = None) -> dict:
@@ -191,12 +192,16 @@ def resource_projection(*, elapsed_seconds: float, stored_bytes: int, remaining_
     if any(not np.isfinite(v) or v < 0 for v in values) or remaining_runs > 40:
         raise ValueError("invalid resource accounting")
     time_known = run_seconds is not None and np.isfinite(run_seconds) and run_seconds > 0
+    time_known = time_known and (completed_checkpoint_seconds is not None
+                                and np.isfinite(completed_checkpoint_seconds)
+                                and completed_checkpoint_seconds >= 0)
     storage_inputs = (retained_completed_run_bytes,
                       retained_checkpoint_bytes_per_completed_run,
                       shared_seed_artifact_bytes, active_checkpoint_overlap_bytes)
     storage_known = all(value is not None and np.isfinite(value) and value >= 0
                         for value in storage_inputs)
-    projected_time = (elapsed_seconds + SAFETY_FACTOR * remaining_runs * run_seconds
+    projected_time = (elapsed_seconds + SAFETY_FACTOR * remaining_runs
+                      * (run_seconds + completed_checkpoint_seconds)
                       + analysis_seconds) if time_known else None
     projected_bytes = None
     if storage_known:
@@ -219,6 +224,7 @@ def resource_projection(*, elapsed_seconds: float, stored_bytes: int, remaining_
     return {"action": "pause" if reasons else "continue", "reasons": reasons,
             "safety_factor": SAFETY_FACTOR, "elapsed_seconds": elapsed_seconds, "stored_bytes": stored_bytes,
             "remaining_runs": remaining_runs, "per_run_seconds": run_seconds,
+            "completed_checkpoint_seconds_allowance": completed_checkpoint_seconds,
             "retained_completed_run_bytes": retained_completed_run_bytes,
             "retained_checkpoint_bytes_per_completed_run": retained_checkpoint_bytes_per_completed_run,
             "shared_seed_artifact_bytes": shared_seed_artifact_bytes,
@@ -229,6 +235,9 @@ def resource_projection(*, elapsed_seconds: float, stored_bytes: int, remaining_
             "final_analysis_allowance_bytes": final_analysis_allowance_bytes,
             "projected_total_seconds": projected_time, "projected_peak_additional_bytes": projected_bytes,
             "time_limit_seconds": TIME_LIMIT, "storage_limit_bytes": STORAGE_LIMIT,
+            "time_calculation_formula": (
+                "elapsed_seconds + safety_factor * remaining_runs * "
+                "(per_run_seconds + completed_checkpoint_seconds_allowance) + analysis_seconds_allowance"),
             "calculation_formula": (
                 "stored_bytes + safety_factor * remaining_runs * "
                 "(retained_completed_run_bytes + retained_checkpoint_bytes_per_completed_run) + "
@@ -278,6 +287,8 @@ def historical_resources(root: Path, storage_measurement: dict) -> dict:
     }
     retained_completed = sum(retained_components.values())
     return {"run_seconds": max(old["baseline_replay_seconds"], old["paper_simulation_seconds"]),
+            "completed_checkpoint_seconds": storage_measurement[
+                "completed_checkpoint_timing"]["allowance_seconds"],
             "legacy_run_bytes": legacy_run_bytes,
             "legacy_projected_peak_additional_bytes": (
                 legacy_run_bytes * 40 * SAFETY_FACTOR + legacy_checkpoint_allowance
@@ -417,7 +428,7 @@ def _write_completed(run_dir: Path, simulation: StreamingSimulation, identity: d
     final_checkpoint = stage / "final_checkpoint.zip"
     final_checksum = save_checkpoint(
         final_checkpoint, simulation, identity, shared_artifact=shared,
-        history_manifest=manifest, initial=initial, external_field=field_path)
+        history_manifest=manifest, initial=initial, external_field=field_path, completed=True)
     receipt = {
         "identity": identity,
         "config_hash": row["config_hash"],
@@ -737,6 +748,7 @@ class Study:
         projection = resource_projection(elapsed_seconds=self.progress["elapsed_seconds"],
             stored_bytes=retained_study_bytes(self.output) + test_bytes,
             remaining_runs=40 - len(done), run_seconds=seconds,
+            completed_checkpoint_seconds=self.history["completed_checkpoint_seconds"],
             retained_completed_run_bytes=retained_output,
             retained_checkpoint_bytes_per_completed_run=retained_checkpoint,
             shared_seed_artifact_bytes=self.history["shared_seed_artifact_bytes"],
@@ -752,9 +764,12 @@ class Study:
                 "incremental history chunks are consolidated on completed publication",
                 "the 1.5 safety factor applies to every remaining run's retained output and checkpoint",
                 "final analysis and figures retain a separate fixed allowance",
+                "full measured completed-checkpoint encode plus verified decode time is added "
+                "to each remaining run before the 1.5 factor, even if observed run time already includes encoding",
             ],
             measurement_status={
                 "runtime": "historical_only_no_current_machine_pilot" if not pilot_observed else "current_completed_pair",
+                "completed_checkpoint_seconds_allowance": "storage_only_measured_full_encode_and_verified_decode",
                 "retained_completed_run_bytes": "historical_category_proxy" if not pilot_observed else "current_completed_run_measured",
                 "retained_checkpoint_bytes_per_completed_run": self.storage_measurement["measurement_status"] if not pilot_observed else "current_completed_run_measured",
                 "shared_seed_artifact_bytes": self.storage_measurement["measurement_status"],
