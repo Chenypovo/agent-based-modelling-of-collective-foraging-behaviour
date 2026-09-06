@@ -1,0 +1,33 @@
+{
+  "checks": {
+    "configured_horizon_completed": true,
+    "finite_metrics": true,
+    "finite_positions": true,
+    "population_conserved": true,
+    "positions_within_bounds": true
+  },
+  "configuration": {
+    "arena_size": 45.0,
+    "follower_direction_rule": "local_weighted_pca_tangent",
+    "n_ants": 10,
+    "seed": 20260824,
+    "steps": 1000
+  },
+  "cumulative_deliveries": 7,
+  "final_counts": {
+    "followers": 7,
+    "foragers": 0,
+    "transporters": 3
+  },
+  "final_phi": -0.3759275795203747,
+  "final_psi": 0.7765287154821662,
+  "notice": "Stage 2B single-rule ablation \u2014 not an exact reproduction of Fig. 4.",
+  "runtime_seconds": 0.862196541000003,
+  "stable": true,
+  "transition_counts": {
+    "follower_to_transporter": 9,
+    "forager_to_follower": 9,
+    "forager_to_transporter": 1,
+    "transporter_to_follower": 7
+  }
+}

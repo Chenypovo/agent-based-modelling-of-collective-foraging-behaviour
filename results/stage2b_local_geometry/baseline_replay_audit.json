@@ -1,0 +1,29 @@
+{
+  "all_match": true,
+  "fixed_seed": 20260824,
+  "frame_checks": {
+    "agent_states.csv": {
+      "detail": "exact persisted values, dtypes, row order, and columns match",
+      "match": true
+    },
+    "events.csv": {
+      "detail": "exact persisted values, dtypes, row order, and columns match",
+      "match": true
+    },
+    "final_agents.csv": {
+      "detail": "exact persisted values, dtypes, row order, and columns match",
+      "match": true
+    },
+    "metrics.csv": {
+      "detail": "exact persisted values, dtypes, row order, and columns match",
+      "match": true
+    }
+  },
+  "notice": "Stage 2B single-rule ablation \u2014 not an exact reproduction of Fig. 4.",
+  "replayed_deliveries": 363,
+  "replayed_final_phi": -0.032578152773163366,
+  "replayed_final_psi": 0.6400746980766642,
+  "rule": "stored_cell_direction",
+  "runtime_seconds": 95.03053899999999,
+  "transition_counts_match": true
+}

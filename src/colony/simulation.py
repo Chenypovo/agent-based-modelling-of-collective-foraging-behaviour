@@ -15,6 +15,7 @@ from .environment import SquareEnvironment, distance_to_site
 from .metrics import compute_order_parameters, fold_headings
 from .movement import build_turn_schedules, initial_headings
 from .pheromone import PheromoneField
+from .trail_direction import local_weighted_pca_tangent
 from .transitions import TransitionRecord, transition_role
 
 TRANSITION_KEYS = (
@@ -35,6 +36,14 @@ class SimulationResult:
     pheromone_snapshots: dict[
         int, tuple[NDArray[np.float64], NDArray[np.float64], NDArray[np.float64]]
     ]
+
+
+@dataclass(frozen=True)
+class FollowerDirectionDecision:
+    heading: float
+    sensing_hit: bool
+    selected_cell_index: tuple[int, int] | None = None
+    selected_intensity: float | None = None
 
 
 class ColonySimulation:
@@ -120,9 +129,8 @@ class ColonySimulation:
         ant.last_displacement = float(np.linalg.norm(ant.position - start))
 
     def _move_follower(self, ant: Ant) -> None:
-        signal = self.field.sense(ant.position)
-        if signal is not None:
-            ant.heading = float(np.arctan2(signal.direction[1], signal.direction[0]))
+        decision = self._follower_direction_decision(ant)
+        ant.heading = decision.heading
         start = ant.position.copy()
         ant.position, ant.heading = self.environment.reflect_move(
             ant.position,
@@ -132,6 +140,26 @@ class ColonySimulation:
         ant.travel_path.append(ant.position.copy())
         ant.last_path_distance = self.config.movement.step_size
         ant.last_displacement = float(np.linalg.norm(ant.position - start))
+
+    def _follower_direction_decision(self, ant: Ant) -> FollowerDirectionDecision:
+        if self.config.follower_direction_rule == "stored_cell_direction":
+            signal = self.field.sense(ant.position)
+            if signal is None:
+                return FollowerDirectionDecision(heading=ant.heading, sensing_hit=False)
+            return FollowerDirectionDecision(
+                heading=float(np.arctan2(signal.direction[1], signal.direction[0])),
+                sensing_hit=True,
+                selected_cell_index=signal.cell_index,
+                selected_intensity=signal.intensity,
+            )
+
+        centers, strengths = self.field.active_cells_near(ant.position)
+        if len(centers) == 0:
+            return FollowerDirectionDecision(heading=ant.heading, sensing_hit=False)
+        return FollowerDirectionDecision(
+            heading=local_weighted_pca_tangent(centers, strengths, ant.heading),
+            sensing_hit=True,
+        )
 
     def _move_transporter(self, ant: Ant) -> None:
         start = ant.position.copy()
@@ -176,9 +204,9 @@ class ColonySimulation:
                 self.first_food_discovery_time = self.time
             self._record_transition(record)
             return
-        signal = self.field.sense(ant.position)
-        if signal is not None:
-            ant.heading = float(np.arctan2(signal.direction[1], signal.direction[0]))
+        decision = self._follower_direction_decision(ant)
+        if decision.sensing_hit:
+            ant.heading = decision.heading
             record = transition_role(
                 ant,
                 Role.FOLLOWER,
@@ -214,9 +242,9 @@ class ColonySimulation:
         ant.travel_path = [ant.position.copy()]
         ant.return_waypoints = np.empty((0, 2), dtype=float)
         ant.return_waypoint_index = 0
-        signal = self.field.sense(ant.position)
-        if signal is not None:
-            ant.heading = float(np.arctan2(signal.direction[1], signal.direction[0]))
+        decision = self._follower_direction_decision(ant)
+        if decision.sensing_hit:
+            ant.heading = decision.heading
         self._record_transition(record)
 
     def _role_counts(self) -> dict[Role, int]:

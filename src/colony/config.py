@@ -9,6 +9,10 @@ from typing import Literal
 import numpy as np
 
 MovementModel = Literal["srw", "fcrw", "zw"]
+FollowerDirectionRule = Literal[
+    "stored_cell_direction",
+    "local_weighted_pca_tangent",
+]
 
 
 @dataclass(frozen=True)
@@ -101,6 +105,7 @@ class ColonyConfig:
     initial_role_rule: str = "all_forager"
     food_detection_rule: str = "site_radius_plus_sensing_range"
     nest_arrival_rule: str = "site_radius"
+    follower_direction_rule: FollowerDirectionRule = "stored_cell_direction"
     memory_stride: int = 3
     memory_final_vertex_rule: str = "append_if_not_retained"
     transporter_motion_rule: str = "reverse_interpolated_coarse_path"
@@ -130,6 +135,11 @@ class ColonyConfig:
                 raise ValueError(f"{label} center must lie inside the arena")
         if self.memory_stride < 1:
             raise ValueError("memory_stride must be positive")
+        if self.follower_direction_rule not in {
+            "stored_cell_direction",
+            "local_weighted_pca_tangent",
+        }:
+            raise ValueError("unsupported follower_direction_rule")
         if self.agent_state_interval < 1:
             raise ValueError("agent_state_interval must be positive")
         if any(step < 0 or step > self.steps for step in self.snapshot_steps):

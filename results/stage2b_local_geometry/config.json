@@ -1,0 +1,56 @@
+{
+  "agent_state_interval": 100,
+  "arena_size": 300.0,
+  "boundary_rule": "reflect_overshoot_and_velocity_component",
+  "event_order_rule": "move_deposit_then_transition_food_before_pheromone",
+  "follower_direction_rule": "local_weighted_pca_tangent",
+  "food": {
+    "center": [
+      240.0,
+      240.0
+    ],
+    "radius": 3.0
+  },
+  "food_detection_rule": "site_radius_plus_sensing_range",
+  "food_is_inexhaustible": true,
+  "initial_heading_rule": "iid_uniform_0_2pi",
+  "initial_position_rule": "nest_centre",
+  "initial_role_rule": "all_forager",
+  "memory_final_vertex_rule": "append_if_not_retained",
+  "memory_stride": 3,
+  "movement": {
+    "gamma": 0.1,
+    "model": "zw",
+    "step_size": 0.6,
+    "theta_deg": 50.0,
+    "time_step": 1.0
+  },
+  "n_ants": 100,
+  "nest": {
+    "center": [
+      90.0,
+      90.0
+    ],
+    "radius": 3.0
+  },
+  "nest_arrival_rule": "site_radius",
+  "output_dir": "/Users/starrystark/Desktop/ntu/Agent-Based Modelling of Collective Foraging Behaviour/results/stage2b_local_geometry",
+  "pheromone": {
+    "cell_size": 0.6,
+    "decay_rate": 0.0,
+    "deposit_amount": 1.0,
+    "diffusion_rate": 0.0,
+    "follower_no_signal_policy": "continue_heading",
+    "sensing_range": 0.6,
+    "tie_break_rule": "food_projection_then_lexicographic"
+  },
+  "seed": 20260824,
+  "snapshot_steps": [
+    1000,
+    4000,
+    10000
+  ],
+  "steps": 10000,
+  "transporter_motion_rule": "reverse_interpolated_coarse_path",
+  "transporter_post_nest_role": "follower"
+}

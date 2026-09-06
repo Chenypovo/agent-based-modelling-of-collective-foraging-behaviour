@@ -1,0 +1,18 @@
+{
+  "alternate_seed_used": false,
+  "analysis_seconds": 4.275146707999994,
+  "autodl_used": false,
+  "baseline_replay_seconds": 95.03053899999999,
+  "cpu_only": true,
+  "gpu_used": false,
+  "machine": "x86_64",
+  "notice": "Stage 2B single-rule ablation \u2014 not an exact reproduction of Fig. 4.",
+  "paper_simulation_seconds": 147.110828958,
+  "parameter_scan_used": false,
+  "pilot_simulation_seconds": 0.862196541000003,
+  "platform": "macOS-27.0-x86_64-i386-64bit",
+  "python": "3.9.4",
+  "test_summary": "59 passed in 4.13s",
+  "total_seconds": 252.555840334,
+  "total_seconds_before_final_report": 252.096075709
+}

@@ -1,0 +1,24 @@
+{
+  "calls_random_numbers": false,
+  "difference_count": 1,
+  "differences": [
+    {
+      "baseline": "stored_cell_direction",
+      "field": "follower_direction_rule",
+      "stage2b": "local_weighted_pca_tangent"
+    }
+  ],
+  "ignored_non_behavioural_fields": [
+    "output_dir"
+  ],
+  "inference_inputs": [
+    "active_cell_centers",
+    "active_cell_concentrations",
+    "current_heading"
+  ],
+  "notice": "Stage 2B single-rule ablation \u2014 not an exact reproduction of Fig. 4.",
+  "only_follower_direction_rule_changed": true,
+  "reads_food_coordinates": false,
+  "reads_nest_coordinates": false,
+  "reads_stored_direction_to_food": false
+}

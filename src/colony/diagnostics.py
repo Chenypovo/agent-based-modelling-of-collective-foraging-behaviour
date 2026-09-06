@@ -18,8 +18,8 @@ from numpy.typing import NDArray
 
 from .agents import Ant, Role
 from .metrics import compute_order_parameters, fold_headings
-from .pheromone import PheromoneField, PheromoneSignal
-from .simulation import ColonySimulation, SimulationResult
+from .pheromone import PheromoneField
+from .simulation import ColonySimulation, FollowerDirectionDecision, SimulationResult
 
 NOTICE = "Stage 2A diagnostic only — no model rules or parameters changed."
 ROLE_SAMPLE_WARNING_THRESHOLD = 5
@@ -512,7 +512,9 @@ def metric_validation_rows(axis_angle: float = np.pi / 4) -> list[dict[str, obje
 class DiagnosticSimulation(ColonySimulation):
     """Frozen Stage 2A simulation with observation-only instrumentation."""
 
-    def __init__(self, *args: object, **kwargs: object) -> None:
+    def __init__(
+        self, *args: object, compact_sensing: bool = False, **kwargs: object
+    ) -> None:
         self.role_order_records: list[dict[str, object]] = []
         self.axis_alignment_records: list[dict[str, object]] = []
         self.sensing_records: list[dict[str, object]] = []
@@ -523,9 +525,8 @@ class DiagnosticSimulation(ColonySimulation):
         self._miss_streak: dict[int, int] = {}
         self._active_transport: dict[int, dict[str, object]] = {}
         self._next_transport_leg_id = 0
+        self.compact_sensing = compact_sensing
         super().__init__(*args, **kwargs)
-        self._unobserved_sense = self.field.sense
-        self.field.sense = self._observed_sense  # type: ignore[method-assign]
         axis = np.asarray(self.config.food.center) - np.asarray(self.config.nest.center)
         self.axis_angle = float(np.arctan2(axis[1], axis[0]))
         self.nest_food_straight_distance = float(np.linalg.norm(axis))
@@ -541,59 +542,89 @@ class DiagnosticSimulation(ColonySimulation):
         self.role_order_records.extend(order)
         self.axis_alignment_records.extend(alignment)
 
-    def _observed_sense(
-        self, position: NDArray[np.float64], radius: float | None = None
-    ) -> PheromoneSignal | None:
-        signal = self._unobserved_sense(position, radius)
+    def _follower_direction_decision(self, ant: Ant) -> FollowerDirectionDecision:
+        decision = super()._follower_direction_decision(ant)
         if self._sense_context is None:
-            return signal
-        ant = self._sense_context["ant"]
-        if not isinstance(ant, Ant):
+            return decision
+        context_ant = self._sense_context["ant"]
+        if not isinstance(context_ant, Ant) or context_ant is not ant:
             raise RuntimeError("invalid sensing diagnostic context")
-        candidate_info = inspect_sensing_candidates(self.field, position, radius)
-        hit = signal is not None
+        position = ant.position
+        candidate_info = inspect_sensing_candidates(self.field, position)
+        hit = decision.sensing_hit
         last_time = self._last_sense_time.get(ant.ant_id)
         continues = last_time is not None and last_time == self.time - 1
         previous_miss = self._last_sense_was_miss.get(ant.ant_id, False)
-        streak = self._miss_streak.get(ant.ant_id, 0) + 1 if (not hit and continues and previous_miss) else (1 if not hit else 0)
+        streak = (
+            self._miss_streak.get(ant.ant_id, 0) + 1
+            if (not hit and continues and previous_miss)
+            else (1 if not hit else 0)
+        )
         self._last_sense_time[ant.ant_id] = self.time
         self._last_sense_was_miss[ant.ant_id] = not hit
         self._miss_streak[ant.ant_id] = streak
         food_vector = np.asarray(self.config.food.center, dtype=float) - np.asarray(position)
         food_angle = float(np.arctan2(food_vector[1], food_vector[0]))
-        chosen_angle = (
-            float(np.arctan2(signal.direction[1], signal.direction[0])) if signal is not None else float("nan")
-        )
-        self.sensing_records.append(
-            {
-                "time": self.time,
-                "ant_id": ant.ant_id,
-                "start_x": float(position[0]),
-                "start_y": float(position[1]),
-                "heading_before_sensing": float(ant.heading),
-                "sensing_hit": hit,
-                "sensing_miss": not hit,
-                "consecutive_miss_length": streak,
-                "candidate_cell_count": int(candidate_info["candidate_cell_count"]),
-                "maximum_intensity": candidate_info["maximum_intensity"],
-                "maximum_intensity_tie_count": int(candidate_info["maximum_intensity_tie_count"]),
-                "highest_concentration_tied": int(candidate_info["maximum_intensity_tie_count"]) > 1,
-                "no_signal_continued_heading": not hit,
-                "selected_cell_x": signal.cell_index[0] if signal is not None else -1,
-                "selected_cell_y": signal.cell_index[1] if signal is not None else -1,
-                "selected_intensity": signal.intensity if signal is not None else float("nan"),
-                "chosen_direction_rad": chosen_angle,
-                "food_direction_rad": food_angle,
-                "chosen_direction_food_error_rad": (
-                    directed_angle_error(chosen_angle, food_angle) if signal is not None else float("nan")
-                ),
-                "chosen_direction_food_error_deg": (
-                    float(np.degrees(directed_angle_error(chosen_angle, food_angle)))
-                    if signal is not None else float("nan")
-                ),
+        chosen_angle = decision.heading if hit else float("nan")
+        record: dict[str, object] = {
+            "time": self.time,
+            "ant_id": ant.ant_id,
+            "start_x": float(position[0]),
+            "start_y": float(position[1]),
+            "heading_before_sensing": float(ant.heading),
+            "sensing_hit": hit,
+            "sensing_miss": not hit,
+            "consecutive_miss_length": streak,
+            "candidate_cell_count": int(candidate_info["candidate_cell_count"]),
+            "maximum_intensity": candidate_info["maximum_intensity"],
+            "maximum_intensity_tie_count": int(
+                candidate_info["maximum_intensity_tie_count"]
+            ),
+            "highest_concentration_tied": int(
+                candidate_info["maximum_intensity_tie_count"]
+            )
+            > 1,
+            "no_signal_continued_heading": not hit,
+            "selected_cell_x": (
+                decision.selected_cell_index[0]
+                if decision.selected_cell_index is not None
+                else -1
+            ),
+            "selected_cell_y": (
+                decision.selected_cell_index[1]
+                if decision.selected_cell_index is not None
+                else -1
+            ),
+            "selected_intensity": (
+                decision.selected_intensity
+                if decision.selected_intensity is not None
+                else float("nan")
+            ),
+            "chosen_direction_rad": chosen_angle,
+            "food_direction_rad": food_angle,
+            "chosen_direction_food_error_rad": (
+                directed_angle_error(chosen_angle, food_angle) if hit else float("nan")
+            ),
+            "chosen_direction_food_error_deg": (
+                float(np.degrees(directed_angle_error(chosen_angle, food_angle)))
+                if hit
+                else float("nan")
+            ),
+        }
+        if self.compact_sensing:
+            compact_fields = {
+                "time",
+                "ant_id",
+                "heading_before_sensing",
+                "sensing_hit",
+                "sensing_miss",
+                "candidate_cell_count",
+                "chosen_direction_rad",
+                "chosen_direction_food_error_deg",
             }
-        )
-        return signal
+            record = {key: value for key, value in record.items() if key in compact_fields}
+        self.sensing_records.append(record)
+        return decision
 
     def _move_follower(self, ant: Ant) -> None:
         before = len(self.sensing_records)

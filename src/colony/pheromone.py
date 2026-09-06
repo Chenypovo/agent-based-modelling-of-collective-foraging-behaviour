@@ -139,6 +139,39 @@ class PheromoneField:
             cell_center=self._cell_center((ix, iy)),
         )
 
+    def active_cells_near(
+        self, position: NDArray[np.float64], radius: float | None = None
+    ) -> tuple[NDArray[np.float64], NDArray[np.float64]]:
+        """Return only centres and strengths of active cells in sensing range."""
+
+        point = np.asarray(position, dtype=float)
+        sensing_radius = self.config.sensing_range if radius is None else float(radius)
+        if point.shape != (2,) or not np.isfinite(point).all():
+            raise ValueError("position must contain two finite coordinates")
+        if not np.isfinite(sensing_radius) or sensing_radius <= 0:
+            raise ValueError("sensing radius must be finite and positive")
+
+        lower = np.floor((point - sensing_radius) / self.config.cell_size).astype(int)
+        upper = np.floor((point + sensing_radius) / self.config.cell_size).astype(int)
+        lower = np.clip(lower, 0, np.array(self.intensity.shape) - 1)
+        upper = np.clip(upper, 0, np.array(self.intensity.shape) - 1)
+
+        centers: list[NDArray[np.float64]] = []
+        strengths: list[float] = []
+        for ix in range(int(lower[0]), int(upper[0]) + 1):
+            for iy in range(int(lower[1]), int(upper[1]) + 1):
+                index = (ix, iy)
+                strength = float(self.intensity[index])
+                if strength <= 0.0:
+                    continue
+                if self._point_to_cell_distance(point, index) > sensing_radius + 1e-12:
+                    continue
+                centers.append(self._cell_center(index))
+                strengths.append(strength)
+        if not centers:
+            return np.empty((0, 2), dtype=float), np.empty(0, dtype=float)
+        return np.vstack(centers), np.asarray(strengths, dtype=float)
+
     @property
     def total_intensity(self) -> float:
         return float(np.sum(self.intensity))

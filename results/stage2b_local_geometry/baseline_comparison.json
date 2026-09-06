@@ -1,0 +1,180 @@
+{
+  "acceptance_gates": {
+    "engineering": {
+      "checks": {
+        "all_tests_passed": true,
+        "configured_horizon_completed": true,
+        "default_rule_full_replay_matches_frozen_stage2a": true,
+        "finite_metrics": true,
+        "finite_positions": true,
+        "fixed_seed_reproducibility_test_passed": true,
+        "only_follower_direction_rule_changed": true,
+        "population_conserved": true,
+        "positions_within_bounds": true,
+        "protected_sha256_all_match": true
+      },
+      "passed": true
+    },
+    "fig4_candidate": {
+      "checks": {
+        "late_window_mean_phi_within_0_15_rad_of_pi_over_4": false,
+        "late_window_mean_psi_at_least_0_90": false,
+        "transport_and_role_cycle_not_collapsed": true
+      },
+      "passed": false
+    },
+    "mechanism_improvement": {
+      "checks": {
+        "deliveries_at_least_291": false,
+        "follower_hit_step_mean_axis_error_at_most_35_deg": false,
+        "late_window_psi_improvement_at_least_0_10": false,
+        "no_food_or_nest_global_coordinate_dependency": true
+      },
+      "passed": false
+    }
+  },
+  "baseline_commit": "02a953af132a44aabcf8be92a873de7694d4a5fb",
+  "baseline_rule": "stored_cell_direction",
+  "fixed_seed": 20260824,
+  "hypothesis_verdict": "opposes_local_geometry_hypothesis_for_this_fixed_seed",
+  "late_window_inclusive": [
+    9000,
+    10000
+  ],
+  "metrics": {
+    "active_pheromone_area_fraction": {
+      "baseline": 0.410948,
+      "delta": -0.15255599999999997,
+      "stage2b": 0.258392
+    },
+    "active_pheromone_cells": {
+      "baseline": 102737,
+      "delta": -38139.0,
+      "stage2b": 64598
+    },
+    "completed_transporter_mean_path_efficiency": {
+      "baseline": 0.6171177090980704,
+      "delta": -0.4572902242417559,
+      "stage2b": 0.15982748485631448
+    },
+    "completed_transporter_median_path_efficiency": {
+      "baseline": 0.7812853602540692,
+      "delta": -0.6715472279920912,
+      "stage2b": 0.10973813226197801
+    },
+    "cumulative_deliveries": {
+      "baseline": 363,
+      "delta": -323.0,
+      "stage2b": 40
+    },
+    "final_phi": {
+      "baseline": -0.0325781527731633,
+      "delta": -0.24757085423008393,
+      "stage2b": -0.28014900700324724
+    },
+    "final_psi": {
+      "baseline": 0.6400746980766642,
+      "delta": -0.15637250131942332,
+      "stage2b": 0.48370219675724085
+    },
+    "final_roles": {
+      "baseline": {
+        "followers": 81,
+        "foragers": 0,
+        "transporters": 19
+      },
+      "stage2b": {
+        "followers": 89,
+        "foragers": 0,
+        "transporters": 11
+      }
+    },
+    "first_food_discovery_time": {
+      "baseline": 913,
+      "delta": 0.0,
+      "stage2b": 913
+    },
+    "first_pheromone_recruitment_time": {
+      "baseline": 1168,
+      "delta": 0.0,
+      "stage2b": 1168
+    },
+    "first_successful_delivery_time": {
+      "baseline": 1583,
+      "delta": 0.0,
+      "stage2b": 1583
+    },
+    "follower_final_phi": {
+      "baseline": -0.1222553688878661,
+      "delta": -0.19648369124464005,
+      "stage2b": -0.31873906013250614
+    },
+    "follower_final_psi": {
+      "baseline": 0.6767627910037167,
+      "delta": -0.18600012994346554,
+      "stage2b": 0.4907626610602512
+    },
+    "follower_hit_step_mean_axis_error_deg": {
+      "baseline": 43.01063219158909,
+      "delta": 0.13733204038463498,
+      "stage2b": 43.147964231973724
+    },
+    "follower_late_window_mean_phi": {
+      "baseline": -0.1689576648179753,
+      "delta": -0.13834028496977707,
+      "stage2b": -0.3072979497877524
+    },
+    "follower_late_window_mean_psi": {
+      "baseline": 0.6507816200978576,
+      "delta": -0.1441980525477048,
+      "stage2b": 0.5065835675501528
+    },
+    "follower_local_continuity_mean_axis_change_deg": {
+      "baseline": 23.22367918099151,
+      "delta": -12.542929907944592,
+      "stage2b": 10.680749273046919
+    },
+    "follower_sensing_miss_rate": {
+      "baseline": 0.02426044896965592,
+      "delta": 0.16007554024438206,
+      "stage2b": 0.184335989214038
+    },
+    "late_window_mean_phi": {
+      "baseline": -0.042959492045807186,
+      "delta": -0.26822357375544903,
+      "stage2b": -0.3111830658012562
+    },
+    "late_window_mean_psi": {
+      "baseline": 0.6364427983712712,
+      "delta": -0.13049613008316507,
+      "stage2b": 0.5059466682881061
+    },
+    "main_channel_width_90": {
+      "baseline": 190.070302782944,
+      "delta": 59.39696961966996,
+      "stage2b": 249.46727240261396
+    },
+    "transporter_final_phi": {
+      "baseline": 0.3497299790842538,
+      "delta": -0.31765037440531546,
+      "stage2b": 0.03207960467893833
+    },
+    "transporter_final_psi": {
+      "baseline": 0.5936239840907911,
+      "delta": -0.0940727039570638,
+      "stage2b": 0.4995512801337273
+    },
+    "transporter_late_window_mean_phi": {
+      "baseline": 0.42996082428847787,
+      "delta": -0.7724530062601835,
+      "stage2b": -0.3424921819717057
+    },
+    "transporter_late_window_mean_psi": {
+      "baseline": 0.7259694704212352,
+      "delta": -0.18386188919234525,
+      "stage2b": 0.5421075812288899
+    }
+  },
+  "notice": "Stage 2B single-rule ablation \u2014 not an exact reproduction of Fig. 4.",
+  "stage2b_rule": "local_weighted_pca_tangent"
+}
