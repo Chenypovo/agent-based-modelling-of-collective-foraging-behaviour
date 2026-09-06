@@ -163,6 +163,9 @@ def retained_study_bytes(path: Path) -> int:
         if not item.is_file():
             continue
         parts = item.relative_to(path).parts
+        if "engineering_failures" in parts:
+            total += item.stat().st_size
+            continue
         if "completed" not in parts and (
                 item.name in ("checkpoint-0.zip", "checkpoint-1.zip")
                 or "history" in parts
@@ -602,6 +605,7 @@ def verify_engineering_tests(root: Path, output: Path, identity: dict) -> dict:
         return receipt
     temporary = tempfile.mkdtemp(prefix="stage2c-engineering-tests-")
     started = time.perf_counter()
+    started_at = datetime.now(timezone.utc).isoformat()
     completed = subprocess.run(
         [sys.executable, "-B", "-m", "pytest", "-q", "-p", "no:cacheprovider", "--basetemp", temporary],
         cwd=root, env=dict(os.environ, PYTHONDONTWRITEBYTECODE="1", PYTEST_DISABLE_PLUGIN_AUTOLOAD="1", MPLBACKEND="Agg"),
@@ -609,6 +613,8 @@ def verify_engineering_tests(root: Path, output: Path, identity: dict) -> dict:
     )
     matches = re.findall(r"\b(\d+) passed\b", completed.stdout)
     receipt = {"identity": identity, "passed": completed.returncode == 0 and bool(matches),
+               "exit_code": completed.returncode, "started_at_utc": started_at,
+               "finished_at_utc": datetime.now(timezone.utc).isoformat(),
                "passed_count": int(matches[-1]) if matches else None,
                "output": completed.stdout + completed.stderr,
                "elapsed_seconds": time.perf_counter() - started,
@@ -626,6 +632,8 @@ class Study:
         self._prior_elapsed = 0.0
         self.root, self.output = root.resolve(), output.resolve()
         validate_output(self.root, self.output)
+        from .stage2c_repair import verify_repair_archive
+        verify_repair_archive(self.output)
         self.identity = build_identity(self.root, self.output)
         preflight_path = self.output / "storage_preflight.json"
         if preflight_path.exists():
@@ -742,6 +750,8 @@ class Study:
                 self.history["retained_checkpoint_bytes_per_completed_run"])
         validation_path = self.output / "engineering_validation.json"
         test_bytes = read_json(validation_path)["temporary_artifact_bytes"] if validation_path.exists() else 0
+        from .stage2c_repair import verify_repair_archive
+        test_bytes += verify_repair_archive(self.output, require_complete=False)
         shared_remaining = sum(
             not (self.output / "runs" / str(seed) / "shared_seed_artifact.zip").is_file()
             for seed in SEEDS)

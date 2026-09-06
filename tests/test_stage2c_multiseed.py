@@ -780,11 +780,14 @@ def test_dry_run_no_simulation_or_initialisation(tmp_path, monkeypatch):
     monkeypatch.setattr(ColonySimulation, "step", forbidden)
     monkeypatch.setattr(StreamingSimulation, "__init__", forbidden)
     monkeypatch.setattr(StreamingSimulation, "endpoint_metrics", forbidden)
+    formal = ROOT / "results/stage2c_multiseed_confirmation"
+    before = (formal.exists(), sorted(p.name for p in formal.iterdir()) if formal.exists() else [])
     result = dry_run(ROOT, tmp_path / "dry-run")
+    assert Path(result["output_dir"]) == (tmp_path / "dry-run").resolve()
     assert not result["simulation_started"] and not result["scientific_metrics_generated"]
     assert result["runtime"]["current_machine_pilot_observed"] is False
     assert not (tmp_path / "dry-run/summary.json").exists()
-    assert not (ROOT / "results/stage2c_multiseed_confirmation").exists()
+    assert (formal.exists(), sorted(p.name for p in formal.iterdir()) if formal.exists() else []) == before
     assert len(pd.read_csv(tmp_path / "dry-run/per_seed_metrics.csv")) == 40
     manifest = read_json(tmp_path / "dry-run/config_manifest.json")
     assert manifest["identity"]["preregistration_commit"] == PREREGISTRATION_COMMIT

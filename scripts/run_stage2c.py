@@ -15,11 +15,12 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from colony.stage2c import DEFAULT_OUTPUT, Study, dry_run, study_lock, validate_output
 from colony.stage2c_checkpoint import json_bytes
+from colony.stage2c_repair import repair_preflight
 
 
 def parser() -> argparse.ArgumentParser:
     command = argparse.ArgumentParser(description=__doc__)
-    command.add_argument("--mode", required=True, choices=("pilot", "full", "analyse", "dry-run"))
+    command.add_argument("--mode", required=True, choices=("pilot", "full", "analyse", "dry-run", "repair-preflight"))
     command.add_argument("--resume", action="store_true", help="resume the same incomplete seed; completed runs are verified and reused")
     command.add_argument("--output-dir", type=Path, help="administrative output location; dry-run requires a temporary directory")
     return command
@@ -32,6 +33,8 @@ def main(argv=None) -> int:
         command.error("--resume applies only to pilot or full")
     if args.mode == "dry-run":
         result = dry_run(PROJECT_ROOT, args.output_dir)
+    elif args.mode == "repair-preflight":
+        result = repair_preflight(PROJECT_ROOT, args.output_dir or PROJECT_ROOT / DEFAULT_OUTPUT)
     else:
         output = args.output_dir or PROJECT_ROOT / DEFAULT_OUTPUT
         output = output.resolve()

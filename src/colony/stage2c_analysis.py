@@ -244,7 +244,8 @@ def csv_bytes(rows: list[dict]) -> bytes:
     return buffer.getvalue().encode()
 
 
-def write_metric_tables(output: Path, rows: list[dict]) -> None:
+def metric_table_bytes(rows: list[dict]) -> dict[str, bytes]:
+    """Serialise tables without filesystem writes (also validates zero-step repair)."""
     index_rows(rows)
     flat = []
     for row in rows:
@@ -259,8 +260,13 @@ def write_metric_tables(output: Path, rows: list[dict]) -> None:
                 item[name + "_observed"] = metric.get("observed")
                 item[name + "_censoring_horizon"] = metric.get("censoring_horizon")
         flat.append(item)
-    atomic_write(output / "per_seed_metrics.csv", csv_bytes(flat))
-    atomic_write(output / "paired_comparison.csv", csv_bytes(paired_rows(rows)))
+    return {"per_seed_metrics.csv": csv_bytes(flat),
+            "paired_comparison.csv": csv_bytes(paired_rows(rows))}
+
+
+def write_metric_tables(output: Path, rows: list[dict]) -> None:
+    for name, data in metric_table_bytes(rows).items():
+        atomic_write(output / name, data)
 
 
 def write_comparison_figures(output: Path, rows: list[dict], summary: dict, *, test_fixture: bool = False) -> None:
