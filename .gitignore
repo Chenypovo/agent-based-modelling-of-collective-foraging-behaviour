@@ -9,3 +9,9 @@ similarity check.pdf
 
 # Large regenerable diagnostic trace (over GitHub's 100 MB file limit).
 results/stage2_diagnostic/sensing_diagnostics.csv
+
+# Local duplicate source documents and assessment reports; do not publish.
+reports/Project Proposal.pdf
+reports/_AY2627_T1_Briefing_updated.pdf
+reports/_PH6780 Templates.docx
+reports/Turnitin_Report.pdf
