@@ -314,6 +314,119 @@ def run_fixture(config, directory, entry, **kwargs):
     return result, statuses
 
 
+class StartRecorded(Exception):
+    """Stop a fixture after its start is persisted, before new simulation work."""
+
+
+@pytest.mark.parametrize("resume", [False, True])
+def test_planned_start_reason_independent_of_resume(small, tmp_path, resume):
+    entry = fixture_progress()["runs"][0]
+
+    def persist():
+        assert entry["status"] == "running"
+        assert entry["reason"] == "started"
+        assert entry["attempts"] == [{"start_time_step": 0, "status": "running"}]
+        assert entry["initial_identity"] is None and entry["checkpoint"] is None
+        raise StartRecorded
+
+    with pytest.raises(StartRecorded):
+        run_one(small, tmp_path / "start", IDENTITY, entry, resume=resume,
+                persist=persist, resource_check=lambda: {"action": "continue"})
+    assert not (tmp_path / "start").exists()
+
+
+@pytest.mark.parametrize("status", ["interrupted", "running", "engineering_failed"])
+@pytest.mark.parametrize("resume", [False, True])
+def test_unfinished_start_reason_and_resume_gate(small, tmp_path, monkeypatch, status, resume):
+    entry = fixture_progress()["runs"][0]
+    run_dir = tmp_path / "unfinished"
+
+    def interrupt(sim, state):
+        if sim.time == 23:
+            raise KeyboardInterrupt
+
+    run_fixture(small, run_dir, entry, resume=False, boundary_observer=interrupt)
+    entry["status"] = status
+    entry["attempts"][-1]["status"] = status
+    before = deepcopy(entry)
+    transitions = []
+
+    def record_transition(record, target, reason):
+        transitions.append((record["status"], target, reason))
+        transition(record, target, reason)
+
+    monkeypatch.setattr("colony.stage2c.transition", record_transition)
+
+    def persist():
+        assert entry["reason"] == "same_seed_resume"
+        assert entry["attempts"][:-1] == before["attempts"]
+        assert entry["attempts"][-1] == {"start_time_step": 20, "status": "running"}
+        raise StartRecorded
+
+    with pytest.raises(StartRecorded if resume else ValueError,
+                       match=None if resume else "unfinished run requires --resume"):
+        run_one(small, run_dir, IDENTITY, entry, resume=resume, persist=persist,
+                resource_check=lambda: {"action": "continue"}, late_window=(60, 80))
+    if not resume:
+        assert entry == before and transitions == []
+    elif status == "running":
+        assert transitions == [
+            ("running", "interrupted", "previous_process_stopped_without_final_status"),
+            ("interrupted", "running", "same_seed_resume")]
+    else:
+        assert transitions == [(status, "running", "same_seed_resume")]
+
+
+def test_full_resume_reuses_pilot_and_starts_planned_fixture(small, tmp_path, monkeypatch):
+    """Exercise full-mode dispatch with a completed small pair and a new seed."""
+    from types import SimpleNamespace
+
+    identity = dict(IDENTITY, runner_worktree_clean=True)
+    entries = fixture_progress()["runs"][:4]
+    configurations, rows = [], []
+    for index, entry in enumerate(entries):
+        entry["seed"] = STORAGE_FIXTURE_SEED + index // 2
+        configurations.append(replace(small, seed=entry["seed"],
+            follower_direction_rule=entry["rule"],
+            output_dir=str(tmp_path / str(entry["seed"]) / entry["rule"])))
+    for entry, config in zip(entries[:2], configurations[:2]):
+        rows.append(run_one(config, Path(config.output_dir), identity, entry, resume=False,
+            persist=lambda: None, resource_check=lambda: {"action": "continue"},
+            late_window=(60, 80), checkpoint_interval=10))
+    pilot_entries = deepcopy(entries[:2])
+    pilot_files = {str(p): (p.read_bytes(), p.stat().st_mtime_ns)
+                   for p in tmp_path.rglob("*") if p.is_file()}
+    calls = []
+
+    def dispatch(config, directory, current_identity, entry, **kwargs):
+        calls.append((entry["status"], kwargs["resume"]))
+        return run_one(config, directory, current_identity, entry,
+                       late_window=(60, 80), checkpoint_interval=10, **kwargs)
+
+    def persist():
+        assert entries[2]["status"] == "running"
+        assert entries[2]["reason"] == "started"
+        assert entries[2]["attempts"] == [{"start_time_step": 0, "status": "running"}]
+        raise StartRecorded
+
+    monkeypatch.setattr("colony.stage2c.run_one", dispatch)
+    monkeypatch.setattr("colony.stage2c.build_identity", lambda *args: identity)
+    monkeypatch.setattr("colony.stage2c.verify_engineering_tests", lambda *args: None)
+    monkeypatch.setattr("colony.stage2c.write_metric_tables", lambda *args: None)
+    monkeypatch.setattr("colony.stage2c.platform.system", lambda: "Darwin")
+    study = SimpleNamespace(root=tmp_path, output=tmp_path, identity=identity,
+        progress={"runs": entries}, configurations=configurations, rows=rows,
+        resources=lambda: {"action": "continue"}, refresh_rows=lambda: None, persist=persist)
+    with pytest.raises(StartRecorded):
+        Study.execute(study, "full", resume=True)
+    assert calls == [("completed", True), ("completed", True), ("planned", True)]
+    assert entries[:2] == pilot_entries
+    assert pilot_files == {str(p): (p.read_bytes(), p.stat().st_mtime_ns)
+                           for p in tmp_path.rglob("*") if p.is_file()}
+    assert entries[3]["status"] == "planned" and entries[3]["attempts"] == []
+    assert not Path(configurations[2].output_dir).exists()
+
+
 @pytest.mark.parametrize("rule", RULES)
 @pytest.mark.parametrize("interrupt_at", [23, 61])
 def test_runner_status_resume_no_duplicate_or_overwrite(small, tmp_path, rule, interrupt_at):

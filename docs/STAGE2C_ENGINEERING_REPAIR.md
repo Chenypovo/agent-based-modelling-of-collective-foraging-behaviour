@@ -1,6 +1,6 @@
 # Stage 2C-E1: zero-step preflight repair
 
-Status: implementation and engineering tests only. The current failed formal directory is read-only in this task. Master must separately authorise running repair and subsequently resuming the pilot. No scientific execution or repair of that directory is authorised by this document.
+Status: implementation and engineering tests only. The current failed formal directory is read-only in this task. Master must separately authorise running repair and subsequently starting the pilot. No scientific execution or repair of that directory is authorised by this document.
 
 ## Recorded failure
 
@@ -69,10 +69,20 @@ Tests use temporary outputs and a two-ant, nine-step-shaped storage fixture with
 
 ## Required next authorisation
 
-This E1 implementation does not execute repair on the current failed study, alter its receipt/manifests or resume its pilot. After reviewing the new commit, master must separately authorise **repair-preflight**. Only after validating the repaired preflight and resource decision may master separately authorise **pilot --resume**. No remaining confirmation seed is authorised by this repair.
+This E1 implementation does not execute repair on the current failed study, alter its receipt/manifests or resume its pilot. After reviewing the new commit, master must separately authorise **repair-preflight**. Only after validating the repaired preflight and resource decision may master separately authorise the first pilot. If all records remain `planned / t=0 / attempts=[]`, that command is `./run_stage2c.sh --mode pilot`, without `--resume`. No remaining confirmation seed is authorised by this repair.
 
 ## E1 implementation acceptance
 
 The final uncached suite passed **176 tests in 94.32 seconds** in the real workspace while the original failed formal directory still existed. The command used `PYTHONDONTWRITEBYTECODE=1`, `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`, `python3 -B -m pytest -q -p no:cacheprovider` and a fresh `/private/tmp/stage2c-e1-v3hjq32o/acceptance-tests` base directory. The log is `/private/tmp/stage2c-e1-v3hjq32o/acceptance-tests.log`.
 
 Read-only before/after inventories preserve all **9 original failed-site files**, **110 protected files** and **26 frozen source files**. The actual site's legacy identity and strict zero-step payload were validated without invoking repair. The real directory has no `engineering_failures/` or `runs/`; all 40 records remain planned at zero with empty attempts. Inventory/hash records are under `/private/tmp/stage2c-e1-v3hjq32o/`. Only engineering source, tests and this document are submitted; the original failed directory remains untracked and unmodified.
+
+## E1.1: distinguish starts from resumes
+
+Previously, `run_one()` selected `same_seed_resume` whenever the global CLI flag was set. This incorrectly labelled untouched planned runs, including those reached by a later `full --resume` invocation. The runner now captures whether the run was planned before any status transition: planned runs record `started` with either flag value; unfinished `running`, `interrupted` and `engineering_failed` runs still require `--resume` and record `same_seed_resume`. A stale `running` record first transitions to `interrupted` as before.
+
+After a separately authorised, successful zero-step repair, the first pilot must use `./run_stage2c.sh --mode pilot` without `--resume`. A later, separately authorised `full --resume` reuses verified completed pilot artifacts and permits recovery of genuinely interrupted runs; untouched planned seeds still record `started`. Neither command is authorised or executed by this engineering change.
+
+This changes only the recorded start reason. Initialisation, random draws, checkpoint loading/publication, simulation steps and the repair admission/archive format remain unchanged. New bounded tests cover both planned flag values, all three unfinished states with and without the flag, the stale-running transition order, and full-mode dispatch reusing a completed fixture pair before recording a new planned fixture's first start. Fixtures use non-registered seeds and temporary directories; the dispatch test stops before initialising the new fixture.
+
+E1.1 acceptance: the 9 new cases passed, then the complete uncached suite passed **185 tests in 90.93 seconds** with the original formal failed directory present. The log and read-only inventory checks are retained under `/private/tmp/stage2c-e11-w7mofefo/`. All 9 failed-site files, 110 protected files and 26 frozen source files retained their SHA-256 values. All 40 formal records remain `planned / t=0 / attempts=[]`; neither `engineering_failures/` nor `runs/` exists. No formal repair, pilot, resume or scientific simulation was executed.

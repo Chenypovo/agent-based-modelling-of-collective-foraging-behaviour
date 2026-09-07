@@ -473,7 +473,8 @@ def run_one(config: ColonyConfig, run_dir: Path, identity: dict, entry: dict, *,
         return row
     if entry["status"] == "completed":
         raise ValueError("completed run is missing its artifacts")
-    if entry["status"] != "planned" and not resume:
+    was_planned = entry["status"] == "planned"
+    if not was_planned and not resume:
         raise ValueError("unfinished run requires --resume")
     if resource_check()["action"] == "pause":
         return None
@@ -489,7 +490,7 @@ def run_one(config: ColonyConfig, run_dir: Path, identity: dict, entry: dict, *,
             raise ValueError("paired initial identity mismatch on resume")
     else:
         simulation = None
-    transition(entry, "running", "same_seed_resume" if resume else "started")
+    transition(entry, "running", "started" if was_planned else "same_seed_resume")
     entry["attempts"].append({"start_time_step": entry["time"], "status": "running"})
     persist()
     run_dir.mkdir(parents=True, exist_ok=True)
