@@ -13,6 +13,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 from datetime import datetime, timezone
 from dataclasses import replace
@@ -30,7 +31,7 @@ from .stage2c_analysis import (
 )
 from .stage2c_checkpoint import (
     atomic_write, behavioural_config, digest_bytes,
-    hash_value, initial_identity, load_checkpoint, load_shared_seed_artifact,
+    hash_value, initial_identity, json_bytes, load_checkpoint, load_shared_seed_artifact,
     read_json, save_checkpoint, save_field_artifact, save_shared_seed_artifact, write_json,
     storage_only_measurement,
 )
@@ -189,13 +190,14 @@ def resource_projection(*, elapsed_seconds: float, stored_bytes: int, remaining_
                         completion_publication_overlap_bytes: int = 0,
                         analysis_seconds: float = 600.0,
                         completed_checkpoint_seconds: float | None = 0.0,
+                        future_resource_history_allowance_bytes: int = 0,
                         pilot_observed: bool = False,
                         assumptions: list[str] | None = None,
                         measurement_status: dict | None = None,
                         amendment: dict | None = None) -> dict:
     values = (elapsed_seconds, stored_bytes, remaining_runs, analysis_seconds,
               final_analysis_allowance_bytes, completion_publication_overlap_bytes,
-              remaining_shared_seed_artifacts)
+              remaining_shared_seed_artifacts, future_resource_history_allowance_bytes)
     if any(not np.isfinite(v) or v < 0 for v in values) or remaining_runs > 40:
         raise ValueError("invalid resource accounting")
     time_known = run_seconds is not None and np.isfinite(run_seconds) and run_seconds > 0
@@ -220,6 +222,7 @@ def resource_projection(*, elapsed_seconds: float, stored_bytes: int, remaining_
             + remaining_shared_seed_artifacts * shared_seed_artifact_bytes
             + active_checkpoint_overlap_bytes
             + completion_publication_overlap_bytes
+            + future_resource_history_allowance_bytes
             + final_analysis_allowance_bytes)
     reasons = []
     if not time_known or not storage_known:
@@ -240,6 +243,7 @@ def resource_projection(*, elapsed_seconds: float, stored_bytes: int, remaining_
             "remaining_shared_seed_artifacts": remaining_shared_seed_artifacts,
             "active_checkpoint_overlap_bytes": active_checkpoint_overlap_bytes,
             "completion_publication_overlap_bytes": completion_publication_overlap_bytes,
+            "future_resource_history_allowance_bytes": future_resource_history_allowance_bytes,
             "analysis_seconds_allowance": analysis_seconds,
             "final_analysis_allowance_bytes": final_analysis_allowance_bytes,
             "projected_total_seconds": projected_time, "projected_peak_additional_bytes": projected_bytes,
@@ -252,6 +256,7 @@ def resource_projection(*, elapsed_seconds: float, stored_bytes: int, remaining_
                 "(retained_completed_run_bytes + retained_checkpoint_bytes_per_completed_run) + "
                 "remaining_shared_seed_artifacts * shared_seed_artifact_bytes + "
                 "active_checkpoint_overlap_bytes + completion_publication_overlap_bytes + "
+                "future_resource_history_allowance_bytes + "
                 "final_analysis_allowance_bytes"),
             "assumptions": assumptions or [],
             "measurement_status": measurement_status or {},
@@ -613,20 +618,65 @@ def verify_engineering_tests(root: Path, output: Path, identity: dict) -> dict:
     temporary = tempfile.mkdtemp(prefix="stage2c-engineering-tests-")
     started = time.perf_counter()
     started_at = datetime.now(timezone.utc).isoformat()
-    completed = subprocess.run(
-        [sys.executable, "-B", "-m", "pytest", "-q", "-p", "no:cacheprovider", "--basetemp", temporary],
-        cwd=root, env=dict(os.environ, PYTHONDONTWRITEBYTECODE="1", PYTEST_DISABLE_PLUGIN_AUTOLOAD="1", MPLBACKEND="Agg"),
-        text=True, capture_output=True, check=False,
-    )
-    matches = re.findall(r"\b(\d+) passed\b", completed.stdout)
+    command = [sys.executable, "-B", "-m", "pytest", "-q", "-p", "no:cacheprovider",
+               "--basetemp", temporary]
+    stop = threading.Event()
+    peak = [0]
+
+    def measure_peak():
+        while not stop.wait(0.05):
+            try:
+                peak[0] = max(peak[0], directory_bytes(Path(temporary)))
+            except OSError:
+                pass
+
+    monitor = threading.Thread(target=measure_peak, name="stage2c-test-storage-monitor", daemon=True)
+    monitor.start()
+    try:
+        try:
+            completed = subprocess.run(
+                command, cwd=root,
+                env=dict(os.environ, PYTHONDONTWRITEBYTECODE="1",
+                         PYTEST_DISABLE_PLUGIN_AUTOLOAD="1", MPLBACKEND="Agg"),
+                text=True, capture_output=True, check=False,
+            )
+            peak[0] = max(peak[0], directory_bytes(Path(temporary)))
+        finally:
+            stop.set()
+            monitor.join()
+    except BaseException:
+        shutil.rmtree(temporary)
+        raise
+    output_text = completed.stdout + completed.stderr
+    matches = re.findall(r"\b(\d+) passed\b", output_text)
+    failed = re.findall(r"\b(\d+) failed\b", output_text)
+    skipped = re.findall(r"\b(\d+) skipped\b", output_text)
+    xfailed = re.findall(r"\b(\d+) xfailed\b", output_text)
+    xpassed = re.findall(r"\b(\d+) xpassed\b", output_text)
     receipt = {"identity": identity, "passed": completed.returncode == 0 and bool(matches),
                "exit_code": completed.returncode, "started_at_utc": started_at,
                "finished_at_utc": datetime.now(timezone.utc).isoformat(),
                "passed_count": int(matches[-1]) if matches else None,
-               "output": completed.stdout + completed.stderr,
+               "failed_count": int(failed[-1]) if failed else 0,
+               "skipped_count": int(skipped[-1]) if skipped else 0,
+               "xfailed_count": int(xfailed[-1]) if xfailed else 0,
+               "xpassed_count": int(xpassed[-1]) if xpassed else 0,
+               "command": command, "stdout": completed.stdout, "stderr": completed.stderr,
+               "output": output_text,
                "elapsed_seconds": time.perf_counter() - started,
-               "temporary_artifact_bytes": directory_bytes(Path(temporary)),
-               "temporary_directory": temporary, "paper_scale_simulation_executed": False}
+               "temporary_artifact_bytes": peak[0],
+               "temporary_peak_bytes": peak[0],
+               "temporary_directory": temporary, "temporary_directory_removed": True,
+               "long_term_retained_bytes": 0,
+               "paper_scale_simulation_executed": False}
+    shutil.rmtree(temporary)
+    for _ in range(20):
+        size = len(json_bytes(receipt))
+        if receipt["long_term_retained_bytes"] == size:
+            break
+        receipt["long_term_retained_bytes"] = size
+    else:
+        raise ValueError("engineering receipt size did not converge")
     write_json(path, receipt, replace=False)
     if not receipt["passed"]:
         raise RuntimeError("engineering tests failed; no confirmatory simulation started")
@@ -641,6 +691,8 @@ class Study:
         validate_output(self.root, self.output)
         from .stage2c_repair import verify_repair_archive
         from .stage2c_amendment import migration_context
+        from .stage2c_resource_history import migration_context as resource_history_context
+        history_context = resource_history_context(self.output)
         context = migration_context(self.output)
         verify_repair_archive(self.output, engineering_validation_bytes=(
             context[1]["engineering_validation.json"] if context else None))
@@ -659,6 +711,9 @@ class Study:
         if context:
             from .stage2c_amendment import retain_resource_floors
             self.history = retain_resource_floors(self.history, json.loads(context[1]["runtime.json"]))
+            if history_context:
+                self.history = retain_resource_floors(
+                    self.history, json.loads(history_context[1]["runtime.json"]))
         self.progress_path = self.output / "checkpoint/progress_manifest.json"
         self.configurations = [c for seed in SEEDS for c in config_pair(seed, self.output)]
         self.rows = planned_rows()
@@ -680,6 +735,9 @@ class Study:
             if context and manifest.get("execution_identity_lineage") != self.progress.get("execution_identity_lineage"):
                 raise ValueError("config execution identity lineage changed")
             self.refresh_rows()
+            if isinstance(self.progress.get("resource_history"), dict):
+                from .stage2c_resource_history import verify_resource_history
+                verify_resource_history(self.output)
         else:
             # Never initialise over unidentified files from an earlier attempt.
             existing = [p for p in self.output.iterdir() if p.name != ".runner.lock"] if self.output.exists() else []
@@ -774,18 +832,28 @@ class Study:
                 retained_checkpoint,
                 self.history["retained_checkpoint_bytes_per_completed_run"])
         validation_path = self.output / "engineering_validation.json"
-        test_bytes = read_json(validation_path)["temporary_artifact_bytes"] if validation_path.exists() else 0
         from .stage2c_repair import verify_repair_archive
         from .stage2c_amendment import migration_context
+        from .stage2c_resource_history import (
+            append_resource_projection, migration_context as resource_history_context,
+            resource_history_allowance,
+        )
+        history_migration = resource_history_context(self.output)
         migration = migration_context(self.output)
         legacy_validation = migration[1]["engineering_validation.json"] if migration else None
-        test_bytes += verify_repair_archive(self.output, require_complete=False,
-                                           engineering_validation_bytes=legacy_validation)
-        if legacy_validation is not None:
-            test_bytes += json.loads(legacy_validation)["temporary_artifact_bytes"]
+        if history_migration:
+            from .stage2c_resource_history import _external_retained_test_bytes
+            test_bytes = _external_retained_test_bytes(history_migration[1])
+        else:
+            test_bytes = read_json(validation_path)["temporary_artifact_bytes"] if validation_path.exists() else 0
+            test_bytes += verify_repair_archive(self.output, require_complete=False,
+                                               engineering_validation_bytes=legacy_validation)
+            if legacy_validation is not None:
+                test_bytes += json.loads(legacy_validation)["temporary_artifact_bytes"]
         shared_remaining = sum(
             not (self.output / "runs" / str(seed) / "shared_seed_artifact.zip").is_file()
             for seed in SEEDS)
+        history_allowance = resource_history_allowance(self.progress)
         projection = resource_projection(elapsed_seconds=self.progress["elapsed_seconds"],
             stored_bytes=retained_study_bytes(self.output) + test_bytes,
             remaining_runs=40 - len(done), run_seconds=seconds,
@@ -797,6 +865,8 @@ class Study:
             active_checkpoint_overlap_bytes=self.history["active_checkpoint_overlap_bytes"],
             completion_publication_overlap_bytes=self.history[
                 "completion_publication_overlap_bytes"],
+            future_resource_history_allowance_bytes=history_allowance[
+                "future_resource_history_bytes"],
             pilot_observed=pilot_observed, amendment=self.identity.get("resource_amendment"),
             assumptions=[
                 "only one active run can hold two rotating checkpoint slots",
@@ -819,11 +889,12 @@ class Study:
             })
         projection.update(historical_evidence=self.history, environment=self.identity["environment"],
                           storage_only_preflight=self.storage_measurement,
+                          resource_history_bounds=history_allowance,
                           per_run=[{"seed": entry["seed"], "rule": entry["rule"], "status": entry["status"],
                                     "elapsed_seconds": entry["elapsed_seconds"], "time_step": entry["time"],
                                     "retained_bytes": directory_bytes(Path(config.output_dir))}
                                    for entry, config in zip(self.progress["runs"], self.configurations)])
-        self.progress["resource_history"].append(projection)
+        append_resource_projection(self.output, self.progress, projection, self.identity)
         write_json(self.output / "runtime.json", projection)
         self.persist()
         return projection

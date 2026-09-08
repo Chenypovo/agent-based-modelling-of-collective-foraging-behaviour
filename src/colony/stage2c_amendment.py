@@ -277,7 +277,7 @@ def _initial(root, output, current):
     return payload, old, proof, files, p, configs
 
 
-def _context(output, *, require_complete=True):
+def _context(output, *, require_complete=True, engineering_validation_bytes=None):
     folder = output / ATTEMPT
     if not (output / 'resource_amendments').exists(): return None
     if sorted(p.name for p in folder.parent.iterdir()) != ['attempt-01']:
@@ -299,17 +299,26 @@ def _context(output, *, require_complete=True):
                 or complete.get('scientific_metrics_generated') is not False
                 or complete['intent_sha256'] != sha256_file(folder / 'intent.json')
                 or complete['new_identity'] != intent['new_identity']
-                or complete['engineering_validation_sha256'] != sha256_file(output / 'engineering_validation.json')):
+                or complete['engineering_validation_sha256'] != (digest_bytes(engineering_validation_bytes)
+                    if engineering_validation_bytes is not None
+                    else sha256_file(output / 'engineering_validation.json'))):
             raise ValueError('resource amendment completion receipt mismatch')
     return intent, previous, prepared
 
 
-def migration_context(output):
+def migration_context(output, *, engineering_validation_bytes=None):
     """Called before ordinary Study construction; read-only, fails closed."""
-    return _context(Path(output))
+    output = Path(output)
+    if engineering_validation_bytes is None and (output / 'resource_history_migrations').exists():
+        from .stage2c_resource_history import legacy_engineering_validation_bytes
+        engineering_validation_bytes = legacy_engineering_validation_bytes(output)
+    return _context(output, engineering_validation_bytes=engineering_validation_bytes)
 
 
 def execution_identity(root, output, progress, index, current):
+    if (Path(output) / 'resource_history_migrations').exists():
+        from .stage2c_resource_history import execution_identity as e5_execution_identity
+        return e5_execution_identity(root, output, progress, index, current)
     lineage = progress.get('execution_identity_lineage')
     context = migration_context(output)
     if context is None:
