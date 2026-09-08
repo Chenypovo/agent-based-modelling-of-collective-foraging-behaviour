@@ -5,6 +5,7 @@ from pathlib import Path
 from types import SimpleNamespace
 import importlib.util
 import json
+import shutil
 
 import numpy as np
 import pytest
@@ -49,7 +50,11 @@ def identity_template():
 
 
 @pytest.fixture
-def completed_fixture(tmp_path, monkeypatch, identity_template):
+def completed_fixture(tmp_path, monkeypatch, identity_template, request):
+    # Each test owns this pytest directory, including its study and source copies.
+    # Register before setup so failures and injected interruptions also clean up,
+    # after the test has finished all evidence-preservation assertions.
+    request.addfinalizer(lambda: shutil.rmtree(tmp_path))
     # The code-equivalence gate reads committed function ASTs, not patched objects.
     current = deepcopy(identity_template)
     old = deepcopy(current); old.pop('resource_amendment')
