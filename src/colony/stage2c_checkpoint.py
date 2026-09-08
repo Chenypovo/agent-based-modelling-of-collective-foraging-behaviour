@@ -286,7 +286,8 @@ def load_shared_seed_artifact(path: Path, config: ColonyConfig, identity: dict,
         if metadata.get("schema_version") != SHARED_SCHEMA_VERSION:
             raise ValueError("shared seed artifact schema mismatch")
         if metadata.get("identity_hash") != hash_value(_identity_binding(identity)):
-            raise ValueError("shared seed artifact identity mismatch")
+            from .stage2c_amendment import verify_legacy_shared_identity
+            verify_legacy_shared_identity(Path(path), config, identity, metadata, checksum)
         if metadata.get("seed") != config.seed:
             raise ValueError("shared seed artifact seed mismatch")
         if metadata.get("pair_config_hash") != hash_value(paired_storage_config(config)):

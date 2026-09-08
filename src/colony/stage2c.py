@@ -5,6 +5,7 @@ from __future__ import annotations
 import contextlib
 import fcntl
 import hashlib
+import json
 import os
 import platform
 import re
@@ -35,13 +36,14 @@ from .stage2c_checkpoint import (
 )
 from .stage2c_streaming import StreamingSimulation
 from .stage2c_storage import HistoryStore
+from .stage2c_amendment import amendment_evidence
 
 PREREGISTRATION_COMMIT = "25994defe0b61e04fa03f3977cd65a2b9a61e640"
 IMPLEMENTATION_COMMIT = "f216ed88b9ab35b88627d1b34473245f16a0559e"
 PROTOCOL_INPUT_COMMIT = "3226100a5fa52777acedbf8cfa25c71559ab525d"
 PREREGISTRATION_PATH = "docs/STAGE2C_PREREGISTRATION.md"
 DEFAULT_OUTPUT = "results/stage2c_multiseed_confirmation"
-TIME_LIMIT = 14400.0
+TIME_LIMIT = 28800.0
 STORAGE_LIMIT = 2_000_000_000
 SAFETY_FACTOR = 1.5
 CHECKPOINT_INTERVAL = 100
@@ -132,6 +134,7 @@ def build_identity(root: Path, output: Path | None = None) -> dict:
             "source_hashes": source_hashes, "source_hash": hash_value(source_hashes),
             "frozen_source_hashes": frozen_hashes, "input_hashes": inputs,
             "input_hash": hash_value(inputs), "preregistration_hash": digest_bytes(expected_protocol),
+            "resource_amendment": amendment_evidence(root),
             "environment": {"python": platform.python_version(), "numpy": np.__version__,
                             "pandas": pd.__version__, "platform": platform.platform(),
                             "machine": platform.machine()}}
@@ -188,7 +191,8 @@ def resource_projection(*, elapsed_seconds: float, stored_bytes: int, remaining_
                         completed_checkpoint_seconds: float | None = 0.0,
                         pilot_observed: bool = False,
                         assumptions: list[str] | None = None,
-                        measurement_status: dict | None = None) -> dict:
+                        measurement_status: dict | None = None,
+                        amendment: dict | None = None) -> dict:
     values = (elapsed_seconds, stored_bytes, remaining_runs, analysis_seconds,
               final_analysis_allowance_bytes, completion_publication_overlap_bytes,
               remaining_shared_seed_artifacts)
@@ -221,10 +225,12 @@ def resource_projection(*, elapsed_seconds: float, stored_bytes: int, remaining_
     if not time_known or not storage_known:
         reasons.append("projection_unresolved")
     if projected_time is not None and (projected_time > TIME_LIMIT or elapsed_seconds >= TIME_LIMIT):
-        reasons.append("four_hour_limit")
+        reasons.append("eight_hour_limit")
     if projected_bytes is not None and (projected_bytes > STORAGE_LIMIT or stored_bytes >= STORAGE_LIMIT):
         reasons.append("two_gb_limit")
     return {"action": "pause" if reasons else "continue", "reasons": reasons,
+            "resource_amendment": amendment or amendment_evidence(),
+            "effective_time_limit_seconds": TIME_LIMIT, "original_time_limit_seconds": 14400.0,
             "safety_factor": SAFETY_FACTOR, "elapsed_seconds": elapsed_seconds, "stored_bytes": stored_bytes,
             "remaining_runs": remaining_runs, "per_run_seconds": run_seconds,
             "completed_checkpoint_seconds_allowance": completed_checkpoint_seconds,
@@ -634,7 +640,10 @@ class Study:
         self.root, self.output = root.resolve(), output.resolve()
         validate_output(self.root, self.output)
         from .stage2c_repair import verify_repair_archive
-        verify_repair_archive(self.output)
+        from .stage2c_amendment import migration_context
+        context = migration_context(self.output)
+        verify_repair_archive(self.output, engineering_validation_bytes=(
+            context[1]["engineering_validation.json"] if context else None))
         self.identity = build_identity(self.root, self.output)
         preflight_path = self.output / "storage_preflight.json"
         if preflight_path.exists():
@@ -647,6 +656,9 @@ class Study:
                     ColonyConfig.paper_scale(), self.identity, Path(temporary))
             self.storage_measurement["source_hash"] = self.identity["source_hash"]
         self.history = historical_resources(self.root, self.storage_measurement)
+        if context:
+            from .stage2c_amendment import retain_resource_floors
+            self.history = retain_resource_floors(self.history, json.loads(context[1]["runtime.json"]))
         self.progress_path = self.output / "checkpoint/progress_manifest.json"
         self.configurations = [c for seed in SEEDS for c in config_pair(seed, self.output)]
         self.rows = planned_rows()
@@ -665,6 +677,8 @@ class Study:
             if (manifest["configurations"] != self._config_entries() or manifest["identity"] != self.identity
                     or manifest["late_window"] != [9000, 10000]):
                 raise ValueError("config manifest changed")
+            if context and manifest.get("execution_identity_lineage") != self.progress.get("execution_identity_lineage"):
+                raise ValueError("config execution identity lineage changed")
             self.refresh_rows()
         else:
             # Never initialise over unidentified files from an earlier attempt.
@@ -706,11 +720,21 @@ class Study:
             write_json(manifest_path, manifest)
         write_json(self.progress_path, self.progress)
 
+    def execution_identity(self, index):
+        from .stage2c_amendment import execution_identity
+        return execution_identity(self.root, self.output, self.progress, index, self.identity)
+
+    def execution_identity_report(self):
+        return [{"seed": entry["seed"], "rule": entry["rule"],
+                 "execution_identity": self.execution_identity(index)}
+                for index, entry in enumerate(self.progress["runs"])]
+
     def refresh_rows(self):
         for index, (entry, config) in enumerate(zip(self.progress["runs"], self.configurations)):
             completed = Path(config.output_dir) / "completed"
             if completed.exists():
-                self.rows[index] = _completed_record(completed, config, self.identity)
+                self.rows[index] = _completed_record(completed, config, self.execution_identity(index))
+                self.rows[index]["execution_identity"] = self.execution_identity(index)
                 if entry["status"] != "completed":
                     _bind_completed_entry(entry, completed, config)
             else:
@@ -752,7 +776,13 @@ class Study:
         validation_path = self.output / "engineering_validation.json"
         test_bytes = read_json(validation_path)["temporary_artifact_bytes"] if validation_path.exists() else 0
         from .stage2c_repair import verify_repair_archive
-        test_bytes += verify_repair_archive(self.output, require_complete=False)
+        from .stage2c_amendment import migration_context
+        migration = migration_context(self.output)
+        legacy_validation = migration[1]["engineering_validation.json"] if migration else None
+        test_bytes += verify_repair_archive(self.output, require_complete=False,
+                                           engineering_validation_bytes=legacy_validation)
+        if legacy_validation is not None:
+            test_bytes += json.loads(legacy_validation)["temporary_artifact_bytes"]
         shared_remaining = sum(
             not (self.output / "runs" / str(seed) / "shared_seed_artifact.zip").is_file()
             for seed in SEEDS)
@@ -767,7 +797,7 @@ class Study:
             active_checkpoint_overlap_bytes=self.history["active_checkpoint_overlap_bytes"],
             completion_publication_overlap_bytes=self.history[
                 "completion_publication_overlap_bytes"],
-            pilot_observed=pilot_observed,
+            pilot_observed=pilot_observed, amendment=self.identity.get("resource_amendment"),
             assumptions=[
                 "only one active run can hold two rotating checkpoint slots",
                 "each completed run retains one compact final checkpoint",
@@ -818,7 +848,7 @@ class Study:
             if build_identity(self.root, self.output) != self.identity:
                 raise ValueError("protected source/input changed before run")
             entry, config = self.progress["runs"][index], self.configurations[index]
-            row = run_one(config, Path(config.output_dir), self.identity, entry, resume=resume,
+            row = run_one(config, Path(config.output_dir), self.execution_identity(index), entry, resume=resume,
                           persist=self.persist, resource_check=self.resources,
                           expected_initial=self.rows[index - 1]["initial_identity"] if index % 2 else None)
             self.refresh_rows()
@@ -826,7 +856,8 @@ class Study:
             if row is None:
                 self.progress["study_state"] = "paused"
                 self.persist()
-                return {"status": "paused", "reason": entry["reason"]}
+                return {"status": "paused", "reason": entry["reason"],
+                        "runtime": read_json(self.output / "runtime.json")}
             if index % 2:
                 if self.rows[index - 1]["initial_identity"] != row["initial_identity"]:
                     raise ValueError("paired initial state or turn schedule mismatch")
@@ -856,7 +887,12 @@ class Study:
         for row, config in zip(self.rows, self.configurations):
             if row["config_hash"] != hash_value(behavioural_config(config)) or row["horizon"] != 10000 or row["late_window"] != [9000, 10000]:
                 raise ValueError("analysis requires the frozen full-size design")
+        execution_identities = self.execution_identity_report()
         summary = analyse_rows(self.rows)
+        summary.update(execution_identities=execution_identities,
+                       resource_amendment=self.identity.get("resource_amendment", amendment_evidence()),
+                       effective_time_limit_seconds=TIME_LIMIT, original_time_limit_seconds=14400.0,
+                       storage_limit_bytes=STORAGE_LIMIT, safety_factor=SAFETY_FACTOR)
         if not summary["final_verdict_available"]:
             raise ValueError("complete paired identity evidence is missing")
         final = self.output / "analysis"

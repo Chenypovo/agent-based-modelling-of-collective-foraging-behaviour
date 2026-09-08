@@ -416,6 +416,7 @@ def test_full_resume_reuses_pilot_and_starts_planned_fixture(small, tmp_path, mo
     monkeypatch.setattr("colony.stage2c.platform.system", lambda: "Darwin")
     study = SimpleNamespace(root=tmp_path, output=tmp_path, identity=identity,
         progress={"runs": entries}, configurations=configurations, rows=rows,
+        execution_identity=lambda index: identity,
         resources=lambda: {"action": "continue"}, refresh_rows=lambda: None, persist=persist)
     with pytest.raises(StartRecorded):
         Study.execute(study, "full", resume=True)
@@ -807,7 +808,7 @@ def test_resource_projection_fixed_factor_and_all_costs():
     assert estimate["safety_factor"] == 1.5
 
 
-@pytest.mark.parametrize("overhead", [10.0, 100.0, None, float("nan"), -1.0])
+@pytest.mark.parametrize("overhead", [10.0, 400.0, None, float("nan"), -1.0])
 def test_completed_compression_time_cannot_bypass_resource_gate(overhead):
     result = resource_projection(
         elapsed_seconds=100, stored_bytes=0, remaining_runs=40, run_seconds=150,
@@ -817,7 +818,7 @@ def test_completed_compression_time_cannot_bypass_resource_gate(overhead):
         active_checkpoint_overlap_bytes=1)
     if overhead is not None and np.isfinite(overhead) and overhead >= 0:
         assert result["projected_total_seconds"] == 100 + 1.5 * 40 * (150 + overhead) + 600
-        assert result["action"] == ("pause" if overhead == 100 else "continue")
+        assert result["action"] == ("pause" if overhead == 400 else "continue")
     else:
         assert result["projected_total_seconds"] is None
         assert "projection_unresolved" in result["reasons"]
@@ -849,7 +850,7 @@ def test_completed_retention_is_checkpoint_plus_long_term_artifacts():
 
 
 @pytest.mark.parametrize("seconds,bytes_,reason", [
-    (300, 1, "four_hour_limit"), (1, 40_000_000, "two_gb_limit"),
+    (800, 1, "eight_hour_limit"), (1, 40_000_000, "two_gb_limit"),
     (None, None, "projection_unresolved")])
 def test_resource_pause_without_scope_change(seconds, bytes_, reason):
     result = resource_projection(

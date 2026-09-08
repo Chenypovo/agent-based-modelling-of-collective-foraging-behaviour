@@ -88,7 +88,7 @@ def _zero_state(payload: dict[str, bytes], output: Path, identity: dict) -> None
     runtime = _json(payload["runtime.json"])
     if (runtime["storage_only_preflight"] != storage or runtime["remaining_runs"] != 40
             or runtime["current_machine_pilot_observed"] is not False
-            or runtime["safety_factor"] != 1.5 or runtime["time_limit_seconds"] != 14400
+            or runtime["safety_factor"] != 1.5 or runtime["time_limit_seconds"] != identity.get("resource_amendment", {}).get("effective_time_limit_seconds", 14400)
             or runtime["storage_limit_bytes"] != 2_000_000_000
             or len(runtime["per_run"]) != 40):
         raise ValueError("repair runtime preflight mismatch")
@@ -187,7 +187,8 @@ def _archive_payload(attempt: Path, intent: dict) -> dict:
     return payload
 
 
-def verify_repair_archive(output: Path, *, require_complete: bool = True) -> int:
+def verify_repair_archive(output: Path, *, require_complete: bool = True,
+                          engineering_validation_bytes: bytes | None = None) -> int:
     """Also used by Study: an unfinished repair may never enter pilot/full."""
     parent = output / "engineering_failures"
     if not parent.exists():
@@ -207,7 +208,8 @@ def verify_repair_archive(output: Path, *, require_complete: bool = True) -> int
         if (complete["identity"] != intent["new_identity"]
                 or complete["failure_receipt_sha256"] != sha256_file(attempt / "failure_receipt.json")
                 or complete["replacement_sha256"] != sha256_file(attempt / "replacement.zip")
-                or complete["engineering_validation_sha256"] != sha256_file(output / "engineering_validation.json")):
+                or complete["engineering_validation_sha256"] != (digest_bytes(engineering_validation_bytes)
+                    if engineering_validation_bytes is not None else sha256_file(output / "engineering_validation.json"))):
             raise ValueError("repair completion receipt mismatch")
     return int(receipt["old_engineering_temporary_bytes"])
 

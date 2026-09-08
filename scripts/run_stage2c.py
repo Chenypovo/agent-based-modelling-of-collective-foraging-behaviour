@@ -20,7 +20,7 @@ from colony.stage2c_repair import repair_preflight
 
 def parser() -> argparse.ArgumentParser:
     command = argparse.ArgumentParser(description=__doc__)
-    command.add_argument("--mode", required=True, choices=("pilot", "full", "analyse", "dry-run", "repair-preflight"))
+    command.add_argument("--mode", required=True, choices=("pilot", "full", "analyse", "dry-run", "repair-preflight", "repair-resource-amendment"))
     command.add_argument("--resume", action="store_true", help="resume the same incomplete seed; completed runs are verified and reused")
     command.add_argument("--output-dir", type=Path, help="administrative output location; dry-run requires a temporary directory")
     return command
@@ -33,6 +33,9 @@ def main(argv=None) -> int:
         command.error("--resume applies only to pilot or full")
     if args.mode == "dry-run":
         result = dry_run(PROJECT_ROOT, args.output_dir)
+    elif args.mode == "repair-resource-amendment":
+        from colony.stage2c_amendment import repair_resource_amendment
+        result = repair_resource_amendment(PROJECT_ROOT, args.output_dir or PROJECT_ROOT / DEFAULT_OUTPUT)
     elif args.mode == "repair-preflight":
         result = repair_preflight(PROJECT_ROOT, args.output_dir or PROJECT_ROOT / DEFAULT_OUTPUT)
     else:
@@ -57,7 +60,7 @@ def main(argv=None) -> int:
         finally:
             signal.signal(signal.SIGTERM, previous_handler)
     print(json_bytes(result).decode(), end="")
-    return 2 if result.get("status") == "paused" else 0
+    return 2 if result.get("status") == "paused" or result.get("action") == "pause" else 0
 
 
 if __name__ == "__main__":
