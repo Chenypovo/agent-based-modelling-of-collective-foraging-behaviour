@@ -1,0 +1,6 @@
+{
+  "follower_to_transporter": 100,
+  "forager_to_follower": 98,
+  "forager_to_transporter": 2,
+  "transporter_to_follower": 98
+}

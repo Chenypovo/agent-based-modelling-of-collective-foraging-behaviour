@@ -1,0 +1,30 @@
+{
+  "completed_leg_count": 98,
+  "continuity_count": 517440,
+  "continuity_sum": 8522137.257130781,
+  "follower_late_count": 1001,
+  "follower_sufficient_count": 1001,
+  "hit_axis_sum": 22238449.75831296,
+  "hit_count": 519355,
+  "incomplete_leg_count": 4,
+  "late_count": 1001,
+  "late_sums": {
+    "follower_phi": 50.56211511672979,
+    "follower_psi": 648.9969640809474,
+    "phi": 46.610054333733736,
+    "psi": 649.2979759095837
+  },
+  "miss_count": 10390,
+  "rng_state": {
+    "live_generator_state": null,
+    "policy": "frozen_pre_generated_turn_schedules",
+    "seed": 20260901
+  },
+  "sensing_steps": 529745,
+  "transition_counts": {
+    "follower_to_transporter": 100,
+    "forager_to_follower": 98,
+    "forager_to_transporter": 2,
+    "transporter_to_follower": 98
+  }
+}

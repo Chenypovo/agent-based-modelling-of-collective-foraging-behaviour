@@ -1,0 +1,156 @@
+{
+  "config_hash": "706ee66480ad98cb754461bfd436a12f0a7f5de37f14ad6608856520533c0b9b",
+  "engineering_valid": true,
+  "horizon": 10000,
+  "initial_identity": {
+    "initial_state_hash": "3653745f9532c1cd0265c9e12ce1a26306678a797e8dc6f18a30deba7516c702",
+    "rng_state": {
+      "live_generator_state": null,
+      "policy": "frozen_pre_generated_turn_schedules",
+      "seed": 20260901
+    },
+    "turn_schedule_hash": "0fb4ce8f9ef05d6684a437950fb876f59dcc5f8a2e9378f170ecf50cb66b00d5"
+  },
+  "late_window": [
+    9000,
+    10000
+  ],
+  "late_window_delivery_increment": 5,
+  "late_window_transition_counts": {
+    "follower_to_transporter": 2,
+    "forager_to_follower": 0,
+    "forager_to_transporter": 0,
+    "transporter_to_follower": 5
+  },
+  "metrics": {
+    "absolute_late_phi_distance": {
+      "availability": "available",
+      "count": 1001,
+      "reason": "",
+      "value": 0.7388346725545575
+    },
+    "active_pheromone_area_fraction": {
+      "availability": "available",
+      "count": 250000,
+      "reason": "",
+      "value": 0.43312
+    },
+    "completed_transporter_mean_path_efficiency": {
+      "availability": "available",
+      "count": 98,
+      "reason": "",
+      "value": 0.30392573944474655
+    },
+    "completed_transporter_median_path_efficiency": {
+      "availability": "available",
+      "count": 98,
+      "reason": "",
+      "value": 0.16023897314982144
+    },
+    "cumulative_deliveries": {
+      "availability": "available",
+      "count": 1,
+      "reason": "",
+      "value": 98
+    },
+    "final_follower_count": {
+      "availability": "available",
+      "count": 100,
+      "reason": "",
+      "value": 96
+    },
+    "final_forager_count": {
+      "availability": "available",
+      "count": 100,
+      "reason": "",
+      "value": 0
+    },
+    "final_transporter_count": {
+      "availability": "available",
+      "count": 100,
+      "reason": "",
+      "value": 4
+    },
+    "first_food_discovery_time": {
+      "availability": "available",
+      "censoring_horizon": 10000,
+      "count": 1,
+      "observed": true,
+      "reason": "",
+      "value": 1571
+    },
+    "first_pheromone_recruitment_time": {
+      "availability": "available",
+      "censoring_horizon": 10000,
+      "count": 1,
+      "observed": true,
+      "reason": "",
+      "value": 1786
+    },
+    "first_successful_delivery_time": {
+      "availability": "available",
+      "censoring_horizon": 10000,
+      "count": 1,
+      "observed": true,
+      "reason": "",
+      "value": 3079
+    },
+    "follower_hit_step_mean_axis_error_deg": {
+      "availability": "available",
+      "count": 519355,
+      "reason": "",
+      "value": 42.81936201309886
+    },
+    "follower_late_window_mean_phi": {
+      "availability": "available",
+      "count": 1001,
+      "reason": "",
+      "value": 0.050511603513216576
+    },
+    "follower_late_window_mean_psi": {
+      "availability": "available",
+      "count": 1001,
+      "reason": "",
+      "value": 0.6483486154654818
+    },
+    "follower_local_continuity_mean_axis_change_deg": {
+      "availability": "available",
+      "count": 517440,
+      "reason": "",
+      "value": 16.469807624325103
+    },
+    "follower_sensing_miss_rate": {
+      "availability": "available",
+      "count": 529745,
+      "reason": "",
+      "value": 0.01961321012940188
+    },
+    "late_window_mean_phi": {
+      "availability": "available",
+      "count": 1001,
+      "reason": "",
+      "value": 0.046563490842890846
+    },
+    "late_window_mean_psi": {
+      "availability": "available",
+      "count": 1001,
+      "reason": "",
+      "value": 0.6486493265830007
+    },
+    "main_channel_width_90": {
+      "availability": "available",
+      "count": 108280,
+      "reason": "",
+      "value": 218.0717313179312
+    }
+  },
+  "rule": "stored_cell_direction",
+  "seed": 20260901,
+  "status": "completed",
+  "transition_counts": {
+    "follower_to_transporter": 100,
+    "forager_to_follower": 98,
+    "forager_to_transporter": 2,
+    "transporter_to_follower": 98
+  }
+}
