@@ -1,0 +1,1 @@
+{"end":170,"rows":[{"ant_id":44,"from_role":"transporter","reason":"food_deposited_at_nest","time":7468,"to_role":"follower","x":87.03332763653452,"y":90.35030679692586},{"ant_id":40,"from_role":"transporter","reason":"food_deposited_at_nest","time":7470,"to_role":"follower","x":92.03221748371878,"y":91.95684433181054}],"schema_version":1,"start":168,"stream":"events"}

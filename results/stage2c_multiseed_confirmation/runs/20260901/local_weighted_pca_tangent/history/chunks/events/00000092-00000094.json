@@ -1,0 +1,1 @@
+{"end":94,"rows":[{"ant_id":94,"from_role":"forager","reason":"pheromone_sensed","time":3624,"to_role":"follower","x":225.9718672396546,"y":43.07608473802775},{"ant_id":50,"from_role":"forager","reason":"pheromone_sensed","time":3679,"to_role":"follower","x":97.22920429942886,"y":77.28473083382856}],"schema_version":1,"start":92,"stream":"events"}

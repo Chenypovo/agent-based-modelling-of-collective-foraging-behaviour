@@ -1,0 +1,1 @@
+{"end":161,"rows":[{"ant_id":61,"from_role":"follower","reason":"food_reached_from_trail","time":6703,"to_role":"transporter","x":238.31580996840285,"y":236.8215209702838},{"ant_id":65,"from_role":"follower","reason":"food_reached_from_trail","time":6746,"to_role":"transporter","x":238.99984159765984,"y":237.1179963621081}],"schema_version":1,"start":159,"stream":"events"}
