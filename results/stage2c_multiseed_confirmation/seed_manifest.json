@@ -1,0 +1,194 @@
+{
+  "confirmatory_seeds": [
+    20260901,
+    20260902,
+    20260903,
+    20260904,
+    20260905,
+    20260906,
+    20260907,
+    20260908,
+    20260909,
+    20260910,
+    20260911,
+    20260912,
+    20260913,
+    20260914,
+    20260915,
+    20260916,
+    20260917,
+    20260918,
+    20260919,
+    20260920
+  ],
+  "exploratory_in_confirmatory_statistics": false,
+  "exploratory_seed": 20260824,
+  "pilot_in_confirmatory_statistics": true,
+  "pilot_seed": 20260901,
+  "planned_runs": [
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260901
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260901
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260902
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260902
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260903
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260903
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260904
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260904
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260905
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260905
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260906
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260906
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260907
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260907
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260908
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260908
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260909
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260909
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260910
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260910
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260911
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260911
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260912
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260912
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260913
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260913
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260914
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260914
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260915
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260915
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260916
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260916
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260917
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260917
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260918
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260918
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260919
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260919
+    },
+    {
+      "rule": "stored_cell_direction",
+      "seed": 20260920
+    },
+    {
+      "rule": "local_weighted_pca_tangent",
+      "seed": 20260920
+    }
+  ],
+  "rule_order": [
+    "stored_cell_direction",
+    "local_weighted_pca_tangent"
+  ]
+}

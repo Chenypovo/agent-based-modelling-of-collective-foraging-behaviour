@@ -1,0 +1,149 @@
+seed,baseline_status,pca_status,baseline_engineering_valid,baseline_candidate_checks,baseline_late_window_delivery_increment,baseline_late_window_transition_counts,pca_engineering_valid,pca_candidate_checks,pca_late_window_delivery_increment,pca_late_window_transition_counts,late_window_mean_phi_baseline,late_window_mean_phi_pca,late_window_mean_phi_delta,late_window_mean_phi_reason,late_window_mean_psi_baseline,late_window_mean_psi_pca,late_window_mean_psi_delta,late_window_mean_psi_reason,follower_late_window_mean_phi_baseline,follower_late_window_mean_phi_pca,follower_late_window_mean_phi_delta,follower_late_window_mean_phi_reason,follower_late_window_mean_psi_baseline,follower_late_window_mean_psi_pca,follower_late_window_mean_psi_delta,follower_late_window_mean_psi_reason,absolute_late_phi_distance_baseline,absolute_late_phi_distance_pca,absolute_late_phi_distance_delta,absolute_late_phi_distance_reason,follower_hit_step_mean_axis_error_deg_baseline,follower_hit_step_mean_axis_error_deg_pca,follower_hit_step_mean_axis_error_deg_delta,follower_hit_step_mean_axis_error_deg_reason,follower_local_continuity_mean_axis_change_deg_baseline,follower_local_continuity_mean_axis_change_deg_pca,follower_local_continuity_mean_axis_change_deg_delta,follower_local_continuity_mean_axis_change_deg_reason,follower_sensing_miss_rate_baseline,follower_sensing_miss_rate_pca,follower_sensing_miss_rate_delta,follower_sensing_miss_rate_reason,cumulative_deliveries_baseline,cumulative_deliveries_pca,cumulative_deliveries_delta,cumulative_deliveries_reason,completed_transporter_mean_path_efficiency_baseline,completed_transporter_mean_path_efficiency_pca,completed_transporter_mean_path_efficiency_delta,completed_transporter_mean_path_efficiency_reason,completed_transporter_median_path_efficiency_baseline,completed_transporter_median_path_efficiency_pca,completed_transporter_median_path_efficiency_delta,completed_transporter_median_path_efficiency_reason,active_pheromone_area_fraction_baseline,active_pheromone_area_fraction_pca,active_pheromone_area_fraction_delta,active_pheromone_area_fraction_reason,main_channel_width_90_baseline,main_channel_width_90_pca,main_channel_width_90_delta,main_channel_width_90_reason,final_forager_count_baseline,final_forager_count_pca,final_forager_count_delta,final_forager_count_reason,final_transporter_count_baseline,final_transporter_count_pca,final_transporter_count_delta,final_transporter_count_reason,final_follower_count_baseline,final_follower_count_pca,final_follower_count_delta,final_follower_count_reason,first_food_discovery_time_baseline,first_food_discovery_time_pca,first_food_discovery_time_delta,first_food_discovery_time_reason,first_successful_delivery_time_baseline,first_successful_delivery_time_pca,first_successful_delivery_time_delta,first_successful_delivery_time_reason,first_pheromone_recruitment_time_baseline,first_pheromone_recruitment_time_pca,first_pheromone_recruitment_time_delta,first_pheromone_recruitment_time_reason,delivery_ratio,delivery_ratio_reason
+20260901,completed,interrupted,True,"{
+  ""passed"": false,
+  ""phi_distance_at_most_0_15"": false,
+  ""psi_at_least_0_90"": false,
+  ""reason"": """",
+  ""transport_and_role_cycle"": true
+}",5,"{
+  ""follower_to_transporter"": 2,
+  ""forager_to_follower"": 0,
+  ""forager_to_transporter"": 0,
+  ""transporter_to_follower"": 5
+}",,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,0.046563490842890846,,,missing_paired_measurement,0.6486493265830007,,,missing_paired_measurement,0.050511603513216576,,,missing_paired_measurement,0.6483486154654818,,,missing_paired_measurement,0.7388346725545575,,,missing_paired_measurement,42.81936201309886,,,missing_paired_measurement,16.469807624325103,,,missing_paired_measurement,0.01961321012940188,,,missing_paired_measurement,98,,,missing_paired_measurement,0.30392573944474655,,,missing_paired_measurement,0.16023897314982144,,,missing_paired_measurement,0.43312,,,missing_paired_measurement,218.0717313179312,,,missing_paired_measurement,0,,,missing_paired_measurement,4,,,missing_paired_measurement,96,,,missing_paired_measurement,1571,,,missing_paired_measurement,3079,,,missing_paired_measurement,1786,,,missing_paired_measurement,,missing_paired_measurement
+20260902,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260903,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260904,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260905,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260906,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260907,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260908,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260909,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260910,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260911,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260912,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260913,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260914,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260915,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260916,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260917,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260918,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260919,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement
+20260920,planned,planned,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,"{
+  ""passed"": null,
+  ""reason"": ""complete_valid_run_required""
+}",,,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,,,missing_paired_measurement,,missing_paired_measurement

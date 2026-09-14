@@ -1,0 +1,48 @@
+{
+  "exit_code": 1,
+  "exit_code_basis": "legacy_failed_pytest_then_runner_RuntimeError",
+  "failed_tests": [
+    "tests/test_stage2c_multiseed.py::test_dry_run_no_simulation_or_initialisation"
+  ],
+  "failure_time_basis": "failed_receipt_filesystem_mtime",
+  "failure_time_utc": "2026-09-06T11:21:35.579215+00:00",
+  "files": {
+    "checkpoint/progress_manifest.json": {
+      "bytes": 128163,
+      "sha256": "9b252451aa3170f24c6273da1c3f94cd2abbfdcc386849cb19ada1adca6d36a2"
+    },
+    "config_manifest.json": {
+      "bytes": 119117,
+      "sha256": "f0f197147102b315c0a5fdbae0f80716cbee3066ee06339bb88157f923913858"
+    },
+    "engineering_validation.json": {
+      "bytes": 23326,
+      "sha256": "5f61c967337687187ed45c6c569a29e1d723d6349551c170df5792760389eec0"
+    },
+    "paired_comparison.csv": {
+      "bytes": 18503,
+      "sha256": "fac22e8d2aed97e8b48a858ff02f4ad3b425d2279d5f3583b11bb90b8bf7f807"
+    },
+    "per_seed_metrics.csv": {
+      "bytes": 28726,
+      "sha256": "47e9885da6557478d5020b694d283e254dddffadbd13d075e1f611ae88f2e73a"
+    },
+    "runtime.json": {
+      "bytes": 76394,
+      "sha256": "aa0cffd9f218ba2e4ab43be92aaa40a000b7f3d4dacac2b6e85bcbe81fed5746"
+    },
+    "seed_manifest.json": {
+      "bytes": 3675,
+      "sha256": "c1f314f2bd7735b12debc0b0b88025f4f126e7cb953f32b0efcfb53c57d97f63"
+    },
+    "storage_preflight.json": {
+      "bytes": 59826,
+      "sha256": "9bb1eed073ac1ea4e6facf675898c9d586b77c0df406956ffdca4208c362ae19"
+    }
+  },
+  "intent_sha256": "64b964073630905230c63779c8bbd7ab4b89df75b9c0fc858d6ea073766e8ba0",
+  "old_engineering_temporary_bytes": 3384769,
+  "old_runner_commit": "b8ad6911fdcbf82489ba1753179b0f12006911bb",
+  "old_source_hash": "737996e31f09f65fd486bed415541e59b835f8baf520d32a99052073abde0321",
+  "schema_version": 1
+}

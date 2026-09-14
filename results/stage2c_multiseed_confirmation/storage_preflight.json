@@ -1,0 +1,2459 @@
+{
+  "active_checkpoint_overlap_bytes": 50850952,
+  "assumptions": [
+    "fixture uses the paper-scale shapes but a non-registered seed",
+    "every ant carries a full non-zero random-walk path and one-third return route",
+    "the pheromone intensity and direction arrays are dense non-zero random values",
+    "hash-shaped identity fixture values preserve production field lengths without depending on the current source hash",
+    "measured ZIP sizes are reported, but the projection does not claim a future compression ratio",
+    "no ant dynamics step, pilot, full run or scientific metric was executed"
+  ],
+  "completed_checkpoint_compression": "deterministic_zip_lzma",
+  "completed_checkpoint_members": [
+    {
+      "completed_lzma_bytes": 17034,
+      "legacy_deflate_bytes": 23687,
+      "name": "metadata.json",
+      "raw_bytes": 374060
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000000.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000001.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000002.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000003.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000004.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000005.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000006.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000007.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000008.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000009.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000010.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000011.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000012.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000013.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000014.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000015.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000016.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000017.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000018.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000019.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000020.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000021.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000022.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000023.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000024.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000025.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000026.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000027.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000028.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000029.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000030.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000031.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000032.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000033.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000034.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000035.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000036.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000037.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000038.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000039.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000040.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000041.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000042.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000043.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000044.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000045.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000046.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000047.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000048.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000049.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000050.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000051.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000052.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000053.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000054.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000055.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000056.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000057.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000058.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000059.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000060.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000061.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000062.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000063.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000064.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000065.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000066.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000067.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000068.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000069.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000070.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000071.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000072.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000073.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000074.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000075.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000076.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000077.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000078.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000079.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000080.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000081.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000082.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000083.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000084.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000085.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000086.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000087.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000088.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000089.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000090.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000091.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000092.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000093.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000094.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000095.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000096.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000097.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000098.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 93,
+      "legacy_deflate_bytes": 76,
+      "name": "arrays/000099.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000100.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125340,
+      "legacy_deflate_bytes": 146072,
+      "name": "arrays/000101.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42401,
+      "legacy_deflate_bytes": 49268,
+      "name": "arrays/000102.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000103.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125095,
+      "legacy_deflate_bytes": 146022,
+      "name": "arrays/000104.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42339,
+      "legacy_deflate_bytes": 49089,
+      "name": "arrays/000105.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000106.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124973,
+      "legacy_deflate_bytes": 146012,
+      "name": "arrays/000107.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42436,
+      "legacy_deflate_bytes": 49193,
+      "name": "arrays/000108.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000109.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125969,
+      "legacy_deflate_bytes": 147285,
+      "name": "arrays/000110.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42891,
+      "legacy_deflate_bytes": 49607,
+      "name": "arrays/000111.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000112.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124814,
+      "legacy_deflate_bytes": 146089,
+      "name": "arrays/000113.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42365,
+      "legacy_deflate_bytes": 49313,
+      "name": "arrays/000114.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000115.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125059,
+      "legacy_deflate_bytes": 146288,
+      "name": "arrays/000116.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42319,
+      "legacy_deflate_bytes": 49168,
+      "name": "arrays/000117.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000118.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 126465,
+      "legacy_deflate_bytes": 147607,
+      "name": "arrays/000119.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43181,
+      "legacy_deflate_bytes": 49689,
+      "name": "arrays/000120.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000121.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 126613,
+      "legacy_deflate_bytes": 147773,
+      "name": "arrays/000122.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43334,
+      "legacy_deflate_bytes": 49842,
+      "name": "arrays/000123.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000124.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124739,
+      "legacy_deflate_bytes": 145779,
+      "name": "arrays/000125.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42234,
+      "legacy_deflate_bytes": 49085,
+      "name": "arrays/000126.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000127.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 127047,
+      "legacy_deflate_bytes": 147902,
+      "name": "arrays/000128.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43546,
+      "legacy_deflate_bytes": 49884,
+      "name": "arrays/000129.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000130.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 127169,
+      "legacy_deflate_bytes": 147964,
+      "name": "arrays/000131.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43346,
+      "legacy_deflate_bytes": 49910,
+      "name": "arrays/000132.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000133.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125068,
+      "legacy_deflate_bytes": 146623,
+      "name": "arrays/000134.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42561,
+      "legacy_deflate_bytes": 49616,
+      "name": "arrays/000135.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000136.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124716,
+      "legacy_deflate_bytes": 145695,
+      "name": "arrays/000137.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42204,
+      "legacy_deflate_bytes": 49099,
+      "name": "arrays/000138.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000139.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 126068,
+      "legacy_deflate_bytes": 147125,
+      "name": "arrays/000140.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43042,
+      "legacy_deflate_bytes": 49492,
+      "name": "arrays/000141.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000142.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125219,
+      "legacy_deflate_bytes": 146480,
+      "name": "arrays/000143.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42614,
+      "legacy_deflate_bytes": 49455,
+      "name": "arrays/000144.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000145.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 128472,
+      "legacy_deflate_bytes": 148489,
+      "name": "arrays/000146.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 44138,
+      "legacy_deflate_bytes": 49973,
+      "name": "arrays/000147.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000148.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 126709,
+      "legacy_deflate_bytes": 147114,
+      "name": "arrays/000149.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43081,
+      "legacy_deflate_bytes": 49615,
+      "name": "arrays/000150.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000151.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125312,
+      "legacy_deflate_bytes": 146479,
+      "name": "arrays/000152.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42630,
+      "legacy_deflate_bytes": 49368,
+      "name": "arrays/000153.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000154.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124966,
+      "legacy_deflate_bytes": 146146,
+      "name": "arrays/000155.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42361,
+      "legacy_deflate_bytes": 49263,
+      "name": "arrays/000156.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000157.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125032,
+      "legacy_deflate_bytes": 146422,
+      "name": "arrays/000158.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42500,
+      "legacy_deflate_bytes": 49399,
+      "name": "arrays/000159.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000160.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125800,
+      "legacy_deflate_bytes": 146975,
+      "name": "arrays/000161.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42927,
+      "legacy_deflate_bytes": 49449,
+      "name": "arrays/000162.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000163.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125372,
+      "legacy_deflate_bytes": 146780,
+      "name": "arrays/000164.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42642,
+      "legacy_deflate_bytes": 49419,
+      "name": "arrays/000165.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000166.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125252,
+      "legacy_deflate_bytes": 146523,
+      "name": "arrays/000167.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42548,
+      "legacy_deflate_bytes": 49411,
+      "name": "arrays/000168.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000169.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124470,
+      "legacy_deflate_bytes": 144978,
+      "name": "arrays/000170.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42151,
+      "legacy_deflate_bytes": 48937,
+      "name": "arrays/000171.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000172.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 126172,
+      "legacy_deflate_bytes": 147329,
+      "name": "arrays/000173.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43061,
+      "legacy_deflate_bytes": 49604,
+      "name": "arrays/000174.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000175.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124605,
+      "legacy_deflate_bytes": 145845,
+      "name": "arrays/000176.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42223,
+      "legacy_deflate_bytes": 49100,
+      "name": "arrays/000177.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000178.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124970,
+      "legacy_deflate_bytes": 146320,
+      "name": "arrays/000179.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42457,
+      "legacy_deflate_bytes": 49248,
+      "name": "arrays/000180.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000181.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125850,
+      "legacy_deflate_bytes": 146988,
+      "name": "arrays/000182.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42852,
+      "legacy_deflate_bytes": 49550,
+      "name": "arrays/000183.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000184.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125269,
+      "legacy_deflate_bytes": 146405,
+      "name": "arrays/000185.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42615,
+      "legacy_deflate_bytes": 49364,
+      "name": "arrays/000186.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 84,
+      "name": "arrays/000187.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125503,
+      "legacy_deflate_bytes": 146686,
+      "name": "arrays/000188.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42769,
+      "legacy_deflate_bytes": 49492,
+      "name": "arrays/000189.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000190.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125570,
+      "legacy_deflate_bytes": 146433,
+      "name": "arrays/000191.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42664,
+      "legacy_deflate_bytes": 49291,
+      "name": "arrays/000192.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000193.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 127320,
+      "legacy_deflate_bytes": 147885,
+      "name": "arrays/000194.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43681,
+      "legacy_deflate_bytes": 49761,
+      "name": "arrays/000195.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000196.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125115,
+      "legacy_deflate_bytes": 146403,
+      "name": "arrays/000197.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42482,
+      "legacy_deflate_bytes": 49431,
+      "name": "arrays/000198.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000199.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125256,
+      "legacy_deflate_bytes": 146202,
+      "name": "arrays/000200.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42378,
+      "legacy_deflate_bytes": 49372,
+      "name": "arrays/000201.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000202.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125064,
+      "legacy_deflate_bytes": 146383,
+      "name": "arrays/000203.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42513,
+      "legacy_deflate_bytes": 49486,
+      "name": "arrays/000204.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000205.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125160,
+      "legacy_deflate_bytes": 146383,
+      "name": "arrays/000206.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42513,
+      "legacy_deflate_bytes": 49328,
+      "name": "arrays/000207.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000208.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124928,
+      "legacy_deflate_bytes": 146112,
+      "name": "arrays/000209.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42482,
+      "legacy_deflate_bytes": 49224,
+      "name": "arrays/000210.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000211.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125673,
+      "legacy_deflate_bytes": 146843,
+      "name": "arrays/000212.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42768,
+      "legacy_deflate_bytes": 49522,
+      "name": "arrays/000213.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000214.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124851,
+      "legacy_deflate_bytes": 145794,
+      "name": "arrays/000215.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42241,
+      "legacy_deflate_bytes": 49090,
+      "name": "arrays/000216.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000217.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124855,
+      "legacy_deflate_bytes": 146071,
+      "name": "arrays/000218.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42731,
+      "legacy_deflate_bytes": 49326,
+      "name": "arrays/000219.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 84,
+      "name": "arrays/000220.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125395,
+      "legacy_deflate_bytes": 146565,
+      "name": "arrays/000221.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42615,
+      "legacy_deflate_bytes": 49360,
+      "name": "arrays/000222.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000223.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 126120,
+      "legacy_deflate_bytes": 147539,
+      "name": "arrays/000224.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43137,
+      "legacy_deflate_bytes": 49623,
+      "name": "arrays/000225.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000226.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125077,
+      "legacy_deflate_bytes": 146099,
+      "name": "arrays/000227.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42444,
+      "legacy_deflate_bytes": 49221,
+      "name": "arrays/000228.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000229.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125241,
+      "legacy_deflate_bytes": 146630,
+      "name": "arrays/000230.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42635,
+      "legacy_deflate_bytes": 49394,
+      "name": "arrays/000231.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000232.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125769,
+      "legacy_deflate_bytes": 147244,
+      "name": "arrays/000233.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42958,
+      "legacy_deflate_bytes": 49520,
+      "name": "arrays/000234.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000235.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 127793,
+      "legacy_deflate_bytes": 148109,
+      "name": "arrays/000236.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43758,
+      "legacy_deflate_bytes": 49808,
+      "name": "arrays/000237.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000238.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125298,
+      "legacy_deflate_bytes": 146664,
+      "name": "arrays/000239.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42617,
+      "legacy_deflate_bytes": 49456,
+      "name": "arrays/000240.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000241.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124224,
+      "legacy_deflate_bytes": 145137,
+      "name": "arrays/000242.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 41987,
+      "legacy_deflate_bytes": 49056,
+      "name": "arrays/000243.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000244.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124992,
+      "legacy_deflate_bytes": 146082,
+      "name": "arrays/000245.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42483,
+      "legacy_deflate_bytes": 49252,
+      "name": "arrays/000246.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000247.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124458,
+      "legacy_deflate_bytes": 145780,
+      "name": "arrays/000248.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42179,
+      "legacy_deflate_bytes": 49151,
+      "name": "arrays/000249.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000250.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 126769,
+      "legacy_deflate_bytes": 147374,
+      "name": "arrays/000251.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43504,
+      "legacy_deflate_bytes": 49601,
+      "name": "arrays/000252.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000253.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 126949,
+      "legacy_deflate_bytes": 147932,
+      "name": "arrays/000254.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43433,
+      "legacy_deflate_bytes": 49840,
+      "name": "arrays/000255.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000256.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124919,
+      "legacy_deflate_bytes": 145991,
+      "name": "arrays/000257.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42324,
+      "legacy_deflate_bytes": 49249,
+      "name": "arrays/000258.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000259.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124629,
+      "legacy_deflate_bytes": 145740,
+      "name": "arrays/000260.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42204,
+      "legacy_deflate_bytes": 49231,
+      "name": "arrays/000261.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000262.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125289,
+      "legacy_deflate_bytes": 146224,
+      "name": "arrays/000263.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 44353,
+      "legacy_deflate_bytes": 49350,
+      "name": "arrays/000264.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000265.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 127083,
+      "legacy_deflate_bytes": 147613,
+      "name": "arrays/000266.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43575,
+      "legacy_deflate_bytes": 49581,
+      "name": "arrays/000267.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000268.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124803,
+      "legacy_deflate_bytes": 146127,
+      "name": "arrays/000269.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42360,
+      "legacy_deflate_bytes": 49234,
+      "name": "arrays/000270.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000271.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125330,
+      "legacy_deflate_bytes": 146386,
+      "name": "arrays/000272.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42548,
+      "legacy_deflate_bytes": 49279,
+      "name": "arrays/000273.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000274.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124782,
+      "legacy_deflate_bytes": 145929,
+      "name": "arrays/000275.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42221,
+      "legacy_deflate_bytes": 49281,
+      "name": "arrays/000276.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000277.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125962,
+      "legacy_deflate_bytes": 147369,
+      "name": "arrays/000278.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42912,
+      "legacy_deflate_bytes": 49697,
+      "name": "arrays/000279.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000280.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125413,
+      "legacy_deflate_bytes": 146748,
+      "name": "arrays/000281.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42580,
+      "legacy_deflate_bytes": 49472,
+      "name": "arrays/000282.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000283.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125055,
+      "legacy_deflate_bytes": 146379,
+      "name": "arrays/000284.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42479,
+      "legacy_deflate_bytes": 49420,
+      "name": "arrays/000285.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000286.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 126458,
+      "legacy_deflate_bytes": 147356,
+      "name": "arrays/000287.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43245,
+      "legacy_deflate_bytes": 49649,
+      "name": "arrays/000288.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000289.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125078,
+      "legacy_deflate_bytes": 146065,
+      "name": "arrays/000290.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42424,
+      "legacy_deflate_bytes": 49300,
+      "name": "arrays/000291.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000292.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 123974,
+      "legacy_deflate_bytes": 144307,
+      "name": "arrays/000293.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 41795,
+      "legacy_deflate_bytes": 48666,
+      "name": "arrays/000294.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000295.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 130461,
+      "legacy_deflate_bytes": 148108,
+      "name": "arrays/000296.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 44833,
+      "legacy_deflate_bytes": 49940,
+      "name": "arrays/000297.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000298.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125451,
+      "legacy_deflate_bytes": 146614,
+      "name": "arrays/000299.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42689,
+      "legacy_deflate_bytes": 49417,
+      "name": "arrays/000300.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000301.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124684,
+      "legacy_deflate_bytes": 145760,
+      "name": "arrays/000302.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42238,
+      "legacy_deflate_bytes": 49107,
+      "name": "arrays/000303.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000304.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 126692,
+      "legacy_deflate_bytes": 147687,
+      "name": "arrays/000305.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43403,
+      "legacy_deflate_bytes": 49693,
+      "name": "arrays/000306.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000307.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124530,
+      "legacy_deflate_bytes": 145697,
+      "name": "arrays/000308.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42164,
+      "legacy_deflate_bytes": 49120,
+      "name": "arrays/000309.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000310.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124803,
+      "legacy_deflate_bytes": 145904,
+      "name": "arrays/000311.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42287,
+      "legacy_deflate_bytes": 49188,
+      "name": "arrays/000312.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000313.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124524,
+      "legacy_deflate_bytes": 145411,
+      "name": "arrays/000314.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42171,
+      "legacy_deflate_bytes": 49071,
+      "name": "arrays/000315.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000316.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124728,
+      "legacy_deflate_bytes": 145505,
+      "name": "arrays/000317.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42237,
+      "legacy_deflate_bytes": 49135,
+      "name": "arrays/000318.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000319.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 126963,
+      "legacy_deflate_bytes": 147513,
+      "name": "arrays/000320.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43331,
+      "legacy_deflate_bytes": 49622,
+      "name": "arrays/000321.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000322.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 128645,
+      "legacy_deflate_bytes": 147780,
+      "name": "arrays/000323.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43893,
+      "legacy_deflate_bytes": 49807,
+      "name": "arrays/000324.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000325.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124835,
+      "legacy_deflate_bytes": 145983,
+      "name": "arrays/000326.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42361,
+      "legacy_deflate_bytes": 49230,
+      "name": "arrays/000327.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000328.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 127443,
+      "legacy_deflate_bytes": 148023,
+      "name": "arrays/000329.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43633,
+      "legacy_deflate_bytes": 49813,
+      "name": "arrays/000330.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000331.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124830,
+      "legacy_deflate_bytes": 145888,
+      "name": "arrays/000332.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42309,
+      "legacy_deflate_bytes": 49275,
+      "name": "arrays/000333.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 84,
+      "name": "arrays/000334.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125069,
+      "legacy_deflate_bytes": 146482,
+      "name": "arrays/000335.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42526,
+      "legacy_deflate_bytes": 49317,
+      "name": "arrays/000336.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000337.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124621,
+      "legacy_deflate_bytes": 145410,
+      "name": "arrays/000338.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42176,
+      "legacy_deflate_bytes": 49008,
+      "name": "arrays/000339.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000340.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125790,
+      "legacy_deflate_bytes": 146874,
+      "name": "arrays/000341.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42913,
+      "legacy_deflate_bytes": 49470,
+      "name": "arrays/000342.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000343.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125508,
+      "legacy_deflate_bytes": 146786,
+      "name": "arrays/000344.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42677,
+      "legacy_deflate_bytes": 49593,
+      "name": "arrays/000345.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000346.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125504,
+      "legacy_deflate_bytes": 146634,
+      "name": "arrays/000347.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42694,
+      "legacy_deflate_bytes": 49413,
+      "name": "arrays/000348.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000349.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125334,
+      "legacy_deflate_bytes": 146439,
+      "name": "arrays/000350.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42561,
+      "legacy_deflate_bytes": 49377,
+      "name": "arrays/000351.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000352.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125314,
+      "legacy_deflate_bytes": 146623,
+      "name": "arrays/000353.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42609,
+      "legacy_deflate_bytes": 49519,
+      "name": "arrays/000354.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000355.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124781,
+      "legacy_deflate_bytes": 146241,
+      "name": "arrays/000356.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42244,
+      "legacy_deflate_bytes": 49279,
+      "name": "arrays/000357.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000358.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124864,
+      "legacy_deflate_bytes": 145831,
+      "name": "arrays/000359.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42343,
+      "legacy_deflate_bytes": 49112,
+      "name": "arrays/000360.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 84,
+      "name": "arrays/000361.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125619,
+      "legacy_deflate_bytes": 146793,
+      "name": "arrays/000362.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42791,
+      "legacy_deflate_bytes": 49445,
+      "name": "arrays/000363.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000364.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125372,
+      "legacy_deflate_bytes": 146647,
+      "name": "arrays/000365.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42644,
+      "legacy_deflate_bytes": 49540,
+      "name": "arrays/000366.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000367.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125800,
+      "legacy_deflate_bytes": 147293,
+      "name": "arrays/000368.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42837,
+      "legacy_deflate_bytes": 49738,
+      "name": "arrays/000369.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000370.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 126081,
+      "legacy_deflate_bytes": 147313,
+      "name": "arrays/000371.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43041,
+      "legacy_deflate_bytes": 49651,
+      "name": "arrays/000372.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000373.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125626,
+      "legacy_deflate_bytes": 146859,
+      "name": "arrays/000374.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42759,
+      "legacy_deflate_bytes": 49432,
+      "name": "arrays/000375.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000376.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125622,
+      "legacy_deflate_bytes": 146775,
+      "name": "arrays/000377.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42769,
+      "legacy_deflate_bytes": 49530,
+      "name": "arrays/000378.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000379.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124842,
+      "legacy_deflate_bytes": 145902,
+      "name": "arrays/000380.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42326,
+      "legacy_deflate_bytes": 49264,
+      "name": "arrays/000381.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000382.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 127066,
+      "legacy_deflate_bytes": 147670,
+      "name": "arrays/000383.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43420,
+      "legacy_deflate_bytes": 49651,
+      "name": "arrays/000384.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000385.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124754,
+      "legacy_deflate_bytes": 145585,
+      "name": "arrays/000386.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42279,
+      "legacy_deflate_bytes": 49165,
+      "name": "arrays/000387.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000388.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 125142,
+      "legacy_deflate_bytes": 146582,
+      "name": "arrays/000389.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42526,
+      "legacy_deflate_bytes": 49485,
+      "name": "arrays/000390.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000391.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124737,
+      "legacy_deflate_bytes": 145978,
+      "name": "arrays/000392.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42349,
+      "legacy_deflate_bytes": 49187,
+      "name": "arrays/000393.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 103,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000394.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 128335,
+      "legacy_deflate_bytes": 148457,
+      "name": "arrays/000395.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 43977,
+      "legacy_deflate_bytes": 49958,
+      "name": "arrays/000396.npy",
+      "raw_bytes": 53472
+    },
+    {
+      "completed_lzma_bytes": 104,
+      "legacy_deflate_bytes": 85,
+      "name": "arrays/000397.npy",
+      "raw_bytes": 144
+    },
+    {
+      "completed_lzma_bytes": 124777,
+      "legacy_deflate_bytes": 146005,
+      "name": "arrays/000398.npy",
+      "raw_bytes": 160144
+    },
+    {
+      "completed_lzma_bytes": 42329,
+      "legacy_deflate_bytes": 49255,
+      "name": "arrays/000399.npy",
+      "raw_bytes": 53472
+    }
+  ],
+  "completed_checkpoint_members_byte_exact": true,
+  "completed_checkpoint_timing": {
+    "allowance_seconds": 7.232699209,
+    "completed_lzma_encode_seconds": 5.693586625000002,
+    "completed_lzma_read_seconds": 1.539112583999998,
+    "legacy_deflate_encode_seconds": 0.5109476669999999,
+    "legacy_deflate_read_seconds": 0.4324517919999984,
+    "read_scope": "whole_archive_sha256_metadata_identity_array_hashes_and_state_decode"
+  },
+  "completed_fixture_arrays_all_nonzero": true,
+  "compression_credit_assumed": false,
+  "history_manifest_bytes": 435,
+  "identity_fixture": "fixed_non-secret_hash-shaped_values_for_stable_size_measurement",
+  "initial_checkpoint_bytes": 91343,
+  "legacy_completed_checkpoint_bytes": 19684283,
+  "measurement_status": "storage_only_measured_non_scientific_fixture",
+  "resource_amendment": {
+    "amendment_before_pca_initialisation": true,
+    "effective_time_limit_seconds": 28800.0,
+    "original_time_limit_seconds": 14400.0,
+    "path": "docs/STAGE2C_RESOURCE_AMENDMENT.md",
+    "safety_factor": 1.5,
+    "sha256": "e5f9a471b5128c30ba3a5bb6b5e1e0677340bd3bde1f59cb385d59a8f2b3904b",
+    "storage_limit_bytes": 2000000000
+  },
+  "scientific_seed_used": false,
+  "shared_seed_artifact_bytes": 7665750,
+  "simulation_steps_executed": 0,
+  "source_hash": "482b4c26584005952ef334ddeb9ce096fe16ca815fd8fb1f0079ff8746bb23b7",
+  "storage_fixture_seed": 991337,
+  "synthetic_dense_final_field_bytes": 5730390,
+  "synthetic_max_active_checkpoint_bytes": 25425476,
+  "synthetic_max_completed_checkpoint_bytes": 16912046,
+  "uncompressed_numeric_bytes": {
+    "pheromone_intensity_and_direction": 6000000,
+    "return_routes": 5334400,
+    "travel_paths": 16001600,
+    "turn_schedule": 8000000
+  }
+}
