@@ -1,0 +1,25 @@
+{
+  "pass": true,
+  "navigation_parameters": [
+    "heading",
+    "left",
+    "right",
+    "role",
+    "low_steps",
+    "fcrw_turn",
+    "noise",
+    "config"
+  ],
+  "prohibited_identifier_hits": {
+    "scalar_baseline.navigation": [],
+    "scalar_baseline.sensing": []
+  },
+  "food_coordinates_owned_by": "ContactEnvironment; configuration/reporting only elsewhere",
+  "cargo_identity_owned_by": "Ledger; never supplied to navigation",
+  "dynamic_evidence": [
+    "test_changing_food_positions_cannot_change_noncontact_navigation",
+    "test_move_has_no_contact_environment_dependency",
+    "test_sensor_only_two_queries_and_left_geometry"
+  ],
+  "limitations": "AST checks are scoped structural evidence, supported by perturbation and poisoned-environment tests; not formal information-flow proof"
+}

@@ -1,0 +1,116 @@
+{
+  "scope": "all Stage 3A delivery files, excluding this storage_measurement.json to avoid self-reference",
+  "files": {
+    "docs/STAGE3A_SCALAR_DECAY_BASELINE_SPEC.md": {
+      "bytes": 8747,
+      "sha256": "e67d44c36089cda634d086a592fe0280432f1d5e13f906c3019a2dddfa9f28ac"
+    },
+    "results/stage3a_scalar_baseline/REPORT.md": {
+      "bytes": 9095,
+      "sha256": "8906a1fb265c7f17d184520e3b72f98e5af8bc00d49776d53d41547127a522fe"
+    },
+    "results/stage3a_scalar_baseline/cli_output_guard_audit.json": {
+      "bytes": 430,
+      "sha256": "02846c66ecef06415f0ee6d19d5b1f85bab41c4ddecb582738b9c55e4404e085"
+    },
+    "results/stage3a_scalar_baseline/config_audit.json": {
+      "bytes": 1569,
+      "sha256": "79448bd33b96286bc4c47d15e6936568b4578f450a82c0bea2157396bafb4c59"
+    },
+    "results/stage3a_scalar_baseline/food_coordinate_isolation_audit.json": {
+      "bytes": 802,
+      "sha256": "e3e62bac5475ea9326a1bdf356e3e565faeff1013bae19833624789628b65d24"
+    },
+    "results/stage3a_scalar_baseline/pilot/food_relocation.json": {
+      "bytes": 14321,
+      "sha256": "656d18036eb5caeed0b6704244b1e24ff4353f0f3bfa890418d66d7cc4d5e6fd"
+    },
+    "results/stage3a_scalar_baseline/pilot/population_smoke.json": {
+      "bytes": 79557,
+      "sha256": "4eb528e0c57ac6af1e17e23e657bec37139defb9de787f44cef56b6d4347bca6"
+    },
+    "results/stage3a_scalar_baseline/pilot/runtime.json": {
+      "bytes": 667,
+      "sha256": "a5b37045e31ef26befb320f54084fc97344a50d264dc7252b5043dcab2d19647"
+    },
+    "results/stage3a_scalar_baseline/pilot/single_cell_decay.json": {
+      "bytes": 849,
+      "sha256": "8475812a83ae31abd1a9a29eb99280446eeaac2c9d853f417a2b8743dcb4be8f"
+    },
+    "results/stage3a_scalar_baseline/pilot/straight_trail.json": {
+      "bytes": 2814,
+      "sha256": "49abbdf0c9296825fcb3622aa6afe2e26660834c3977e41abbda4f6a46bc953f"
+    },
+    "results/stage3a_scalar_baseline/pilot/trail_gap.json": {
+      "bytes": 6408,
+      "sha256": "47ee1a9874efeaa70f611b793dec078285c1e65af56a6a40e4859e11a3e922dc"
+    },
+    "results/stage3a_scalar_baseline/protected_sha256_before.json": {
+      "bytes": 110355,
+      "sha256": "cdd80349d2e0866bd92ad50c2cfc6d9f3337df60f9653b23dc6b8738c8005d49"
+    },
+    "results/stage3a_scalar_baseline/protected_sha256_check.json": {
+      "bytes": 110706,
+      "sha256": "3227b504b9bd875464fdc017c03aa11f9a5cc75193f883c296ea20c1eff5dace"
+    },
+    "results/stage3a_scalar_baseline/stage3a_source_sha256.json": {
+      "bytes": 1268,
+      "sha256": "c8b83c7c0177827e993061d42b1d0658bf1a5c73327a561fe9329e3d0878eb9a"
+    },
+    "results/stage3a_scalar_baseline/test_results.txt": {
+      "bytes": 432,
+      "sha256": "63f0969727c54666c1c25682aeb750c9406be5e1760da0a95d7b7177f38d0cf1"
+    },
+    "results/stage3a_scalar_baseline/test_runtime.json": {
+      "bytes": 151,
+      "sha256": "ddea11b02c79d4d3a8b06ebabd52333b366bedc98ed0c9684e8dec716e85c93f"
+    },
+    "scripts/audit_stage3a.py": {
+      "bytes": 6068,
+      "sha256": "80bb75d16a9f431ce12fa64800cbd8b2aee86a93ed84f08b238c6116af2ded3b"
+    },
+    "scripts/run_stage3a_pilot.py": {
+      "bytes": 2042,
+      "sha256": "74eb8923f4b2ed2bef8ae44415b35dc7b7208d7d54d9249968bcf0970ecc6581"
+    },
+    "src/scalar_baseline/__init__.py": {
+      "bytes": 80,
+      "sha256": "09dd48b2a41c39406a6a6d76fbdd0cb92bc455b6eae10222a12fa8c0e5a8a7b7"
+    },
+    "src/scalar_baseline/config.py": {
+      "bytes": 6005,
+      "sha256": "37f40dcba20c076d91c9f8932b1dc5dbe70b85606708e76f904c4f2567f04db9"
+    },
+    "src/scalar_baseline/environment.py": {
+      "bytes": 2306,
+      "sha256": "37036a0f432ff6828f99f3d8c605a4fdc447a599d22b02eeec6bc56566e9623e"
+    },
+    "src/scalar_baseline/field.py": {
+      "bytes": 2635,
+      "sha256": "0d9b001ebea9bd8a12de80da7d76f86f6049956548ea30e4d31ac0d6dd2f8fb6"
+    },
+    "src/scalar_baseline/navigation.py": {
+      "bytes": 1758,
+      "sha256": "a348db296579a437421491fe0e4505c7f03792e8eb2974587f91d980fbc32b2e"
+    },
+    "src/scalar_baseline/pilot.py": {
+      "bytes": 4980,
+      "sha256": "3d7717df05818a62ada801b6ac7b88611e816157a30b5376ed322e394b264030"
+    },
+    "src/scalar_baseline/sensing.py": {
+      "bytes": 610,
+      "sha256": "5f2ce942aed803701c404e3c4a86993ad8b47a29a9b29c58bb8fd65a96a261d9"
+    },
+    "src/scalar_baseline/simulation.py": {
+      "bytes": 5618,
+      "sha256": "3a820ba03ee7450fa7fe834baec2563baca13af08db318925bb6c47d5a4e8251"
+    },
+    "tests/test_stage3a_scalar_baseline.py": {
+      "bytes": 12290,
+      "sha256": "93f76078eb251a994a5564d810597aa14f1bf510a4cf1884e4bfadebc451c270"
+    }
+  },
+  "file_count": 27,
+  "total_bytes_excluding_this_manifest": 392563,
+  "result_bytes_excluding_this_manifest": 339424
+}

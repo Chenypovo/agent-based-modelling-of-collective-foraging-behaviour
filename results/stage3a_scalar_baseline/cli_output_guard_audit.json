@@ -1,0 +1,16 @@
+{
+  "pass": true,
+  "checks": [
+    {
+      "output": "results/stage2c_multiseed_confirmation/forbidden-stage3a-pilot",
+      "returncode": 2,
+      "reason": "output cannot be inside a protected tree"
+    },
+    {
+      "output": "results/stage3a_scalar_baseline/pilot",
+      "returncode": 2,
+      "reason": "output must be a fresh directory; existing evidence is never overwritten"
+    }
+  ],
+  "simulation_executed": false
+}

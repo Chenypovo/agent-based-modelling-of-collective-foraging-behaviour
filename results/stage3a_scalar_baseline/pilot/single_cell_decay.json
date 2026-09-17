@@ -1,0 +1,47 @@
+[
+  {
+    "time": 0,
+    "exponential": 1.0,
+    "hard_cutoff_cell_timer": 1.0
+  },
+  {
+    "time": 1,
+    "exponential": 0.7071067811865476,
+    "hard_cutoff_cell_timer": 1.0
+  },
+  {
+    "time": 2,
+    "exponential": 1.5,
+    "hard_cutoff_cell_timer": 2.0
+  },
+  {
+    "time": 3,
+    "exponential": 1.0606601717798214,
+    "hard_cutoff_cell_timer": 2.0
+  },
+  {
+    "time": 4,
+    "exponential": 0.7500000000000001,
+    "hard_cutoff_cell_timer": 2.0
+  },
+  {
+    "time": 5,
+    "exponential": 0.5303300858899107,
+    "hard_cutoff_cell_timer": 2.0
+  },
+  {
+    "time": 6,
+    "exponential": 0.37500000000000006,
+    "hard_cutoff_cell_timer": 0.0
+  },
+  {
+    "time": 7,
+    "exponential": 0.26516504294495535,
+    "hard_cutoff_cell_timer": 0.0
+  },
+  {
+    "time": 8,
+    "exponential": 0.18750000000000003,
+    "hard_cutoff_cell_timer": 0.0
+  }
+]
