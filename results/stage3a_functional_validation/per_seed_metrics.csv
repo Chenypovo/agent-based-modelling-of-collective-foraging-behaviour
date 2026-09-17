@@ -1,0 +1,6 @@
+seed,first_discovery_step,first_delivery_step,first_pheromone_recruitment_step,first_verified_recruitment_step,first_follower_food_arrival_step,discoveries,deliveries,raw_recruitment_episodes,verified_recruitment_episodes,unique_verified_recruits,follower_food_arrivals,arrival_episodes_at_least_10_steps_posthoc,max_arrival_episode_steps,first_return_route_fraction_on,first_return_route_fraction_off,first_return_route_max_gap_on,first_return_route_max_gap_off,final_centre_connectivity_on,final_centre_connectivity_off,cpu_seconds,wall_seconds,peak_rss_bytes,stored_bytes,complete_and_valid
+2026091701,509,1017,581,581,1887,16,11,8436,7661,99,13,5,79,1.0,1.0,0,0,False,False,17.880701000000002,16.668839834,271765504,4971479,True
+2026091702,2691,5381,2886,2886,3122,9,2,5416,5184,93,6,4,52,0.7475836431226766,0.9468401486988848,71,5,False,False,17.822091,17.612314041,255303680,3250103,True
+2026091703,1933,3865,1956,1956,3024,10,6,7300,7036,96,4,4,39,0.9239130434782609,1.0,5,0,False,False,17.812821,16.874330584,272670720,4277228,True
+2026091704,1696,3391,1709,1709,1955,14,9,6868,6426,93,11,7,66,0.8855457227138643,1.0,6,0,False,False,17.547571,16.443158916,273207296,4060581,True
+2026091705,680,1359,831,831,1394,11,6,4422,4232,86,5,4,33,1.0,1.0,0,0,False,False,17.638731,16.882799292,254451712,2601780,True

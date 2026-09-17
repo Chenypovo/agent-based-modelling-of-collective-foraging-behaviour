@@ -1,0 +1,105 @@
+{
+  "seed": 2026091701,
+  "status": "complete",
+  "error": null,
+  "steps_completed": 12000,
+  "first_discovery": {
+    "time": 509,
+    "event": "pickup",
+    "ant_id": 56,
+    "source": "A",
+    "role_before_contact": "fcrw",
+    "own_path_vertices": 510,
+    "remaining_steps": 11491
+  },
+  "first_delivery": {
+    "time": 1017,
+    "event": "delivery",
+    "ant_id": 56,
+    "source": "A",
+    "role_before_contact": "transporter",
+    "first_pickup_ant_is_first_deliverer": true
+  },
+  "first_raw_recruitment": {
+    "event": "recruitment",
+    "time": 581,
+    "ant_id": 67,
+    "left": 0.9746796308915485,
+    "right": 0.0,
+    "position": [
+      234.61945503141934,
+      134.85642158784702
+    ],
+    "heading_after": 0.6944104381250851,
+    "verified_other_ant_trail": true,
+    "zero_field_role": "fcrw"
+  },
+  "first_verified_recruitment": {
+    "event": "recruitment",
+    "time": 581,
+    "ant_id": 67,
+    "left": 0.9746796308915485,
+    "right": 0.0,
+    "position": [
+      234.61945503141934,
+      134.85642158784702
+    ],
+    "heading_after": 0.6944104381250851,
+    "verified_other_ant_trail": true,
+    "zero_field_role": "fcrw"
+  },
+  "raw_recruitments": 8436,
+  "verified_recruitments": 7661,
+  "unique_verified_recruits": 99,
+  "follower_food_arrivals": 13,
+  "first_follower_food_arrival": {
+    "time": 1887,
+    "event": "pickup",
+    "ant_id": 25,
+    "source": "A",
+    "role_before_contact": "follower",
+    "own_path_vertices": 1888,
+    "remaining_steps": 10113,
+    "follower_episode": {
+      "event": "follower_episode_end",
+      "time": 1887,
+      "ant_id": 25,
+      "reason": "food_contact",
+      "duration_steps": 7,
+      "distance_travelled": 4.199999999999975,
+      "displacement": 3.6656646332930833,
+      "verified_recruitment": true
+    }
+  },
+  "verified_episode_food_arrivals": 13,
+  "discoveries": {
+    "A": 16,
+    "B": 0
+  },
+  "deliveries": {
+    "A": 11,
+    "B": 0
+  },
+  "follower_steps": 252799,
+  "follower_low_signal_steps": 14423,
+  "final_field": {
+    "time": 12000,
+    "field_sum": 6008.420820499096,
+    "positive_cells": 20597,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 3537,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 5668,
+      "nest_food_centre_cells_connected_8": false
+    }
+  },
+  "valid_state_every_completed_step": true,
+  "functional_success": true,
+  "wall_seconds": 16.668839834,
+  "cpu_seconds": 17.880701000000002,
+  "peak_rss_bytes": 271765504
+}

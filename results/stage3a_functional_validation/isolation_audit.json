@@ -1,0 +1,25 @@
+{
+  "pass": true,
+  "frozen_source_matches": {
+    "src/scalar_baseline/__init__.py": true,
+    "src/scalar_baseline/config.py": true,
+    "src/scalar_baseline/environment.py": true,
+    "src/scalar_baseline/field.py": true,
+    "src/scalar_baseline/navigation.py": true,
+    "src/scalar_baseline/pilot.py": true,
+    "src/scalar_baseline/sensing.py": true,
+    "src/scalar_baseline/simulation.py": true,
+    "scripts/run_stage3a_pilot.py": true,
+    "scripts/audit_stage3a.py": true,
+    "tests/test_stage3a_scalar_baseline.py": true,
+    "docs/STAGE3A_SCALAR_DECAY_BASELINE_SPEC.md": true
+  },
+  "observer_equivalence_tests": [
+    "test_observer_does_not_change_dynamics",
+    "test_observer_records_actual_follower_contact_and_delivery"
+  ],
+  "food_coordinates_used_only_for": "original environment contacts and post-movement/offline metrics",
+  "source_identity_in_scalar_field": false,
+  "verified_recruitment_definition": "fcrw->follower with S>=on in an ant that has never deposited; zero-signal counterfactual remains fcrw",
+  "counterfactual_limitation": "role triggering only; not evidence for improved food acquisition over a no-pheromone control"
+}

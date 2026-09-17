@@ -1,0 +1,21 @@
+{
+  "total_cpu_seconds": 88.70191500000001,
+  "sum_wall_seconds": 84.481442667,
+  "total_seed_output_bytes": 19161171,
+  "max_seed_cpu_seconds": 17.880701000000002,
+  "max_seed_wall_seconds": 17.612314041,
+  "max_seed_output_bytes": 4971479,
+  "max_peak_rss_bytes": 273207296,
+  "projection_basis": "2 * pairs * maximum measured B0 cost; no C overhead included; sequential execution",
+  "five_pair_projection": {
+    "cpu_seconds": 178.80701000000002,
+    "wall_seconds": 176.12314041000002,
+    "bytes": 49714790
+  },
+  "twenty_pair_projection": {
+    "cpu_seconds": 715.2280400000001,
+    "wall_seconds": 704.4925616400001,
+    "bytes": 198859160
+  },
+  "future_paired_experiments_authorised": false
+}

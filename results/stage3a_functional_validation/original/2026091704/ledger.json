@@ -1,0 +1,158 @@
+{
+  "discoveries": {
+    "A": 14,
+    "B": 0
+  },
+  "deliveries": {
+    "A": 9,
+    "B": 0
+  },
+  "cargo": {
+    "4": "A",
+    "71": "A",
+    "95": "A",
+    "83": "A",
+    "5": "A"
+  },
+  "carried_a_at_relocation": [],
+  "events": [
+    {
+      "time": 1696,
+      "event": "pickup",
+      "ant_id": 34,
+      "source": "A"
+    },
+    {
+      "time": 1953,
+      "event": "pickup",
+      "ant_id": 71,
+      "source": "A"
+    },
+    {
+      "time": 1955,
+      "event": "pickup",
+      "ant_id": 94,
+      "source": "A"
+    },
+    {
+      "time": 3140,
+      "event": "pickup",
+      "ant_id": 84,
+      "source": "A"
+    },
+    {
+      "time": 3391,
+      "event": "delivery",
+      "ant_id": 34,
+      "source": "A"
+    },
+    {
+      "time": 3823,
+      "event": "pickup",
+      "ant_id": 5,
+      "source": "A"
+    },
+    {
+      "time": 3905,
+      "event": "delivery",
+      "ant_id": 71,
+      "source": "A"
+    },
+    {
+      "time": 3909,
+      "event": "delivery",
+      "ant_id": 94,
+      "source": "A"
+    },
+    {
+      "time": 4305,
+      "event": "pickup",
+      "ant_id": 87,
+      "source": "A"
+    },
+    {
+      "time": 4908,
+      "event": "pickup",
+      "ant_id": 76,
+      "source": "A"
+    },
+    {
+      "time": 5577,
+      "event": "pickup",
+      "ant_id": 92,
+      "source": "A"
+    },
+    {
+      "time": 6105,
+      "event": "pickup",
+      "ant_id": 94,
+      "source": "A"
+    },
+    {
+      "time": 6279,
+      "event": "delivery",
+      "ant_id": 84,
+      "source": "A"
+    },
+    {
+      "time": 7645,
+      "event": "delivery",
+      "ant_id": 5,
+      "source": "A"
+    },
+    {
+      "time": 8301,
+      "event": "delivery",
+      "ant_id": 94,
+      "source": "A"
+    },
+    {
+      "time": 8609,
+      "event": "delivery",
+      "ant_id": 87,
+      "source": "A"
+    },
+    {
+      "time": 9300,
+      "event": "pickup",
+      "ant_id": 4,
+      "source": "A"
+    },
+    {
+      "time": 9426,
+      "event": "pickup",
+      "ant_id": 71,
+      "source": "A"
+    },
+    {
+      "time": 9815,
+      "event": "delivery",
+      "ant_id": 76,
+      "source": "A"
+    },
+    {
+      "time": 11153,
+      "event": "delivery",
+      "ant_id": 92,
+      "source": "A"
+    },
+    {
+      "time": 11631,
+      "event": "pickup",
+      "ant_id": 95,
+      "source": "A"
+    },
+    {
+      "time": 11658,
+      "event": "pickup",
+      "ant_id": 83,
+      "source": "A"
+    },
+    {
+      "time": 11899,
+      "event": "pickup",
+      "ant_id": 5,
+      "source": "A"
+    }
+  ]
+}

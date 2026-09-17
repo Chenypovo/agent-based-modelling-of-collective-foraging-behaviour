@@ -1,0 +1,117 @@
+{"seed": 2026091702, "step": 1000, "deliveries": {"A": 0, "B": 0}, "recruitments": 0, "wall_seconds": 1.88}
+{"seed": 2026091702, "step": 2000, "deliveries": {"A": 0, "B": 0}, "recruitments": 0, "wall_seconds": 3.27}
+{"seed": 2026091702, "step": 3000, "deliveries": {"A": 0, "B": 0}, "recruitments": 17, "wall_seconds": 4.61}
+{"seed": 2026091702, "step": 4000, "deliveries": {"A": 0, "B": 0}, "recruitments": 237, "wall_seconds": 6.03}
+{"seed": 2026091702, "step": 5000, "deliveries": {"A": 0, "B": 0}, "recruitments": 691, "wall_seconds": 7.44}
+{"seed": 2026091702, "step": 6000, "deliveries": {"A": 1, "B": 0}, "recruitments": 1254, "wall_seconds": 9.3}
+{"seed": 2026091702, "step": 7000, "deliveries": {"A": 2, "B": 0}, "recruitments": 1813, "wall_seconds": 10.76}
+{"seed": 2026091702, "step": 8000, "deliveries": {"A": 2, "B": 0}, "recruitments": 2257, "wall_seconds": 12.21}
+{"seed": 2026091702, "step": 9000, "deliveries": {"A": 2, "B": 0}, "recruitments": 2908, "wall_seconds": 13.61}
+{"seed": 2026091702, "step": 10000, "deliveries": {"A": 2, "B": 0}, "recruitments": 3682, "wall_seconds": 14.94}
+{"seed": 2026091702, "step": 11000, "deliveries": {"A": 2, "B": 0}, "recruitments": 4647, "wall_seconds": 16.23}
+{"seed": 2026091702, "step": 12000, "deliveries": {"A": 2, "B": 0}, "recruitments": 5416, "wall_seconds": 17.53}
+{
+  "seed": 2026091702,
+  "status": "complete",
+  "error": null,
+  "steps_completed": 12000,
+  "first_discovery": {
+    "time": 2691,
+    "event": "pickup",
+    "ant_id": 64,
+    "source": "A",
+    "role_before_contact": "fcrw",
+    "own_path_vertices": 2692,
+    "remaining_steps": 9309
+  },
+  "first_delivery": {
+    "time": 5381,
+    "event": "delivery",
+    "ant_id": 64,
+    "source": "A",
+    "role_before_contact": "transporter",
+    "first_pickup_ant_is_first_deliverer": true
+  },
+  "first_raw_recruitment": {
+    "event": "recruitment",
+    "time": 2886,
+    "ant_id": 33,
+    "left": 0.0,
+    "right": 0.9903428719330244,
+    "position": [
+      241.84513110173117,
+      185.93902259260562
+    ],
+    "heading_after": 3.0016905966809517,
+    "verified_other_ant_trail": true,
+    "zero_field_role": "fcrw"
+  },
+  "first_verified_recruitment": {
+    "event": "recruitment",
+    "time": 2886,
+    "ant_id": 33,
+    "left": 0.0,
+    "right": 0.9903428719330244,
+    "position": [
+      241.84513110173117,
+      185.93902259260562
+    ],
+    "heading_after": 3.0016905966809517,
+    "verified_other_ant_trail": true,
+    "zero_field_role": "fcrw"
+  },
+  "raw_recruitments": 5416,
+  "verified_recruitments": 5184,
+  "unique_verified_recruits": 93,
+  "follower_food_arrivals": 6,
+  "first_follower_food_arrival": {
+    "time": 3122,
+    "event": "pickup",
+    "ant_id": 96,
+    "source": "A",
+    "role_before_contact": "follower",
+    "own_path_vertices": 3123,
+    "remaining_steps": 8878,
+    "follower_episode": {
+      "event": "follower_episode_end",
+      "time": 3122,
+      "ant_id": 96,
+      "reason": "food_contact",
+      "duration_steps": 1,
+      "distance_travelled": 0.5999999999999932,
+      "displacement": 0.5999999999999932,
+      "verified_recruitment": true
+    }
+  },
+  "verified_episode_food_arrivals": 6,
+  "discoveries": {
+    "A": 9,
+    "B": 0
+  },
+  "deliveries": {
+    "A": 2,
+    "B": 0
+  },
+  "follower_steps": 191707,
+  "follower_low_signal_steps": 8994,
+  "final_field": {
+    "time": 12000,
+    "field_sum": 9734.42342026854,
+    "positive_cells": 17743,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 6578,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 9975,
+      "nest_food_centre_cells_connected_8": false
+    }
+  },
+  "valid_state_every_completed_step": true,
+  "functional_success": true,
+  "wall_seconds": 17.612314041,
+  "cpu_seconds": 17.822091,
+  "peak_rss_bytes": 255303680
+}
