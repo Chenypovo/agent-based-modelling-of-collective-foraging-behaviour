@@ -16,12 +16,14 @@ import json
 import math
 import os
 from pathlib import Path
+import platform
 import resource
+import subprocess
 import sys
 import tempfile
 import textwrap
 import time
-from typing import Iterable
+from typing import Callable, Iterable
 
 import numpy as np
 
@@ -48,6 +50,31 @@ BOOTSTRAP_REPLICATES = 10_000
 BOOTSTRAP_SEED = 2026092199
 FORMAL_RESULTS_RELATIVE = Path("results/stage3c_confirmatory_recovery")
 SNAPSHOT_STEPS = (5_999, 6_000, 12_000, 17_999)
+
+EXECUTION_IDENTITY_FILES = (
+    "requirements.txt",
+    "docs/STAGE3C_CONFIRMATORY_PREREGISTRATION.md",
+    "docs/STAGE3C_ENGINEERING_SPEC.md",
+    "src/ant_walks/models.py",
+    "src/scalar_baseline/__init__.py",
+    "src/scalar_baseline/config.py",
+    "src/scalar_baseline/environment.py",
+    "src/scalar_baseline/field.py",
+    "src/scalar_baseline/functional_validation.py",
+    "src/scalar_baseline/navigation.py",
+    "src/scalar_baseline/sensing.py",
+    "src/scalar_baseline/simulation.py",
+    "src/scalar_baseline/stage3b.py",
+    "src/scalar_baseline/stage3c.py",
+    "src/scalar_baseline/stage3c_analysis.py",
+    "scripts/run_stage3c.py",
+    "scripts/audit_stage3c.py",
+    "scripts/summarise_stage3c.py",
+    "tests/test_stage3b_recovery.py",
+    "tests/test_stage3c_confirmation.py",
+)
+EXPANSION_AUTHORISATION_FILENAME = "expansion_authorisation.json"
+EXPANSION_SEEDS = CONFIRMATORY_SEEDS[1:]
 
 PER_RUN_WALL_LIMIT = 600.0
 PER_RUN_CPU_LIMIT = 600.0
@@ -334,29 +361,85 @@ def _directory_bytes(path: Path) -> int:
     return sum(item.stat().st_size for item in path.rglob("*") if item.is_file())
 
 
+def _canonical_sha256(data: dict) -> str:
+    encoded = json.dumps(data, sort_keys=True, separators=(",", ":"), allow_nan=False)
+    return hashlib.sha256(encoded.encode()).hexdigest()
+
+
+def _git_output(repository_root: Path, *arguments: str) -> str:
+    try:
+        process = subprocess.run(
+            ("git", "-C", str(repository_root), *arguments),
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise EvidenceError(f"Git identity query failed: {arguments}") from exc
+    return process.stdout.strip()
+
+
 def _source_identity(repository_root: Path) -> dict:
-    relative = (
-        "docs/STAGE3C_CONFIRMATORY_PREREGISTRATION.md",
-        "docs/STAGE3C_ENGINEERING_SPEC.md",
-        "src/scalar_baseline/stage3b.py",
-        "src/scalar_baseline/stage3c.py",
-        "src/scalar_baseline/stage3c_analysis.py",
-        "scripts/run_stage3c.py",
-        "scripts/audit_stage3c.py",
-        "scripts/summarise_stage3c.py",
-        "tests/test_stage3c_confirmation.py",
-    )
-    missing = [name for name in relative if not (repository_root / name).is_file()]
+    """Bind Git, runtime, platform, and every execution-critical file."""
+    missing = [
+        name for name in EXECUTION_IDENTITY_FILES
+        if not (repository_root / name).is_file()
+    ]
     if missing:
         raise EvidenceError(f"source identity files are missing: {missing}")
+    tracked_status = _git_output(
+        repository_root, "status", "--porcelain=v1", "--untracked-files=no"
+    )
     return {
+        "schema": "stage3c-execution-identity-v1",
+        "git": {
+            "head": _git_output(repository_root, "rev-parse", "HEAD"),
+            "branch": _git_output(repository_root, "branch", "--show-current"),
+            "tracked_clean": tracked_status == "",
+            "tracked_status": tracked_status.splitlines() if tracked_status else [],
+        },
+        "runtime": {
+            "python_version": platform.python_version(),
+            "python_implementation": platform.python_implementation(),
+            "numpy_version": np.__version__,
+            "platform": platform.platform(),
+        },
         "files": {
             name: {
+                "path": name,
                 "bytes": (repository_root / name).stat().st_size,
                 "sha256": _sha256(repository_root / name),
             }
-            for name in relative
-        }
+            for name in EXECUTION_IDENTITY_FILES
+        },
+    }
+
+
+IdentityProvider = Callable[[Path], dict]
+
+
+def _require_clean_identity(identity: dict) -> None:
+    git = identity.get("git", {})
+    if (
+        not git.get("head")
+        or not git.get("branch")
+        or git.get("tracked_clean") is not True
+        or git.get("tracked_status") != []
+    ):
+        raise EvidenceError("formal execution requires a clean tracked Git identity")
+
+
+def _arm_identity_record(frozen: dict, before: dict, after: dict) -> dict:
+    matches = frozen == before == after
+    return {
+        "schema": "stage3c-arm-identity-v1",
+        "match": matches,
+        "frozen_identity_sha256": _canonical_sha256(frozen),
+        "pre_run_identity_sha256": _canonical_sha256(before),
+        "post_run_identity_sha256": _canonical_sha256(after),
+        "frozen": frozen,
+        "pre_run": before,
+        "post_run": after,
     }
 
 
@@ -395,6 +478,9 @@ def _execute_arm(
     config: ArmConfiguration,
     repository_root: Path,
     *,
+    frozen_identity: dict,
+    pre_run_identity: dict,
+    identity_provider: IdentityProvider = _source_identity,
     retain_observations: bool = False,
 ) -> dict:
     """Execute one arm inside an already-created unpublished directory."""
@@ -579,7 +665,15 @@ def _execute_arm(
     if retain_observations:
         _write_json(output / "observations.json", sim.observations)
     np.savez_compressed(output / "field_snapshots.npz", **snapshots)
-    _write_json(output / "source_identity.json", _source_identity(repository_root))
+    post_run_identity = identity_provider(repository_root)
+    if config.formal:
+        _require_clean_identity(post_run_identity)
+    identity_record = _arm_identity_record(
+        frozen_identity, pre_run_identity, post_run_identity
+    )
+    if not identity_record["match"]:
+        raise EvidenceError("execution identity changed during arm execution")
+    _write_json(output / "source_identity.json", identity_record)
 
     wall_seconds = time.perf_counter() - start_wall
     cpu_seconds = time.process_time() - start_cpu
@@ -705,7 +799,10 @@ def _required_run_files(arm: str) -> set[str]:
 
 
 def validate_run_directory(
-    run_directory: Path, expected: ArmConfiguration | None = None
+    run_directory: Path,
+    expected: ArmConfiguration | None = None,
+    *,
+    expected_execution_identity: dict | None = None,
 ) -> dict:
     """Validate a completed directory without changing or rerunning it."""
     if not run_directory.is_dir():
@@ -740,8 +837,29 @@ def validate_run_directory(
     summary = json.loads((run_directory / "summary.json").read_text())
     resources = json.loads((run_directory / "resources.json").read_text())
     integrity = json.loads((run_directory / "integrity.json").read_text())
+    source_identity = json.loads((run_directory / "source_identity.json").read_text())
     if summary.get("status") != "complete" or not resources.get("pass") or not integrity.get("pass"):
         raise EvidenceError("run is not valid and complete")
+    identities = (
+        source_identity.get("frozen"),
+        source_identity.get("pre_run"),
+        source_identity.get("post_run"),
+    )
+    if (
+        source_identity.get("schema") != "stage3c-arm-identity-v1"
+        or source_identity.get("match") is not True
+        or any(identity is None for identity in identities)
+        or not identities[0] == identities[1] == identities[2]
+        or source_identity.get("frozen_identity_sha256")
+        != _canonical_sha256(identities[0])
+        or source_identity.get("pre_run_identity_sha256")
+        != _canonical_sha256(identities[1])
+        or source_identity.get("post_run_identity_sha256")
+        != _canonical_sha256(identities[2])
+    ):
+        raise EvidenceError("run execution identity record is invalid")
+    if expected_execution_identity is not None and identities[0] != expected_execution_identity:
+        raise EvidenceError("run execution identity differs from frozen pre-run identity")
     if expected is not None:
         expected_status = "confirmatory" if expected.formal else "engineering-fixture"
         identity_checks = (
@@ -755,6 +873,8 @@ def validate_run_directory(
         )
         if not all(identity_checks):
             raise EvidenceError("run receipt or summary identity is inconsistent")
+        if expected.formal:
+            _require_clean_identity(identities[0])
     if _directory_bytes(run_directory) > PER_RUN_TEMP_LIMIT:
         raise ResourceLimitError("completed directory exceeds per-run storage limit")
     if max(
@@ -769,8 +889,30 @@ def validate_run_directory(
         "formal": receipt["formal"],
         "files_verified": len(manifest),
         "receipt_sha256": _sha256(receipt_path),
+        "source_identity_sha256": _sha256(run_directory / "source_identity.json"),
+        "retained_bytes": _directory_bytes(run_directory),
+        "file_count": len(present),
         "summary": summary,
         "resources": resources,
+    }
+
+
+def _engineering_arm_report(validation: dict) -> dict:
+    resources = validation["resources"]
+    return {
+        "seed": validation["seed"],
+        "arm": validation["arm"],
+        "complete": True,
+        "valid": True,
+        "wall_seconds": resources["wall_seconds"],
+        "cpu_seconds": resources["cpu_seconds"],
+        "peak_rss_bytes": resources["peak_rss_bytes"],
+        "retained_bytes": validation["retained_bytes"],
+        "file_count": validation["file_count"],
+        "completed_receipt_sha256": validation["receipt_sha256"],
+        "source_identity_sha256": validation["source_identity_sha256"],
+        "resource_action": "CONTINUE",
+        "engineering_status": "PASS",
     }
 
 
@@ -781,10 +923,22 @@ def run_arm_atomic(
     *,
     retain_observations: bool = False,
     reuse_completed: bool = True,
+    identity_provider: IdentityProvider = _source_identity,
 ) -> dict:
     """Run one arm into a temporary directory and atomically publish it."""
     if config.formal:
         validate_confirmatory_config(config)
+        audit = validate_prerun_engineering_audit(
+            study_root, repository_root, identity_provider=identity_provider
+        )
+        frozen_identity = audit["execution_identity"]
+        pre_run_identity = identity_provider(repository_root)
+        _require_clean_identity(pre_run_identity)
+        if pre_run_identity != frozen_identity:
+            raise EvidenceError("formal arm identity differs from frozen pre-run identity")
+    else:
+        pre_run_identity = identity_provider(repository_root)
+        frozen_identity = pre_run_identity
     final = study_root / "runs" / str(config.seed) / config.arm
     final.parent.mkdir(parents=True, exist_ok=True)
     incomplete_prefix = f".{config.seed}-{config.arm}.incomplete-"
@@ -796,22 +950,33 @@ def run_arm_atomic(
     if final.exists():
         if not reuse_completed:
             raise EvidenceError("completed evidence already exists; overwrite refused")
-        validation = validate_run_directory(final, config)
-        return {"reused": True, "validation": validation}
+        validation = validate_run_directory(
+            final,
+            config,
+            expected_execution_identity=frozen_identity if config.formal else None,
+        )
+        return _engineering_arm_report(validation)
 
     temporary = Path(
         tempfile.mkdtemp(prefix=f".{config.seed}-{config.arm}.tmp-", dir=final.parent)
     )
     try:
-        summary = _execute_arm(
+        _execute_arm(
             temporary,
             config,
             repository_root,
+            frozen_identity=frozen_identity,
+            pre_run_identity=pre_run_identity,
+            identity_provider=identity_provider,
             retain_observations=retain_observations,
         )
-        validation = validate_run_directory(temporary, config)
+        validation = validate_run_directory(
+            temporary,
+            config,
+            expected_execution_identity=frozen_identity if config.formal else None,
+        )
         os.replace(temporary, final)
-        return {"reused": False, "summary": summary, "validation": validation}
+        return _engineering_arm_report(validation)
     except Exception as exc:
         failure = {
             "status": "incomplete",
@@ -839,15 +1004,38 @@ def pair_configuration_identity(b0_record: dict, c_record: dict) -> dict:
     return {"pass": b0 == c, "shared_configuration": b0 if b0 == c else None}
 
 
-def create_first_pair_engineering_receipt(
-    study_root: Path, repository_root: Path | None = None
+def _first_pair_configs(
+    pair_configs: dict[str, ArmConfiguration] | None,
+) -> dict[str, ArmConfiguration]:
+    configs = pair_configs or {
+        arm: confirmatory_config(CONFIRMATORY_SEEDS[0], arm) for arm in ARMS
+    }
+    if set(configs) != set(ARMS):
+        raise ConfigurationError("first pair must contain exactly B0 and C")
+    if configs["B0"].arm != "B0" or configs["C"].arm != "C":
+        raise ConfigurationError("first-pair arm labels are invalid")
+    if configs["B0"].seed != configs["C"].seed:
+        raise ConfigurationError("first-pair seeds differ")
+    return configs
+
+
+def _first_pair_engineering_evidence(
+    study_root: Path,
+    repository_root: Path,
+    *,
+    pair_configs: dict[str, ArmConfiguration] | None = None,
+    identity_provider: IdentityProvider = _source_identity,
 ) -> dict:
-    """Record engineering validity without reporting scientific outcomes."""
-    seed = CONFIRMATORY_SEEDS[0]
+    configs = _first_pair_configs(pair_configs)
+    seed = configs["B0"].seed
+    audit = validate_prerun_engineering_audit(
+        study_root, repository_root, identity_provider=identity_provider
+    )
     validations = {
         arm: validate_run_directory(
             study_root / "runs" / str(seed) / arm,
-            confirmatory_config(seed, arm),
+            configs[arm],
+            expected_execution_identity=audit["execution_identity"],
         )
         for arm in ARMS
     }
@@ -868,64 +1056,163 @@ def create_first_pair_engineering_receipt(
     }
     if source_records["B0"] != source_records["C"]:
         raise EvidenceError("first-pair source identity failed")
-    repository_root = repository_root or Path(__file__).resolve().parents[2]
     protection = verify_study_protection(study_root, repository_root)
     if not protection["pass"]:
         raise EvidenceError("protected-file integrity failed")
-    validate_prerun_engineering_audit(study_root, repository_root)
-    if source_records["B0"] != _source_identity(repository_root):
-        raise EvidenceError("first-pair source does not match the frozen audit")
-    receipt = {
-        "status": "engineering-pass",
+    arms = {arm: _engineering_arm_report(validations[arm]) for arm in ARMS}
+    return {
+        "engineering_status": "PASS",
+        "resource_action": "CONTINUE",
         "seed": seed,
-        "scientific_outcomes_inspected": False,
-        "configuration_identity": identity["pass"],
-        "source_identity": True,
-        "protected_file_integrity": True,
-        "arm_completed_receipts": {
-            arm: validations[arm]["receipt_sha256"] for arm in ARMS
+        "arms": arms,
+        "pair_identity": {
+            "configuration": True,
+            "execution_identity": True,
         },
+        "protected_files": {
+            "pass": True,
+            "files_checked": protection["files_checked"],
+            "manifest_sha256": protection["manifest_sha256"],
+        },
+        "prerun_audit_sha256": audit["audit_sha256"],
+        "execution_git_head": audit["execution_identity"]["git"]["head"],
+        "execution_identity_sha256": audit["execution_identity_sha256"],
     }
-    _write_json(study_root / "first_pair_engineering_receipt.json", receipt)
+
+
+def create_first_pair_engineering_receipt(
+    study_root: Path,
+    repository_root: Path | None = None,
+    *,
+    pair_configs: dict[str, ArmConfiguration] | None = None,
+    identity_provider: IdentityProvider = _source_identity,
+) -> dict:
+    """Record engineering validity without exposing scientific outcomes."""
+    repository_root = repository_root or Path(__file__).resolve().parents[2]
+    path = study_root / "first_pair_engineering_receipt.json"
+    if path.exists():
+        raise EvidenceError("first-pair engineering receipt is immutable")
+    receipt = _first_pair_engineering_evidence(
+        study_root,
+        repository_root,
+        pair_configs=pair_configs,
+        identity_provider=identity_provider,
+    )
+    _write_json(path, receipt)
     return receipt
 
 
 def validate_first_pair_engineering_receipt(
-    study_root: Path, repository_root: Path | None = None
+    study_root: Path,
+    repository_root: Path | None = None,
+    *,
+    pair_configs: dict[str, ArmConfiguration] | None = None,
+    identity_provider: IdentityProvider = _source_identity,
 ) -> dict:
     path = study_root / "first_pair_engineering_receipt.json"
     if not path.is_file():
         raise EvidenceError("remaining mode requires a first-pair engineering receipt")
-    stored = json.loads(path.read_text())
-    seed = CONFIRMATORY_SEEDS[0]
-    if (
-        stored.get("status") != "engineering-pass"
-        or stored.get("seed") != seed
-        or stored.get("scientific_outcomes_inspected") is not False
-        or stored.get("configuration_identity") is not True
-        or stored.get("source_identity") is not True
-        or stored.get("protected_file_integrity") is not True
-    ):
-        raise EvidenceError("first-pair engineering receipt is invalid")
-    for arm in ARMS:
-        validation = validate_run_directory(
-            study_root / "runs" / str(seed) / arm,
-            confirmatory_config(seed, arm),
-        )
-        if stored["arm_completed_receipts"].get(arm) != validation["receipt_sha256"]:
-            raise EvidenceError("first-pair receipt identity changed")
     repository_root = repository_root or Path(__file__).resolve().parents[2]
-    protection = verify_study_protection(study_root, repository_root)
-    if not protection["pass"]:
-        raise EvidenceError("protected-file integrity changed")
-    validate_prerun_engineering_audit(study_root, repository_root)
-    return {"pass": True, "receipt_sha256": _sha256(path)}
+    try:
+        stored = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError) as exc:
+        raise EvidenceError("first-pair engineering receipt is corrupt") from exc
+    expected = _first_pair_engineering_evidence(
+        study_root,
+        repository_root,
+        pair_configs=pair_configs,
+        identity_provider=identity_provider,
+    )
+    if stored != expected:
+        raise EvidenceError("first-pair engineering receipt is invalid or stale")
+    return {
+        "pass": True,
+        "receipt_sha256": _sha256(path),
+        "seed": stored["seed"],
+        "arm_completed_receipts": {
+            arm: stored["arms"][arm]["completed_receipt_sha256"] for arm in ARMS
+        },
+        "prerun_audit_sha256": stored["prerun_audit_sha256"],
+        "execution_git_head": stored["execution_git_head"],
+        "execution_identity_sha256": stored["execution_identity_sha256"],
+        "engineering_status": "PASS",
+        "resource_action": "CONTINUE",
+    }
+
+
+def expected_expansion_authorisation(
+    study_root: Path,
+    repository_root: Path | None = None,
+    *,
+    identity_provider: IdentityProvider = _source_identity,
+) -> dict:
+    """Return the exact Stage 3C-F authorisation payload without writing it."""
+    repository_root = repository_root or Path(__file__).resolve().parents[2]
+    gate = validate_first_pair_engineering_receipt(
+        study_root, repository_root, identity_provider=identity_provider
+    )
+    return {
+        "authorised_stage": "Stage 3C-F",
+        "approved": True,
+        "first_pair_engineering_receipt_sha256": gate["receipt_sha256"],
+        "first_pair_B0_completed_receipt_sha256": gate[
+            "arm_completed_receipts"
+        ]["B0"],
+        "first_pair_C_completed_receipt_sha256": gate[
+            "arm_completed_receipts"
+        ]["C"],
+        "frozen_execution_git_head": gate["execution_git_head"],
+        "frozen_prerun_audit_sha256": gate["prerun_audit_sha256"],
+        "seeds": list(EXPANSION_SEEDS),
+        "arm_order": list(ARMS),
+    }
+
+
+def validate_expansion_authorisation(
+    study_root: Path,
+    repository_root: Path | None = None,
+    *,
+    identity_provider: IdentityProvider = _source_identity,
+) -> dict:
+    """Fail closed unless an independent Stage 3C-F authorisation is exact."""
+    repository_root = repository_root or Path(__file__).resolve().parents[2]
+    path = study_root / EXPANSION_AUTHORISATION_FILENAME
+    if not path.is_file():
+        raise EvidenceError("remaining mode requires Stage 3C-F authorisation")
+    try:
+        stored = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError) as exc:
+        raise EvidenceError("Stage 3C-F authorisation is corrupt") from exc
+    expected = expected_expansion_authorisation(
+        study_root, repository_root, identity_provider=identity_provider
+    )
+    if stored != expected:
+        raise EvidenceError("Stage 3C-F authorisation does not match frozen evidence")
+    return {
+        "engineering_status": "PASS",
+        "resource_action": "CONTINUE",
+        "authorisation_sha256": _sha256(path),
+        "first_pair_engineering_receipt_sha256": stored[
+            "first_pair_engineering_receipt_sha256"
+        ],
+        "execution_git_head": stored["frozen_execution_git_head"],
+        "prerun_audit_sha256": stored["frozen_prerun_audit_sha256"],
+        "seeds": stored["seeds"],
+        "arm_order": stored["arm_order"],
+    }
 
 
 def validate_complete_study(
-    study_root: Path, repository_root: Path | None = None
+    study_root: Path,
+    repository_root: Path | None = None,
+    *,
+    identity_provider: IdentityProvider = _source_identity,
 ) -> dict:
     """Refuse analysis unless all 40 immutable arms and study limits pass."""
+    repository_root = repository_root or Path(__file__).resolve().parents[2]
+    audit = validate_prerun_engineering_audit(
+        study_root, repository_root, identity_provider=identity_provider
+    )
     validations = []
     total_cpu = 0.0
     for seed in CONFIRMATORY_SEEDS:
@@ -933,17 +1220,16 @@ def validate_complete_study(
             validation = validate_run_directory(
                 study_root / "runs" / str(seed) / arm,
                 confirmatory_config(seed, arm),
+                expected_execution_identity=audit["execution_identity"],
             )
             validations.append(validation)
             total_cpu += validation["resources"]["cpu_seconds"]
     total_bytes = _directory_bytes(study_root)
     if total_cpu > STUDY_CPU_LIMIT or total_bytes > STUDY_OUTPUT_LIMIT:
         raise ResourceLimitError("complete-study resource limit exceeded")
-    repository_root = repository_root or Path(__file__).resolve().parents[2]
     protection = verify_study_protection(study_root, repository_root)
     if not protection["pass"]:
         raise EvidenceError("protected-file integrity changed")
-    validate_prerun_engineering_audit(study_root, repository_root)
     return {
         "pass": True,
         "runs_verified": len(validations),
@@ -1272,8 +1558,14 @@ def cargo_classification_audit() -> dict:
     }
 
 
-def prerun_engineering_audit(repository_root: Path) -> dict:
+def prerun_engineering_audit(
+    repository_root: Path,
+    *,
+    identity_provider: IdentityProvider = _source_identity,
+) -> dict:
     """Build every outcome-blind gate before a formal arm can start."""
+    execution_identity = identity_provider(repository_root)
+    _require_clean_identity(execution_identity)
     audits = {
         "formal_configuration": formal_configuration_audit(),
         "schedule_prefix": schedule_prefix_audit(),
@@ -1285,7 +1577,7 @@ def prerun_engineering_audit(repository_root: Path) -> dict:
         "resource_estimate": static_resource_estimate(
             repository_root / "results/stage3b_recovery_pilot/resource_summary.json"
         ),
-        "source_identity": _source_identity(repository_root),
+        "execution_identity": execution_identity,
     }
     audits["pass"] = all(
         item.get("pass", item.get("within_limits", True))
@@ -1303,22 +1595,38 @@ def prerun_engineering_audit(repository_root: Path) -> dict:
 
 
 def initialise_prerun_engineering_audit(
-    study_root: Path, repository_root: Path
+    study_root: Path,
+    repository_root: Path,
+    *,
+    identity_provider: IdentityProvider = _source_identity,
 ) -> dict:
     """Create the pre-run audit once or validate it against current source."""
     study_root.mkdir(parents=True, exist_ok=True)
     path = study_root / "prerun_engineering_audit.json"
     if path.exists():
-        return validate_prerun_engineering_audit(study_root, repository_root)
-    audit = prerun_engineering_audit(repository_root)
+        return validate_prerun_engineering_audit(
+            study_root, repository_root, identity_provider=identity_provider
+        )
+    audit = prerun_engineering_audit(
+        repository_root, identity_provider=identity_provider
+    )
     if not audit["pass"]:
         raise EvidenceError("pre-run engineering audit failed")
     _write_json(path, audit)
-    return {"pass": True, "audit_sha256": _sha256(path), "scope": audit["scope"]}
+    return {
+        "pass": True,
+        "audit_sha256": _sha256(path),
+        "execution_identity_sha256": _canonical_sha256(audit["execution_identity"]),
+        "execution_identity": audit["execution_identity"],
+        "scope": audit["scope"],
+    }
 
 
 def validate_prerun_engineering_audit(
-    study_root: Path, repository_root: Path
+    study_root: Path,
+    repository_root: Path,
+    *,
+    identity_provider: IdentityProvider = _source_identity,
 ) -> dict:
     path = study_root / "prerun_engineering_audit.json"
     if not path.is_file():
@@ -1326,6 +1634,14 @@ def validate_prerun_engineering_audit(
     audit = json.loads(path.read_text())
     if audit.get("pass") is not True:
         raise EvidenceError("pre-run engineering audit did not pass")
-    if audit.get("source_identity") != _source_identity(repository_root):
+    current_identity = identity_provider(repository_root)
+    _require_clean_identity(current_identity)
+    if audit.get("execution_identity") != current_identity:
         raise EvidenceError("source changed after pre-run engineering audit")
-    return {"pass": True, "audit_sha256": _sha256(path), "scope": audit["scope"]}
+    return {
+        "pass": True,
+        "audit_sha256": _sha256(path),
+        "execution_identity_sha256": _canonical_sha256(current_identity),
+        "execution_identity": current_identity,
+        "scope": audit["scope"],
+    }

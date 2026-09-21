@@ -20,8 +20,9 @@ The command entry points are:
 - `scripts/run_stage3c.py first-pair`: run only seed `2026092101`, B0 then C,
   and produce an outcome-blind engineering receipt;
 - `scripts/run_stage3c.py remaining`: refuse execution until the first-pair
-  receipt and both arm hashes validate, then run seeds `2026092102-2026092120`
-  in ascending order, B0 then C;
+  evidence and a separate immutable Stage 3C-F expansion authorisation both
+  validate, then run seeds `2026092102-2026092120` in ascending order, B0 then
+  C;
 - `scripts/run_stage3c.py analyse`: refuse execution until all 40 immutable runs
   pass validation, then execute the frozen analysis once;
 - `scripts/audit_stage3c.py`: generate machine-readable configuration,
@@ -57,6 +58,7 @@ Future formal evidence uses this structure:
 ```text
 results/stage3c_confirmatory_recovery/
   first_pair_engineering_receipt.json
+  expansion_authorisation.json  # created only by a later Stage 3C-F approval
   runs/<seed>/B0/
   runs/<seed>/C/
   paired_primary.csv
@@ -84,10 +86,37 @@ manifest excludes the new Stage 3C formal directory itself.
 
 The first-pair mode also runs and freezes an outcome-blind pre-run engineering
 audit before it constructs a formal simulation. That audit binds the current
-source hashes and must pass configuration, schedule-prefix, pair-identity,
+execution identity and must pass configuration, schedule-prefix, pair-identity,
 Stage 3B B0 replay, single-change, navigation-isolation, cargo-classification,
-and static-resource checks. Remaining and analyse modes reject a changed source
-or missing audit.
+and static-resource checks. The execution identity contains the full Git HEAD,
+branch, tracked-clean state, Python, NumPy and platform versions, plus path,
+size and SHA-256 for the 20 execution-critical files listed in the repair
+specification. Git status is evaluated with untracked files excluded, so the
+five protected untracked trees and older ignored caches do not make a clean
+tracked checkout fail.
+
+Every formal arm must match the frozen pre-run identity before simulation and
+again after the final step, before atomic publication. The per-arm identity
+artifact records the frozen, pre-run and post-run identities and their hashes.
+A changed HEAD, tracked file, runtime identity, or critical-file hash blocks
+publication. The two first-pair arms must contain byte-identical identity
+records. The first-pair engineering receipt binds the pre-run audit hash, Git
+HEAD, both completed-receipt hashes, both source-identity hashes, resource
+measurements, pair identity and protected-file result.
+
+The `first-pair` return value, CLI JSON and engineering receipt contain only
+engineering state and resource fields. They do not contain a nested summary,
+event data, endpoint values, delivery or pickup data, role data, trail metrics,
+or recovery outcomes. Each arm's scientific `summary.json` remains inside its
+immutable run directory and is covered by that arm's completed receipt.
+
+`remaining` additionally requires
+`expansion_authorisation.json`, which a later Stage 3C-F review may create. The
+file must approve Stage 3C-F and exactly bind the first-pair engineering
+receipt, both completed arm receipts, frozen Git HEAD, frozen pre-run audit,
+the 19 remaining seeds, and arm order B0 then C. Missing, malformed, stale, or
+extra authorisation content fails before any simulation is constructed. This
+engineering stage creates no authorisation file.
 
 ## Pair, identity, and navigation validation
 

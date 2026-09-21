@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -19,6 +20,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from scalar_baseline.stage3c import (  # noqa: E402
     ARMS,
     CONFIRMATORY_SEEDS,
+    EvidenceError,
     FORMAL_RESULTS_RELATIVE,
     confirmatory_config,
     create_first_pair_engineering_receipt,
@@ -26,7 +28,7 @@ from scalar_baseline.stage3c import (  # noqa: E402
     initialise_study_protection,
     run_arm_atomic,
     schedule_prefix_audit,
-    validate_first_pair_engineering_receipt,
+    validate_expansion_authorisation,
     validate_prerun_engineering_audit,
     verify_study_protection,
 )
@@ -53,29 +55,48 @@ def dry_run() -> dict:
     }
 
 
-def first_pair(study_root: Path) -> dict:
+def first_pair(
+    study_root: Path,
+    *,
+    pair_configs=None,
+    identity_provider=None,
+) -> dict:
+    kwargs = {"identity_provider": identity_provider} if identity_provider else {}
+    configs = pair_configs or {
+        arm: confirmatory_config(CONFIRMATORY_SEEDS[0], arm) for arm in ARMS
+    }
     protection_before = initialise_study_protection(study_root, ROOT)
-    engineering_gate = initialise_prerun_engineering_audit(study_root, ROOT)
-    seed = CONFIRMATORY_SEEDS[0]
+    if not protection_before["pass"]:
+        raise EvidenceError("protected-file validation failed before first pair")
+    initialise_prerun_engineering_audit(study_root, ROOT, **kwargs)
+    seed = configs["B0"].seed
     arms = {}
     for arm in ARMS:
         arms[arm] = run_arm_atomic(
             study_root,
-            confirmatory_config(seed, arm),
+            configs[arm],
             ROOT,
             retain_observations=False,
+            **kwargs,
         )
     protection_after = verify_study_protection(study_root, ROOT)
-    receipt = create_first_pair_engineering_receipt(study_root, ROOT)
-    return {"mode": "first-pair", "seed": seed, "engineering_gate": engineering_gate,
-            "arms": arms,
-            "protection_before": protection_before, "protection_after": protection_after,
-            "receipt": receipt}
+    if not protection_after["pass"]:
+        raise EvidenceError("protected-file validation failed after first pair")
+    receipt = create_first_pair_engineering_receipt(
+        study_root, ROOT, pair_configs=configs, **kwargs
+    )
+    return {
+        **receipt,
+        "first_pair_engineering_receipt_sha256": (
+            hashlib.sha256(
+                (study_root / "first_pair_engineering_receipt.json").read_bytes()
+            ).hexdigest()
+        ),
+    }
 
 
 def remaining(study_root: Path) -> dict:
-    validate_prerun_engineering_audit(study_root, ROOT)
-    gate = validate_first_pair_engineering_receipt(study_root, ROOT)
+    gate = validate_expansion_authorisation(study_root, ROOT)
     completed = []
     for seed in CONFIRMATORY_SEEDS[1:]:
         for arm in ARMS:

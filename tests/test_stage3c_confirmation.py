@@ -1,12 +1,16 @@
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import asdict, replace
 import hashlib
 import importlib.util
 import inspect
+import io
 import json
 import math
 from pathlib import Path
+import subprocess
+from contextlib import redirect_stdout
 
 import numpy as np
 import pytest
@@ -17,6 +21,7 @@ from scalar_baseline.stage3c import (
     ARMS,
     CAPPED_RECOVERY_TIME,
     CONFIRMATORY_SEEDS,
+    EXECUTION_IDENTITY_FILES,
     OBSERVATION_END,
     RELOCATION_STEP,
     STAGE3B_PREFIX_STEPS,
@@ -29,6 +34,7 @@ from scalar_baseline.stage3c import (
     compute_capped_recovery_time,
     confirmatory_config,
     create_first_pair_engineering_receipt,
+    expected_expansion_authorisation,
     fixture_config,
     initialise_prerun_engineering_audit,
     initialise_study_protection,
@@ -44,6 +50,7 @@ from scalar_baseline.stage3c import (
     static_resource_estimate,
     validate_complete_study,
     validate_confirmatory_config,
+    validate_expansion_authorisation,
     validate_first_pair_engineering_receipt,
     validate_run_directory,
     verify_protected_snapshot,
@@ -56,6 +63,32 @@ from scalar_baseline.stage3c_analysis import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
+STABLE_EXECUTION_IDENTITY = stage3c._source_identity(ROOT)
+STABLE_EXECUTION_IDENTITY["git"]["tracked_clean"] = True
+STABLE_EXECUTION_IDENTITY["git"]["tracked_status"] = []
+
+
+def stable_identity(_repository_root: Path) -> dict:
+    return deepcopy(STABLE_EXECUTION_IDENTITY)
+
+
+def write_synthetic_prerun(root: Path, identity: dict | None = None) -> Path:
+    path = root / "prerun_engineering_audit.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(
+            {
+                "pass": True,
+                "execution_identity": identity or stable_identity(ROOT),
+                "scope": {
+                    "formal_simulation_steps_executed": 0,
+                    "confirmatory_seeds_run": 0,
+                },
+            }
+        )
+        + "\n"
+    )
+    return path
 
 
 def synthetic_rows(*, b0=10_000, candidate=7_000, pre_b0=10, pre_c=8):
@@ -77,7 +110,14 @@ def _hash(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def write_synthetic_completed_run(root: Path, config, *, b0_time=10_000, c_time=7_000):
+def write_synthetic_completed_run(
+    root: Path,
+    config,
+    *,
+    b0_time=10_000,
+    c_time=7_000,
+    execution_identity: dict | None = None,
+):
     """Create temporary synthetic evidence; never execute a formal simulation."""
     folder = root / "runs" / str(config.seed) / config.arm
     folder.mkdir(parents=True)
@@ -92,12 +132,14 @@ def write_synthetic_completed_run(root: Path, config, *, b0_time=10_000, c_time=
         "non_delivery": capped == CAPPED_RECOVERY_TIME,
         "pre_relocation_A_deliveries": 10 if config.arm == "B0" else 8,
     }
+    identity = execution_identity or stable_identity(ROOT)
+    identity_record = stage3c._arm_identity_record(identity, identity, identity)
     data = {
         "config.json": config.as_record(),
         "summary.json": summary,
         "timeseries_100step.json": [],
         "ledger_events.json": [],
-        "source_identity.json": stage3c._source_identity(ROOT),
+        "source_identity.json": identity_record,
         "resources.json": {
             "pass": True,
             "cpu_seconds": 0.1,
@@ -283,7 +325,8 @@ def test_atomic_publication_and_completed_validation(tmp_path):
     config = fixture_config(seed=31107, arm="C", steps=8, n_ants=1, relocation_step=4)
     result = run_arm_atomic(tmp_path, config, ROOT)
     final = tmp_path / "runs" / str(config.seed) / "C"
-    assert final.is_dir() and not result["reused"]
+    assert final.is_dir() and result["engineering_status"] == "PASS"
+    assert "summary" not in result and "validation" not in result
     assert validate_run_directory(final, config)["pass"]
     assert (final / "recovery_episodes.json").is_file()
     assert not list(final.parent.glob("*.tmp-*"))
@@ -292,7 +335,7 @@ def test_atomic_publication_and_completed_validation(tmp_path):
 def test_completed_run_reuse_and_overwrite_refusal(tmp_path):
     config = fixture_config(seed=31108, steps=6, n_ants=1, relocation_step=3)
     run_arm_atomic(tmp_path, config, ROOT)
-    assert run_arm_atomic(tmp_path, config, ROOT)["reused"]
+    assert run_arm_atomic(tmp_path, config, ROOT)["complete"] is True
     with pytest.raises(EvidenceError):
         run_arm_atomic(tmp_path, config, ROOT, reuse_completed=False)
 
@@ -330,12 +373,258 @@ def test_first_pair_gate_refuses_missing_receipt(tmp_path):
 def test_first_pair_receipt_validates_synthetic_engineering_evidence(tmp_path):
     seed = CONFIRMATORY_SEEDS[0]
     initialise_study_protection(tmp_path, ROOT)
-    initialise_prerun_engineering_audit(tmp_path, ROOT)
+    write_synthetic_prerun(tmp_path)
     for arm in ARMS:
         write_synthetic_completed_run(tmp_path, confirmatory_config(seed, arm))
-    receipt = create_first_pair_engineering_receipt(tmp_path, ROOT)
-    assert receipt["scientific_outcomes_inspected"] is False
-    assert validate_first_pair_engineering_receipt(tmp_path, ROOT)["pass"]
+    receipt = create_first_pair_engineering_receipt(
+        tmp_path, ROOT, identity_provider=stable_identity
+    )
+    assert "scientific_outcomes_inspected" not in receipt
+    assert receipt["prerun_audit_sha256"] == _hash(
+        tmp_path / "prerun_engineering_audit.json"
+    )
+    for arm in ARMS:
+        assert receipt["arms"][arm]["completed_receipt_sha256"] == _hash(
+            tmp_path / "runs" / str(seed) / arm / "completed_receipt.json"
+        )
+    assert validate_first_pair_engineering_receipt(
+        tmp_path, ROOT, identity_provider=stable_identity
+    )["pass"]
+
+
+def test_execution_identity_covers_git_runtime_platform_and_20_files():
+    identity = stage3c._source_identity(ROOT)
+    assert identity["schema"] == "stage3c-execution-identity-v1"
+    assert identity["git"]["head"] and identity["git"]["branch"]
+    assert set(identity["runtime"]) == {
+        "python_version",
+        "python_implementation",
+        "numpy_version",
+        "platform",
+    }
+    assert tuple(identity["files"]) == EXECUTION_IDENTITY_FILES
+    assert len(identity["files"]) == 20
+    assert all(record["bytes"] >= 0 and len(record["sha256"]) == 64
+               for record in identity["files"].values())
+
+
+def _git(repo: Path, *args: str) -> None:
+    subprocess.run(("git", "-C", str(repo), *args), check=True, capture_output=True)
+
+
+def test_git_identity_ignores_untracked_and_ignored_but_rejects_tracked_change(tmp_path):
+    repo = tmp_path / "identity-repo"
+    repo.mkdir()
+    for relative in EXECUTION_IDENTITY_FILES:
+        path = repo / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(f"fixture:{relative}\n")
+    (repo / ".gitignore").write_text("ignored/\n")
+    _git(repo, "init", "-b", "identity-test")
+    _git(repo, "config", "user.name", "Stage3C Test")
+    _git(repo, "config", "user.email", "stage3c@example.invalid")
+    _git(repo, "add", ".")
+    _git(repo, "commit", "-m", "identity fixture")
+
+    frozen = stage3c._source_identity(repo)
+    assert frozen["git"]["tracked_clean"] is True
+    for relative in (
+        ".tmp_progress_report/item.txt",
+        "from_prof/item.txt",
+        "output/item.txt",
+        "reports/item.txt",
+        "results/stage2c_multiseed_confirmation/item.txt",
+    ):
+        path = repo / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("untracked\n")
+    (repo / "ignored/item.txt").parent.mkdir(parents=True, exist_ok=True)
+    (repo / "ignored/item.txt").write_text("ignored\n")
+    assert stage3c._source_identity(repo) == frozen
+
+    (repo / "requirements.txt").write_text("tracked mutation\n")
+    dirty = stage3c._source_identity(repo)
+    assert dirty["git"]["tracked_clean"] is False
+    with pytest.raises(EvidenceError, match="clean tracked"):
+        initialise_prerun_engineering_audit(tmp_path / "study", repo)
+
+    audit_root = tmp_path / "frozen-audit"
+    write_synthetic_prerun(audit_root, frozen)
+    _git(repo, "add", "requirements.txt")
+    _git(repo, "commit", "-m", "change execution identity")
+    assert stage3c._source_identity(repo)["git"]["head"] != frozen["git"]["head"]
+    with pytest.raises(EvidenceError, match="source changed"):
+        stage3c.validate_prerun_engineering_audit(audit_root, repo)
+
+
+def test_arm_publication_fails_if_identity_changes_during_execution(tmp_path):
+    identities = [stable_identity(ROOT), stable_identity(ROOT)]
+    identities[1]["git"]["head"] = "f" * 40
+
+    def changing_identity(_repository_root):
+        return deepcopy(identities.pop(0))
+
+    config = fixture_config(seed=31111, steps=5, n_ants=1, relocation_step=2)
+    with pytest.raises(EvidenceError, match="changed during"):
+        run_arm_atomic(
+            tmp_path, config, ROOT, identity_provider=changing_identity
+        )
+    assert not (tmp_path / "runs" / str(config.seed) / config.arm).exists()
+
+
+def test_first_pair_rejects_B0_C_execution_identity_mismatch(tmp_path):
+    seed = CONFIRMATORY_SEEDS[0]
+    write_synthetic_prerun(tmp_path)
+    write_synthetic_completed_run(tmp_path, confirmatory_config(seed, "B0"))
+    changed = stable_identity(ROOT)
+    changed["runtime"]["numpy_version"] = "identity-mismatch-fixture"
+    write_synthetic_completed_run(
+        tmp_path,
+        confirmatory_config(seed, "C"),
+        execution_identity=changed,
+    )
+    with pytest.raises(EvidenceError, match="execution identity"):
+        create_first_pair_engineering_receipt(
+            tmp_path, ROOT, identity_provider=stable_identity
+        )
+
+
+def _load_runner():
+    script = ROOT / "scripts/run_stage3c.py"
+    spec = importlib.util.spec_from_file_location("stage3c_runner_e1_test", script)
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
+def _assert_outcome_blind(value) -> None:
+    encoded = json.dumps(value, sort_keys=True).lower()
+    forbidden = (
+        "summary",
+        "discover",
+        "deliver",
+        "capped",
+        "non_delivery",
+        "pre_relocation",
+        "old_food",
+        "obsolete_trail",
+        "recovery_",
+        "role",
+        "pickup",
+        "scientific_outcomes_inspected",
+    )
+    assert not [term for term in forbidden if term in encoded]
+
+
+def test_actual_first_pair_return_receipt_and_cli_stdout_are_outcome_blind(
+    tmp_path, monkeypatch
+):
+    module = _load_runner()
+    seed = 31112
+    configs = {
+        arm: fixture_config(
+            seed=seed, arm=arm, steps=6, n_ants=1, relocation_step=3,
+            fixture_label="first-pair-output-blinding-fixture",
+        )
+        for arm in ARMS
+    }
+    result = module.first_pair(
+        tmp_path, pair_configs=configs, identity_provider=stable_identity
+    )
+    receipt = json.loads((tmp_path / "first_pair_engineering_receipt.json").read_text())
+    _assert_outcome_blind(result)
+    _assert_outcome_blind(receipt)
+    for arm in ARMS:
+        run_dir = tmp_path / "runs" / str(seed) / arm
+        assert (run_dir / "summary.json").is_file()
+        completed = json.loads((run_dir / "completed_receipt.json").read_text())
+        assert "summary.json" in completed["recursive_files_excluding_this_receipt"]
+
+    monkeypatch.setattr(module, "first_pair", lambda _study_root: result)
+    output = io.StringIO()
+    with redirect_stdout(output):
+        assert module.main(["first-pair", "--study-root", str(tmp_path / "cli")]) == 0
+    cli_json = json.loads(output.getvalue())
+    assert cli_json == result
+    _assert_outcome_blind(cli_json)
+
+
+def _prepare_synthetic_first_pair(root: Path) -> None:
+    seed = CONFIRMATORY_SEEDS[0]
+    initialise_study_protection(root, ROOT)
+    write_synthetic_prerun(root)
+    for arm in ARMS:
+        write_synthetic_completed_run(root, confirmatory_config(seed, arm))
+    create_first_pair_engineering_receipt(
+        root, ROOT, identity_provider=stable_identity
+    )
+
+
+def test_expansion_authorisation_fails_closed_and_exact_gate_passes(
+    tmp_path, monkeypatch
+):
+    _prepare_synthetic_first_pair(tmp_path)
+    path = tmp_path / stage3c.EXPANSION_AUTHORISATION_FILENAME
+    with pytest.raises(EvidenceError, match="requires Stage 3C-F"):
+        validate_expansion_authorisation(
+            tmp_path, ROOT, identity_provider=stable_identity
+        )
+    path.write_text("{not-json\n")
+    with pytest.raises(EvidenceError, match="corrupt"):
+        validate_expansion_authorisation(
+            tmp_path, ROOT, identity_provider=stable_identity
+        )
+
+    expected = expected_expansion_authorisation(
+        tmp_path, ROOT, identity_provider=stable_identity
+    )
+    mutations = (
+        ("first_pair_engineering_receipt_sha256", "0" * 64),
+        ("first_pair_B0_completed_receipt_sha256", "1" * 64),
+        ("frozen_execution_git_head", "2" * 40),
+        ("frozen_prerun_audit_sha256", "3" * 64),
+        ("seeds", [2026092102]),
+        ("arm_order", ["C", "B0"]),
+    )
+    for field, value in mutations:
+        candidate = deepcopy(expected)
+        candidate[field] = value
+        path.write_text(json.dumps(candidate) + "\n")
+        with pytest.raises(EvidenceError, match="does not match"):
+            validate_expansion_authorisation(
+                tmp_path, ROOT, identity_provider=stable_identity
+            )
+
+    changed_identity = stable_identity(ROOT)
+    changed_identity["git"]["head"] = "4" * 40
+    path.write_text(json.dumps(expected) + "\n")
+    with pytest.raises(EvidenceError, match="source changed"):
+        validate_expansion_authorisation(
+            tmp_path, ROOT, identity_provider=lambda _root: deepcopy(changed_identity)
+        )
+
+    monkeypatch.setattr(
+        Stage3CB0Simulation,
+        "__init__",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            AssertionError("authorisation validation started a simulation")
+        ),
+    )
+    gate = validate_expansion_authorisation(
+        tmp_path, ROOT, identity_provider=stable_identity
+    )
+    assert gate["engineering_status"] == "PASS"
+    assert gate["seeds"] == list(CONFIRMATORY_SEEDS[1:])
+
+
+def test_remaining_refuses_before_simulation_without_authorisation(tmp_path, monkeypatch):
+    module = _load_runner()
+    calls = []
+    monkeypatch.setattr(module, "run_arm_atomic", lambda *args, **kwargs: calls.append(args))
+    with pytest.raises(EvidenceError, match="Stage 3C-F"):
+        module.remaining(tmp_path)
+    assert calls == []
 
 
 def test_analyse_gate_refuses_incomplete_study(tmp_path):
@@ -345,13 +634,25 @@ def test_analyse_gate_refuses_incomplete_study(tmp_path):
         rows_from_study(tmp_path)
 
 
-def test_analyse_gate_accepts_40_synthetic_completed_records(tmp_path):
+def test_analyse_gate_accepts_40_synthetic_completed_records(tmp_path, monkeypatch):
     initialise_study_protection(tmp_path, ROOT)
-    initialise_prerun_engineering_audit(tmp_path, ROOT)
+    write_synthetic_prerun(tmp_path)
     for seed in CONFIRMATORY_SEEDS:
         for arm in ARMS:
             write_synthetic_completed_run(tmp_path, confirmatory_config(seed, arm))
-    assert validate_complete_study(tmp_path)["runs_verified"] == 40
+    assert validate_complete_study(
+        tmp_path, ROOT, identity_provider=stable_identity
+    )["runs_verified"] == 40
+    import scalar_baseline.stage3c_analysis as analysis_module
+
+    original_gate = analysis_module.validate_complete_study
+    monkeypatch.setattr(
+        analysis_module,
+        "validate_complete_study",
+        lambda study_root: original_gate(
+            study_root, ROOT, identity_provider=stable_identity
+        ),
+    )
     result = write_analysis(tmp_path)
     assert result["decision"] == "PASS"
     assert (tmp_path / "paired_primary.csv").is_file()
