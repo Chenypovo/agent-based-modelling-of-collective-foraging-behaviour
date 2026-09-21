@@ -1,0 +1,74 @@
+{
+  "scope": "Exploratory five-seed paired pilot; not confirmatory evidence.",
+  "seeds": [
+    2026091701,
+    2026091702,
+    2026091703,
+    2026091704,
+    2026091705
+  ],
+  "pairs_completed": 10,
+  "total_B_deliveries": {
+    "B0": 2,
+    "C": 1
+  },
+  "seeds_with_B_discovery": {
+    "B0": 5,
+    "C": 4
+  },
+  "seeds_with_B_delivery": {
+    "B0": 2,
+    "C": 1
+  },
+  "pre_A_deliveries": {
+    "B0": 16,
+    "C": 16
+  },
+  "pre_verified_recruitments": {
+    "B0": 12548,
+    "C": 2037
+  },
+  "pre_follower_food_arrivals": {
+    "B0": 21,
+    "C": 14
+  },
+  "direction_counts": {
+    "first_B_discovery": {
+      "negative_C_lower_or_earlier": 3,
+      "zero": 0,
+      "positive_C_higher_or_later": 1,
+      "comparable_pairs": 4
+    },
+    "capped_recovery_time": {
+      "negative_C_lower_or_earlier": 1,
+      "zero": 3,
+      "positive_C_higher_or_later": 1,
+      "comparable_pairs": 5
+    },
+    "B_deliveries": {
+      "negative_C_lower_or_earlier": 1,
+      "zero": 4,
+      "positive_C_higher_or_later": 0,
+      "comparable_pairs": 5
+    },
+    "pre_A_deliveries": {
+      "negative_C_lower_or_earlier": 2,
+      "zero": 2,
+      "positive_C_higher_or_later": 1,
+      "comparable_pairs": 5
+    }
+  },
+  "recovery": {
+    "episodes": 25270,
+    "reacquired": 18671,
+    "timeouts": 6591,
+    "food_contacts": 8,
+    "maximum_duration": 24,
+    "overall_reacquisition_rate": 0.7388603086664028,
+    "episode_B_discovery_within_100_steps": 40,
+    "episode_B_delivery_within_100_steps": 0
+  },
+  "statistical_tests": null,
+  "confirmatory_claim": false,
+  "descriptive_direction": "Mixed and overall not favourable to C: C found B earlier in 3/4 directly comparable pairs, but missed B in one seed; B0 completed B delivery in 2/5 seeds versus C in 1/5, with totals 2 versus 1. Pre-relocation A delivery totals tied 16 versus 16 but varied strongly by seed."
+}

@@ -1,0 +1,29 @@
+{
+  "bytes_excluding_manifest": 2954948,
+  "files": {
+    "summary.json": {
+      "bytes": 1886,
+      "sha256": "0741ea7ee029bb08da40252d807f499b271fb7c42a78ba10b650d26141844610"
+    },
+    "recovery_episodes.json": {
+      "bytes": 2425119,
+      "sha256": "4b34b8866ded9c1b29c3d9b2fbc90596936f0bb2b4a4d49a3cf74b9921d4b873"
+    },
+    "timeseries_100step.json": {
+      "bytes": 52391,
+      "sha256": "e1f49c5383ec79ea7fd236f762ce496e7d51d941d2d16306fc69c4501b708e87"
+    },
+    "config.json": {
+      "bytes": 803,
+      "sha256": "e37b05754b48249b2977e552f32f7f455d9b7777639ab9d040aeae87f9db5f05"
+    },
+    "ledger_events.json": {
+      "bytes": 2013,
+      "sha256": "a458b004143c8badcd6849de344cc5292bf00ee9660efb17c12d1c8239fafc93"
+    },
+    "field_snapshots.npz": {
+      "bytes": 472736,
+      "sha256": "db04eefe9b96e1d61d888625bd9b96ce6fde99faa889b26065884ce58d26824f"
+    }
+  }
+}

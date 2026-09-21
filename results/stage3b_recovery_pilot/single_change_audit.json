@@ -1,0 +1,18 @@
+{
+  "pass": true,
+  "seed": 2026091701,
+  "shared_identity": {
+    "initial_agents": true,
+    "initial_field": true,
+    "FCRW_schedule": true,
+    "follower_noise_schedule": true,
+    "recovery_side_schedule": true,
+    "environment": true,
+    "pheromone": true,
+    "configuration": true
+  },
+  "only_mechanism_difference": "C replaces follower loss-to-FCRW branch with frozen finite recovery; B0 does not read side schedule",
+  "B0_recovery_side_reads_in_movement": false,
+  "B0_source_class": "ObservedSimulation unchanged at commit 658e394",
+  "C_recovery_duration": 24
+}

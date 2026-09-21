@@ -1,0 +1,39 @@
+[
+  {
+    "time": 2691,
+    "event": "pickup",
+    "ant_id": 64,
+    "source": "A"
+  },
+  {
+    "time": 3122,
+    "event": "pickup",
+    "ant_id": 96,
+    "source": "A"
+  },
+  {
+    "time": 5381,
+    "event": "delivery",
+    "ant_id": 64,
+    "source": "A"
+  },
+  {
+    "time": 6000,
+    "event": "relocation",
+    "carried_a": [
+      96
+    ]
+  },
+  {
+    "time": 6243,
+    "event": "delivery",
+    "ant_id": 96,
+    "source": "A"
+  },
+  {
+    "time": 7415,
+    "event": "pickup",
+    "ant_id": 56,
+    "source": "B"
+  }
+]

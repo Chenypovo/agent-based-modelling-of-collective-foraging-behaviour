@@ -1,0 +1,186 @@
+{
+  "pass": true,
+  "seed": 2026091701,
+  "checks": {
+    "B0_complete": true,
+    "C_complete": true,
+    "B0_pre_relocation_ledger_matches_Stage3A": true,
+    "B0_first_A_discovery_matches_Stage3A": true,
+    "B0_first_A_delivery_matches_Stage3A": true,
+    "C_recovery_triggered": true,
+    "C_episode_partition": true,
+    "no_anchor_fallback": true,
+    "resource_limits": true,
+    "prerun_single_change": true,
+    "prerun_prefix_replay": true,
+    "prerun_isolation": true,
+    "B0_files_under_50MiB": true,
+    "C_files_under_50MiB": true
+  },
+  "advisory_storage_targets": {
+    "B0_output_under_10MiB_target": true,
+    "C_output_under_10MiB_target": true
+  },
+  "descriptive_first_pair": {
+    "B0": {
+      "seed": 2026091701,
+      "arm": "B0",
+      "status": "complete",
+      "error": null,
+      "steps_completed": 12000,
+      "first_A_discovery": 509,
+      "first_A_delivery": 1017,
+      "pre_relocation_A_deliveries": 4,
+      "pre_relocation_verified_recruitments": 2577,
+      "pre_relocation_follower_food_arrivals": 9,
+      "pre_relocation_follower_episode_lengths": [
+        7,
+        1,
+        11,
+        26,
+        1,
+        22,
+        79,
+        34,
+        8
+      ],
+      "pre_relocation_delivery_rate_per_1000": 0.6666666666666666,
+      "pre_relocation_recovery_episodes": 0,
+      "first_B_discovery": 7137,
+      "first_B_delivery": null,
+      "B_not_discovered": false,
+      "B_not_delivered": true,
+      "B_deliveries": 0,
+      "capped_recovery_time": 6000,
+      "old_food_dwell_ant_steps": 1604,
+      "recovery_episodes": 0,
+      "recovery_reacquired": 0,
+      "recovery_timeouts": 0,
+      "recovery_food_contacts": 0,
+      "recovery_reacquisition_rate": null,
+      "anchor_fallbacks": 0,
+      "completed_cargo": {
+        "A": 11,
+        "B": 0
+      },
+      "incomplete_cargo": {
+        "66": "B",
+        "4": "B",
+        "99": "B",
+        "18": "B",
+        "78": "B",
+        "82": "B",
+        "31": "B"
+      },
+      "final_field": {
+        "time": 12000,
+        "field_sum": 10071.807773613718,
+        "positive_cells": 24779,
+        "on": {
+          "threshold": 0.5,
+          "detectable_cells": 6690,
+          "nest_food_centre_cells_connected_8": false
+        },
+        "off": {
+          "threshold": 0.25,
+          "detectable_cells": 9733,
+          "nest_food_centre_cells_connected_8": false
+        }
+      },
+      "final_state_digest": {
+        "agents_sha256": "c6a2de1d8ad990de3cc7c3a459c08df9f2bc45615a16e3ca471c113ddd5b6ee1",
+        "field_sha256": "5dc0158b59d8ff73866f70497de0464a08dd63db62b2e2e7faa84851e539b393",
+        "events_sha256": "229fddf721a525a9c8dbcbc9c20d6ce61b635a56e1b5d73ddcfa1b96c6a61930",
+        "discoveries": {
+          "A": 11,
+          "B": 7
+        },
+        "deliveries": {
+          "A": 11,
+          "B": 0
+        }
+      },
+      "wall_seconds": 16.979008166,
+      "cpu_seconds": 16.9152,
+      "peak_rss_bytes": 372002816,
+      "valid_state_every_completed_step": true
+    },
+    "C": {
+      "seed": 2026091701,
+      "arm": "C",
+      "status": "complete",
+      "error": null,
+      "steps_completed": 12000,
+      "first_A_discovery": 509,
+      "first_A_delivery": 1017,
+      "pre_relocation_A_deliveries": 1,
+      "pre_relocation_verified_recruitments": 147,
+      "pre_relocation_follower_food_arrivals": 0,
+      "pre_relocation_follower_episode_lengths": [],
+      "pre_relocation_delivery_rate_per_1000": 0.16666666666666666,
+      "pre_relocation_recovery_episodes": 333,
+      "first_B_discovery": 6879,
+      "first_B_delivery": null,
+      "B_not_discovered": false,
+      "B_not_delivered": true,
+      "B_deliveries": 0,
+      "capped_recovery_time": 6000,
+      "old_food_dwell_ant_steps": 1911,
+      "recovery_episodes": 4379,
+      "recovery_reacquired": 3271,
+      "recovery_timeouts": 1105,
+      "recovery_food_contacts": 3,
+      "recovery_reacquisition_rate": 0.7469741950216945,
+      "anchor_fallbacks": 0,
+      "completed_cargo": {
+        "A": 2,
+        "B": 0
+      },
+      "incomplete_cargo": {
+        "79": "B",
+        "86": "B",
+        "4": "B",
+        "97": "B",
+        "82": "B",
+        "33": "B",
+        "69": "B",
+        "7": "B",
+        "18": "B",
+        "35": "B"
+      },
+      "final_field": {
+        "time": 12000,
+        "field_sum": 10918.063250408835,
+        "positive_cells": 17108,
+        "on": {
+          "threshold": 0.5,
+          "detectable_cells": 7327,
+          "nest_food_centre_cells_connected_8": false
+        },
+        "off": {
+          "threshold": 0.25,
+          "detectable_cells": 10955,
+          "nest_food_centre_cells_connected_8": false
+        }
+      },
+      "final_state_digest": {
+        "agents_sha256": "d095fd9fc0a46e9909984f9b4f430eeb767e4eff315d4ec02c2b545e7762fbe2",
+        "field_sha256": "ba5cb10a9d9cf4c0046f2101f75ee70cbf8f7cf4ace8a6f4b768cd0b0e17743a",
+        "events_sha256": "4121a1248ce4b8509358a88605100fcab6e5ae47045bf6c9e0ac5bf9fb513ace",
+        "discoveries": {
+          "A": 2,
+          "B": 10
+        },
+        "deliveries": {
+          "A": 2,
+          "B": 0
+        }
+      },
+      "wall_seconds": 13.437401125000001,
+      "cpu_seconds": 13.353734,
+      "peak_rss_bytes": 384819200,
+      "valid_state_every_completed_step": true
+    }
+  },
+  "expansion_authorised_by_protocol": true
+}
