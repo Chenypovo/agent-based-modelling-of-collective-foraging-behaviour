@@ -1,0 +1,8 @@
+{
+  "schema": "stage3d-resume-identity-v1",
+  "seed": 2026092113,
+  "arm": "C",
+  "config_sha256": "d7eb6933670383e28eef5e735a821719579616d3be6fb648f4c1f2894a4a6f03",
+  "execution_identity_sha256": "83da34818b0b43cb4f72d7d9c20774ff7ba05d307b61de2f49d3ac49132f9bd5",
+  "policy": "restart unpublished deterministic arm from step zero"
+}

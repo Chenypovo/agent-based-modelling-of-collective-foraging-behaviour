@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "stage": "3D",
+  "seed": 2026092116,
+  "arm": "B0",
+  "decay_law": "hard_cutoff_cell_timer",
+  "formal": true,
+  "recursive_files_excluding_this_receipt": {
+    "config.json": {
+      "bytes": 1128,
+      "sha256": "4c529a293acc6934437b05d0c95275d5e889420355b52efc462ab288e1b7ec62"
+    },
+    "field_snapshots.npz": {
+      "bytes": 33598,
+      "sha256": "d13ade6818bdc1bc72dc58d7a32f437c212f36cfd2cf0c1ae24b4be227aedadf"
+    },
+    "integrity.json": {
+      "bytes": 181,
+      "sha256": "66c061e791cadbbf51ebe9f1e897dcb447c878226d1344bad6179382005735cc"
+    },
+    "ledger_events.json": {
+      "bytes": 2197,
+      "sha256": "5bb1d4e5741c0be53e3c92e2984ec24db5bcc88c7463f45618631daa18bcd547"
+    },
+    "resources.json": {
+      "bytes": 350,
+      "sha256": "df6eb7ff4a82278a4591dd723c51918bc91057907eaaa444050163da89a66b7f"
+    },
+    "resume_identity.json": {
+      "bytes": 336,
+      "sha256": "a4830100500101b7a46b891df67ce2cf19f6e202f4881449a7cfba1a88e2e494"
+    },
+    "source_identity.json": {
+      "bytes": 14309,
+      "sha256": "706b9d7ddcb5e9e0492273e07c01de91e3fe91758dc64ea8877db701eca3c58f"
+    },
+    "storage.json": {
+      "bytes": 1309,
+      "sha256": "72a72ae31ecfd89249e03e248e623d5ee47902f4ba90422c02db788ccdc549ee"
+    },
+    "summary.json": {
+      "bytes": 1263,
+      "sha256": "4d1a8155ce4cb7f0e76a1837ee70b9c3d853165f2ea6cf3e4a73a414d854fa09"
+    },
+    "timeseries_100step.json": {
+      "bytes": 76603,
+      "sha256": "66bb49a5633e7f2154e67ea86673431532b1c7cfeb0fcef253b24ba31883682d"
+    }
+  }
+}

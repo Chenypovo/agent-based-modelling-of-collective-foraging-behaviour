@@ -1,0 +1,97 @@
+{
+  "study_status": "prospective exploratory extension after Stage 3C",
+  "classification": "NO_CLEAR_INTERACTION",
+  "valid": true,
+  "errors": [],
+  "seeds": [
+    2026092101,
+    2026092102,
+    2026092103,
+    2026092104,
+    2026092105,
+    2026092106,
+    2026092107,
+    2026092108,
+    2026092109,
+    2026092110,
+    2026092111,
+    2026092112,
+    2026092113,
+    2026092114,
+    2026092115,
+    2026092116,
+    2026092117,
+    2026092118,
+    2026092119,
+    2026092120
+  ],
+  "cells": {
+    "exponential_B0": {
+      "mean": 7864.35,
+      "median": 7414.0,
+      "non_delivery_count": 2
+    },
+    "exponential_C": {
+      "mean": 7072.0,
+      "median": 6421.0,
+      "non_delivery_count": 0
+    },
+    "hard_cutoff_B0": {
+      "mean": 7183.2,
+      "median": 7017.5,
+      "non_delivery_count": 0
+    },
+    "hard_cutoff_C": {
+      "mean": 5982.45,
+      "median": 6764.0,
+      "non_delivery_count": 0
+    }
+  },
+  "exponential_within_law": {
+    "source": "read-only Stage 3C reuse",
+    "mean_C_minus_B0": -792.35,
+    "confidence_interval_95": [
+      -2077.5625,
+      593.3149999999997
+    ],
+    "stage3c_decision": "FAIL"
+  },
+  "hard_cutoff_within_law": {
+    "status": "descriptive",
+    "mean_C_minus_B0": -1200.75,
+    "confidence_interval_95": [
+      -2000.08,
+      -405.88125000000025
+    ]
+  },
+  "interaction": {
+    "definition": "(C-B0)_hard_cutoff - (C-B0)_exponential",
+    "mean": -408.4,
+    "confidence_interval_95": [
+      -1974.25375,
+      1022.3137499999998
+    ],
+    "direction_if_detected": null
+  },
+  "paired_bootstrap": {
+    "replicates": 10000,
+    "seed": 2026092299,
+    "resampling_unit": "complete seed-level four-cell record",
+    "percentile_method": "linear",
+    "replicate_means_data_sha256": "73ecb1be1c07aac1b7f7206c9d43f937143777aba4b37f85149a72b4d3c15cc5",
+    "replicate_means_file": "bootstrap_interaction_means.npy",
+    "replicate_means_file_sha256": "eb4b020c076f077aacaa3554a62199b8cd5e17a9ad43769fb2415133723a884d"
+  },
+  "hard_cutoff_pre_A_totals": {
+    "B0": 90,
+    "C": 67
+  },
+  "hard_cutoff_pre_A_ratio": 0.7444444444444445,
+  "thresholds": {
+    "all_40_new_hard_cutoff_arms_valid": true,
+    "all_40_reused_exponential_arms_valid": true,
+    "hard_cutoff_pre_A_ratio_at_least_0_80": false,
+    "interaction_CI_entirely_on_one_side_of_zero": false
+  },
+  "secondary_metrics_used_for_decision": false
+}

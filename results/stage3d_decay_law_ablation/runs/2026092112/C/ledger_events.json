@@ -1,0 +1,204 @@
+[
+  {
+    "time": 2012,
+    "event": "pickup",
+    "ant_id": 39,
+    "source": "A"
+  },
+  {
+    "time": 2188,
+    "event": "pickup",
+    "ant_id": 21,
+    "source": "A"
+  },
+  {
+    "time": 4023,
+    "event": "delivery",
+    "ant_id": 39,
+    "source": "A"
+  },
+  {
+    "time": 4326,
+    "event": "pickup",
+    "ant_id": 70,
+    "source": "A"
+  },
+  {
+    "time": 4375,
+    "event": "delivery",
+    "ant_id": 21,
+    "source": "A"
+  },
+  {
+    "time": 5296,
+    "event": "pickup",
+    "ant_id": 4,
+    "source": "A"
+  },
+  {
+    "time": 5460,
+    "event": "pickup",
+    "ant_id": 85,
+    "source": "A"
+  },
+  {
+    "time": 5729,
+    "event": "pickup",
+    "ant_id": 33,
+    "source": "A"
+  },
+  {
+    "time": 6000,
+    "event": "relocation",
+    "carried_a": [
+      4,
+      33,
+      70,
+      85
+    ]
+  },
+  {
+    "time": 6235,
+    "event": "pickup",
+    "ant_id": 56,
+    "source": "B"
+  },
+  {
+    "time": 6576,
+    "event": "pickup",
+    "ant_id": 89,
+    "source": "B"
+  },
+  {
+    "time": 7906,
+    "event": "pickup",
+    "ant_id": 60,
+    "source": "B"
+  },
+  {
+    "time": 8466,
+    "event": "pickup",
+    "ant_id": 61,
+    "source": "B"
+  },
+  {
+    "time": 8651,
+    "event": "delivery",
+    "ant_id": 70,
+    "source": "A"
+  },
+  {
+    "time": 9492,
+    "event": "pickup",
+    "ant_id": 87,
+    "source": "B"
+  },
+  {
+    "time": 10591,
+    "event": "delivery",
+    "ant_id": 4,
+    "source": "A"
+  },
+  {
+    "time": 10919,
+    "event": "delivery",
+    "ant_id": 85,
+    "source": "A"
+  },
+  {
+    "time": 10948,
+    "event": "pickup",
+    "ant_id": 45,
+    "source": "B"
+  },
+  {
+    "time": 11457,
+    "event": "delivery",
+    "ant_id": 33,
+    "source": "A"
+  },
+  {
+    "time": 11840,
+    "event": "pickup",
+    "ant_id": 86,
+    "source": "B"
+  },
+  {
+    "time": 12024,
+    "event": "pickup",
+    "ant_id": 70,
+    "source": "B"
+  },
+  {
+    "time": 12469,
+    "event": "delivery",
+    "ant_id": 56,
+    "source": "B"
+  },
+  {
+    "time": 12581,
+    "event": "pickup",
+    "ant_id": 50,
+    "source": "B"
+  },
+  {
+    "time": 12610,
+    "event": "pickup",
+    "ant_id": 16,
+    "source": "B"
+  },
+  {
+    "time": 12720,
+    "event": "pickup",
+    "ant_id": 85,
+    "source": "B"
+  },
+  {
+    "time": 12792,
+    "event": "pickup",
+    "ant_id": 82,
+    "source": "B"
+  },
+  {
+    "time": 13151,
+    "event": "delivery",
+    "ant_id": 89,
+    "source": "B"
+  },
+  {
+    "time": 13741,
+    "event": "delivery",
+    "ant_id": 70,
+    "source": "B"
+  },
+  {
+    "time": 14176,
+    "event": "pickup",
+    "ant_id": 64,
+    "source": "B"
+  },
+  {
+    "time": 14519,
+    "event": "delivery",
+    "ant_id": 85,
+    "source": "B"
+  },
+  {
+    "time": 15450,
+    "event": "pickup",
+    "ant_id": 56,
+    "source": "B"
+  },
+  {
+    "time": 15811,
+    "event": "delivery",
+    "ant_id": 60,
+    "source": "B"
+  },
+  {
+    "time": 16889,
+    "event": "delivery",
+    "ant_id": 61,
+    "source": "B"
+  }
+]

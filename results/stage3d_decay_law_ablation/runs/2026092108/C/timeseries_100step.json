@@ -1,0 +1,3962 @@
+[
+  {
+    "time": 100,
+    "roles": {
+      "fcrw": 100,
+      "follower": 0,
+      "transporter": 0,
+      "recovery": 0
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 0.0,
+    "obsolete_trail_cells_off": 0,
+    "obsolete_trail_cells_on": 0,
+    "discoveries": {
+      "A": 0,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 200,
+    "roles": {
+      "fcrw": 100,
+      "follower": 0,
+      "transporter": 0,
+      "recovery": 0
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 0.0,
+    "obsolete_trail_cells_off": 0,
+    "obsolete_trail_cells_on": 0,
+    "discoveries": {
+      "A": 0,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 300,
+    "roles": {
+      "fcrw": 100,
+      "follower": 0,
+      "transporter": 0,
+      "recovery": 0
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 0.0,
+    "obsolete_trail_cells_off": 0,
+    "obsolete_trail_cells_on": 0,
+    "discoveries": {
+      "A": 0,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 400,
+    "roles": {
+      "fcrw": 100,
+      "follower": 0,
+      "transporter": 0,
+      "recovery": 0
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 0.0,
+    "obsolete_trail_cells_off": 0,
+    "obsolete_trail_cells_on": 0,
+    "discoveries": {
+      "A": 0,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 500,
+    "roles": {
+      "fcrw": 100,
+      "follower": 0,
+      "transporter": 0,
+      "recovery": 0
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 0.0,
+    "obsolete_trail_cells_off": 0,
+    "obsolete_trail_cells_on": 0,
+    "discoveries": {
+      "A": 0,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 600,
+    "roles": {
+      "fcrw": 100,
+      "follower": 0,
+      "transporter": 0,
+      "recovery": 0
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 0.0,
+    "obsolete_trail_cells_off": 0,
+    "obsolete_trail_cells_on": 0,
+    "discoveries": {
+      "A": 0,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 700,
+    "roles": {
+      "fcrw": 100,
+      "follower": 0,
+      "transporter": 0,
+      "recovery": 0
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 0.0,
+    "obsolete_trail_cells_off": 0,
+    "obsolete_trail_cells_on": 0,
+    "discoveries": {
+      "A": 0,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 800,
+    "roles": {
+      "fcrw": 100,
+      "follower": 0,
+      "transporter": 0,
+      "recovery": 0
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 0.0,
+    "obsolete_trail_cells_off": 0,
+    "obsolete_trail_cells_on": 0,
+    "discoveries": {
+      "A": 0,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 900,
+    "roles": {
+      "fcrw": 100,
+      "follower": 0,
+      "transporter": 0,
+      "recovery": 0
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 0.0,
+    "obsolete_trail_cells_off": 0,
+    "obsolete_trail_cells_on": 0,
+    "discoveries": {
+      "A": 0,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 1000,
+    "roles": {
+      "fcrw": 99,
+      "follower": 0,
+      "transporter": 1,
+      "recovery": 0
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 4.0,
+    "obsolete_trail_cells_off": 3,
+    "obsolete_trail_cells_on": 3,
+    "discoveries": {
+      "A": 1,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 1100,
+    "roles": {
+      "fcrw": 97,
+      "follower": 0,
+      "transporter": 2,
+      "recovery": 1
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 6.0,
+    "obsolete_trail_cells_off": 3,
+    "obsolete_trail_cells_on": 3,
+    "discoveries": {
+      "A": 2,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 1200,
+    "roles": {
+      "fcrw": 95,
+      "follower": 1,
+      "transporter": 2,
+      "recovery": 2
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 6.0,
+    "obsolete_trail_cells_off": 3,
+    "obsolete_trail_cells_on": 3,
+    "discoveries": {
+      "A": 2,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 1300,
+    "roles": {
+      "fcrw": 97,
+      "follower": 1,
+      "transporter": 2,
+      "recovery": 0
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 6.0,
+    "obsolete_trail_cells_off": 3,
+    "obsolete_trail_cells_on": 3,
+    "discoveries": {
+      "A": 2,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 1400,
+    "roles": {
+      "fcrw": 93,
+      "follower": 2,
+      "transporter": 3,
+      "recovery": 2
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 10.0,
+    "obsolete_trail_cells_off": 3,
+    "obsolete_trail_cells_on": 3,
+    "discoveries": {
+      "A": 3,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 1500,
+    "roles": {
+      "fcrw": 91,
+      "follower": 2,
+      "transporter": 3,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 10.0,
+    "obsolete_trail_cells_off": 3,
+    "obsolete_trail_cells_on": 3,
+    "discoveries": {
+      "A": 3,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 1600,
+    "roles": {
+      "fcrw": 91,
+      "follower": 4,
+      "transporter": 3,
+      "recovery": 2
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 27.0,
+    "obsolete_trail_cells_off": 13,
+    "obsolete_trail_cells_on": 13,
+    "discoveries": {
+      "A": 3,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 1700,
+    "roles": {
+      "fcrw": 89,
+      "follower": 4,
+      "transporter": 3,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 27.0,
+    "obsolete_trail_cells_off": 13,
+    "obsolete_trail_cells_on": 13,
+    "discoveries": {
+      "A": 3,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 1800,
+    "roles": {
+      "fcrw": 87,
+      "follower": 6,
+      "transporter": 3,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 36.0,
+    "obsolete_trail_cells_off": 19,
+    "obsolete_trail_cells_on": 19,
+    "discoveries": {
+      "A": 3,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    }
+  },
+  {
+    "time": 1900,
+    "roles": {
+      "fcrw": 86,
+      "follower": 7,
+      "transporter": 2,
+      "recovery": 5
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 43.0,
+    "obsolete_trail_cells_off": 23,
+    "obsolete_trail_cells_on": 23,
+    "discoveries": {
+      "A": 3,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 1,
+      "B": 0
+    }
+  },
+  {
+    "time": 2000,
+    "roles": {
+      "fcrw": 86,
+      "follower": 3,
+      "transporter": 3,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 46.0,
+    "obsolete_trail_cells_off": 24,
+    "obsolete_trail_cells_on": 24,
+    "discoveries": {
+      "A": 4,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 1,
+      "B": 0
+    }
+  },
+  {
+    "time": 2100,
+    "roles": {
+      "fcrw": 88,
+      "follower": 6,
+      "transporter": 3,
+      "recovery": 3
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 60.0,
+    "obsolete_trail_cells_off": 32,
+    "obsolete_trail_cells_on": 32,
+    "discoveries": {
+      "A": 4,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 1,
+      "B": 0
+    }
+  },
+  {
+    "time": 2200,
+    "roles": {
+      "fcrw": 88,
+      "follower": 4,
+      "transporter": 2,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 63.0,
+    "obsolete_trail_cells_off": 33,
+    "obsolete_trail_cells_on": 33,
+    "discoveries": {
+      "A": 4,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 2,
+      "B": 0
+    }
+  },
+  {
+    "time": 2300,
+    "roles": {
+      "fcrw": 87,
+      "follower": 7,
+      "transporter": 2,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 63.0,
+    "obsolete_trail_cells_off": 33,
+    "obsolete_trail_cells_on": 33,
+    "discoveries": {
+      "A": 4,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 2,
+      "B": 0
+    }
+  },
+  {
+    "time": 2400,
+    "roles": {
+      "fcrw": 87,
+      "follower": 5,
+      "transporter": 2,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 63.0,
+    "obsolete_trail_cells_off": 33,
+    "obsolete_trail_cells_on": 33,
+    "discoveries": {
+      "A": 4,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 2,
+      "B": 0
+    }
+  },
+  {
+    "time": 2500,
+    "roles": {
+      "fcrw": 89,
+      "follower": 5,
+      "transporter": 2,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 63.0,
+    "obsolete_trail_cells_off": 33,
+    "obsolete_trail_cells_on": 33,
+    "discoveries": {
+      "A": 4,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 2,
+      "B": 0
+    }
+  },
+  {
+    "time": 2600,
+    "roles": {
+      "fcrw": 89,
+      "follower": 6,
+      "transporter": 3,
+      "recovery": 2
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 69.0,
+    "obsolete_trail_cells_off": 33,
+    "obsolete_trail_cells_on": 33,
+    "discoveries": {
+      "A": 5,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 2,
+      "B": 0
+    }
+  },
+  {
+    "time": 2700,
+    "roles": {
+      "fcrw": 90,
+      "follower": 6,
+      "transporter": 2,
+      "recovery": 2
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 70.0,
+    "obsolete_trail_cells_off": 33,
+    "obsolete_trail_cells_on": 33,
+    "discoveries": {
+      "A": 5,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 0
+    }
+  },
+  {
+    "time": 2800,
+    "roles": {
+      "fcrw": 85,
+      "follower": 9,
+      "transporter": 3,
+      "recovery": 3
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 93.0,
+    "obsolete_trail_cells_off": 46,
+    "obsolete_trail_cells_on": 46,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 0
+    }
+  },
+  {
+    "time": 2900,
+    "roles": {
+      "fcrw": 89,
+      "follower": 5,
+      "transporter": 3,
+      "recovery": 3
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 110.0,
+    "obsolete_trail_cells_off": 56,
+    "obsolete_trail_cells_on": 56,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 0
+    }
+  },
+  {
+    "time": 3000,
+    "roles": {
+      "fcrw": 90,
+      "follower": 2,
+      "transporter": 3,
+      "recovery": 5
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 123.0,
+    "obsolete_trail_cells_off": 61,
+    "obsolete_trail_cells_on": 61,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 0
+    }
+  },
+  {
+    "time": 3100,
+    "roles": {
+      "fcrw": 87,
+      "follower": 6,
+      "transporter": 3,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 134.0,
+    "obsolete_trail_cells_off": 65,
+    "obsolete_trail_cells_on": 65,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 0
+    }
+  },
+  {
+    "time": 3200,
+    "roles": {
+      "fcrw": 86,
+      "follower": 4,
+      "transporter": 3,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 134.0,
+    "obsolete_trail_cells_off": 65,
+    "obsolete_trail_cells_on": 65,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 0
+    }
+  },
+  {
+    "time": 3300,
+    "roles": {
+      "fcrw": 82,
+      "follower": 10,
+      "transporter": 3,
+      "recovery": 5
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 142.0,
+    "obsolete_trail_cells_off": 71,
+    "obsolete_trail_cells_on": 71,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 0
+    }
+  },
+  {
+    "time": 3400,
+    "roles": {
+      "fcrw": 83,
+      "follower": 5,
+      "transporter": 3,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 153.0,
+    "obsolete_trail_cells_off": 76,
+    "obsolete_trail_cells_on": 76,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 0
+    }
+  },
+  {
+    "time": 3500,
+    "roles": {
+      "fcrw": 80,
+      "follower": 12,
+      "transporter": 3,
+      "recovery": 5
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 183.0,
+    "obsolete_trail_cells_off": 91,
+    "obsolete_trail_cells_on": 91,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 0
+    }
+  },
+  {
+    "time": 3600,
+    "roles": {
+      "fcrw": 81,
+      "follower": 9,
+      "transporter": 3,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 166.0,
+    "obsolete_trail_cells_off": 81,
+    "obsolete_trail_cells_on": 81,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 0
+    }
+  },
+  {
+    "time": 3700,
+    "roles": {
+      "fcrw": 81,
+      "follower": 11,
+      "transporter": 3,
+      "recovery": 5
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 196.0,
+    "obsolete_trail_cells_off": 98,
+    "obsolete_trail_cells_on": 98,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 0
+    }
+  },
+  {
+    "time": 3800,
+    "roles": {
+      "fcrw": 77,
+      "follower": 13,
+      "transporter": 3,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 203.0,
+    "obsolete_trail_cells_off": 101,
+    "obsolete_trail_cells_on": 101,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 0
+    }
+  },
+  {
+    "time": 3900,
+    "roles": {
+      "fcrw": 74,
+      "follower": 14,
+      "transporter": 3,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 196.0,
+    "obsolete_trail_cells_off": 98,
+    "obsolete_trail_cells_on": 98,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 0
+    }
+  },
+  {
+    "time": 4000,
+    "roles": {
+      "fcrw": 75,
+      "follower": 14,
+      "transporter": 2,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 199.0,
+    "obsolete_trail_cells_off": 100,
+    "obsolete_trail_cells_on": 100,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 4,
+      "B": 0
+    }
+  },
+  {
+    "time": 4100,
+    "roles": {
+      "fcrw": 79,
+      "follower": 10,
+      "transporter": 2,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 188.0,
+    "obsolete_trail_cells_off": 94,
+    "obsolete_trail_cells_on": 94,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 4,
+      "B": 0
+    }
+  },
+  {
+    "time": 4200,
+    "roles": {
+      "fcrw": 78,
+      "follower": 12,
+      "transporter": 2,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 185.0,
+    "obsolete_trail_cells_off": 92,
+    "obsolete_trail_cells_on": 92,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 4,
+      "B": 0
+    }
+  },
+  {
+    "time": 4300,
+    "roles": {
+      "fcrw": 77,
+      "follower": 10,
+      "transporter": 2,
+      "recovery": 11
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 185.0,
+    "obsolete_trail_cells_off": 92,
+    "obsolete_trail_cells_on": 92,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 4,
+      "B": 0
+    }
+  },
+  {
+    "time": 4400,
+    "roles": {
+      "fcrw": 78,
+      "follower": 12,
+      "transporter": 2,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 185.0,
+    "obsolete_trail_cells_off": 92,
+    "obsolete_trail_cells_on": 92,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 4,
+      "B": 0
+    }
+  },
+  {
+    "time": 4500,
+    "roles": {
+      "fcrw": 79,
+      "follower": 10,
+      "transporter": 2,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 185.0,
+    "obsolete_trail_cells_off": 92,
+    "obsolete_trail_cells_on": 92,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 4,
+      "B": 0
+    }
+  },
+  {
+    "time": 4600,
+    "roles": {
+      "fcrw": 79,
+      "follower": 11,
+      "transporter": 2,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 181.0,
+    "obsolete_trail_cells_off": 91,
+    "obsolete_trail_cells_on": 91,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 4,
+      "B": 0
+    }
+  },
+  {
+    "time": 4700,
+    "roles": {
+      "fcrw": 78,
+      "follower": 11,
+      "transporter": 2,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 178.0,
+    "obsolete_trail_cells_off": 90,
+    "obsolete_trail_cells_on": 90,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 4,
+      "B": 0
+    }
+  },
+  {
+    "time": 4800,
+    "roles": {
+      "fcrw": 73,
+      "follower": 17,
+      "transporter": 2,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 160.0,
+    "obsolete_trail_cells_off": 79,
+    "obsolete_trail_cells_on": 79,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 4,
+      "B": 0
+    }
+  },
+  {
+    "time": 4900,
+    "roles": {
+      "fcrw": 73,
+      "follower": 14,
+      "transporter": 2,
+      "recovery": 11
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 166.0,
+    "obsolete_trail_cells_off": 82,
+    "obsolete_trail_cells_on": 82,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 4,
+      "B": 0
+    }
+  },
+  {
+    "time": 5000,
+    "roles": {
+      "fcrw": 72,
+      "follower": 13,
+      "transporter": 2,
+      "recovery": 13
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 164.0,
+    "obsolete_trail_cells_off": 83,
+    "obsolete_trail_cells_on": 83,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 4,
+      "B": 0
+    }
+  },
+  {
+    "time": 5100,
+    "roles": {
+      "fcrw": 78,
+      "follower": 12,
+      "transporter": 1,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 152.0,
+    "obsolete_trail_cells_off": 77,
+    "obsolete_trail_cells_on": 77,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 5,
+      "B": 0
+    }
+  },
+  {
+    "time": 5200,
+    "roles": {
+      "fcrw": 72,
+      "follower": 18,
+      "transporter": 1,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 152.0,
+    "obsolete_trail_cells_off": 77,
+    "obsolete_trail_cells_on": 77,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 5,
+      "B": 0
+    }
+  },
+  {
+    "time": 5300,
+    "roles": {
+      "fcrw": 72,
+      "follower": 17,
+      "transporter": 1,
+      "recovery": 10
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 144.0,
+    "obsolete_trail_cells_off": 71,
+    "obsolete_trail_cells_on": 71,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 5,
+      "B": 0
+    }
+  },
+  {
+    "time": 5400,
+    "roles": {
+      "fcrw": 72,
+      "follower": 19,
+      "transporter": 1,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 117.0,
+    "obsolete_trail_cells_off": 63,
+    "obsolete_trail_cells_on": 63,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 5,
+      "B": 0
+    }
+  },
+  {
+    "time": 5500,
+    "roles": {
+      "fcrw": 74,
+      "follower": 13,
+      "transporter": 0,
+      "recovery": 13
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 90.0,
+    "obsolete_trail_cells_off": 47,
+    "obsolete_trail_cells_on": 47,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 5600,
+    "roles": {
+      "fcrw": 79,
+      "follower": 12,
+      "transporter": 0,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 90.0,
+    "obsolete_trail_cells_off": 47,
+    "obsolete_trail_cells_on": 47,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 5700,
+    "roles": {
+      "fcrw": 81,
+      "follower": 12,
+      "transporter": 0,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 55.0,
+    "obsolete_trail_cells_off": 27,
+    "obsolete_trail_cells_on": 27,
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 5800,
+    "roles": {
+      "fcrw": 82,
+      "follower": 7,
+      "transporter": 1,
+      "recovery": 10
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 42.0,
+    "obsolete_trail_cells_off": 22,
+    "obsolete_trail_cells_on": 22,
+    "discoveries": {
+      "A": 7,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 5900,
+    "roles": {
+      "fcrw": 87,
+      "follower": 8,
+      "transporter": 1,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 0,
+    "obsolete_trail_scalar_mass": 49.0,
+    "obsolete_trail_cells_off": 27,
+    "obsolete_trail_cells_on": 27,
+    "discoveries": {
+      "A": 7,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 6000,
+    "roles": {
+      "fcrw": 88,
+      "follower": 4,
+      "transporter": 2,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 0,
+    "obsolete_trail_ant_steps": 1,
+    "obsolete_trail_scalar_mass": 52.0,
+    "obsolete_trail_cells_off": 29,
+    "obsolete_trail_cells_on": 29,
+    "discoveries": {
+      "A": 7,
+      "B": 1
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 6100,
+    "roles": {
+      "fcrw": 87,
+      "follower": 4,
+      "transporter": 2,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 43,
+    "obsolete_trail_ant_steps": 70,
+    "obsolete_trail_scalar_mass": 52.0,
+    "obsolete_trail_cells_off": 29,
+    "obsolete_trail_cells_on": 29,
+    "discoveries": {
+      "A": 7,
+      "B": 1
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 6200,
+    "roles": {
+      "fcrw": 88,
+      "follower": 5,
+      "transporter": 2,
+      "recovery": 5
+    },
+    "old_food_dwell_ant_steps": 45,
+    "obsolete_trail_ant_steps": 148,
+    "obsolete_trail_scalar_mass": 52.0,
+    "obsolete_trail_cells_off": 29,
+    "obsolete_trail_cells_on": 29,
+    "discoveries": {
+      "A": 7,
+      "B": 1
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 6300,
+    "roles": {
+      "fcrw": 88,
+      "follower": 3,
+      "transporter": 2,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 48,
+    "obsolete_trail_ant_steps": 234,
+    "obsolete_trail_scalar_mass": 52.0,
+    "obsolete_trail_cells_off": 29,
+    "obsolete_trail_cells_on": 29,
+    "discoveries": {
+      "A": 7,
+      "B": 1
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 6400,
+    "roles": {
+      "fcrw": 84,
+      "follower": 5,
+      "transporter": 2,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 56,
+    "obsolete_trail_ant_steps": 270,
+    "obsolete_trail_scalar_mass": 52.0,
+    "obsolete_trail_cells_off": 29,
+    "obsolete_trail_cells_on": 29,
+    "discoveries": {
+      "A": 7,
+      "B": 1
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 6500,
+    "roles": {
+      "fcrw": 83,
+      "follower": 7,
+      "transporter": 2,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 142,
+    "obsolete_trail_ant_steps": 362,
+    "obsolete_trail_scalar_mass": 52.0,
+    "obsolete_trail_cells_off": 29,
+    "obsolete_trail_cells_on": 29,
+    "discoveries": {
+      "A": 7,
+      "B": 1
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 6600,
+    "roles": {
+      "fcrw": 88,
+      "follower": 2,
+      "transporter": 2,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 158,
+    "obsolete_trail_ant_steps": 403,
+    "obsolete_trail_scalar_mass": 52.0,
+    "obsolete_trail_cells_off": 29,
+    "obsolete_trail_cells_on": 29,
+    "discoveries": {
+      "A": 7,
+      "B": 1
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 6700,
+    "roles": {
+      "fcrw": 87,
+      "follower": 3,
+      "transporter": 5,
+      "recovery": 5
+    },
+    "old_food_dwell_ant_steps": 241,
+    "obsolete_trail_ant_steps": 449,
+    "obsolete_trail_scalar_mass": 52.0,
+    "obsolete_trail_cells_off": 29,
+    "obsolete_trail_cells_on": 29,
+    "discoveries": {
+      "A": 7,
+      "B": 4
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 6800,
+    "roles": {
+      "fcrw": 82,
+      "follower": 6,
+      "transporter": 5,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 408,
+    "obsolete_trail_ant_steps": 509,
+    "obsolete_trail_scalar_mass": 52.0,
+    "obsolete_trail_cells_off": 29,
+    "obsolete_trail_cells_on": 29,
+    "discoveries": {
+      "A": 7,
+      "B": 4
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 6900,
+    "roles": {
+      "fcrw": 82,
+      "follower": 9,
+      "transporter": 5,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 421,
+    "obsolete_trail_ant_steps": 549,
+    "obsolete_trail_scalar_mass": 33.0,
+    "obsolete_trail_cells_off": 18,
+    "obsolete_trail_cells_on": 18,
+    "discoveries": {
+      "A": 7,
+      "B": 4
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 7000,
+    "roles": {
+      "fcrw": 78,
+      "follower": 7,
+      "transporter": 5,
+      "recovery": 10
+    },
+    "old_food_dwell_ant_steps": 504,
+    "obsolete_trail_ant_steps": 604,
+    "obsolete_trail_scalar_mass": 22.0,
+    "obsolete_trail_cells_off": 12,
+    "obsolete_trail_cells_on": 12,
+    "discoveries": {
+      "A": 7,
+      "B": 4
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 7100,
+    "roles": {
+      "fcrw": 80,
+      "follower": 7,
+      "transporter": 5,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 515,
+    "obsolete_trail_ant_steps": 675,
+    "obsolete_trail_scalar_mass": 45.0,
+    "obsolete_trail_cells_off": 25,
+    "obsolete_trail_cells_on": 25,
+    "discoveries": {
+      "A": 7,
+      "B": 4
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 7200,
+    "roles": {
+      "fcrw": 82,
+      "follower": 11,
+      "transporter": 5,
+      "recovery": 2
+    },
+    "old_food_dwell_ant_steps": 540,
+    "obsolete_trail_ant_steps": 693,
+    "obsolete_trail_scalar_mass": 45.0,
+    "obsolete_trail_cells_off": 25,
+    "obsolete_trail_cells_on": 25,
+    "discoveries": {
+      "A": 7,
+      "B": 4
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    }
+  },
+  {
+    "time": 7300,
+    "roles": {
+      "fcrw": 75,
+      "follower": 12,
+      "transporter": 4,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 568,
+    "obsolete_trail_ant_steps": 735,
+    "obsolete_trail_scalar_mass": 70.0,
+    "obsolete_trail_cells_off": 36,
+    "obsolete_trail_cells_on": 36,
+    "discoveries": {
+      "A": 7,
+      "B": 4
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 1
+    }
+  },
+  {
+    "time": 7400,
+    "roles": {
+      "fcrw": 77,
+      "follower": 11,
+      "transporter": 5,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 607,
+    "obsolete_trail_ant_steps": 828,
+    "obsolete_trail_scalar_mass": 115.0,
+    "obsolete_trail_cells_off": 59,
+    "obsolete_trail_cells_on": 59,
+    "discoveries": {
+      "A": 7,
+      "B": 5
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 1
+    }
+  },
+  {
+    "time": 7500,
+    "roles": {
+      "fcrw": 77,
+      "follower": 14,
+      "transporter": 5,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 668,
+    "obsolete_trail_ant_steps": 883,
+    "obsolete_trail_scalar_mass": 130.0,
+    "obsolete_trail_cells_off": 62,
+    "obsolete_trail_cells_on": 62,
+    "discoveries": {
+      "A": 7,
+      "B": 5
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 1
+    }
+  },
+  {
+    "time": 7600,
+    "roles": {
+      "fcrw": 70,
+      "follower": 16,
+      "transporter": 6,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 672,
+    "obsolete_trail_ant_steps": 973,
+    "obsolete_trail_scalar_mass": 130.0,
+    "obsolete_trail_cells_off": 62,
+    "obsolete_trail_cells_on": 62,
+    "discoveries": {
+      "A": 7,
+      "B": 6
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 1
+    }
+  },
+  {
+    "time": 7700,
+    "roles": {
+      "fcrw": 83,
+      "follower": 9,
+      "transporter": 6,
+      "recovery": 2
+    },
+    "old_food_dwell_ant_steps": 823,
+    "obsolete_trail_ant_steps": 1071,
+    "obsolete_trail_scalar_mass": 162.0,
+    "obsolete_trail_cells_off": 74,
+    "obsolete_trail_cells_on": 74,
+    "discoveries": {
+      "A": 7,
+      "B": 6
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 1
+    }
+  },
+  {
+    "time": 7800,
+    "roles": {
+      "fcrw": 75,
+      "follower": 14,
+      "transporter": 8,
+      "recovery": 3
+    },
+    "old_food_dwell_ant_steps": 858,
+    "obsolete_trail_ant_steps": 1143,
+    "obsolete_trail_scalar_mass": 173.0,
+    "obsolete_trail_cells_off": 80,
+    "obsolete_trail_cells_on": 80,
+    "discoveries": {
+      "A": 7,
+      "B": 8
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 1
+    }
+  },
+  {
+    "time": 7900,
+    "roles": {
+      "fcrw": 68,
+      "follower": 15,
+      "transporter": 8,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 903,
+    "obsolete_trail_ant_steps": 1287,
+    "obsolete_trail_scalar_mass": 166.0,
+    "obsolete_trail_cells_off": 75,
+    "obsolete_trail_cells_on": 75,
+    "discoveries": {
+      "A": 7,
+      "B": 8
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 1
+    }
+  },
+  {
+    "time": 8000,
+    "roles": {
+      "fcrw": 66,
+      "follower": 16,
+      "transporter": 9,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 908,
+    "obsolete_trail_ant_steps": 1352,
+    "obsolete_trail_scalar_mass": 184.0,
+    "obsolete_trail_cells_off": 87,
+    "obsolete_trail_cells_on": 87,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 1
+    }
+  },
+  {
+    "time": 8100,
+    "roles": {
+      "fcrw": 69,
+      "follower": 16,
+      "transporter": 9,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 996,
+    "obsolete_trail_ant_steps": 1394,
+    "obsolete_trail_scalar_mass": 185.0,
+    "obsolete_trail_cells_off": 87,
+    "obsolete_trail_cells_on": 87,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 1
+    }
+  },
+  {
+    "time": 8200,
+    "roles": {
+      "fcrw": 65,
+      "follower": 19,
+      "transporter": 9,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 996,
+    "obsolete_trail_ant_steps": 1491,
+    "obsolete_trail_scalar_mass": 236.0,
+    "obsolete_trail_cells_off": 100,
+    "obsolete_trail_cells_on": 100,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 1
+    }
+  },
+  {
+    "time": 8300,
+    "roles": {
+      "fcrw": 63,
+      "follower": 22,
+      "transporter": 9,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 998,
+    "obsolete_trail_ant_steps": 1553,
+    "obsolete_trail_scalar_mass": 256.0,
+    "obsolete_trail_cells_off": 106,
+    "obsolete_trail_cells_on": 106,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 1
+    }
+  },
+  {
+    "time": 8400,
+    "roles": {
+      "fcrw": 64,
+      "follower": 20,
+      "transporter": 8,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 1061,
+    "obsolete_trail_ant_steps": 1619,
+    "obsolete_trail_scalar_mass": 282.0,
+    "obsolete_trail_cells_off": 115,
+    "obsolete_trail_cells_on": 115,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 8500,
+    "roles": {
+      "fcrw": 65,
+      "follower": 25,
+      "transporter": 8,
+      "recovery": 2
+    },
+    "old_food_dwell_ant_steps": 1061,
+    "obsolete_trail_ant_steps": 1645,
+    "obsolete_trail_scalar_mass": 282.0,
+    "obsolete_trail_cells_off": 115,
+    "obsolete_trail_cells_on": 115,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 8600,
+    "roles": {
+      "fcrw": 64,
+      "follower": 22,
+      "transporter": 8,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 1061,
+    "obsolete_trail_ant_steps": 1669,
+    "obsolete_trail_scalar_mass": 306.0,
+    "obsolete_trail_cells_off": 130,
+    "obsolete_trail_cells_on": 130,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 8700,
+    "roles": {
+      "fcrw": 62,
+      "follower": 24,
+      "transporter": 8,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 1061,
+    "obsolete_trail_ant_steps": 1698,
+    "obsolete_trail_scalar_mass": 306.0,
+    "obsolete_trail_cells_off": 130,
+    "obsolete_trail_cells_on": 130,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 8800,
+    "roles": {
+      "fcrw": 55,
+      "follower": 26,
+      "transporter": 8,
+      "recovery": 11
+    },
+    "old_food_dwell_ant_steps": 1102,
+    "obsolete_trail_ant_steps": 1707,
+    "obsolete_trail_scalar_mass": 306.0,
+    "obsolete_trail_cells_off": 130,
+    "obsolete_trail_cells_on": 130,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 8900,
+    "roles": {
+      "fcrw": 60,
+      "follower": 27,
+      "transporter": 8,
+      "recovery": 5
+    },
+    "old_food_dwell_ant_steps": 1135,
+    "obsolete_trail_ant_steps": 1739,
+    "obsolete_trail_scalar_mass": 324.0,
+    "obsolete_trail_cells_off": 131,
+    "obsolete_trail_cells_on": 131,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 9000,
+    "roles": {
+      "fcrw": 58,
+      "follower": 24,
+      "transporter": 8,
+      "recovery": 10
+    },
+    "old_food_dwell_ant_steps": 1135,
+    "obsolete_trail_ant_steps": 1771,
+    "obsolete_trail_scalar_mass": 324.0,
+    "obsolete_trail_cells_off": 131,
+    "obsolete_trail_cells_on": 131,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 9100,
+    "roles": {
+      "fcrw": 58,
+      "follower": 24,
+      "transporter": 8,
+      "recovery": 10
+    },
+    "old_food_dwell_ant_steps": 1139,
+    "obsolete_trail_ant_steps": 1817,
+    "obsolete_trail_scalar_mass": 318.0,
+    "obsolete_trail_cells_off": 127,
+    "obsolete_trail_cells_on": 127,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 9200,
+    "roles": {
+      "fcrw": 59,
+      "follower": 29,
+      "transporter": 8,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 1178,
+    "obsolete_trail_ant_steps": 1829,
+    "obsolete_trail_scalar_mass": 318.0,
+    "obsolete_trail_cells_off": 127,
+    "obsolete_trail_cells_on": 127,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 9300,
+    "roles": {
+      "fcrw": 55,
+      "follower": 33,
+      "transporter": 8,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 1203,
+    "obsolete_trail_ant_steps": 1829,
+    "obsolete_trail_scalar_mass": 307.0,
+    "obsolete_trail_cells_off": 123,
+    "obsolete_trail_cells_on": 123,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 9400,
+    "roles": {
+      "fcrw": 55,
+      "follower": 32,
+      "transporter": 8,
+      "recovery": 5
+    },
+    "old_food_dwell_ant_steps": 1214,
+    "obsolete_trail_ant_steps": 1852,
+    "obsolete_trail_scalar_mass": 282.0,
+    "obsolete_trail_cells_off": 110,
+    "obsolete_trail_cells_on": 110,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 9500,
+    "roles": {
+      "fcrw": 57,
+      "follower": 29,
+      "transporter": 8,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 1289,
+    "obsolete_trail_ant_steps": 1926,
+    "obsolete_trail_scalar_mass": 264.0,
+    "obsolete_trail_cells_off": 102,
+    "obsolete_trail_cells_on": 102,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 9600,
+    "roles": {
+      "fcrw": 63,
+      "follower": 22,
+      "transporter": 8,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 1317,
+    "obsolete_trail_ant_steps": 1944,
+    "obsolete_trail_scalar_mass": 264.0,
+    "obsolete_trail_cells_off": 102,
+    "obsolete_trail_cells_on": 102,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 9700,
+    "roles": {
+      "fcrw": 55,
+      "follower": 23,
+      "transporter": 8,
+      "recovery": 14
+    },
+    "old_food_dwell_ant_steps": 1317,
+    "obsolete_trail_ant_steps": 1944,
+    "obsolete_trail_scalar_mass": 232.0,
+    "obsolete_trail_cells_off": 87,
+    "obsolete_trail_cells_on": 87,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 9800,
+    "roles": {
+      "fcrw": 53,
+      "follower": 26,
+      "transporter": 8,
+      "recovery": 13
+    },
+    "old_food_dwell_ant_steps": 1330,
+    "obsolete_trail_ant_steps": 1950,
+    "obsolete_trail_scalar_mass": 225.0,
+    "obsolete_trail_cells_off": 82,
+    "obsolete_trail_cells_on": 82,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 9900,
+    "roles": {
+      "fcrw": 50,
+      "follower": 32,
+      "transporter": 8,
+      "recovery": 10
+    },
+    "old_food_dwell_ant_steps": 1346,
+    "obsolete_trail_ant_steps": 1984,
+    "obsolete_trail_scalar_mass": 225.0,
+    "obsolete_trail_cells_off": 82,
+    "obsolete_trail_cells_on": 82,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 10000,
+    "roles": {
+      "fcrw": 55,
+      "follower": 27,
+      "transporter": 8,
+      "recovery": 10
+    },
+    "old_food_dwell_ant_steps": 1350,
+    "obsolete_trail_ant_steps": 2045,
+    "obsolete_trail_scalar_mass": 207.0,
+    "obsolete_trail_cells_off": 70,
+    "obsolete_trail_cells_on": 70,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 10100,
+    "roles": {
+      "fcrw": 52,
+      "follower": 32,
+      "transporter": 8,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 1350,
+    "obsolete_trail_ant_steps": 2100,
+    "obsolete_trail_scalar_mass": 207.0,
+    "obsolete_trail_cells_off": 70,
+    "obsolete_trail_cells_on": 70,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 10200,
+    "roles": {
+      "fcrw": 49,
+      "follower": 37,
+      "transporter": 8,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 1350,
+    "obsolete_trail_ant_steps": 2136,
+    "obsolete_trail_scalar_mass": 132.0,
+    "obsolete_trail_cells_off": 48,
+    "obsolete_trail_cells_on": 48,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 10300,
+    "roles": {
+      "fcrw": 50,
+      "follower": 36,
+      "transporter": 8,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 1350,
+    "obsolete_trail_ant_steps": 2183,
+    "obsolete_trail_scalar_mass": 93.0,
+    "obsolete_trail_cells_off": 34,
+    "obsolete_trail_cells_on": 34,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 10400,
+    "roles": {
+      "fcrw": 51,
+      "follower": 32,
+      "transporter": 8,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 1350,
+    "obsolete_trail_ant_steps": 2242,
+    "obsolete_trail_scalar_mass": 52.0,
+    "obsolete_trail_cells_off": 23,
+    "obsolete_trail_cells_on": 23,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 10500,
+    "roles": {
+      "fcrw": 48,
+      "follower": 39,
+      "transporter": 8,
+      "recovery": 5
+    },
+    "old_food_dwell_ant_steps": 1408,
+    "obsolete_trail_ant_steps": 2259,
+    "obsolete_trail_scalar_mass": 62.0,
+    "obsolete_trail_cells_off": 30,
+    "obsolete_trail_cells_on": 30,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 10600,
+    "roles": {
+      "fcrw": 48,
+      "follower": 34,
+      "transporter": 8,
+      "recovery": 10
+    },
+    "old_food_dwell_ant_steps": 1448,
+    "obsolete_trail_ant_steps": 2279,
+    "obsolete_trail_scalar_mass": 41.0,
+    "obsolete_trail_cells_off": 17,
+    "obsolete_trail_cells_on": 17,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 10700,
+    "roles": {
+      "fcrw": 52,
+      "follower": 28,
+      "transporter": 8,
+      "recovery": 12
+    },
+    "old_food_dwell_ant_steps": 1448,
+    "obsolete_trail_ant_steps": 2325,
+    "obsolete_trail_scalar_mass": 41.0,
+    "obsolete_trail_cells_off": 17,
+    "obsolete_trail_cells_on": 17,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 10800,
+    "roles": {
+      "fcrw": 54,
+      "follower": 29,
+      "transporter": 8,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 1472,
+    "obsolete_trail_ant_steps": 2346,
+    "obsolete_trail_scalar_mass": 41.0,
+    "obsolete_trail_cells_off": 17,
+    "obsolete_trail_cells_on": 17,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 10900,
+    "roles": {
+      "fcrw": 49,
+      "follower": 32,
+      "transporter": 8,
+      "recovery": 11
+    },
+    "old_food_dwell_ant_steps": 1476,
+    "obsolete_trail_ant_steps": 2352,
+    "obsolete_trail_scalar_mass": 10.0,
+    "obsolete_trail_cells_off": 7,
+    "obsolete_trail_cells_on": 7,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 11000,
+    "roles": {
+      "fcrw": 48,
+      "follower": 34,
+      "transporter": 8,
+      "recovery": 10
+    },
+    "old_food_dwell_ant_steps": 1476,
+    "obsolete_trail_ant_steps": 2352,
+    "obsolete_trail_scalar_mass": 10.0,
+    "obsolete_trail_cells_off": 7,
+    "obsolete_trail_cells_on": 7,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 11100,
+    "roles": {
+      "fcrw": 42,
+      "follower": 38,
+      "transporter": 8,
+      "recovery": 12
+    },
+    "old_food_dwell_ant_steps": 1495,
+    "obsolete_trail_ant_steps": 2352,
+    "obsolete_trail_scalar_mass": 10.0,
+    "obsolete_trail_cells_off": 7,
+    "obsolete_trail_cells_on": 7,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 11200,
+    "roles": {
+      "fcrw": 46,
+      "follower": 35,
+      "transporter": 8,
+      "recovery": 11
+    },
+    "old_food_dwell_ant_steps": 1495,
+    "obsolete_trail_ant_steps": 2359,
+    "obsolete_trail_scalar_mass": 10.0,
+    "obsolete_trail_cells_off": 7,
+    "obsolete_trail_cells_on": 7,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 11300,
+    "roles": {
+      "fcrw": 44,
+      "follower": 39,
+      "transporter": 8,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 1495,
+    "obsolete_trail_ant_steps": 2401,
+    "obsolete_trail_scalar_mass": 52.0,
+    "obsolete_trail_cells_off": 35,
+    "obsolete_trail_cells_on": 35,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 11400,
+    "roles": {
+      "fcrw": 51,
+      "follower": 33,
+      "transporter": 8,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 1495,
+    "obsolete_trail_ant_steps": 2435,
+    "obsolete_trail_scalar_mass": 86.0,
+    "obsolete_trail_cells_off": 57,
+    "obsolete_trail_cells_on": 57,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 2
+    }
+  },
+  {
+    "time": 11500,
+    "roles": {
+      "fcrw": 44,
+      "follower": 42,
+      "transporter": 7,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 1542,
+    "obsolete_trail_ant_steps": 2441,
+    "obsolete_trail_scalar_mass": 89.0,
+    "obsolete_trail_cells_off": 59,
+    "obsolete_trail_cells_on": 59,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 2
+    }
+  },
+  {
+    "time": 11600,
+    "roles": {
+      "fcrw": 44,
+      "follower": 40,
+      "transporter": 7,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 1542,
+    "obsolete_trail_ant_steps": 2449,
+    "obsolete_trail_scalar_mass": 89.0,
+    "obsolete_trail_cells_off": 59,
+    "obsolete_trail_cells_on": 59,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 2
+    }
+  },
+  {
+    "time": 11700,
+    "roles": {
+      "fcrw": 43,
+      "follower": 41,
+      "transporter": 7,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 1542,
+    "obsolete_trail_ant_steps": 2470,
+    "obsolete_trail_scalar_mass": 89.0,
+    "obsolete_trail_cells_off": 59,
+    "obsolete_trail_cells_on": 59,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 2
+    }
+  },
+  {
+    "time": 11800,
+    "roles": {
+      "fcrw": 47,
+      "follower": 38,
+      "transporter": 7,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 1557,
+    "obsolete_trail_ant_steps": 2479,
+    "obsolete_trail_scalar_mass": 98.0,
+    "obsolete_trail_cells_off": 65,
+    "obsolete_trail_cells_on": 65,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 2
+    }
+  },
+  {
+    "time": 11900,
+    "roles": {
+      "fcrw": 48,
+      "follower": 36,
+      "transporter": 7,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 1568,
+    "obsolete_trail_ant_steps": 2484,
+    "obsolete_trail_scalar_mass": 98.0,
+    "obsolete_trail_cells_off": 65,
+    "obsolete_trail_cells_on": 65,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 2
+    }
+  },
+  {
+    "time": 12000,
+    "roles": {
+      "fcrw": 45,
+      "follower": 37,
+      "transporter": 6,
+      "recovery": 12
+    },
+    "old_food_dwell_ant_steps": 1568,
+    "obsolete_trail_ant_steps": 2499,
+    "obsolete_trail_scalar_mass": 100.0,
+    "obsolete_trail_cells_off": 66,
+    "obsolete_trail_cells_on": 66,
+    "discoveries": {
+      "A": 7,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 3
+    }
+  },
+  {
+    "time": 12100,
+    "roles": {
+      "fcrw": 54,
+      "follower": 31,
+      "transporter": 7,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 1568,
+    "obsolete_trail_ant_steps": 2539,
+    "obsolete_trail_scalar_mass": 100.0,
+    "obsolete_trail_cells_off": 66,
+    "obsolete_trail_cells_on": 66,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 3
+    }
+  },
+  {
+    "time": 12200,
+    "roles": {
+      "fcrw": 48,
+      "follower": 33,
+      "transporter": 7,
+      "recovery": 12
+    },
+    "old_food_dwell_ant_steps": 1575,
+    "obsolete_trail_ant_steps": 2578,
+    "obsolete_trail_scalar_mass": 100.0,
+    "obsolete_trail_cells_off": 66,
+    "obsolete_trail_cells_on": 66,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 3
+    }
+  },
+  {
+    "time": 12300,
+    "roles": {
+      "fcrw": 51,
+      "follower": 31,
+      "transporter": 7,
+      "recovery": 11
+    },
+    "old_food_dwell_ant_steps": 1596,
+    "obsolete_trail_ant_steps": 2602,
+    "obsolete_trail_scalar_mass": 100.0,
+    "obsolete_trail_cells_off": 66,
+    "obsolete_trail_cells_on": 66,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 3
+    }
+  },
+  {
+    "time": 12400,
+    "roles": {
+      "fcrw": 52,
+      "follower": 27,
+      "transporter": 7,
+      "recovery": 14
+    },
+    "old_food_dwell_ant_steps": 1667,
+    "obsolete_trail_ant_steps": 2620,
+    "obsolete_trail_scalar_mass": 100.0,
+    "obsolete_trail_cells_off": 66,
+    "obsolete_trail_cells_on": 66,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 3
+    }
+  },
+  {
+    "time": 12500,
+    "roles": {
+      "fcrw": 52,
+      "follower": 28,
+      "transporter": 7,
+      "recovery": 13
+    },
+    "old_food_dwell_ant_steps": 1733,
+    "obsolete_trail_ant_steps": 2628,
+    "obsolete_trail_scalar_mass": 90.0,
+    "obsolete_trail_cells_off": 59,
+    "obsolete_trail_cells_on": 59,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 3
+    }
+  },
+  {
+    "time": 12600,
+    "roles": {
+      "fcrw": 52,
+      "follower": 30,
+      "transporter": 7,
+      "recovery": 11
+    },
+    "old_food_dwell_ant_steps": 1742,
+    "obsolete_trail_ant_steps": 2637,
+    "obsolete_trail_scalar_mass": 90.0,
+    "obsolete_trail_cells_off": 59,
+    "obsolete_trail_cells_on": 59,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 3
+    }
+  },
+  {
+    "time": 12700,
+    "roles": {
+      "fcrw": 51,
+      "follower": 34,
+      "transporter": 7,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 1744,
+    "obsolete_trail_ant_steps": 2637,
+    "obsolete_trail_scalar_mass": 90.0,
+    "obsolete_trail_cells_off": 59,
+    "obsolete_trail_cells_on": 59,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 3
+    }
+  },
+  {
+    "time": 12800,
+    "roles": {
+      "fcrw": 52,
+      "follower": 30,
+      "transporter": 7,
+      "recovery": 11
+    },
+    "old_food_dwell_ant_steps": 1803,
+    "obsolete_trail_ant_steps": 2675,
+    "obsolete_trail_scalar_mass": 90.0,
+    "obsolete_trail_cells_off": 59,
+    "obsolete_trail_cells_on": 59,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 3
+    }
+  },
+  {
+    "time": 12900,
+    "roles": {
+      "fcrw": 53,
+      "follower": 33,
+      "transporter": 7,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 1823,
+    "obsolete_trail_ant_steps": 2700,
+    "obsolete_trail_scalar_mass": 108.0,
+    "obsolete_trail_cells_off": 67,
+    "obsolete_trail_cells_on": 67,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 3
+    }
+  },
+  {
+    "time": 13000,
+    "roles": {
+      "fcrw": 50,
+      "follower": 37,
+      "transporter": 7,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 1830,
+    "obsolete_trail_ant_steps": 2700,
+    "obsolete_trail_scalar_mass": 108.0,
+    "obsolete_trail_cells_off": 67,
+    "obsolete_trail_cells_on": 67,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 3
+    }
+  },
+  {
+    "time": 13100,
+    "roles": {
+      "fcrw": 55,
+      "follower": 30,
+      "transporter": 7,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 1878,
+    "obsolete_trail_ant_steps": 2721,
+    "obsolete_trail_scalar_mass": 108.0,
+    "obsolete_trail_cells_off": 67,
+    "obsolete_trail_cells_on": 67,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 3
+    }
+  },
+  {
+    "time": 13200,
+    "roles": {
+      "fcrw": 55,
+      "follower": 31,
+      "transporter": 7,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 1978,
+    "obsolete_trail_ant_steps": 2787,
+    "obsolete_trail_scalar_mass": 126.0,
+    "obsolete_trail_cells_off": 75,
+    "obsolete_trail_cells_on": 75,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 3
+    }
+  },
+  {
+    "time": 13300,
+    "roles": {
+      "fcrw": 50,
+      "follower": 34,
+      "transporter": 5,
+      "recovery": 11
+    },
+    "old_food_dwell_ant_steps": 2023,
+    "obsolete_trail_ant_steps": 2875,
+    "obsolete_trail_scalar_mass": 94.0,
+    "obsolete_trail_cells_off": 51,
+    "obsolete_trail_cells_on": 51,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 13400,
+    "roles": {
+      "fcrw": 53,
+      "follower": 35,
+      "transporter": 5,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 2065,
+    "obsolete_trail_ant_steps": 2903,
+    "obsolete_trail_scalar_mass": 67.0,
+    "obsolete_trail_cells_off": 34,
+    "obsolete_trail_cells_on": 34,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 13500,
+    "roles": {
+      "fcrw": 52,
+      "follower": 37,
+      "transporter": 5,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 2139,
+    "obsolete_trail_ant_steps": 2907,
+    "obsolete_trail_scalar_mass": 66.0,
+    "obsolete_trail_cells_off": 33,
+    "obsolete_trail_cells_on": 33,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 13600,
+    "roles": {
+      "fcrw": 49,
+      "follower": 35,
+      "transporter": 5,
+      "recovery": 11
+    },
+    "old_food_dwell_ant_steps": 2204,
+    "obsolete_trail_ant_steps": 2956,
+    "obsolete_trail_scalar_mass": 66.0,
+    "obsolete_trail_cells_off": 33,
+    "obsolete_trail_cells_on": 33,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 13700,
+    "roles": {
+      "fcrw": 51,
+      "follower": 33,
+      "transporter": 5,
+      "recovery": 11
+    },
+    "old_food_dwell_ant_steps": 2244,
+    "obsolete_trail_ant_steps": 3011,
+    "obsolete_trail_scalar_mass": 66.0,
+    "obsolete_trail_cells_off": 33,
+    "obsolete_trail_cells_on": 33,
+    "discoveries": {
+      "A": 7,
+      "B": 10
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 13800,
+    "roles": {
+      "fcrw": 52,
+      "follower": 38,
+      "transporter": 6,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 2247,
+    "obsolete_trail_ant_steps": 3035,
+    "obsolete_trail_scalar_mass": 57.0,
+    "obsolete_trail_cells_off": 27,
+    "obsolete_trail_cells_on": 27,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 13900,
+    "roles": {
+      "fcrw": 56,
+      "follower": 32,
+      "transporter": 6,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 2255,
+    "obsolete_trail_ant_steps": 3053,
+    "obsolete_trail_scalar_mass": 57.0,
+    "obsolete_trail_cells_off": 27,
+    "obsolete_trail_cells_on": 27,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 14000,
+    "roles": {
+      "fcrw": 54,
+      "follower": 34,
+      "transporter": 6,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 2288,
+    "obsolete_trail_ant_steps": 3112,
+    "obsolete_trail_scalar_mass": 57.0,
+    "obsolete_trail_cells_off": 27,
+    "obsolete_trail_cells_on": 27,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 14100,
+    "roles": {
+      "fcrw": 50,
+      "follower": 36,
+      "transporter": 6,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 2288,
+    "obsolete_trail_ant_steps": 3150,
+    "obsolete_trail_scalar_mass": 57.0,
+    "obsolete_trail_cells_off": 27,
+    "obsolete_trail_cells_on": 27,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 14200,
+    "roles": {
+      "fcrw": 50,
+      "follower": 36,
+      "transporter": 6,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 2288,
+    "obsolete_trail_ant_steps": 3150,
+    "obsolete_trail_scalar_mass": 57.0,
+    "obsolete_trail_cells_off": 27,
+    "obsolete_trail_cells_on": 27,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 14300,
+    "roles": {
+      "fcrw": 50,
+      "follower": 35,
+      "transporter": 6,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 2288,
+    "obsolete_trail_ant_steps": 3172,
+    "obsolete_trail_scalar_mass": 57.0,
+    "obsolete_trail_cells_off": 27,
+    "obsolete_trail_cells_on": 27,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 14400,
+    "roles": {
+      "fcrw": 50,
+      "follower": 36,
+      "transporter": 6,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 2288,
+    "obsolete_trail_ant_steps": 3209,
+    "obsolete_trail_scalar_mass": 63.0,
+    "obsolete_trail_cells_off": 30,
+    "obsolete_trail_cells_on": 30,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 14500,
+    "roles": {
+      "fcrw": 57,
+      "follower": 33,
+      "transporter": 6,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 2288,
+    "obsolete_trail_ant_steps": 3268,
+    "obsolete_trail_scalar_mass": 107.0,
+    "obsolete_trail_cells_off": 51,
+    "obsolete_trail_cells_on": 51,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 14600,
+    "roles": {
+      "fcrw": 52,
+      "follower": 38,
+      "transporter": 6,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 2288,
+    "obsolete_trail_ant_steps": 3357,
+    "obsolete_trail_scalar_mass": 140.0,
+    "obsolete_trail_cells_off": 70,
+    "obsolete_trail_cells_on": 70,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 14700,
+    "roles": {
+      "fcrw": 50,
+      "follower": 37,
+      "transporter": 6,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 2288,
+    "obsolete_trail_ant_steps": 3366,
+    "obsolete_trail_scalar_mass": 140.0,
+    "obsolete_trail_cells_off": 70,
+    "obsolete_trail_cells_on": 70,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 5
+    }
+  },
+  {
+    "time": 14800,
+    "roles": {
+      "fcrw": 54,
+      "follower": 37,
+      "transporter": 5,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 2289,
+    "obsolete_trail_ant_steps": 3409,
+    "obsolete_trail_scalar_mass": 143.0,
+    "obsolete_trail_cells_off": 71,
+    "obsolete_trail_cells_on": 71,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 6
+    }
+  },
+  {
+    "time": 14900,
+    "roles": {
+      "fcrw": 55,
+      "follower": 37,
+      "transporter": 5,
+      "recovery": 3
+    },
+    "old_food_dwell_ant_steps": 2345,
+    "obsolete_trail_ant_steps": 3485,
+    "obsolete_trail_scalar_mass": 132.0,
+    "obsolete_trail_cells_off": 65,
+    "obsolete_trail_cells_on": 65,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 6
+    }
+  },
+  {
+    "time": 15000,
+    "roles": {
+      "fcrw": 50,
+      "follower": 40,
+      "transporter": 5,
+      "recovery": 5
+    },
+    "old_food_dwell_ant_steps": 2374,
+    "obsolete_trail_ant_steps": 3509,
+    "obsolete_trail_scalar_mass": 132.0,
+    "obsolete_trail_cells_off": 65,
+    "obsolete_trail_cells_on": 65,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 6
+    }
+  },
+  {
+    "time": 15100,
+    "roles": {
+      "fcrw": 57,
+      "follower": 36,
+      "transporter": 4,
+      "recovery": 3
+    },
+    "old_food_dwell_ant_steps": 2437,
+    "obsolete_trail_ant_steps": 3542,
+    "obsolete_trail_scalar_mass": 135.0,
+    "obsolete_trail_cells_off": 65,
+    "obsolete_trail_cells_on": 65,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 7
+    }
+  },
+  {
+    "time": 15200,
+    "roles": {
+      "fcrw": 52,
+      "follower": 35,
+      "transporter": 4,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 2478,
+    "obsolete_trail_ant_steps": 3571,
+    "obsolete_trail_scalar_mass": 117.0,
+    "obsolete_trail_cells_off": 56,
+    "obsolete_trail_cells_on": 56,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 7
+    }
+  },
+  {
+    "time": 15300,
+    "roles": {
+      "fcrw": 55,
+      "follower": 36,
+      "transporter": 3,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 2566,
+    "obsolete_trail_ant_steps": 3610,
+    "obsolete_trail_scalar_mass": 130.0,
+    "obsolete_trail_cells_off": 60,
+    "obsolete_trail_cells_on": 60,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 8
+    }
+  },
+  {
+    "time": 15400,
+    "roles": {
+      "fcrw": 64,
+      "follower": 25,
+      "transporter": 3,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 2613,
+    "obsolete_trail_ant_steps": 3619,
+    "obsolete_trail_scalar_mass": 130.0,
+    "obsolete_trail_cells_off": 60,
+    "obsolete_trail_cells_on": 60,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 8
+    }
+  },
+  {
+    "time": 15500,
+    "roles": {
+      "fcrw": 67,
+      "follower": 29,
+      "transporter": 3,
+      "recovery": 1
+    },
+    "old_food_dwell_ant_steps": 2672,
+    "obsolete_trail_ant_steps": 3653,
+    "obsolete_trail_scalar_mass": 130.0,
+    "obsolete_trail_cells_off": 60,
+    "obsolete_trail_cells_on": 60,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 8
+    }
+  },
+  {
+    "time": 15600,
+    "roles": {
+      "fcrw": 63,
+      "follower": 26,
+      "transporter": 3,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 2672,
+    "obsolete_trail_ant_steps": 3653,
+    "obsolete_trail_scalar_mass": 130.0,
+    "obsolete_trail_cells_off": 60,
+    "obsolete_trail_cells_on": 60,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 8
+    }
+  },
+  {
+    "time": 15700,
+    "roles": {
+      "fcrw": 60,
+      "follower": 25,
+      "transporter": 3,
+      "recovery": 12
+    },
+    "old_food_dwell_ant_steps": 2710,
+    "obsolete_trail_ant_steps": 3704,
+    "obsolete_trail_scalar_mass": 130.0,
+    "obsolete_trail_cells_off": 60,
+    "obsolete_trail_cells_on": 60,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 8
+    }
+  },
+  {
+    "time": 15800,
+    "roles": {
+      "fcrw": 65,
+      "follower": 25,
+      "transporter": 3,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 2759,
+    "obsolete_trail_ant_steps": 3739,
+    "obsolete_trail_scalar_mass": 130.0,
+    "obsolete_trail_cells_off": 60,
+    "obsolete_trail_cells_on": 60,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 8
+    }
+  },
+  {
+    "time": 15900,
+    "roles": {
+      "fcrw": 69,
+      "follower": 22,
+      "transporter": 3,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 2822,
+    "obsolete_trail_ant_steps": 3789,
+    "obsolete_trail_scalar_mass": 130.0,
+    "obsolete_trail_cells_off": 60,
+    "obsolete_trail_cells_on": 60,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 8
+    }
+  },
+  {
+    "time": 16000,
+    "roles": {
+      "fcrw": 74,
+      "follower": 13,
+      "transporter": 2,
+      "recovery": 11
+    },
+    "old_food_dwell_ant_steps": 2822,
+    "obsolete_trail_ant_steps": 3809,
+    "obsolete_trail_scalar_mass": 133.0,
+    "obsolete_trail_cells_off": 60,
+    "obsolete_trail_cells_on": 60,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 16100,
+    "roles": {
+      "fcrw": 75,
+      "follower": 16,
+      "transporter": 2,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 2823,
+    "obsolete_trail_ant_steps": 3813,
+    "obsolete_trail_scalar_mass": 133.0,
+    "obsolete_trail_cells_off": 60,
+    "obsolete_trail_cells_on": 60,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 16200,
+    "roles": {
+      "fcrw": 76,
+      "follower": 14,
+      "transporter": 2,
+      "recovery": 8
+    },
+    "old_food_dwell_ant_steps": 2823,
+    "obsolete_trail_ant_steps": 3884,
+    "obsolete_trail_scalar_mass": 133.0,
+    "obsolete_trail_cells_off": 60,
+    "obsolete_trail_cells_on": 60,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 16300,
+    "roles": {
+      "fcrw": 78,
+      "follower": 14,
+      "transporter": 2,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 2842,
+    "obsolete_trail_ant_steps": 3908,
+    "obsolete_trail_scalar_mass": 133.0,
+    "obsolete_trail_cells_off": 60,
+    "obsolete_trail_cells_on": 60,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 16400,
+    "roles": {
+      "fcrw": 78,
+      "follower": 11,
+      "transporter": 2,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 2848,
+    "obsolete_trail_ant_steps": 3923,
+    "obsolete_trail_scalar_mass": 129.0,
+    "obsolete_trail_cells_off": 58,
+    "obsolete_trail_cells_on": 58,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 16500,
+    "roles": {
+      "fcrw": 87,
+      "follower": 9,
+      "transporter": 2,
+      "recovery": 2
+    },
+    "old_food_dwell_ant_steps": 2850,
+    "obsolete_trail_ant_steps": 3941,
+    "obsolete_trail_scalar_mass": 77.0,
+    "obsolete_trail_cells_off": 34,
+    "obsolete_trail_cells_on": 34,
+    "discoveries": {
+      "A": 7,
+      "B": 11
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 16600,
+    "roles": {
+      "fcrw": 81,
+      "follower": 10,
+      "transporter": 3,
+      "recovery": 6
+    },
+    "old_food_dwell_ant_steps": 2867,
+    "obsolete_trail_ant_steps": 3941,
+    "obsolete_trail_scalar_mass": 42.0,
+    "obsolete_trail_cells_off": 13,
+    "obsolete_trail_cells_on": 13,
+    "discoveries": {
+      "A": 7,
+      "B": 12
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 16700,
+    "roles": {
+      "fcrw": 84,
+      "follower": 9,
+      "transporter": 3,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 2867,
+    "obsolete_trail_ant_steps": 3961,
+    "obsolete_trail_scalar_mass": 62.0,
+    "obsolete_trail_cells_off": 24,
+    "obsolete_trail_cells_on": 24,
+    "discoveries": {
+      "A": 7,
+      "B": 12
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 16800,
+    "roles": {
+      "fcrw": 78,
+      "follower": 12,
+      "transporter": 3,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 2877,
+    "obsolete_trail_ant_steps": 3972,
+    "obsolete_trail_scalar_mass": 71.0,
+    "obsolete_trail_cells_off": 30,
+    "obsolete_trail_cells_on": 30,
+    "discoveries": {
+      "A": 7,
+      "B": 12
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 16900,
+    "roles": {
+      "fcrw": 82,
+      "follower": 8,
+      "transporter": 5,
+      "recovery": 5
+    },
+    "old_food_dwell_ant_steps": 2962,
+    "obsolete_trail_ant_steps": 4006,
+    "obsolete_trail_scalar_mass": 94.0,
+    "obsolete_trail_cells_off": 46,
+    "obsolete_trail_cells_on": 46,
+    "discoveries": {
+      "A": 7,
+      "B": 14
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 17000,
+    "roles": {
+      "fcrw": 74,
+      "follower": 14,
+      "transporter": 5,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 3072,
+    "obsolete_trail_ant_steps": 4019,
+    "obsolete_trail_scalar_mass": 94.0,
+    "obsolete_trail_cells_off": 46,
+    "obsolete_trail_cells_on": 46,
+    "discoveries": {
+      "A": 7,
+      "B": 14
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 17100,
+    "roles": {
+      "fcrw": 74,
+      "follower": 8,
+      "transporter": 5,
+      "recovery": 13
+    },
+    "old_food_dwell_ant_steps": 3191,
+    "obsolete_trail_ant_steps": 4095,
+    "obsolete_trail_scalar_mass": 131.0,
+    "obsolete_trail_cells_off": 66,
+    "obsolete_trail_cells_on": 66,
+    "discoveries": {
+      "A": 7,
+      "B": 14
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 17200,
+    "roles": {
+      "fcrw": 75,
+      "follower": 13,
+      "transporter": 5,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 3268,
+    "obsolete_trail_ant_steps": 4187,
+    "obsolete_trail_scalar_mass": 161.0,
+    "obsolete_trail_cells_off": 85,
+    "obsolete_trail_cells_on": 85,
+    "discoveries": {
+      "A": 7,
+      "B": 14
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 17300,
+    "roles": {
+      "fcrw": 78,
+      "follower": 10,
+      "transporter": 5,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 3313,
+    "obsolete_trail_ant_steps": 4254,
+    "obsolete_trail_scalar_mass": 157.0,
+    "obsolete_trail_cells_off": 83,
+    "obsolete_trail_cells_on": 83,
+    "discoveries": {
+      "A": 7,
+      "B": 14
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 17400,
+    "roles": {
+      "fcrw": 73,
+      "follower": 12,
+      "transporter": 5,
+      "recovery": 10
+    },
+    "old_food_dwell_ant_steps": 3359,
+    "obsolete_trail_ant_steps": 4285,
+    "obsolete_trail_scalar_mass": 169.0,
+    "obsolete_trail_cells_off": 87,
+    "obsolete_trail_cells_on": 87,
+    "discoveries": {
+      "A": 7,
+      "B": 14
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 17500,
+    "roles": {
+      "fcrw": 67,
+      "follower": 18,
+      "transporter": 5,
+      "recovery": 10
+    },
+    "old_food_dwell_ant_steps": 3390,
+    "obsolete_trail_ant_steps": 4332,
+    "obsolete_trail_scalar_mass": 179.0,
+    "obsolete_trail_cells_off": 87,
+    "obsolete_trail_cells_on": 87,
+    "discoveries": {
+      "A": 7,
+      "B": 14
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 17600,
+    "roles": {
+      "fcrw": 71,
+      "follower": 15,
+      "transporter": 5,
+      "recovery": 9
+    },
+    "old_food_dwell_ant_steps": 3429,
+    "obsolete_trail_ant_steps": 4388,
+    "obsolete_trail_scalar_mass": 204.0,
+    "obsolete_trail_cells_off": 99,
+    "obsolete_trail_cells_on": 99,
+    "discoveries": {
+      "A": 7,
+      "B": 14
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 17700,
+    "roles": {
+      "fcrw": 74,
+      "follower": 17,
+      "transporter": 5,
+      "recovery": 4
+    },
+    "old_food_dwell_ant_steps": 3462,
+    "obsolete_trail_ant_steps": 4486,
+    "obsolete_trail_scalar_mass": 235.0,
+    "obsolete_trail_cells_off": 112,
+    "obsolete_trail_cells_on": 112,
+    "discoveries": {
+      "A": 7,
+      "B": 14
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 17800,
+    "roles": {
+      "fcrw": 64,
+      "follower": 18,
+      "transporter": 5,
+      "recovery": 13
+    },
+    "old_food_dwell_ant_steps": 3489,
+    "obsolete_trail_ant_steps": 4618,
+    "obsolete_trail_scalar_mass": 243.0,
+    "obsolete_trail_cells_off": 116,
+    "obsolete_trail_cells_on": 116,
+    "discoveries": {
+      "A": 7,
+      "B": 14
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 17900,
+    "roles": {
+      "fcrw": 68,
+      "follower": 20,
+      "transporter": 5,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 3541,
+    "obsolete_trail_ant_steps": 4676,
+    "obsolete_trail_scalar_mass": 243.0,
+    "obsolete_trail_cells_off": 116,
+    "obsolete_trail_cells_on": 116,
+    "discoveries": {
+      "A": 7,
+      "B": 14
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  },
+  {
+    "time": 17999,
+    "roles": {
+      "fcrw": 67,
+      "follower": 21,
+      "transporter": 5,
+      "recovery": 7
+    },
+    "old_food_dwell_ant_steps": 3546,
+    "obsolete_trail_ant_steps": 4738,
+    "obsolete_trail_scalar_mass": 241.0,
+    "obsolete_trail_cells_off": 115,
+    "obsolete_trail_cells_on": 115,
+    "discoveries": {
+      "A": 7,
+      "B": 14
+    },
+    "deliveries": {
+      "A": 7,
+      "B": 9
+    }
+  }
+]

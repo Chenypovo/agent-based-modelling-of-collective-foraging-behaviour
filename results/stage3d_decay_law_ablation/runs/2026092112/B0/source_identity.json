@@ -1,0 +1,358 @@
+{
+  "schema": "stage3d-arm-identity-v1",
+  "match": true,
+  "frozen_identity_sha256": "83da34818b0b43cb4f72d7d9c20774ff7ba05d307b61de2f49d3ac49132f9bd5",
+  "pre_run_identity_sha256": "83da34818b0b43cb4f72d7d9c20774ff7ba05d307b61de2f49d3ac49132f9bd5",
+  "post_run_identity_sha256": "83da34818b0b43cb4f72d7d9c20774ff7ba05d307b61de2f49d3ac49132f9bd5",
+  "frozen": {
+    "schema": "stage3d-execution-identity-v1",
+    "git": {
+      "head": "2eb94fd37c77bb656a0a3c878ea878bac5a77b0c",
+      "branch": "codex/stage3d-decay-law-ablation",
+      "tracked_clean": true,
+      "tracked_status": []
+    },
+    "runtime": {
+      "python_version": "3.9.4",
+      "python_implementation": "CPython",
+      "numpy_version": "1.26.2",
+      "platform": "macOS-27.0-x86_64-i386-64bit"
+    },
+    "files": {
+      "requirements.txt": {
+        "path": "requirements.txt",
+        "bytes": 60,
+        "sha256": "7ef28bb3877cf783ac38b90ecec5735719bf6c75e808cb9550e522417f8e9e2a"
+      },
+      "docs/STAGE3D_DECAY_LAW_PREREGISTRATION.md": {
+        "path": "docs/STAGE3D_DECAY_LAW_PREREGISTRATION.md",
+        "bytes": 12347,
+        "sha256": "68c2f6c2a07468ad4244182722a61f1447f3baf1fa8e6c862f480bb570673183"
+      },
+      "docs/STAGE3D_ENGINEERING_SPEC.md": {
+        "path": "docs/STAGE3D_ENGINEERING_SPEC.md",
+        "bytes": 3762,
+        "sha256": "ddb79b90c0480f8075a6c7e161c62daf00810755c2339a437d7aa6e542b453ed"
+      },
+      "src/ant_walks/models.py": {
+        "path": "src/ant_walks/models.py",
+        "bytes": 6099,
+        "sha256": "96589d8fd545cc98d3434f7d34201d537905fa3a561460f7f3e037f28915f0c4"
+      },
+      "src/scalar_baseline/__init__.py": {
+        "path": "src/scalar_baseline/__init__.py",
+        "bytes": 80,
+        "sha256": "09dd48b2a41c39406a6a6d76fbdd0cb92bc455b6eae10222a12fa8c0e5a8a7b7"
+      },
+      "src/scalar_baseline/config.py": {
+        "path": "src/scalar_baseline/config.py",
+        "bytes": 6005,
+        "sha256": "37f40dcba20c076d91c9f8932b1dc5dbe70b85606708e76f904c4f2567f04db9"
+      },
+      "src/scalar_baseline/environment.py": {
+        "path": "src/scalar_baseline/environment.py",
+        "bytes": 2306,
+        "sha256": "37036a0f432ff6828f99f3d8c605a4fdc447a599d22b02eeec6bc56566e9623e"
+      },
+      "src/scalar_baseline/field.py": {
+        "path": "src/scalar_baseline/field.py",
+        "bytes": 2635,
+        "sha256": "0d9b001ebea9bd8a12de80da7d76f86f6049956548ea30e4d31ac0d6dd2f8fb6"
+      },
+      "src/scalar_baseline/functional_validation.py": {
+        "path": "src/scalar_baseline/functional_validation.py",
+        "bytes": 12104,
+        "sha256": "225cd4b2d56bbab41314322007da042ce94fb12ecec3c71286027ac3870fa02a"
+      },
+      "src/scalar_baseline/navigation.py": {
+        "path": "src/scalar_baseline/navigation.py",
+        "bytes": 1758,
+        "sha256": "a348db296579a437421491fe0e4505c7f03792e8eb2974587f91d980fbc32b2e"
+      },
+      "src/scalar_baseline/sensing.py": {
+        "path": "src/scalar_baseline/sensing.py",
+        "bytes": 610,
+        "sha256": "5f2ce942aed803701c404e3c4a86993ad8b47a29a9b29c58bb8fd65a96a261d9"
+      },
+      "src/scalar_baseline/simulation.py": {
+        "path": "src/scalar_baseline/simulation.py",
+        "bytes": 5618,
+        "sha256": "3a820ba03ee7450fa7fe834baec2563baca13af08db318925bb6c47d5a4e8251"
+      },
+      "src/scalar_baseline/stage3b.py": {
+        "path": "src/scalar_baseline/stage3b.py",
+        "bytes": 19849,
+        "sha256": "99f944fca91c1751665b99a7028eaa58fa85951c186c50b9940062ec54e7c334"
+      },
+      "src/scalar_baseline/stage3c.py": {
+        "path": "src/scalar_baseline/stage3c.py",
+        "bytes": 62155,
+        "sha256": "dcaef6cbf1b3801ed5e89758a407e7e211f5f0c5254abfb0fb1b7b498a81b374"
+      },
+      "src/scalar_baseline/stage3c_analysis.py": {
+        "path": "src/scalar_baseline/stage3c_analysis.py",
+        "bytes": 7248,
+        "sha256": "2bd35c2a215b1e2abc8e0d027ac824a70ef6a2263d1cd09a4caf6c3de9b198c6"
+      },
+      "src/scalar_baseline/stage3d.py": {
+        "path": "src/scalar_baseline/stage3d.py",
+        "bytes": 43722,
+        "sha256": "d2f0633a7d0cb2586eec84660c95fdbb5c340f7b247b7fd42ac8b2e449ae7030"
+      },
+      "src/scalar_baseline/stage3d_analysis.py": {
+        "path": "src/scalar_baseline/stage3d_analysis.py",
+        "bytes": 28406,
+        "sha256": "1d26f9d7a06e9c183ce827f6b06e735cef54891d8ee900899404d23860bd82b0"
+      },
+      "scripts/run_stage3d.py": {
+        "path": "scripts/run_stage3d.py",
+        "bytes": 1559,
+        "sha256": "761f90ffa01b8993fdcaf0535dfd1853fd520910cf67ba0ed538428d3cb9b3e6"
+      },
+      "tests/test_stage3d_decay_law.py": {
+        "path": "tests/test_stage3d_decay_law.py",
+        "bytes": 12581,
+        "sha256": "c86be64d0a2088b4a63649e2a9a5e9d01a10fcbb3bb9a641f9bc6807df249407"
+      },
+      "run_stage3d.sh": {
+        "path": "run_stage3d.sh",
+        "bytes": 132,
+        "sha256": "f0808df692bea747b9e46cf6cc99a647374d5898dd8c3f0788ccefcf8b7d916b"
+      }
+    }
+  },
+  "pre_run": {
+    "schema": "stage3d-execution-identity-v1",
+    "git": {
+      "head": "2eb94fd37c77bb656a0a3c878ea878bac5a77b0c",
+      "branch": "codex/stage3d-decay-law-ablation",
+      "tracked_clean": true,
+      "tracked_status": []
+    },
+    "runtime": {
+      "python_version": "3.9.4",
+      "python_implementation": "CPython",
+      "numpy_version": "1.26.2",
+      "platform": "macOS-27.0-x86_64-i386-64bit"
+    },
+    "files": {
+      "requirements.txt": {
+        "path": "requirements.txt",
+        "bytes": 60,
+        "sha256": "7ef28bb3877cf783ac38b90ecec5735719bf6c75e808cb9550e522417f8e9e2a"
+      },
+      "docs/STAGE3D_DECAY_LAW_PREREGISTRATION.md": {
+        "path": "docs/STAGE3D_DECAY_LAW_PREREGISTRATION.md",
+        "bytes": 12347,
+        "sha256": "68c2f6c2a07468ad4244182722a61f1447f3baf1fa8e6c862f480bb570673183"
+      },
+      "docs/STAGE3D_ENGINEERING_SPEC.md": {
+        "path": "docs/STAGE3D_ENGINEERING_SPEC.md",
+        "bytes": 3762,
+        "sha256": "ddb79b90c0480f8075a6c7e161c62daf00810755c2339a437d7aa6e542b453ed"
+      },
+      "src/ant_walks/models.py": {
+        "path": "src/ant_walks/models.py",
+        "bytes": 6099,
+        "sha256": "96589d8fd545cc98d3434f7d34201d537905fa3a561460f7f3e037f28915f0c4"
+      },
+      "src/scalar_baseline/__init__.py": {
+        "path": "src/scalar_baseline/__init__.py",
+        "bytes": 80,
+        "sha256": "09dd48b2a41c39406a6a6d76fbdd0cb92bc455b6eae10222a12fa8c0e5a8a7b7"
+      },
+      "src/scalar_baseline/config.py": {
+        "path": "src/scalar_baseline/config.py",
+        "bytes": 6005,
+        "sha256": "37f40dcba20c076d91c9f8932b1dc5dbe70b85606708e76f904c4f2567f04db9"
+      },
+      "src/scalar_baseline/environment.py": {
+        "path": "src/scalar_baseline/environment.py",
+        "bytes": 2306,
+        "sha256": "37036a0f432ff6828f99f3d8c605a4fdc447a599d22b02eeec6bc56566e9623e"
+      },
+      "src/scalar_baseline/field.py": {
+        "path": "src/scalar_baseline/field.py",
+        "bytes": 2635,
+        "sha256": "0d9b001ebea9bd8a12de80da7d76f86f6049956548ea30e4d31ac0d6dd2f8fb6"
+      },
+      "src/scalar_baseline/functional_validation.py": {
+        "path": "src/scalar_baseline/functional_validation.py",
+        "bytes": 12104,
+        "sha256": "225cd4b2d56bbab41314322007da042ce94fb12ecec3c71286027ac3870fa02a"
+      },
+      "src/scalar_baseline/navigation.py": {
+        "path": "src/scalar_baseline/navigation.py",
+        "bytes": 1758,
+        "sha256": "a348db296579a437421491fe0e4505c7f03792e8eb2974587f91d980fbc32b2e"
+      },
+      "src/scalar_baseline/sensing.py": {
+        "path": "src/scalar_baseline/sensing.py",
+        "bytes": 610,
+        "sha256": "5f2ce942aed803701c404e3c4a86993ad8b47a29a9b29c58bb8fd65a96a261d9"
+      },
+      "src/scalar_baseline/simulation.py": {
+        "path": "src/scalar_baseline/simulation.py",
+        "bytes": 5618,
+        "sha256": "3a820ba03ee7450fa7fe834baec2563baca13af08db318925bb6c47d5a4e8251"
+      },
+      "src/scalar_baseline/stage3b.py": {
+        "path": "src/scalar_baseline/stage3b.py",
+        "bytes": 19849,
+        "sha256": "99f944fca91c1751665b99a7028eaa58fa85951c186c50b9940062ec54e7c334"
+      },
+      "src/scalar_baseline/stage3c.py": {
+        "path": "src/scalar_baseline/stage3c.py",
+        "bytes": 62155,
+        "sha256": "dcaef6cbf1b3801ed5e89758a407e7e211f5f0c5254abfb0fb1b7b498a81b374"
+      },
+      "src/scalar_baseline/stage3c_analysis.py": {
+        "path": "src/scalar_baseline/stage3c_analysis.py",
+        "bytes": 7248,
+        "sha256": "2bd35c2a215b1e2abc8e0d027ac824a70ef6a2263d1cd09a4caf6c3de9b198c6"
+      },
+      "src/scalar_baseline/stage3d.py": {
+        "path": "src/scalar_baseline/stage3d.py",
+        "bytes": 43722,
+        "sha256": "d2f0633a7d0cb2586eec84660c95fdbb5c340f7b247b7fd42ac8b2e449ae7030"
+      },
+      "src/scalar_baseline/stage3d_analysis.py": {
+        "path": "src/scalar_baseline/stage3d_analysis.py",
+        "bytes": 28406,
+        "sha256": "1d26f9d7a06e9c183ce827f6b06e735cef54891d8ee900899404d23860bd82b0"
+      },
+      "scripts/run_stage3d.py": {
+        "path": "scripts/run_stage3d.py",
+        "bytes": 1559,
+        "sha256": "761f90ffa01b8993fdcaf0535dfd1853fd520910cf67ba0ed538428d3cb9b3e6"
+      },
+      "tests/test_stage3d_decay_law.py": {
+        "path": "tests/test_stage3d_decay_law.py",
+        "bytes": 12581,
+        "sha256": "c86be64d0a2088b4a63649e2a9a5e9d01a10fcbb3bb9a641f9bc6807df249407"
+      },
+      "run_stage3d.sh": {
+        "path": "run_stage3d.sh",
+        "bytes": 132,
+        "sha256": "f0808df692bea747b9e46cf6cc99a647374d5898dd8c3f0788ccefcf8b7d916b"
+      }
+    }
+  },
+  "post_run": {
+    "schema": "stage3d-execution-identity-v1",
+    "git": {
+      "head": "2eb94fd37c77bb656a0a3c878ea878bac5a77b0c",
+      "branch": "codex/stage3d-decay-law-ablation",
+      "tracked_clean": true,
+      "tracked_status": []
+    },
+    "runtime": {
+      "python_version": "3.9.4",
+      "python_implementation": "CPython",
+      "numpy_version": "1.26.2",
+      "platform": "macOS-27.0-x86_64-i386-64bit"
+    },
+    "files": {
+      "requirements.txt": {
+        "path": "requirements.txt",
+        "bytes": 60,
+        "sha256": "7ef28bb3877cf783ac38b90ecec5735719bf6c75e808cb9550e522417f8e9e2a"
+      },
+      "docs/STAGE3D_DECAY_LAW_PREREGISTRATION.md": {
+        "path": "docs/STAGE3D_DECAY_LAW_PREREGISTRATION.md",
+        "bytes": 12347,
+        "sha256": "68c2f6c2a07468ad4244182722a61f1447f3baf1fa8e6c862f480bb570673183"
+      },
+      "docs/STAGE3D_ENGINEERING_SPEC.md": {
+        "path": "docs/STAGE3D_ENGINEERING_SPEC.md",
+        "bytes": 3762,
+        "sha256": "ddb79b90c0480f8075a6c7e161c62daf00810755c2339a437d7aa6e542b453ed"
+      },
+      "src/ant_walks/models.py": {
+        "path": "src/ant_walks/models.py",
+        "bytes": 6099,
+        "sha256": "96589d8fd545cc98d3434f7d34201d537905fa3a561460f7f3e037f28915f0c4"
+      },
+      "src/scalar_baseline/__init__.py": {
+        "path": "src/scalar_baseline/__init__.py",
+        "bytes": 80,
+        "sha256": "09dd48b2a41c39406a6a6d76fbdd0cb92bc455b6eae10222a12fa8c0e5a8a7b7"
+      },
+      "src/scalar_baseline/config.py": {
+        "path": "src/scalar_baseline/config.py",
+        "bytes": 6005,
+        "sha256": "37f40dcba20c076d91c9f8932b1dc5dbe70b85606708e76f904c4f2567f04db9"
+      },
+      "src/scalar_baseline/environment.py": {
+        "path": "src/scalar_baseline/environment.py",
+        "bytes": 2306,
+        "sha256": "37036a0f432ff6828f99f3d8c605a4fdc447a599d22b02eeec6bc56566e9623e"
+      },
+      "src/scalar_baseline/field.py": {
+        "path": "src/scalar_baseline/field.py",
+        "bytes": 2635,
+        "sha256": "0d9b001ebea9bd8a12de80da7d76f86f6049956548ea30e4d31ac0d6dd2f8fb6"
+      },
+      "src/scalar_baseline/functional_validation.py": {
+        "path": "src/scalar_baseline/functional_validation.py",
+        "bytes": 12104,
+        "sha256": "225cd4b2d56bbab41314322007da042ce94fb12ecec3c71286027ac3870fa02a"
+      },
+      "src/scalar_baseline/navigation.py": {
+        "path": "src/scalar_baseline/navigation.py",
+        "bytes": 1758,
+        "sha256": "a348db296579a437421491fe0e4505c7f03792e8eb2974587f91d980fbc32b2e"
+      },
+      "src/scalar_baseline/sensing.py": {
+        "path": "src/scalar_baseline/sensing.py",
+        "bytes": 610,
+        "sha256": "5f2ce942aed803701c404e3c4a86993ad8b47a29a9b29c58bb8fd65a96a261d9"
+      },
+      "src/scalar_baseline/simulation.py": {
+        "path": "src/scalar_baseline/simulation.py",
+        "bytes": 5618,
+        "sha256": "3a820ba03ee7450fa7fe834baec2563baca13af08db318925bb6c47d5a4e8251"
+      },
+      "src/scalar_baseline/stage3b.py": {
+        "path": "src/scalar_baseline/stage3b.py",
+        "bytes": 19849,
+        "sha256": "99f944fca91c1751665b99a7028eaa58fa85951c186c50b9940062ec54e7c334"
+      },
+      "src/scalar_baseline/stage3c.py": {
+        "path": "src/scalar_baseline/stage3c.py",
+        "bytes": 62155,
+        "sha256": "dcaef6cbf1b3801ed5e89758a407e7e211f5f0c5254abfb0fb1b7b498a81b374"
+      },
+      "src/scalar_baseline/stage3c_analysis.py": {
+        "path": "src/scalar_baseline/stage3c_analysis.py",
+        "bytes": 7248,
+        "sha256": "2bd35c2a215b1e2abc8e0d027ac824a70ef6a2263d1cd09a4caf6c3de9b198c6"
+      },
+      "src/scalar_baseline/stage3d.py": {
+        "path": "src/scalar_baseline/stage3d.py",
+        "bytes": 43722,
+        "sha256": "d2f0633a7d0cb2586eec84660c95fdbb5c340f7b247b7fd42ac8b2e449ae7030"
+      },
+      "src/scalar_baseline/stage3d_analysis.py": {
+        "path": "src/scalar_baseline/stage3d_analysis.py",
+        "bytes": 28406,
+        "sha256": "1d26f9d7a06e9c183ce827f6b06e735cef54891d8ee900899404d23860bd82b0"
+      },
+      "scripts/run_stage3d.py": {
+        "path": "scripts/run_stage3d.py",
+        "bytes": 1559,
+        "sha256": "761f90ffa01b8993fdcaf0535dfd1853fd520910cf67ba0ed538428d3cb9b3e6"
+      },
+      "tests/test_stage3d_decay_law.py": {
+        "path": "tests/test_stage3d_decay_law.py",
+        "bytes": 12581,
+        "sha256": "c86be64d0a2088b4a63649e2a9a5e9d01a10fcbb3bb9a641f9bc6807df249407"
+      },
+      "run_stage3d.sh": {
+        "path": "run_stage3d.sh",
+        "bytes": 132,
+        "sha256": "f0808df692bea747b9e46cf6cc99a647374d5898dd8c3f0788ccefcf8b7d916b"
+      }
+    }
+  }
+}
