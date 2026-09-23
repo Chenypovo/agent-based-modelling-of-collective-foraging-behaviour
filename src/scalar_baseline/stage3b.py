@@ -65,6 +65,8 @@ class PairedB0Simulation(ObservedSimulation):
 class RecoverySimulation(ObservedSimulation):
     """C changes only the follower signal-loss branch."""
 
+    recovery_duration = RECOVERY_DURATION
+
     def __init__(self, config: SimulationConfig):
         super().__init__(config)
         self._recovery_sides = np.stack([side_schedule(config.seed, i, config.steps)
@@ -136,7 +138,7 @@ class RecoverySimulation(ObservedSimulation):
                            min(self.config.navigation.max_turn, correction + noise))
                 ant.heading = (ant.heading + turn) % (2 * math.pi)
                 state.recovery_step += 1
-                if state.recovery_step == RECOVERY_DURATION:
+                if state.recovery_step == self.recovery_duration:
                     ant.role, ant.low_steps = "fcrw", 0
                     self._finish_recovery(ant, state, "timeout")
         else:
@@ -215,7 +217,7 @@ class RecoverySimulation(ObservedSimulation):
         super().validate()
         for ant, state in zip(self.ants, self.recovery):
             if state.recovery_active:
-                if ant.role != "follower" or not 1 <= state.recovery_step < RECOVERY_DURATION:
+                if ant.role != "follower" or not 1 <= state.recovery_step < self.recovery_duration:
                     raise AssertionError("invalid recovery state")
                 if state.recovery_initial_side not in {-1, 1}:
                     raise AssertionError("invalid recovery side")
