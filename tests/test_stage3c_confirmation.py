@@ -110,6 +110,17 @@ def _hash(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _recursive_file_snapshot(path: Path) -> list[tuple[str, int, str]] | None:
+    """Return byte-sensitive state, while preserving absence as a distinct state."""
+    if not path.exists():
+        return None
+    return [
+        (item.relative_to(path).as_posix(), item.stat().st_size, _hash(item))
+        for item in sorted(path.rglob("*"))
+        if item.is_file()
+    ]
+
+
 def write_synthetic_completed_run(
     root: Path,
     config,
@@ -795,12 +806,28 @@ def test_dry_run_initialises_no_simulation_and_creates_no_formal_results(monkeyp
 
     monkeypatch.setattr(Stage3CB0Simulation, "__init__", forbidden)
     monkeypatch.setattr(Stage3CRecoverySimulation, "__init__", forbidden)
+    formal_results = ROOT / "results/stage3c_confirmatory_recovery"
+    before = _recursive_file_snapshot(formal_results)
     result = module.dry_run()
     assert result["simulation_initialised"] is False
     assert result["simulation_steps_executed"] == 0
     assert result["confirmatory_seeds_run"] == 0
-    assert not (ROOT / "results/stage3c_confirmatory_recovery").exists()
+    assert _recursive_file_snapshot(formal_results) == before
 
 
-def test_formal_results_directory_absent_during_engineering_stage():
-    assert not (ROOT / "results/stage3c_confirmatory_recovery").exists()
+def test_formal_results_snapshot_distinguishes_absent_and_existing_states(tmp_path):
+    formal_results = tmp_path / "results/stage3c_confirmatory_recovery"
+    assert _recursive_file_snapshot(formal_results) is None
+
+    artifact = formal_results / "runs/fixture/completed_receipt.json"
+    artifact.parent.mkdir(parents=True)
+    artifact.write_bytes(b"immutable formal evidence\n")
+    before = _recursive_file_snapshot(formal_results)
+    assert before == [
+        (
+            "runs/fixture/completed_receipt.json",
+            len(b"immutable formal evidence\n"),
+            hashlib.sha256(b"immutable formal evidence\n").hexdigest(),
+        )
+    ]
+    assert _recursive_file_snapshot(formal_results) == before

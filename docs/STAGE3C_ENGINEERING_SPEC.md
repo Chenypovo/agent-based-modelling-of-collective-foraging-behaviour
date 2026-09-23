@@ -187,7 +187,10 @@ configuration rejection, horizon-stable randomness, Stage 3B B0 replay,
 unchanged 24-step recovery, pair identity, isolation, food-source
 classification, endpoints, atomic publication and overwrite refusal, incomplete
 evidence, execution gates, exact bootstrap, decision boundaries, resource
-limits, and absence of the formal results directory.
+limits, and state-independent protection of the formal results directory. If
+the directory is absent before a dry-run it must remain absent; if it already
+exists, its recursive paths, sizes, and SHA-256 values must remain byte-for-byte
+unchanged. The dry-run must execute zero simulation steps in either state.
 
 Passing tests, audits, or fixture runs is engineering evidence only. Stage 3C-E
 does not create `results/stage3c_confirmatory_recovery/`, run a confirmatory
