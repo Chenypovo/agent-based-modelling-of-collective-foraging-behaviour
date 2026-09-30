@@ -31,6 +31,7 @@ class NavigationConfig:
     spiral_spacing: float = 4.0         # distance between successive spiral search loops
     landmarks: tuple = ()               # fixed landmark positions
     view_radius: float = 8.0            # landmark visibility
+    deposit_during_search: bool = True  # False: loaded ants lay no pheromone while spiral-searching
 
     def __post_init__(self) -> None:
         if not math.isfinite(self.compass_noise) or self.compass_noise < 0:
@@ -72,6 +73,9 @@ class PathIntegrationSimulation(Simulation):
         self._arrival_recorded: set[int] = set()
         self.memory = LandmarkMemory()
         self.arrival_errors: list[float] = []
+        self.arrival_records: list[tuple[float, float]] = []   # (arrival error, outbound path length)
+        self._outbound: dict[int, float] = {}
+        self._searched: set[int] = set()
         self.search_starts = 0
         self.landmark_resets = 0
         self._grid: dict[tuple[int, int], list[tuple[float, float]]] = {}
@@ -135,7 +139,9 @@ class PathIntegrationSimulation(Simulation):
     def _record_arrival(self, ant) -> None:
         if ant.ant_id not in self._arrival_recorded:
             self._arrival_recorded.add(ant.ant_id)
-            self.arrival_errors.append(self.estimate_error(ant.ant_id))
+            error = self.estimate_error(ant.ant_id)
+            self.arrival_errors.append(error)
+            self.arrival_records.append((error, self._outbound.get(ant.ant_id, math.nan)))
 
     # ----- movement --------------------------------------------------------
     def _move(self, ant) -> None:
@@ -167,14 +173,38 @@ class PathIntegrationSimulation(Simulation):
                 phi = math.sqrt(2 * state[1] / a)
                 c = state[0]
                 self._step_toward(ant, (c[0] + a * phi * math.cos(phi), c[1] + a * phi * math.sin(phi)), step)
+        if self.mode.get(ant.ant_id) == "search":
+            self._searched.add(ant.ant_id)
         ant.path.append(ant.position)
         self._integrate(ant, old)
+
+    def step(self) -> None:
+        if self.navigation.deposit_during_search:
+            super().step()
+            return
+        # Same as Simulation.step, except ants that spiral-searched this step do not deposit.
+        if self.time >= self.config.steps:
+            raise ValueError("declared horizon exhausted")
+        self.time += 1
+        self.field.advance(self.time)
+        self.environment.relocate(self.time, self.ledger)
+        transporting = [ant.role == "transporter" for ant in self.ants]
+        self._searched.clear()
+        for ant in self.ants:
+            self._move(ant)
+        for ant in self.ants:
+            self._contacts(ant)
+        for ant, was_transporting in zip(self.ants, transporting):
+            if was_transporting and ant.ant_id not in self._searched:
+                self.field.deposit(ant.position, self.config.deposit_q)
+        self.validate()
 
     def _contacts(self, ant) -> None:
         was_transporter = ant.role == "transporter"
         super()._contacts(ant)
         if not was_transporter and ant.role == "transporter":
             self.mode[ant.ant_id] = "home"
+            self._outbound[ant.ant_id] = (len(ant.path) - 1) * self.config.step_size
             self._arrival_recorded.discard(ant.ant_id)
         elif was_transporter and ant.role != "transporter":
             # Delivered: the visible nest re-anchors the home vector exactly.

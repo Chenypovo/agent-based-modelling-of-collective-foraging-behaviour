@@ -107,3 +107,62 @@ def test_invalid_navigation_config():
         NavigationConfig(compass_noise=-1)
     with pytest.raises(ValueError):
         NavigationConfig(nest_cue_radius=0)
+
+
+def test_deposit_during_search_on_is_the_default_and_matches_explicit_on():
+    assert NavigationConfig().deposit_during_search is True
+    a = PathIntegrationSimulation(config(seed=4), NavigationConfig(compass_noise=0.6))
+    b = PathIntegrationSimulation(config(seed=4), NavigationConfig(compass_noise=0.6, deposit_during_search=True))
+    a.run()
+    b.run()
+    assert a.ledger.events == b.ledger.events
+    assert (a.field.concentration == b.field.concentration).all()
+
+
+def test_no_deposit_option_matches_default_when_no_search_happens():
+    a = PathIntegrationSimulation(config(seed=6), NavigationConfig(compass_noise=0.0))
+    b = PathIntegrationSimulation(config(seed=6), NavigationConfig(compass_noise=0.0, deposit_during_search=False))
+    a.run()
+    b.run()
+    assert a.search_starts == 0 and b.search_starts == 0
+    assert a.ledger.events == b.ledger.events
+    assert (a.field.concentration == b.field.concentration).all()
+
+
+def test_searching_transporters_do_not_deposit_when_option_off():
+    sim = PathIntegrationSimulation(config(seed=3, steps=4000),
+                                    NavigationConfig(compass_noise=0.6, deposit_during_search=False))
+    calls = []
+
+    class Recorder:
+        def __init__(self, field):
+            self._field = field
+
+        def __getattr__(self, name):
+            return getattr(self._field, name)
+
+        def deposit(self, position, q):
+            calls.append(position)
+            self._field.deposit(position, q)
+
+    sim.field = Recorder(sim.field)
+    searched_steps = 0
+    while sim.time < sim.config.steps:
+        transporting = {a.ant_id for a in sim.ants if a.role == "transporter"}
+        before = len(calls)
+        sim.step()
+        searched_steps += bool(sim._searched)
+        assert len(calls) - before == len(transporting - sim._searched)
+    assert sim.search_starts > 0 and searched_steps > 0
+
+
+def test_arrival_records_pair_error_with_outbound_length_without_changing_dynamics():
+    sim = PathIntegrationSimulation(config(seed=5), NavigationConfig(compass_noise=0.3))
+    sim.run()
+    ref = PathIntegrationSimulation(config(seed=5), NavigationConfig(compass_noise=0.3))
+    ref.run()
+    assert sim.ledger.events == ref.ledger.events
+    assert sim.arrival_records and [e for e, _ in sim.arrival_records] == sim.arrival_errors
+    nest, food = sim.config.nest, sim.config.food_a
+    for _, outbound in sim.arrival_records:
+        assert outbound >= math.dist(nest, food) - 2  # cannot reach food in fewer steps than the distance
