@@ -1,0 +1,16 @@
+{
+  "pass": true,
+  "recovery_move_prohibited_identifier_hits": [],
+  "whole_class_expected_contact_or_metric_hits": [],
+  "field_slots": [
+    "concentration",
+    "last_deposit",
+    "time",
+    "arena_size",
+    "cell_size",
+    "decay"
+  ],
+  "diffusion": 0,
+  "local_samples_per_recovery_step": 2,
+  "limitations": "Scoped structural audit plus tests; food coordinates remain in environment contacts/offline metrics."
+}

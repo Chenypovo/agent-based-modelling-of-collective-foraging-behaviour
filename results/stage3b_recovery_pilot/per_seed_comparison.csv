@@ -1,0 +1,6 @@
+seed,B0_first_B_discovery,C_first_B_discovery,delta_first_B_discovery_C_minus_B0,B0_first_B_delivery,C_first_B_delivery,delta_first_B_delivery_C_minus_B0,B0_capped_recovery_time,C_capped_recovery_time,delta_capped_recovery_time_C_minus_B0,B0_B_deliveries,C_B_deliveries,delta_B_deliveries_C_minus_B0,B0_pre_A_deliveries,C_pre_A_deliveries,delta_pre_A_deliveries_C_minus_B0,B0_old_food_dwell_ant_steps,C_old_food_dwell_ant_steps,old_food_dwell_ratio_C_over_B0,recovery_episodes,recovery_reacquisition_rate,recovery_timeouts,recovery_food_contacts,episode_B_discovery_within_100_steps,episode_B_delivery_within_100_steps
+2026091701,7137,6879,-258,,,,6000,6000,0,0,0,0,4,1,-3,1604,1911,1.1913965087281795,4379,0.7469741950216945,1105,3,25,0
+2026091702,7415,6111,-1304,,,,6000,6000,0,0,0,0,1,1,0,2099,929,0.44259171033825634,3520,0.6934659090909091,1078,1,3,0
+2026091703,6297,9874,3577,11644,10242,-1402,5644,4242,-1402,1,1,0,3,8,5,870,2146,2.466666666666667,4042,0.7822859970311727,879,1,1,0
+2026091704,8961,7112,-1849,,,,6000,6000,0,0,0,0,3,3,0,3175,2168,0.6828346456692913,8227,0.7515497751306673,2042,2,11,0
+2026091705,6623,,,10697,,,4697,6000,1303,1,0,-1,5,3,-2,1056,1684,1.5946969696969697,5102,0.7083496667973344,1487,1,0,0

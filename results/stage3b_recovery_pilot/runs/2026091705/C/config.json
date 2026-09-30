@@ -1,0 +1,44 @@
+{
+  "n_ants": 100,
+  "steps": 12000,
+  "seed": 2026091705,
+  "arena_size": 300,
+  "cell_size": 1,
+  "diffusion": 0,
+  "deposit_q": 1,
+  "step_size": 0.6,
+  "gamma": 0.2,
+  "theta_max": 1.0471975511965976,
+  "nest": [
+    150,
+    150
+  ],
+  "food_a": [
+    240,
+    150
+  ],
+  "food_b": [
+    150,
+    240
+  ],
+  "contact_radius": 0.75,
+  "relocation_step": 6000,
+  "decay": {
+    "mode": "exponential",
+    "half_life_steps": 999.9999999999999,
+    "decay_rate": 0.0006931471805599453,
+    "cutoff_steps": null
+  },
+  "navigation": {
+    "signal_on": 0.5,
+    "signal_off": 0.25,
+    "loss_steps": 2,
+    "epsilon": 1e-12,
+    "max_turn": 1.0471975511965976,
+    "noise_amplitude": 0.05,
+    "sensor_distance": 1.0,
+    "sensor_angle": 0.7853981633974483
+  },
+  "arm": "C",
+  "recovery_duration": 24
+}

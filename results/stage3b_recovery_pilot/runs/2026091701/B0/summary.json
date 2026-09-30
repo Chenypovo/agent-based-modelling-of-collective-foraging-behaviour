@@ -1,0 +1,83 @@
+{
+  "seed": 2026091701,
+  "arm": "B0",
+  "status": "complete",
+  "error": null,
+  "steps_completed": 12000,
+  "first_A_discovery": 509,
+  "first_A_delivery": 1017,
+  "pre_relocation_A_deliveries": 4,
+  "pre_relocation_verified_recruitments": 2577,
+  "pre_relocation_follower_food_arrivals": 9,
+  "pre_relocation_follower_episode_lengths": [
+    7,
+    1,
+    11,
+    26,
+    1,
+    22,
+    79,
+    34,
+    8
+  ],
+  "pre_relocation_delivery_rate_per_1000": 0.6666666666666666,
+  "pre_relocation_recovery_episodes": 0,
+  "first_B_discovery": 7137,
+  "first_B_delivery": null,
+  "B_not_discovered": false,
+  "B_not_delivered": true,
+  "B_deliveries": 0,
+  "capped_recovery_time": 6000,
+  "old_food_dwell_ant_steps": 1604,
+  "recovery_episodes": 0,
+  "recovery_reacquired": 0,
+  "recovery_timeouts": 0,
+  "recovery_food_contacts": 0,
+  "recovery_reacquisition_rate": null,
+  "anchor_fallbacks": 0,
+  "completed_cargo": {
+    "A": 11,
+    "B": 0
+  },
+  "incomplete_cargo": {
+    "66": "B",
+    "4": "B",
+    "99": "B",
+    "18": "B",
+    "78": "B",
+    "82": "B",
+    "31": "B"
+  },
+  "final_field": {
+    "time": 12000,
+    "field_sum": 10071.807773613718,
+    "positive_cells": 24779,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 6690,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 9733,
+      "nest_food_centre_cells_connected_8": false
+    }
+  },
+  "final_state_digest": {
+    "agents_sha256": "c6a2de1d8ad990de3cc7c3a459c08df9f2bc45615a16e3ca471c113ddd5b6ee1",
+    "field_sha256": "5dc0158b59d8ff73866f70497de0464a08dd63db62b2e2e7faa84851e539b393",
+    "events_sha256": "229fddf721a525a9c8dbcbc9c20d6ce61b635a56e1b5d73ddcfa1b96c6a61930",
+    "discoveries": {
+      "A": 11,
+      "B": 7
+    },
+    "deliveries": {
+      "A": 11,
+      "B": 0
+    }
+  },
+  "wall_seconds": 16.979008166,
+  "cpu_seconds": 16.9152,
+  "peak_rss_bytes": 372002816,
+  "valid_state_every_completed_step": true
+}

@@ -1,0 +1,14 @@
+{
+  "pass": true,
+  "wall_seconds": 36.542938750000076,
+  "cpu_seconds": 36.13399800000002,
+  "peak_rss_bytes": 782196736,
+  "temporary_output_bytes": 111764,
+  "limits": {
+    "wall_seconds": 600.0,
+    "cpu_seconds": 600.0,
+    "peak_rss_bytes": 2147483648,
+    "temporary_output_bytes": 536870912,
+    "single_retained_file_bytes": 52428800
+  }
+}

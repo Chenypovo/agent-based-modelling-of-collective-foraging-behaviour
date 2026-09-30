@@ -1,0 +1,824 @@
+{
+  "config": {
+    "n_ants": 2,
+    "steps": 10,
+    "seed": 20260917,
+    "arena_size": 10,
+    "cell_size": 1.0,
+    "diffusion": 0.0,
+    "deposit_q": 1.0,
+    "step_size": 0.6,
+    "gamma": 0.2,
+    "theta_max": 0,
+    "nest": [
+      2,
+      2
+    ],
+    "food_a": [
+      4.4,
+      2
+    ],
+    "food_b": [
+      2,
+      4.4
+    ],
+    "contact_radius": 0.15,
+    "relocation_step": 5,
+    "decay": {
+      "mode": "exponential",
+      "half_life_steps": 20.0,
+      "decay_rate": 0.03465735902799726,
+      "cutoff_steps": null
+    },
+    "navigation": {
+      "signal_on": 100,
+      "signal_off": 100,
+      "loss_steps": 2,
+      "epsilon": 1e-12,
+      "max_turn": 1.0471975511965976,
+      "noise_amplitude": 0,
+      "sensor_distance": 1.0,
+      "sensor_angle": 0.7853981633974483
+    }
+  },
+  "fixture": "deterministic contact geometry; ant0 heading=0; ant1 starts (2,0.8), heading=pi/2 with declared own prefix [(2,2),(2,1.4),(2,0.8)]; high thresholds isolate contact bookkeeping",
+  "ledger": {
+    "discoveries": {
+      "A": 1,
+      "B": 1
+    },
+    "deliveries": {
+      "A": 1,
+      "B": 1
+    },
+    "cargo": {},
+    "carried_a_at_relocation": [
+      0
+    ],
+    "events": [
+      {
+        "time": 4,
+        "event": "pickup",
+        "ant_id": 0,
+        "source": "A"
+      },
+      {
+        "time": 5,
+        "event": "relocation",
+        "carried_a": [
+          0
+        ]
+      },
+      {
+        "time": 6,
+        "event": "pickup",
+        "ant_id": 1,
+        "source": "B"
+      },
+      {
+        "time": 8,
+        "event": "delivery",
+        "ant_id": 0,
+        "source": "A"
+      },
+      {
+        "time": 10,
+        "event": "delivery",
+        "ant_id": 1,
+        "source": "B"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "time": 1,
+      "agents": [
+        {
+          "ant_id": 0,
+          "position": [
+            2.6,
+            2.0
+          ],
+          "heading": 0.0,
+          "role": "fcrw",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2.6,
+              2.0
+            ]
+          ]
+        },
+        {
+          "ant_id": 1,
+          "position": [
+            2.0,
+            1.4
+          ],
+          "heading": 1.5707963267948966,
+          "role": "fcrw",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              1.4
+            ],
+            [
+              2,
+              0.8
+            ],
+            [
+              2.0,
+              1.4
+            ]
+          ]
+        }
+      ],
+      "discoveries": {
+        "A": 0,
+        "B": 0
+      },
+      "deliveries": {
+        "A": 0,
+        "B": 0
+      }
+    },
+    {
+      "time": 2,
+      "agents": [
+        {
+          "ant_id": 0,
+          "position": [
+            3.2,
+            2.0
+          ],
+          "heading": 0.0,
+          "role": "fcrw",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2.6,
+              2.0
+            ],
+            [
+              3.2,
+              2.0
+            ]
+          ]
+        },
+        {
+          "ant_id": 1,
+          "position": [
+            2.0,
+            2.0
+          ],
+          "heading": 1.5707963267948966,
+          "role": "fcrw",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              1.4
+            ],
+            [
+              2,
+              0.8
+            ],
+            [
+              2.0,
+              1.4
+            ],
+            [
+              2.0,
+              2.0
+            ]
+          ]
+        }
+      ],
+      "discoveries": {
+        "A": 0,
+        "B": 0
+      },
+      "deliveries": {
+        "A": 0,
+        "B": 0
+      }
+    },
+    {
+      "time": 3,
+      "agents": [
+        {
+          "ant_id": 0,
+          "position": [
+            3.8000000000000003,
+            2.0
+          ],
+          "heading": 0.0,
+          "role": "fcrw",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2.6,
+              2.0
+            ],
+            [
+              3.2,
+              2.0
+            ],
+            [
+              3.8000000000000003,
+              2.0
+            ]
+          ]
+        },
+        {
+          "ant_id": 1,
+          "position": [
+            2.0,
+            2.6
+          ],
+          "heading": 1.5707963267948966,
+          "role": "fcrw",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              1.4
+            ],
+            [
+              2,
+              0.8
+            ],
+            [
+              2.0,
+              1.4
+            ],
+            [
+              2.0,
+              2.0
+            ],
+            [
+              2.0,
+              2.6
+            ]
+          ]
+        }
+      ],
+      "discoveries": {
+        "A": 0,
+        "B": 0
+      },
+      "deliveries": {
+        "A": 0,
+        "B": 0
+      }
+    },
+    {
+      "time": 4,
+      "agents": [
+        {
+          "ant_id": 0,
+          "position": [
+            4.4,
+            2.0
+          ],
+          "heading": 0.0,
+          "role": "transporter",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2.6,
+              2.0
+            ],
+            [
+              3.2,
+              2.0
+            ],
+            [
+              3.8000000000000003,
+              2.0
+            ],
+            [
+              4.4,
+              2.0
+            ]
+          ]
+        },
+        {
+          "ant_id": 1,
+          "position": [
+            2.0,
+            3.2
+          ],
+          "heading": 1.5707963267948966,
+          "role": "fcrw",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              1.4
+            ],
+            [
+              2,
+              0.8
+            ],
+            [
+              2.0,
+              1.4
+            ],
+            [
+              2.0,
+              2.0
+            ],
+            [
+              2.0,
+              2.6
+            ],
+            [
+              2.0,
+              3.2
+            ]
+          ]
+        }
+      ],
+      "discoveries": {
+        "A": 1,
+        "B": 0
+      },
+      "deliveries": {
+        "A": 0,
+        "B": 0
+      }
+    },
+    {
+      "time": 5,
+      "agents": [
+        {
+          "ant_id": 0,
+          "position": [
+            3.8000000000000003,
+            2.0
+          ],
+          "heading": 3.141592653589793,
+          "role": "transporter",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2.6,
+              2.0
+            ],
+            [
+              3.2,
+              2.0
+            ],
+            [
+              3.8000000000000003,
+              2.0
+            ]
+          ]
+        },
+        {
+          "ant_id": 1,
+          "position": [
+            2.0,
+            3.8000000000000003
+          ],
+          "heading": 1.5707963267948966,
+          "role": "fcrw",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              1.4
+            ],
+            [
+              2,
+              0.8
+            ],
+            [
+              2.0,
+              1.4
+            ],
+            [
+              2.0,
+              2.0
+            ],
+            [
+              2.0,
+              2.6
+            ],
+            [
+              2.0,
+              3.2
+            ],
+            [
+              2.0,
+              3.8000000000000003
+            ]
+          ]
+        }
+      ],
+      "discoveries": {
+        "A": 1,
+        "B": 0
+      },
+      "deliveries": {
+        "A": 0,
+        "B": 0
+      }
+    },
+    {
+      "time": 6,
+      "agents": [
+        {
+          "ant_id": 0,
+          "position": [
+            3.2,
+            2.0
+          ],
+          "heading": 3.141592653589793,
+          "role": "transporter",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2.6,
+              2.0
+            ],
+            [
+              3.2,
+              2.0
+            ]
+          ]
+        },
+        {
+          "ant_id": 1,
+          "position": [
+            2.0,
+            4.4
+          ],
+          "heading": 1.5707963267948966,
+          "role": "transporter",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              1.4
+            ],
+            [
+              2,
+              0.8
+            ],
+            [
+              2.0,
+              1.4
+            ],
+            [
+              2.0,
+              2.0
+            ],
+            [
+              2.0,
+              2.6
+            ],
+            [
+              2.0,
+              3.2
+            ],
+            [
+              2.0,
+              3.8000000000000003
+            ],
+            [
+              2.0,
+              4.4
+            ]
+          ]
+        }
+      ],
+      "discoveries": {
+        "A": 1,
+        "B": 1
+      },
+      "deliveries": {
+        "A": 0,
+        "B": 0
+      }
+    },
+    {
+      "time": 7,
+      "agents": [
+        {
+          "ant_id": 0,
+          "position": [
+            2.6,
+            2.0
+          ],
+          "heading": 3.141592653589793,
+          "role": "transporter",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2.6,
+              2.0
+            ]
+          ]
+        },
+        {
+          "ant_id": 1,
+          "position": [
+            2.0,
+            3.8000000000000003
+          ],
+          "heading": 4.71238898038469,
+          "role": "transporter",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              1.4
+            ],
+            [
+              2,
+              0.8
+            ],
+            [
+              2.0,
+              1.4
+            ],
+            [
+              2.0,
+              2.0
+            ],
+            [
+              2.0,
+              2.6
+            ],
+            [
+              2.0,
+              3.2
+            ],
+            [
+              2.0,
+              3.8000000000000003
+            ]
+          ]
+        }
+      ],
+      "discoveries": {
+        "A": 1,
+        "B": 1
+      },
+      "deliveries": {
+        "A": 0,
+        "B": 0
+      }
+    },
+    {
+      "time": 8,
+      "agents": [
+        {
+          "ant_id": 0,
+          "position": [
+            2,
+            2
+          ],
+          "heading": 3.141592653589793,
+          "role": "fcrw",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ]
+          ]
+        },
+        {
+          "ant_id": 1,
+          "position": [
+            2.0,
+            3.2
+          ],
+          "heading": 4.71238898038469,
+          "role": "transporter",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              1.4
+            ],
+            [
+              2,
+              0.8
+            ],
+            [
+              2.0,
+              1.4
+            ],
+            [
+              2.0,
+              2.0
+            ],
+            [
+              2.0,
+              2.6
+            ],
+            [
+              2.0,
+              3.2
+            ]
+          ]
+        }
+      ],
+      "discoveries": {
+        "A": 1,
+        "B": 1
+      },
+      "deliveries": {
+        "A": 1,
+        "B": 0
+      }
+    },
+    {
+      "time": 9,
+      "agents": [
+        {
+          "ant_id": 0,
+          "position": [
+            1.4,
+            2.0
+          ],
+          "heading": 3.141592653589793,
+          "role": "fcrw",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              1.4,
+              2.0
+            ]
+          ]
+        },
+        {
+          "ant_id": 1,
+          "position": [
+            2.0,
+            2.6
+          ],
+          "heading": 4.71238898038469,
+          "role": "transporter",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              1.4
+            ],
+            [
+              2,
+              0.8
+            ],
+            [
+              2.0,
+              1.4
+            ],
+            [
+              2.0,
+              2.0
+            ],
+            [
+              2.0,
+              2.6
+            ]
+          ]
+        }
+      ],
+      "discoveries": {
+        "A": 1,
+        "B": 1
+      },
+      "deliveries": {
+        "A": 1,
+        "B": 0
+      }
+    },
+    {
+      "time": 10,
+      "agents": [
+        {
+          "ant_id": 0,
+          "position": [
+            0.7999999999999999,
+            2.0
+          ],
+          "heading": 3.141592653589793,
+          "role": "fcrw",
+          "low_steps": 0,
+          "path": [
+            [
+              2,
+              2
+            ],
+            [
+              1.4,
+              2.0
+            ],
+            [
+              0.7999999999999999,
+              2.0
+            ]
+          ]
+        },
+        {
+          "ant_id": 1,
+          "position": [
+            2.0,
+            2.0
+          ],
+          "heading": 4.71238898038469,
+          "role": "fcrw",
+          "low_steps": 0,
+          "path": [
+            [
+              2.0,
+              2.0
+            ]
+          ]
+        }
+      ],
+      "discoveries": {
+        "A": 1,
+        "B": 1
+      },
+      "deliveries": {
+        "A": 1,
+        "B": 1
+      }
+    }
+  ]
+}

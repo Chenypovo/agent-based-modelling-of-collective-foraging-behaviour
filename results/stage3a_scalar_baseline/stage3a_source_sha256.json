@@ -1,0 +1,14 @@
+{
+  "src/scalar_baseline/__init__.py": "09dd48b2a41c39406a6a6d76fbdd0cb92bc455b6eae10222a12fa8c0e5a8a7b7",
+  "src/scalar_baseline/config.py": "37f40dcba20c076d91c9f8932b1dc5dbe70b85606708e76f904c4f2567f04db9",
+  "src/scalar_baseline/environment.py": "37036a0f432ff6828f99f3d8c605a4fdc447a599d22b02eeec6bc56566e9623e",
+  "src/scalar_baseline/field.py": "0d9b001ebea9bd8a12de80da7d76f86f6049956548ea30e4d31ac0d6dd2f8fb6",
+  "src/scalar_baseline/navigation.py": "a348db296579a437421491fe0e4505c7f03792e8eb2974587f91d980fbc32b2e",
+  "src/scalar_baseline/pilot.py": "3d7717df05818a62ada801b6ac7b88611e816157a30b5376ed322e394b264030",
+  "src/scalar_baseline/sensing.py": "5f2ce942aed803701c404e3c4a86993ad8b47a29a9b29c58bb8fd65a96a261d9",
+  "src/scalar_baseline/simulation.py": "3a820ba03ee7450fa7fe834baec2563baca13af08db318925bb6c47d5a4e8251",
+  "scripts/run_stage3a_pilot.py": "74eb8923f4b2ed2bef8ae44415b35dc7b7208d7d54d9249968bcf0970ecc6581",
+  "scripts/audit_stage3a.py": "80bb75d16a9f431ce12fa64800cbd8b2aee86a93ed84f08b238c6116af2ded3b",
+  "tests/test_stage3a_scalar_baseline.py": "93f76078eb251a994a5564d810597aa14f1bf510a4cf1884e4bfadebc451c270",
+  "docs/STAGE3A_SCALAR_DECAY_BASELINE_SPEC.md": "e67d44c36089cda634d086a592fe0280432f1d5e13f906c3019a2dddfa9f28ac"
+}

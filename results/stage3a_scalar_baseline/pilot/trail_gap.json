@@ -1,0 +1,335 @@
+{
+  "config": {
+    "n_ants": 1,
+    "steps": 24,
+    "seed": 20260917,
+    "arena_size": 40.0,
+    "cell_size": 1.0,
+    "diffusion": 0.0,
+    "deposit_q": 1.0,
+    "step_size": 0.6,
+    "gamma": 0.2,
+    "theta_max": 0,
+    "nest": [
+      20.0,
+      20.0
+    ],
+    "food_a": [
+      28.0,
+      20.0
+    ],
+    "food_b": [
+      20.0,
+      28.0
+    ],
+    "contact_radius": 0.75,
+    "relocation_step": null,
+    "decay": {
+      "mode": "exponential",
+      "half_life_steps": 20.0,
+      "decay_rate": 0.03465735902799726,
+      "cutoff_steps": null
+    },
+    "navigation": {
+      "signal_on": 0.5,
+      "signal_off": 0.25,
+      "loss_steps": 2,
+      "epsilon": 1e-12,
+      "max_turn": 1.0471975511965976,
+      "noise_amplitude": 0,
+      "sensor_distance": 1.0,
+      "sensor_angle": 0.7853981633974483
+    }
+  },
+  "fixture": "artificial two-cell-wide straight trail; heading=0; initial=(3.5,10); gap x cells 10..13",
+  "rows": [
+    {
+      "time": 1,
+      "left": 0.9659363289248456,
+      "right": 0.9659363289248456,
+      "position": [
+        4.1,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 2,
+      "left": 0.9330329915368075,
+      "right": 0.9330329915368075,
+      "position": [
+        4.699999999999999,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 3,
+      "left": 0.9012504626108304,
+      "right": 0.9012504626108304,
+      "position": [
+        5.299999999999999,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 4,
+      "left": 0.8705505632961243,
+      "right": 0.8705505632961243,
+      "position": [
+        5.899999999999999,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 5,
+      "left": 0.8408964152537148,
+      "right": 0.8408964152537148,
+      "position": [
+        6.499999999999998,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 6,
+      "left": 0.8122523963562358,
+      "right": 0.8122523963562358,
+      "position": [
+        7.099999999999998,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 7,
+      "left": 0.7845840978967511,
+      "right": 0.7845840978967511,
+      "position": [
+        7.6999999999999975,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 8,
+      "left": 0.7578582832551994,
+      "right": 0.7578582832551994,
+      "position": [
+        8.299999999999997,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 9,
+      "left": 0.7320428479728132,
+      "right": 0.7320428479728132,
+      "position": [
+        8.899999999999997,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 10,
+      "left": 0.707106781186548,
+      "right": 0.707106781186548,
+      "position": [
+        9.499999999999996,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 11,
+      "left": 0.0,
+      "right": 0.0,
+      "position": [
+        10.099999999999996,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 1
+    },
+    {
+      "time": 12,
+      "left": 0.0,
+      "right": 0.0,
+      "position": [
+        10.699999999999996,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "fcrw",
+      "low_steps": 0
+    },
+    {
+      "time": 13,
+      "left": 0.0,
+      "right": 0.0,
+      "position": [
+        11.299999999999995,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "fcrw",
+      "low_steps": 0
+    },
+    {
+      "time": 14,
+      "left": 0.0,
+      "right": 0.0,
+      "position": [
+        11.899999999999995,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "fcrw",
+      "low_steps": 0
+    },
+    {
+      "time": 15,
+      "left": 0.0,
+      "right": 0.0,
+      "position": [
+        12.499999999999995,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "fcrw",
+      "low_steps": 0
+    },
+    {
+      "time": 16,
+      "left": 0.0,
+      "right": 0.0,
+      "position": [
+        13.099999999999994,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "fcrw",
+      "low_steps": 0
+    },
+    {
+      "time": 17,
+      "left": 0.0,
+      "right": 0.0,
+      "position": [
+        13.699999999999994,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "fcrw",
+      "low_steps": 0
+    },
+    {
+      "time": 18,
+      "left": 0.535886731268147,
+      "right": 0.535886731268147,
+      "position": [
+        14.299999999999994,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 19,
+      "left": 0.5176324619206892,
+      "right": 0.5176324619206892,
+      "position": [
+        14.899999999999993,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 20,
+      "left": 0.5000000000000004,
+      "right": 0.5000000000000004,
+      "position": [
+        15.499999999999993,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 21,
+      "left": 0.48296816446242324,
+      "right": 0.48296816446242324,
+      "position": [
+        16.099999999999994,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 22,
+      "left": 0.4665164957684042,
+      "right": 0.4665164957684042,
+      "position": [
+        16.699999999999996,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 23,
+      "left": 0.4506252313054156,
+      "right": 0.4506252313054156,
+      "position": [
+        17.299999999999997,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    },
+    {
+      "time": 24,
+      "left": 0.43527528164806256,
+      "right": 0.43527528164806256,
+      "position": [
+        17.9,
+        10.0
+      ],
+      "heading": 0.0,
+      "role": "follower",
+      "low_steps": 0
+    }
+  ]
+}

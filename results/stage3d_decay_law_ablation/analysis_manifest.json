@@ -1,0 +1,67 @@
+{
+  "schema": "stage3d-analysis-manifest-v1",
+  "scope": "Stage 3D analysis-layer outputs; manifest excludes itself and raw arm receipts",
+  "file_count": 12,
+  "files": [
+    {
+      "path": "paired_decay_interaction.csv",
+      "bytes": 1837,
+      "sha256": "580c383b36720823a9d50f41eb56c0ff04f26adb86ca44c7a220c18795b32052"
+    },
+    {
+      "path": "confirmatory_analysis.json",
+      "bytes": 2385,
+      "sha256": "21a8f118f0ba5ecc9031cb7e6759f54bf61bbe1c1559c70247b23b70907431ec"
+    },
+    {
+      "path": "bootstrap_interaction_means.npy",
+      "bytes": 80128,
+      "sha256": "eb4b020c076f077aacaa3554a62199b8cd5e17a9ad43769fb2415133723a884d"
+    },
+    {
+      "path": "secondary_endpoints.csv",
+      "bytes": 9678,
+      "sha256": "341dee6e92e349c1d641c1edcedd5f436a94abe967481d67bd745257d8bb48f2"
+    },
+    {
+      "path": "secondary_timeseries_100step.csv",
+      "bytes": 1141077,
+      "sha256": "9584aa09e8f02ec3492082a10108865b02f3d2a312690b12758fb59c828d0ad9"
+    },
+    {
+      "path": "secondary_summary.json",
+      "bytes": 3476,
+      "sha256": "68ad06f4a583db122d6b769d9718decdef600cddcd408e47f1a17211f2e354c2"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 6232,
+      "sha256": "3cb7686588246d242cc85c5253b27c4b8e86f623f84e8fd481ef182dd28cbb4e"
+    },
+    {
+      "path": "paired_interaction.png",
+      "bytes": 79106,
+      "sha256": "b19cc3477cb936ee7e1a8281074bc06fd9d7b03536605d3318662495d035f792"
+    },
+    {
+      "path": "four_cell_capped_times.png",
+      "bytes": 109227,
+      "sha256": "f8acd6e7ee06be528e1d6cb2e5f640f1aed72ab9a53863dfb1726eb5b4dfc4dd"
+    },
+    {
+      "path": "non_delivery_food_b_delivery.png",
+      "bytes": 76661,
+      "sha256": "ec7e5670f865e3bec0661b808b9e579000fdc5bb88b834d61c614cd7b8ccd137"
+    },
+    {
+      "path": "obsolete_trail_persistence.png",
+      "bytes": 281132,
+      "sha256": "8fc325dbfd007dcd836d94365decf6e0c7bba8d02a04997e4f3deefc87e6fe7b"
+    },
+    {
+      "path": "recovery_diagnostics.png",
+      "bytes": 93556,
+      "sha256": "0be20d7691f9da189661b85157608a5eb5ba9f4d69e60d008daf76a4e6d7c43e"
+    }
+  ]
+}

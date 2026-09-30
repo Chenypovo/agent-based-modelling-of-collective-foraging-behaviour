@@ -1,0 +1,73 @@
+{
+  "seed": 2026091705,
+  "arm": "B0",
+  "status": "complete",
+  "error": null,
+  "steps_completed": 12000,
+  "first_A_discovery": 680,
+  "first_A_delivery": 1359,
+  "pre_relocation_A_deliveries": 5,
+  "pre_relocation_verified_recruitments": 2926,
+  "pre_relocation_follower_food_arrivals": 2,
+  "pre_relocation_follower_episode_lengths": [
+    11,
+    18
+  ],
+  "pre_relocation_delivery_rate_per_1000": 0.8333333333333334,
+  "pre_relocation_recovery_episodes": 0,
+  "first_B_discovery": 6623,
+  "first_B_delivery": 10697,
+  "B_not_discovered": false,
+  "B_not_delivered": false,
+  "B_deliveries": 1,
+  "capped_recovery_time": 4697,
+  "old_food_dwell_ant_steps": 1056,
+  "recovery_episodes": 0,
+  "recovery_reacquired": 0,
+  "recovery_timeouts": 0,
+  "recovery_food_contacts": 0,
+  "recovery_reacquisition_rate": null,
+  "anchor_fallbacks": 0,
+  "completed_cargo": {
+    "A": 6,
+    "B": 1
+  },
+  "incomplete_cargo": {
+    "61": "B",
+    "28": "B",
+    "13": "B",
+    "9": "B"
+  },
+  "final_field": {
+    "time": 12000,
+    "field_sum": 5522.952964206547,
+    "positive_cells": 12791,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 3692,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 5603,
+      "nest_food_centre_cells_connected_8": false
+    }
+  },
+  "final_state_digest": {
+    "agents_sha256": "83f7b042f20d7d194570655682e33569451773b74b1655823ed26e2e0bcd0447",
+    "field_sha256": "2ac597732cc26a8d2d005833150d3243cd3b541f5e041019c75c6e1fc3431f35",
+    "events_sha256": "b5f450fefde29240fe0ecb107dbc3bd35e7e2a7583c2fec24a86dc7e9253bedb",
+    "discoveries": {
+      "A": 6,
+      "B": 5
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 1
+    }
+  },
+  "wall_seconds": 18.401968375,
+  "cpu_seconds": 18.154855,
+  "peak_rss_bytes": 384446464,
+  "valid_state_every_completed_step": true
+}

@@ -1,0 +1,21 @@
+{
+  "purpose": "engineering validation only",
+  "seconds_by_fixture": {
+    "single_cell_decay": 0.00019374999999999254,
+    "straight_trail": 0.0007040839999999937,
+    "trail_gap": 0.0009110420000000008,
+    "food_relocation": 0.0010272080000000017,
+    "population_smoke": 0.015877667000000012
+  },
+  "total_seconds_including_output": 0.023459166000000004,
+  "artifact_bytes_excluding_this_runtime_file": 103949,
+  "files": {
+    "single_cell_decay.json": 849,
+    "straight_trail.json": 2814,
+    "trail_gap.json": 6408,
+    "food_relocation.json": 14321,
+    "population_smoke.json": 79557
+  },
+  "formal_experiment_runs": 0,
+  "recovery_C_implemented": false
+}

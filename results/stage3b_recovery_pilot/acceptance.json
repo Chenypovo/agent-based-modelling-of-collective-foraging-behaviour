@@ -1,0 +1,11 @@
+{
+  "engineering_pass": true,
+  "pilot_viability_pass": true,
+  "runs_complete": 10,
+  "runs_expected": 10,
+  "tests_pass": true,
+  "maximum_recovery_duration": 24,
+  "baseline_revisions": 0,
+  "confirmatory_seeds_run": 0,
+  "stage2c_resumed": false
+}

@@ -1,0 +1,40 @@
+{
+  "pass": true,
+  "seed": 2026091701,
+  "compared_through_step": 5999,
+  "static_current_digest": {
+    "agents_sha256": "460734773858f2ed31de6cbfe6ed544c5919cc22fc97fa1af60822e4edb6af66",
+    "field_sha256": "7c0a9786eea405c0688213452b35107a323b680378990787bed9646173f3b6ba",
+    "events_sha256": "10b1716b567ac2f3d786cada245497f8115eb31dca232d3b017e6a9efc4d4f1d",
+    "discoveries": {
+      "A": 11,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 4,
+      "B": 0
+    }
+  },
+  "relocation_B0_digest": {
+    "agents_sha256": "460734773858f2ed31de6cbfe6ed544c5919cc22fc97fa1af60822e4edb6af66",
+    "field_sha256": "7c0a9786eea405c0688213452b35107a323b680378990787bed9646173f3b6ba",
+    "events_sha256": "10b1716b567ac2f3d786cada245497f8115eb31dca232d3b017e6a9efc4d4f1d",
+    "discoveries": {
+      "A": 11,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 4,
+      "B": 0
+    }
+  },
+  "current_observation_count": 5285,
+  "stage3a_prefix_count": 5285,
+  "current_vs_relocation_observations_equal": true,
+  "current_vs_stage3a_observations_equal": true,
+  "random_identity": {
+    "FCRW_schedule": true,
+    "follower_noise_schedule": true,
+    "recovery_side_schedule": true
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "command": "PYTHONDONTWRITEBYTECODE=1 MPLBACKEND=Agg python3 -B -m pytest -p no:cacheprovider -q",
+  "returncode": 0,
+  "wall_seconds": 189.417834542
+}

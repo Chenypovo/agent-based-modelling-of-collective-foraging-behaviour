@@ -1,0 +1,159 @@
+[
+  {
+    "time": 2012,
+    "event": "pickup",
+    "ant_id": 39,
+    "source": "A"
+  },
+  {
+    "time": 2188,
+    "event": "pickup",
+    "ant_id": 21,
+    "source": "A"
+  },
+  {
+    "time": 4023,
+    "event": "delivery",
+    "ant_id": 39,
+    "source": "A"
+  },
+  {
+    "time": 4375,
+    "event": "delivery",
+    "ant_id": 21,
+    "source": "A"
+  },
+  {
+    "time": 5694,
+    "event": "pickup",
+    "ant_id": 73,
+    "source": "A"
+  },
+  {
+    "time": 6000,
+    "event": "relocation",
+    "carried_a": [
+      73
+    ]
+  },
+  {
+    "time": 6576,
+    "event": "pickup",
+    "ant_id": 89,
+    "source": "B"
+  },
+  {
+    "time": 6697,
+    "event": "pickup",
+    "ant_id": 60,
+    "source": "B"
+  },
+  {
+    "time": 6753,
+    "event": "pickup",
+    "ant_id": 62,
+    "source": "B"
+  },
+  {
+    "time": 7548,
+    "event": "pickup",
+    "ant_id": 66,
+    "source": "B"
+  },
+  {
+    "time": 7562,
+    "event": "pickup",
+    "ant_id": 4,
+    "source": "B"
+  },
+  {
+    "time": 7792,
+    "event": "pickup",
+    "ant_id": 8,
+    "source": "B"
+  },
+  {
+    "time": 8645,
+    "event": "pickup",
+    "ant_id": 55,
+    "source": "B"
+  },
+  {
+    "time": 8662,
+    "event": "pickup",
+    "ant_id": 69,
+    "source": "B"
+  },
+  {
+    "time": 8831,
+    "event": "pickup",
+    "ant_id": 92,
+    "source": "B"
+  },
+  {
+    "time": 9488,
+    "event": "pickup",
+    "ant_id": 64,
+    "source": "B"
+  },
+  {
+    "time": 11387,
+    "event": "delivery",
+    "ant_id": 73,
+    "source": "A"
+  },
+  {
+    "time": 13151,
+    "event": "delivery",
+    "ant_id": 89,
+    "source": "B"
+  },
+  {
+    "time": 13326,
+    "event": "delivery",
+    "ant_id": 62,
+    "source": "B"
+  },
+  {
+    "time": 13393,
+    "event": "delivery",
+    "ant_id": 60,
+    "source": "B"
+  },
+  {
+    "time": 15095,
+    "event": "delivery",
+    "ant_id": 66,
+    "source": "B"
+  },
+  {
+    "time": 15123,
+    "event": "delivery",
+    "ant_id": 4,
+    "source": "B"
+  },
+  {
+    "time": 15583,
+    "event": "delivery",
+    "ant_id": 8,
+    "source": "B"
+  },
+  {
+    "time": 17289,
+    "event": "delivery",
+    "ant_id": 55,
+    "source": "B"
+  },
+  {
+    "time": 17323,
+    "event": "delivery",
+    "ant_id": 69,
+    "source": "B"
+  },
+  {
+    "time": 17661,
+    "event": "delivery",
+    "ant_id": 92,
+    "source": "B"
+  }
+]

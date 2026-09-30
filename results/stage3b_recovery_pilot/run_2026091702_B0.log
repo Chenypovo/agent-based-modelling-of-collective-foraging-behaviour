@@ -1,0 +1,81 @@
+{"seed": 2026091702, "arm": "B0", "step": 1000, "A": 0, "B": 0, "wall": 1.43}
+{"seed": 2026091702, "arm": "B0", "step": 2000, "A": 0, "B": 0, "wall": 2.82}
+{"seed": 2026091702, "arm": "B0", "step": 3000, "A": 0, "B": 0, "wall": 4.17}
+{"seed": 2026091702, "arm": "B0", "step": 4000, "A": 0, "B": 0, "wall": 5.49}
+{"seed": 2026091702, "arm": "B0", "step": 5000, "A": 0, "B": 0, "wall": 6.82}
+{"seed": 2026091702, "arm": "B0", "step": 6000, "A": 1, "B": 0, "wall": 8.16}
+{"seed": 2026091702, "arm": "B0", "step": 7000, "A": 2, "B": 0, "wall": 9.52}
+{"seed": 2026091702, "arm": "B0", "step": 8000, "A": 2, "B": 0, "wall": 10.88}
+{"seed": 2026091702, "arm": "B0", "step": 9000, "A": 2, "B": 0, "wall": 12.24}
+{"seed": 2026091702, "arm": "B0", "step": 10000, "A": 2, "B": 0, "wall": 13.6}
+{"seed": 2026091702, "arm": "B0", "step": 11000, "A": 2, "B": 0, "wall": 14.94}
+{"seed": 2026091702, "arm": "B0", "step": 12000, "A": 2, "B": 0, "wall": 16.29}
+{
+  "seed": 2026091702,
+  "arm": "B0",
+  "status": "complete",
+  "error": null,
+  "steps_completed": 12000,
+  "first_A_discovery": 2691,
+  "first_A_delivery": 5381,
+  "pre_relocation_A_deliveries": 1,
+  "pre_relocation_verified_recruitments": 1227,
+  "pre_relocation_follower_food_arrivals": 1,
+  "pre_relocation_follower_episode_lengths": [
+    1
+  ],
+  "pre_relocation_delivery_rate_per_1000": 0.16666666666666666,
+  "pre_relocation_recovery_episodes": 0,
+  "first_B_discovery": 7415,
+  "first_B_delivery": null,
+  "B_not_discovered": false,
+  "B_not_delivered": true,
+  "B_deliveries": 0,
+  "capped_recovery_time": 6000,
+  "old_food_dwell_ant_steps": 2099,
+  "recovery_episodes": 0,
+  "recovery_reacquired": 0,
+  "recovery_timeouts": 0,
+  "recovery_food_contacts": 0,
+  "recovery_reacquisition_rate": null,
+  "anchor_fallbacks": 0,
+  "completed_cargo": {
+    "A": 2,
+    "B": 0
+  },
+  "incomplete_cargo": {
+    "56": "B"
+  },
+  "final_field": {
+    "time": 12000,
+    "field_sum": 1419.090252545444,
+    "positive_cells": 5517,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 992,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 1568,
+      "nest_food_centre_cells_connected_8": false
+    }
+  },
+  "final_state_digest": {
+    "agents_sha256": "0f63d15d951bd6cca46865623e369fba55eb1f4b6b78b736b2695fb6af6f7af0",
+    "field_sha256": "939afe7998046c0ecded17381a49756a50d23463c8c427eeaf18bf08b3d70458",
+    "events_sha256": "a4e2b2505da72304c195e33d4e6619ef6ce76f12ac592a65b3c713274d47017c",
+    "discoveries": {
+      "A": 2,
+      "B": 1
+    },
+    "deliveries": {
+      "A": 2,
+      "B": 0
+    }
+  },
+  "wall_seconds": 17.477247875,
+  "cpu_seconds": 17.371681000000002,
+  "peak_rss_bytes": 391012352,
+  "valid_state_every_completed_step": true
+}

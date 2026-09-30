@@ -1,0 +1,28 @@
+{
+  "time": 5381,
+  "field_sum": 2361.2400729582055,
+  "positive_cells": 2660,
+  "on": {
+    "threshold": 0.5,
+    "detectable_cells": 1819,
+    "nest_food_centre_cells_connected_8": false
+  },
+  "off": {
+    "threshold": 0.25,
+    "detectable_cells": 2469,
+    "nest_food_centre_cells_connected_8": false
+  },
+  "first_pickup_ant_route": {
+    "ant_id": 64,
+    "on": {
+      "points": 2690,
+      "detectable_fraction": 0.7475836431226766,
+      "longest_undetectable_run_points": 71
+    },
+    "off": {
+      "points": 2690,
+      "detectable_fraction": 0.9468401486988848,
+      "longest_undetectable_run_points": 5
+    }
+  }
+}

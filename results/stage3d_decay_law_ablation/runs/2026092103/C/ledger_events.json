@@ -1,0 +1,120 @@
+[
+  {
+    "time": 863,
+    "event": "pickup",
+    "ant_id": 31,
+    "source": "A"
+  },
+  {
+    "time": 1549,
+    "event": "pickup",
+    "ant_id": 18,
+    "source": "A"
+  },
+  {
+    "time": 1725,
+    "event": "delivery",
+    "ant_id": 31,
+    "source": "A"
+  },
+  {
+    "time": 2926,
+    "event": "delivery",
+    "ant_id": 18,
+    "source": "A"
+  },
+  {
+    "time": 2947,
+    "event": "pickup",
+    "ant_id": 50,
+    "source": "A"
+  },
+  {
+    "time": 3675,
+    "event": "pickup",
+    "ant_id": 68,
+    "source": "A"
+  },
+  {
+    "time": 4434,
+    "event": "pickup",
+    "ant_id": 81,
+    "source": "A"
+  },
+  {
+    "time": 4540,
+    "event": "pickup",
+    "ant_id": 20,
+    "source": "A"
+  },
+  {
+    "time": 4789,
+    "event": "pickup",
+    "ant_id": 88,
+    "source": "A"
+  },
+  {
+    "time": 5893,
+    "event": "delivery",
+    "ant_id": 50,
+    "source": "A"
+  },
+  {
+    "time": 6000,
+    "event": "relocation",
+    "carried_a": [
+      20,
+      68,
+      81,
+      88
+    ]
+  },
+  {
+    "time": 7276,
+    "event": "pickup",
+    "ant_id": 24,
+    "source": "B"
+  },
+  {
+    "time": 7349,
+    "event": "delivery",
+    "ant_id": 68,
+    "source": "A"
+  },
+  {
+    "time": 8867,
+    "event": "delivery",
+    "ant_id": 81,
+    "source": "A"
+  },
+  {
+    "time": 9079,
+    "event": "delivery",
+    "ant_id": 20,
+    "source": "A"
+  },
+  {
+    "time": 9577,
+    "event": "delivery",
+    "ant_id": 88,
+    "source": "A"
+  },
+  {
+    "time": 13420,
+    "event": "pickup",
+    "ant_id": 9,
+    "source": "B"
+  },
+  {
+    "time": 14364,
+    "event": "pickup",
+    "ant_id": 20,
+    "source": "B"
+  },
+  {
+    "time": 14551,
+    "event": "delivery",
+    "ant_id": 24,
+    "source": "B"
+  }
+]

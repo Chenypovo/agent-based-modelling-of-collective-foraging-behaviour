@@ -1,0 +1,30 @@
+{
+  "limits": {
+    "per_run_wall_seconds": 600,
+    "per_run_cpu_seconds": 600,
+    "per_run_peak_rss_bytes": 2147483648,
+    "all_pairs_cpu_seconds": 7200,
+    "all_pairs_retained_bytes": 2147483648,
+    "single_file_bytes": 52428800
+  },
+  "total_cpu_seconds": 155.912212,
+  "total_wall_seconds_sequential": 157.118749376,
+  "max_run_cpu_seconds": 18.154855,
+  "max_run_wall_seconds": 18.401968375,
+  "max_peak_rss_bytes": 391012352,
+  "run_output_bytes": {
+    "runs/2026091701/B0": 5305860,
+    "runs/2026091701/C": 3558917,
+    "runs/2026091702/B0": 224606,
+    "runs/2026091702/C": 2329080,
+    "runs/2026091703/B0": 518469,
+    "runs/2026091703/C": 2955843,
+    "runs/2026091704/B0": 461109,
+    "runs/2026091704/C": 5423762,
+    "runs/2026091705/B0": 360810,
+    "runs/2026091705/C": 3413507
+  },
+  "total_run_output_bytes": 24551963,
+  "largest_file_bytes_before_report": 4932128,
+  "all_limits_pass": true
+}

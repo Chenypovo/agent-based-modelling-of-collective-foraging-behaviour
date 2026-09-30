@@ -1,0 +1,350 @@
+[
+  {
+    "time": 1000,
+    "field_sum": 0.0,
+    "positive_cells": 0,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 0,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 0,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "discoveries": {
+      "A": 0,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    },
+    "raw_recruitments": 0,
+    "roles": {
+      "fcrw": 100,
+      "follower": 0,
+      "transporter": 0
+    }
+  },
+  {
+    "time": 2000,
+    "field_sum": 65.49072997532396,
+    "positive_cells": 42,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 42,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 42,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "discoveries": {
+      "A": 1,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    },
+    "raw_recruitments": 5,
+    "roles": {
+      "fcrw": 97,
+      "follower": 2,
+      "transporter": 1
+    }
+  },
+  {
+    "time": 3000,
+    "field_sum": 1234.6456930329825,
+    "positive_cells": 901,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 885,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 901,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "discoveries": {
+      "A": 3,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 0,
+      "B": 0
+    },
+    "raw_recruitments": 231,
+    "roles": {
+      "fcrw": 97,
+      "follower": 0,
+      "transporter": 3
+    }
+  },
+  {
+    "time": 4000,
+    "field_sum": 3900.0815283635334,
+    "positive_cells": 3215,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 2947,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 3209,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "discoveries": {
+      "A": 5,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 1,
+      "B": 0
+    },
+    "raw_recruitments": 658,
+    "roles": {
+      "fcrw": 88,
+      "follower": 8,
+      "transporter": 4
+    }
+  },
+  {
+    "time": 5000,
+    "field_sum": 5049.107563396861,
+    "positive_cells": 5613,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 4063,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 5355,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 1,
+      "B": 0
+    },
+    "raw_recruitments": 1629,
+    "roles": {
+      "fcrw": 78,
+      "follower": 17,
+      "transporter": 5
+    }
+  },
+  {
+    "time": 6000,
+    "field_sum": 5255.805120768654,
+    "positive_cells": 7379,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 4011,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 6073,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 0
+    },
+    "raw_recruitments": 3049,
+    "roles": {
+      "fcrw": 72,
+      "follower": 25,
+      "transporter": 3
+    }
+  },
+  {
+    "time": 7000,
+    "field_sum": 3788.036834298254,
+    "positive_cells": 8164,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 2557,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 4884,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 5,
+      "B": 0
+    },
+    "raw_recruitments": 4355,
+    "roles": {
+      "fcrw": 77,
+      "follower": 22,
+      "transporter": 1
+    }
+  },
+  {
+    "time": 8000,
+    "field_sum": 2615.6159664747047,
+    "positive_cells": 8742,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 1464,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 3151,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "discoveries": {
+      "A": 6,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 5,
+      "B": 0
+    },
+    "raw_recruitments": 5385,
+    "roles": {
+      "fcrw": 88,
+      "follower": 11,
+      "transporter": 1
+    }
+  },
+  {
+    "time": 9000,
+    "field_sum": 2737.3712407060934,
+    "positive_cells": 9781,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 1629,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 2645,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "discoveries": {
+      "A": 7,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 5,
+      "B": 0
+    },
+    "raw_recruitments": 5936,
+    "roles": {
+      "fcrw": 84,
+      "follower": 14,
+      "transporter": 2
+    }
+  },
+  {
+    "time": 10000,
+    "field_sum": 2417.1416393794852,
+    "positive_cells": 10382,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 1578,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 2507,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "discoveries": {
+      "A": 7,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    },
+    "raw_recruitments": 6636,
+    "roles": {
+      "fcrw": 87,
+      "follower": 12,
+      "transporter": 1
+    }
+  },
+  {
+    "time": 11000,
+    "field_sum": 1930.168369015332,
+    "positive_cells": 10671,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 1023,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 1999,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "discoveries": {
+      "A": 7,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    },
+    "raw_recruitments": 7139,
+    "roles": {
+      "fcrw": 92,
+      "follower": 7,
+      "transporter": 1
+    }
+  },
+  {
+    "time": 12000,
+    "field_sum": 2886.1601223514863,
+    "positive_cells": 11633,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 1663,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 2255,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "discoveries": {
+      "A": 10,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 6,
+      "B": 0
+    },
+    "raw_recruitments": 7300,
+    "roles": {
+      "fcrw": 86,
+      "follower": 10,
+      "transporter": 4
+    }
+  }
+]

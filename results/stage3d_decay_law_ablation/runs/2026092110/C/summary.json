@@ -1,0 +1,48 @@
+{
+  "evidence_status": "stage3d_formal",
+  "seed": 2026092110,
+  "arm": "C",
+  "decay_law": "hard_cutoff_cell_timer",
+  "status": "complete",
+  "steps_completed": 18000,
+  "first_B_discovery": 6636,
+  "first_B_delivery": 13271,
+  "B_deliveries": 3,
+  "non_delivery": false,
+  "capped_recovery_time": 7271,
+  "pre_relocation_A_deliveries": 3,
+  "old_food_dwell_ant_steps": 3851,
+  "obsolete_trail_ant_steps": 3839,
+  "recovery_count": 8510,
+  "recovery_reacquired": 5988,
+  "recovery_timeouts": 2521,
+  "recovery_food_contacts": 1,
+  "recovery_B_discovery_within_100_steps": 18,
+  "recovery_B_delivery_within_100_steps": 0,
+  "completed_cargo": {
+    "A": 3,
+    "B": 3
+  },
+  "incomplete_cargo": {
+    "37": "B",
+    "84": "B",
+    "71": "B",
+    "22": "B",
+    "13": "B",
+    "85": "B"
+  },
+  "final_state_digest": {
+    "agents_sha256": "0d7228950a6a265eb44467dba5ca3a6afad4691006222aadc6695368930e5c7e",
+    "field_sha256": "3cbe845335ac1b482b6cb8a3a00e57291b6d65ae6fb3b9087b4b2a0e2801cedb",
+    "events_sha256": "9b6eef8ec3b5251de79d9256dbee62462fcccc5a9dad90d095a0f53617935cca",
+    "discoveries": {
+      "A": 3,
+      "B": 9
+    },
+    "deliveries": {
+      "A": 3,
+      "B": 3
+    }
+  },
+  "valid_state_every_completed_step": true
+}

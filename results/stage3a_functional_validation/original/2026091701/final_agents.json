@@ -1,0 +1,1002 @@
+[
+  {
+    "ant_id": 0,
+    "position": [
+      203.96049060120694,
+      240.45904869030403
+    ],
+    "heading": 1.709587797648548,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 1,
+    "position": [
+      192.5697517825368,
+      95.7869749067364
+    ],
+    "heading": 5.760682818210622,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 2,
+    "position": [
+      184.5963492814567,
+      63.226887114462215
+    ],
+    "heading": 1.5126087797998224,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 3,
+    "position": [
+      247.70820319058515,
+      0.0
+    ],
+    "heading": 5.33877351585024,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 4,
+    "position": [
+      89.88050502792021,
+      209.3280217519089
+    ],
+    "heading": 3.6065887759911184,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 5,
+    "position": [
+      89.48740388157235,
+      44.26965197621626
+    ],
+    "heading": 3.816427103836954,
+    "role": "fcrw",
+    "path_vertices": 4194
+  },
+  {
+    "ant_id": 6,
+    "position": [
+      198.44430106083593,
+      0.0
+    ],
+    "heading": 3.940203134521997,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 7,
+    "position": [
+      218.7752723505337,
+      35.86459483996027
+    ],
+    "heading": 4.691057840179307,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 8,
+    "position": [
+      157.87727915780061,
+      4.624154319757157
+    ],
+    "heading": 2.381761934567957,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 9,
+    "position": [
+      300,
+      18.560381041013866
+    ],
+    "heading": 6.252786453273755,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 10,
+    "position": [
+      78.39234566125415,
+      0.0
+    ],
+    "heading": 3.499497704734027,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 11,
+    "position": [
+      85.61370569596596,
+      182.83913029285762
+    ],
+    "heading": 3.456220848826905,
+    "role": "transporter",
+    "path_vertices": 1045
+  },
+  {
+    "ant_id": 12,
+    "position": [
+      163.7109658845524,
+      264.29233641236505
+    ],
+    "heading": 0.4327768195757251,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 13,
+    "position": [
+      68.15406217564438,
+      169.202129356557
+    ],
+    "heading": 2.0828413853975842,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 14,
+    "position": [
+      274.50679321871684,
+      131.11939783476998
+    ],
+    "heading": 3.2533004332260487,
+    "role": "transporter",
+    "path_vertices": 10601
+  },
+  {
+    "ant_id": 15,
+    "position": [
+      294.5242703505009,
+      213.57163638276302
+    ],
+    "heading": 4.7239987066249665,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 16,
+    "position": [
+      49.7408738213529,
+      300
+    ],
+    "heading": 1.5026279276437338,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 17,
+    "position": [
+      280.96119901279894,
+      235.5458577878237
+    ],
+    "heading": 1.7913612455022978,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 18,
+    "position": [
+      300,
+      64.70970178893316
+    ],
+    "heading": 6.241746620390535,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 19,
+    "position": [
+      297.9812551886203,
+      200.6858231566808
+    ],
+    "heading": 4.360647632510192,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 20,
+    "position": [
+      208.38815825469948,
+      205.8535888203108
+    ],
+    "heading": 2.2621540118051975,
+    "role": "transporter",
+    "path_vertices": 10935
+  },
+  {
+    "ant_id": 21,
+    "position": [
+      251.17658280480197,
+      141.15421970749054
+    ],
+    "heading": 2.049599858551428,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 22,
+    "position": [
+      187.65789277763386,
+      119.86037438812556
+    ],
+    "heading": 4.841015838767117,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 23,
+    "position": [
+      267.7467037131978,
+      183.7638904048287
+    ],
+    "heading": 1.1215653438744602,
+    "role": "transporter",
+    "path_vertices": 10573
+  },
+  {
+    "ant_id": 24,
+    "position": [
+      147.30912767248358,
+      81.64788370609537
+    ],
+    "heading": 0.8001485043219697,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 25,
+    "position": [
+      300,
+      23.32079111460771
+    ],
+    "heading": 0.047754054338087215,
+    "role": "follower",
+    "path_vertices": 8228
+  },
+  {
+    "ant_id": 26,
+    "position": [
+      300,
+      18.4680807701594
+    ],
+    "heading": 0.13591134802949945,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 27,
+    "position": [
+      300,
+      64.9058463166599
+    ],
+    "heading": 0.1680205957519494,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 28,
+    "position": [
+      297.678337226165,
+      44.276377150330035
+    ],
+    "heading": 0.8957497674580743,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 29,
+    "position": [
+      95.85457541741194,
+      243.76416747801392
+    ],
+    "heading": 2.9556248425890295,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 30,
+    "position": [
+      223.09230133001788,
+      263.6219536884951
+    ],
+    "heading": 2.6406528258283495,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 31,
+    "position": [
+      131.8376280083816,
+      261.543271155706
+    ],
+    "heading": 3.469578177309351,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 32,
+    "position": [
+      87.16811802298209,
+      76.82219754683486
+    ],
+    "heading": 1.2830383093825048,
+    "role": "fcrw",
+    "path_vertices": 9114
+  },
+  {
+    "ant_id": 33,
+    "position": [
+      124.70987134990808,
+      276.3193360277937
+    ],
+    "heading": 1.2638706650722789,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 34,
+    "position": [
+      72.00256950661267,
+      19.279227112429755
+    ],
+    "heading": 4.6903948110203935,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 35,
+    "position": [
+      148.75113808521965,
+      147.90326966690128
+    ],
+    "heading": 1.4961892182476144,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 36,
+    "position": [
+      168.97562781673432,
+      27.732858615146228
+    ],
+    "heading": 6.233537014371509,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 37,
+    "position": [
+      103.20183423660878,
+      186.34263633526592
+    ],
+    "heading": 6.080292761714902,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 38,
+    "position": [
+      49.987870006204034,
+      300
+    ],
+    "heading": 1.4813384150671949,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 39,
+    "position": [
+      58.78549645633551,
+      49.30723758418578
+    ],
+    "heading": 5.205739940738221,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 40,
+    "position": [
+      64.75756268161366,
+      55.961220686501015
+    ],
+    "heading": 3.6351350425899214,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 41,
+    "position": [
+      136.7003953672792,
+      240.586193321714
+    ],
+    "heading": 1.458838225972598,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 42,
+    "position": [
+      100.70244625885682,
+      174.51304800089142
+    ],
+    "heading": 0.5335263760818758,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 43,
+    "position": [
+      238.04660122461533,
+      99.42600588550636
+    ],
+    "heading": 1.0481132462542708,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 44,
+    "position": [
+      157.66848288839947,
+      208.65086750092476
+    ],
+    "heading": 5.0106044288599305,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 45,
+    "position": [
+      101.9460449427102,
+      147.13027816737488
+    ],
+    "heading": 3.1929317370047974,
+    "role": "transporter",
+    "path_vertices": 2595
+  },
+  {
+    "ant_id": 46,
+    "position": [
+      69.90188221253231,
+      0.0
+    ],
+    "heading": 5.388726973532401,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 47,
+    "position": [
+      139.5306075913968,
+      37.452790157863014
+    ],
+    "heading": 2.673500621151795,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 48,
+    "position": [
+      49.97922054077865,
+      300
+    ],
+    "heading": 1.5906404022025176,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 49,
+    "position": [
+      95.8894165777925,
+      191.19325978134674
+    ],
+    "heading": 3.5667616994121403,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 50,
+    "position": [
+      150.31465941523197,
+      286.6927628578006
+    ],
+    "heading": 2.4828822581631838,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 51,
+    "position": [
+      19.505053911224824,
+      26.609490343647266
+    ],
+    "heading": 3.286688718655144,
+    "role": "fcrw",
+    "path_vertices": 5392
+  },
+  {
+    "ant_id": 52,
+    "position": [
+      212.66393772785148,
+      30.772413253355133
+    ],
+    "heading": 0.7656677316960936,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 53,
+    "position": [
+      180.6378115291798,
+      231.6712531370547
+    ],
+    "heading": 5.258234952069847,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 54,
+    "position": [
+      143.50256807268084,
+      185.09254872191343
+    ],
+    "heading": 2.779335195697088,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 55,
+    "position": [
+      65.11156385044474,
+      0.0
+    ],
+    "heading": 4.031339954432167,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 56,
+    "position": [
+      34.90188618267878,
+      74.10558464853895
+    ],
+    "heading": 3.9928443226703427,
+    "role": "fcrw",
+    "path_vertices": 10984
+  },
+  {
+    "ant_id": 57,
+    "position": [
+      33.5662169599793,
+      246.73095810630468
+    ],
+    "heading": 3.523614539780129,
+    "role": "fcrw",
+    "path_vertices": 8000
+  },
+  {
+    "ant_id": 58,
+    "position": [
+      81.88659138577962,
+      37.47989798980674
+    ],
+    "heading": 2.7353771997367606,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 59,
+    "position": [
+      32.52999227122217,
+      300
+    ],
+    "heading": 1.6121803971574282,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 60,
+    "position": [
+      300,
+      18.406155747781387
+    ],
+    "heading": 6.254838673495276,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 61,
+    "position": [
+      203.07256600192048,
+      32.51125349417112
+    ],
+    "heading": 4.1474659963907765,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 62,
+    "position": [
+      300,
+      242.8259381194258
+    ],
+    "heading": 5.125056557333308,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 63,
+    "position": [
+      172.93644252805458,
+      35.67070120682003
+    ],
+    "heading": 3.892365187762464,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 64,
+    "position": [
+      289.32755463831114,
+      275.32081955743746
+    ],
+    "heading": 2.1685009770132533,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 65,
+    "position": [
+      300,
+      64.95684899217143
+    ],
+    "heading": 6.191002578168373,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 66,
+    "position": [
+      210.159153061431,
+      267.5690785844923
+    ],
+    "heading": 1.6172418878252688,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 67,
+    "position": [
+      270.364462090059,
+      0.0
+    ],
+    "heading": 4.663521801861143,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 68,
+    "position": [
+      36.143468211454916,
+      33.17369731666853
+    ],
+    "heading": 6.00754420055361,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 69,
+    "position": [
+      32.205375253305505,
+      89.88290417828793
+    ],
+    "heading": 2.511772404435781,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 70,
+    "position": [
+      133.9165694355779,
+      176.94935427034127
+    ],
+    "heading": 3.3883063778295193,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 71,
+    "position": [
+      244.0278740483781,
+      43.93198729327781
+    ],
+    "heading": 5.80614751378653,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 72,
+    "position": [
+      162.94046644043254,
+      0.6100578551456458
+    ],
+    "heading": 3.259500004030014,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 73,
+    "position": [
+      27.509595891513765,
+      51.55418796606605
+    ],
+    "heading": 5.844590704874542,
+    "role": "fcrw",
+    "path_vertices": 1749
+  },
+  {
+    "ant_id": 74,
+    "position": [
+      49.97438727823926,
+      300
+    ],
+    "heading": 1.7082430122380683,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 75,
+    "position": [
+      145.07021392805814,
+      178.5649030762661
+    ],
+    "heading": 2.5349929147648673,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 76,
+    "position": [
+      300,
+      64.79101693491333
+    ],
+    "heading": 6.215451613997634,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 77,
+    "position": [
+      67.94261090510105,
+      204.82154796259778
+    ],
+    "heading": 3.797912703881786,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 78,
+    "position": [
+      4.865331316929431,
+      84.5571752573289
+    ],
+    "heading": 3.5423011625832714,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 79,
+    "position": [
+      300,
+      87.49663433142274
+    ],
+    "heading": 0.004141314645443039,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 80,
+    "position": [
+      39.21438213936834,
+      57.769296747511625
+    ],
+    "heading": 1.4668419297537643,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 81,
+    "position": [
+      166.12809381932405,
+      249.0641175494884
+    ],
+    "heading": 5.474411985923377,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 82,
+    "position": [
+      165.95779248487204,
+      99.91521956856182
+    ],
+    "heading": 2.765528929414802,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 83,
+    "position": [
+      114.04425314328044,
+      181.24661739361878
+    ],
+    "heading": 1.0506060193276274,
+    "role": "fcrw",
+    "path_vertices": 3928
+  },
+  {
+    "ant_id": 84,
+    "position": [
+      267.6431554704608,
+      0.0
+    ],
+    "heading": 4.94192810174385,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 85,
+    "position": [
+      60.88694083997506,
+      41.174672036803436
+    ],
+    "heading": 5.376333552566677,
+    "role": "fcrw",
+    "path_vertices": 4030
+  },
+  {
+    "ant_id": 86,
+    "position": [
+      294.0850226977562,
+      99.36532829656547
+    ],
+    "heading": 5.900079866032183,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 87,
+    "position": [
+      19.33136572231822,
+      93.72836833974071
+    ],
+    "heading": 1.4051506625702914,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 88,
+    "position": [
+      238.27378252559456,
+      2.2423745449118515
+    ],
+    "heading": 3.0263833219623946,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 89,
+    "position": [
+      70.78963095510483,
+      81.18524338627918
+    ],
+    "heading": 4.383132792504979,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 90,
+    "position": [
+      65.6954111145192,
+      179.58559020012083
+    ],
+    "heading": 1.3271870094093523,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 91,
+    "position": [
+      300,
+      64.94523701526508
+    ],
+    "heading": 0.10995968417226026,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 92,
+    "position": [
+      238.3664898683814,
+      239.40035656717134
+    ],
+    "heading": 1.902784947077376,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 93,
+    "position": [
+      37.06942084691833,
+      300
+    ],
+    "heading": 1.670848081719697,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 94,
+    "position": [
+      164.39831472999757,
+      29.17024894583441
+    ],
+    "heading": 3.560245186860721,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 95,
+    "position": [
+      216.65044381809756,
+      119.64038502548648
+    ],
+    "heading": 4.986933655639598,
+    "role": "fcrw",
+    "path_vertices": 3618
+  },
+  {
+    "ant_id": 96,
+    "position": [
+      241.73040160017166,
+      153.96332822936236
+    ],
+    "heading": 1.6515732345011498,
+    "role": "follower",
+    "path_vertices": 766
+  },
+  {
+    "ant_id": 97,
+    "position": [
+      126.05219543726332,
+      181.62173669883782
+    ],
+    "heading": 1.3090189419365479,
+    "role": "follower",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 98,
+    "position": [
+      152.8178468608287,
+      243.95030640093137
+    ],
+    "heading": 0.26842356269553863,
+    "role": "fcrw",
+    "path_vertices": 12001
+  },
+  {
+    "ant_id": 99,
+    "position": [
+      282.59768634667813,
+      299.68359767236774
+    ],
+    "heading": 3.12228084240322,
+    "role": "fcrw",
+    "path_vertices": 12001
+  }
+]

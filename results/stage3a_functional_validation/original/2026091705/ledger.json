@@ -1,0 +1,122 @@
+{
+  "discoveries": {
+    "A": 11,
+    "B": 0
+  },
+  "deliveries": {
+    "A": 6,
+    "B": 0
+  },
+  "cargo": {
+    "67": "A",
+    "8": "A",
+    "13": "A",
+    "74": "A",
+    "75": "A"
+  },
+  "carried_a_at_relocation": [],
+  "events": [
+    {
+      "time": 680,
+      "event": "pickup",
+      "ant_id": 32,
+      "source": "A"
+    },
+    {
+      "time": 954,
+      "event": "pickup",
+      "ant_id": 77,
+      "source": "A"
+    },
+    {
+      "time": 1343,
+      "event": "pickup",
+      "ant_id": 94,
+      "source": "A"
+    },
+    {
+      "time": 1359,
+      "event": "delivery",
+      "ant_id": 32,
+      "source": "A"
+    },
+    {
+      "time": 1394,
+      "event": "pickup",
+      "ant_id": 66,
+      "source": "A"
+    },
+    {
+      "time": 1822,
+      "event": "pickup",
+      "ant_id": 24,
+      "source": "A"
+    },
+    {
+      "time": 1907,
+      "event": "delivery",
+      "ant_id": 77,
+      "source": "A"
+    },
+    {
+      "time": 2685,
+      "event": "delivery",
+      "ant_id": 94,
+      "source": "A"
+    },
+    {
+      "time": 2787,
+      "event": "delivery",
+      "ant_id": 66,
+      "source": "A"
+    },
+    {
+      "time": 3461,
+      "event": "pickup",
+      "ant_id": 84,
+      "source": "A"
+    },
+    {
+      "time": 3643,
+      "event": "delivery",
+      "ant_id": 24,
+      "source": "A"
+    },
+    {
+      "time": 6861,
+      "event": "delivery",
+      "ant_id": 84,
+      "source": "A"
+    },
+    {
+      "time": 10301,
+      "event": "pickup",
+      "ant_id": 67,
+      "source": "A"
+    },
+    {
+      "time": 11039,
+      "event": "pickup",
+      "ant_id": 8,
+      "source": "A"
+    },
+    {
+      "time": 11309,
+      "event": "pickup",
+      "ant_id": 13,
+      "source": "A"
+    },
+    {
+      "time": 11318,
+      "event": "pickup",
+      "ant_id": 74,
+      "source": "A"
+    },
+    {
+      "time": 11549,
+      "event": "pickup",
+      "ant_id": 75,
+      "source": "A"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+[
+  {
+    "time": 6000,
+    "event": "relocation",
+    "carried_a": []
+  },
+  {
+    "time": 7750,
+    "event": "pickup",
+    "ant_id": 9,
+    "source": "B"
+  },
+  {
+    "time": 10104,
+    "event": "pickup",
+    "ant_id": 77,
+    "source": "B"
+  },
+  {
+    "time": 10965,
+    "event": "pickup",
+    "ant_id": 76,
+    "source": "B"
+  },
+  {
+    "time": 15409,
+    "event": "pickup",
+    "ant_id": 12,
+    "source": "B"
+  },
+  {
+    "time": 15499,
+    "event": "delivery",
+    "ant_id": 9,
+    "source": "B"
+  },
+  {
+    "time": 17277,
+    "event": "pickup",
+    "ant_id": 10,
+    "source": "B"
+  },
+  {
+    "time": 17556,
+    "event": "pickup",
+    "ant_id": 93,
+    "source": "B"
+  }
+]

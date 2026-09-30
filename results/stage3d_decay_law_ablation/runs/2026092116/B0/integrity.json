@@ -1,0 +1,9 @@
+{
+  "pass": true,
+  "population": 100,
+  "population_expected": 100,
+  "finite_numbers": true,
+  "bounds_valid": true,
+  "cargo_conserved": true,
+  "maximum_recovery_duration": 0
+}

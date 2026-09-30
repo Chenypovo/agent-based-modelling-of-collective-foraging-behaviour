@@ -1,0 +1,18 @@
+{
+  "minimum_functional_gate_pass": true,
+  "discovery_and_delivery_seeds": 5,
+  "verified_recruitment_seeds": 5,
+  "follower_arrival_seeds": 5,
+  "complete_valid_seeds": 5,
+  "resources_pass": true,
+  "baseline_revisions": 0,
+  "recovery_C": false,
+  "relocation_runs": 0,
+  "stage3b_started": false,
+  "follower_arrival_episode_steps": {
+    "min": 1,
+    "median": 12.0,
+    "max": 79
+  },
+  "limitation": "Passing the stated minimum gate does not establish continuous nest-to-food following or scientific pheromone benefit. Full regression test receipt is separate."
+}

@@ -1,0 +1,10 @@
+{
+  "pass": true,
+  "manifest_count": 10,
+  "common_manifest": {
+    "docs/STAGE3B_RECOVERY_PILOT_SPEC.md": "bb777d4e7a21f11991d582cdd64a92e0fbba605ac4f300ea167f48f1fc4ed4fb",
+    "src/scalar_baseline/stage3b.py": "99f944fca91c1751665b99a7028eaa58fa85951c186c50b9940062ec54e7c334",
+    "scripts/run_stage3b_arm.py": "33e005de14c0e11546608c8fd51eddd48ccfefee740c1b810b6c45d68b7ccea9",
+    "tests/test_stage3b_recovery.py": "6ee2c9815084d4eb7b65ef54329c70ecc248ddbf30ce3e00cb069331dfec8bbd"
+  }
+}

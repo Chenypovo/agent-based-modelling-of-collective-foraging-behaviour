@@ -1,0 +1,69 @@
+{
+  "pass": true,
+  "default_config": {
+    "n_ants": 10,
+    "steps": 100,
+    "seed": 20260917,
+    "arena_size": 40.0,
+    "cell_size": 1.0,
+    "diffusion": 0.0,
+    "deposit_q": 1.0,
+    "step_size": 0.6,
+    "gamma": 0.2,
+    "theta_max": 1.0471975511965976,
+    "nest": [
+      20.0,
+      20.0
+    ],
+    "food_a": [
+      28.0,
+      20.0
+    ],
+    "food_b": [
+      20.0,
+      28.0
+    ],
+    "contact_radius": 0.75,
+    "relocation_step": null,
+    "decay": {
+      "mode": "exponential",
+      "half_life_steps": 20.0,
+      "decay_rate": 0.03465735902799726,
+      "cutoff_steps": null
+    },
+    "navigation": {
+      "signal_on": 0.5,
+      "signal_off": 0.25,
+      "loss_steps": 2,
+      "epsilon": 1e-12,
+      "max_turn": 1.0471975511965976,
+      "noise_amplitude": 0.05,
+      "sensor_distance": 1.0,
+      "sensor_angle": 0.7853981633974483
+    }
+  },
+  "field_slots": [
+    "concentration",
+    "last_deposit",
+    "time",
+    "arena_size",
+    "cell_size",
+    "decay"
+  ],
+  "event_order": "decay/expiry; relocation; all movement/local sensing; contacts; deposition",
+  "deposition_footprint": "one containing cell, no automatic spread",
+  "matching": {
+    "q": 1.0,
+    "threshold": 0.5,
+    "cutoff_steps": 20,
+    "rounding": "ceil; integer snap absolute tolerance 1e-12"
+  },
+  "roles": [
+    "fcrw",
+    "follower",
+    "transporter"
+  ],
+  "recovery_C": false,
+  "provisional_rules": "all new settings and behaviours listed in STAGE3A_SCALAR_DECAY_BASELINE_SPEC.md; no biological calibration",
+  "scientific_decay_comparison": false
+}

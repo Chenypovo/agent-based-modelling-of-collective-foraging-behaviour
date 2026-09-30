@@ -1,0 +1,33 @@
+{
+  "time": 12000,
+  "wall_seconds": 16.533242125,
+  "metrics": {
+    "time": 12000,
+    "field_sum": 6008.420820499096,
+    "positive_cells": 20597,
+    "on": {
+      "threshold": 0.5,
+      "detectable_cells": 3537,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "off": {
+      "threshold": 0.25,
+      "detectable_cells": 5668,
+      "nest_food_centre_cells_connected_8": false
+    },
+    "discoveries": {
+      "A": 16,
+      "B": 0
+    },
+    "deliveries": {
+      "A": 11,
+      "B": 0
+    },
+    "raw_recruitments": 8436,
+    "roles": {
+      "fcrw": 61,
+      "follower": 34,
+      "transporter": 5
+    }
+  }
+}
