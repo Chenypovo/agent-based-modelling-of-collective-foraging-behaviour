@@ -15,3 +15,6 @@ reports/Project Proposal.pdf
 reports/_AY2627_T1_Briefing_updated.pdf
 reports/_PH6780 Templates.docx
 reports/Turnitin_Report.pdf
+
+# Stage 5 per-run field/occupancy arrays (large, regenerable from scripts/stage5_*).
+results/stage5_diagnostics/**/runs/
