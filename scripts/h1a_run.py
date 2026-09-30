@@ -11,8 +11,9 @@ Steps 3-5 read the trail physics from results/h1a_baseline/calib/selection.json.
 from __future__ import annotations
 
 import argparse
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, as_completed
 import json
+import os
 from pathlib import Path
 import sys
 import time
@@ -128,18 +129,27 @@ def run_one(task: tuple[dict, int]) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("step", choices=tuple(SEEDS))
-    parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--workers", type=int, default=4)
     args = parser.parse_args()
+    os.nice(10)  # low priority so the machine stays usable; inherited by workers
     tasks = [(c, s) for c in conditions(args.step) for s in SEEDS[args.step]]
     out = OUT / args.step
-    out.mkdir(parents=True, exist_ok=True)
-    rows = []
+    parts = out / "runs"
+    parts.mkdir(parents=True, exist_ok=True)
+    part = lambda c, s: parts / f"{c['name']}_{s}.json"  # noqa: E731
+    todo = [t for t in tasks if not part(*t).exists()]
+    print(f"{len(tasks) - len(todo)} of {len(tasks)} runs already done; running {len(todo)}", flush=True)
     with ProcessPoolExecutor(max_workers=args.workers) as pool:
-        for i, r in enumerate(pool.map(run_one, tasks), 1):
-            rows.append(r)
-            print(f"[{i}/{len(tasks)}] {r['name']} {r['seed']} A={r['deliveries_A']} "
+        futures = {pool.submit(run_one, t): t for t in todo}
+        for i, future in enumerate(as_completed(futures), 1):
+            r = future.result()
+            tmp = part(*futures[future]).with_suffix(".tmp")
+            tmp.write_text(json.dumps(r) + "\n")
+            tmp.replace(part(*futures[future]))  # atomic: a stop never leaves a half-written file
+            print(f"[{i}/{len(todo)}] {r['name']} {r['seed']} A={r['deliveries_A']} "
                   f"B={r['deliveries_B']} foll={r['follower_fraction']:.3f} "
                   f"{r['wall_seconds']:.0f}s", flush=True)
+    rows = [json.loads(part(*t).read_text()) for t in tasks]
     (out / "runs.json").write_text(json.dumps(rows) + "\n")
     return 0
 
