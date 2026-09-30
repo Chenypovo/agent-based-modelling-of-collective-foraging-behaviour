@@ -128,6 +128,13 @@ rule 1; if both pass, the larger; if neither, the larger (and Step 5 will say re
 - Rough cost: ~30 s per 12,000-step run, ~90 s per 36,000-step run, 8 workers:
   Step 2 ≈ 15 min, Step 3 ≈ 35 min, Steps 4 and 5 ≈ 20 min each.
 
-## Deviations
+## Deviations and post-result decisions
 
-None yet.
+- 2026-09-30, **after Step 4 results were seen**: the user set the H1a support criterion to the
+  strict rule: H1a is supported only if some intermediate half-life i ∈ {500, 1000, 2000} has
+  (a) median τ below both extremes (250 and 4000), (b) paired 95% bootstrap CIs of Δ excluding 0
+  for both comparisons, and (c) median static-efficiency ratio ≥ 0.8. Chosen after the results were
+  known; the report states this.
+- 2026-09-30: runner changed to save each run on completion and resume, 4 workers at low priority
+  (first calibration attempt with 9 workers froze the machine and was stopped; no results from it
+  were kept or looked at beyond the first ~20 progress lines). No change to conditions or seeds.
