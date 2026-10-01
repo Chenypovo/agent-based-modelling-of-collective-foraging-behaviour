@@ -1,0 +1,108 @@
+{
+  "seeds": [
+    2026260001,
+    2026260230,
+    230
+  ],
+  "D": 0.01,
+  "theta_deg": {
+    "homo": [
+      59.99999999999999,
+      59.99999999999999
+    ],
+    "het120": [
+      119.99999999999999,
+      37.43178986651237
+    ]
+  },
+  "per_condition": {
+    "homo": {
+      "median_tau": 10843.5,
+      "non_recovery": 37,
+      "non_recovery_R_pre_0": 0,
+      "median_R_pre": 299.5,
+      "median_static_deliveries": 896.0,
+      "median_follower_fraction": 0.24327416666666668,
+      "first_B_quartiles": [
+        909.0,
+        1867.5,
+        3804.0
+      ],
+      "no_B_delivery": 0,
+      "early_B_quartiles": [
+        15.0,
+        72.0,
+        183.75
+      ],
+      "pickups_by_group": {
+        "scout": {
+          "A": 42010,
+          "B": 101622
+        },
+        "recruit": {
+          "A": 164240,
+          "B": 409371
+        }
+      },
+      "first_B_pickup_by_scout": 37
+    },
+    "het120": {
+      "median_tau": 13184.5,
+      "non_recovery": 50,
+      "non_recovery_R_pre_0": 1,
+      "median_R_pre": 334.0,
+      "median_static_deliveries": 974.5,
+      "median_follower_fraction": 0.24280236111111111,
+      "first_B_quartiles": [
+        840.75,
+        1852.5,
+        3421.75
+      ],
+      "no_B_delivery": 0,
+      "early_B_quartiles": [
+        7.0,
+        63.5,
+        182.75
+      ],
+      "pickups_by_group": {
+        "scout": {
+          "A": 50950,
+          "B": 72130
+        },
+        "recruit": {
+          "A": 172687,
+          "B": 426211
+        }
+      },
+      "first_B_pickup_by_scout": 37
+    }
+  },
+  "comparison": {
+    "delta": 2341.0,
+    "ci": [
+      721.475,
+      4147.537499999999
+    ],
+    "efficiency_ratio": 1.0921058006535946,
+    "ratio_ci": [
+      1.019509462490137,
+      1.1718020541549954
+    ],
+    "excluded_ratio_seeds": 0,
+    "paired_tau_diff_iqr": [
+      -2327.75,
+      0.0,
+      5776.0
+    ]
+  },
+  "secondary_paired_median_diff": {
+    "first_B": -194.5,
+    "early_B": 5.0
+  },
+  "rule": {
+    "a_median_shorter": false,
+    "b_ci_excludes_0": true,
+    "c_efficiency_ratio_ge_0.8": true
+  },
+  "verdict": "not supported"
+}
