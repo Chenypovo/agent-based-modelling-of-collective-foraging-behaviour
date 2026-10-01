@@ -56,6 +56,19 @@ commit. Local `git push` over HTTPS is unreliable; large pushes may need to go c
   clear at D = 0.01, and it shrank to nothing at D = 0.02. Half-life 250 costs static efficiency badly.
 - Runs: max 4 workers, low priority (9 workers froze the Mac). Runner saves per run and resumes.
 
+## H1b status (in progress, 2026-10-02 00:20)
+
+Branch `h1b-heterogeneity` (from `h1a-baseline`, not pushed). Plan `docs/H1B_ANALYSIS_PLAN.md`
+(n = 230 per condition, user decision before Step 2; verdict rule = brief default, user-confirmed).
+- Part A done (commit 7afc6c8). Step 0/1 done. Runner `scripts/h1b_run.py`, stats `scripts/h1b_summarise.py`.
+- Step 2 (D = 0.01): **not supported, opposite direction**: median τ het120 13,184 vs homo 10,844,
+  Δ = +2,341 [721, 4,148]; static efficiency ratio 1.09 [1.02, 1.17]. `results/h1b_heterogeneity/main/summary.md`.
+- Step 3 (D = 0.02, exploratory): same direction, Δ = +2,389 [321, 4,694]; efficiency 1.19 [1.09, 1.36].
+  `results/h1b_heterogeneity/robust/summary.md`.
+- Remaining: Step 4 (`python3 scripts/h1b_run.py sweep`, 120 runs ~35 min, then `h1b_summarise.py sweep`;
+  includes the homo-37.43° control for the colony-spread confound) — user to decide; Step 5 REPORT.md
+  + this file.
+
 ## Supervisor feedback from 2 Oct meeting
 
 _To fill in after the meeting._
