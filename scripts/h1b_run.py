@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """H1b runs (docs/H1B_ANALYSIS_PLAN.md): main, robust, sweep, check.
 
-main   - Step 2: homo (100 x 60 deg) vs het120 (20 x 120 + 80 x 37.43 deg), D = 0.01, 100 seeds
+main   - Step 2: homo (100 x 60 deg) vs het120 (20 x 120 + 80 x 37.43 deg), D = 0.01, 230 seeds
 robust - Step 3: as main at D = 0.02, fresh seeds
 sweep  - Step 4/4b: het80, het100 and homo at 37.43 deg on the first 40 main seeds (exploratory)
 check  - homo on H1a seed 2026240001 (half-life 1000); must equal the stored H1a delivery times
@@ -36,7 +36,7 @@ from stage5_navigation.path_integration import NavigationConfig  # noqa: E402
 OUT = ROOT / "results" / "h1b_heterogeneity"
 N_ANTS, N_SCOUTS, THETA_REF = 100, 20, math.pi / 3
 ON, OFF = 0.25, 0.125
-SEEDS = {"main": range(2026260001, 2026260101), "robust": range(2026270001, 2026270101),
+SEEDS = {"main": range(2026260001, 2026260231), "robust": range(2026270001, 2026270231),
          "sweep": range(2026260001, 2026260041), "check": (2026240001,)}
 
 

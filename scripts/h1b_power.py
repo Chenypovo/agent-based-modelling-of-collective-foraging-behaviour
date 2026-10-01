@@ -4,13 +4,15 @@
 Pool = paired tau for half-life (1000, 500) and (1000, 2000), same seed. Per n: draw n pairs with
 replacement, randomly swap members, shrink recovered "hetero" tau by 20%, paired bootstrap CI of the
 difference in medians; detection = delta < 0 and CI excludes 0.
-Writes results/h1b_heterogeneity/power/power.json + power.md.
+Writes results/h1b_heterogeneity/power/power.json + power.md; with n values as arguments,
+power_extended.json + power_extended.md for those n only.
 """
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
+import sys
 
 import numpy as np
 
@@ -42,7 +44,23 @@ def detection_rate(pairs: np.ndarray, n: int, effect: float, rng: np.random.Gene
     return hits / REPS
 
 
+def extended(ns: tuple[int, ...]) -> int:
+    """User-requested check of larger n (2026-10-01, after Step 1, before any H1b run)."""
+    rng = np.random.default_rng(SEED + 1)
+    result = {step: {n: detection_rate(pool(step), n, EFFECT, rng) for n in ns} for step in ("h1a", "robust")}
+    (OUT / "power_extended.json").write_text(json.dumps(result, indent=2) + "\n")
+    lines = ["# H1b Step 1 extension: detection rate for larger n (same method, rng seed 20261002)", "",
+             "| Data | " + " | ".join(f"n={n}" for n in ns) + " |", "|---|" + "---|" * len(ns)]
+    for step, label in (("h1a", "D = 0.01 (used)"), ("robust", "D = 0.02 (sensitivity)")):
+        lines.append(f"| {label} | " + " | ".join(f"{result[step][n]:.2f}" for n in ns) + " |")
+    (OUT / "power_extended.md").write_text("\n".join(lines) + "\n")
+    print("\n".join(lines))
+    return 0
+
+
 def main() -> int:
+    if len(sys.argv) > 1:
+        return extended(tuple(int(x) for x in sys.argv[1:]))
     OUT.mkdir(parents=True, exist_ok=True)
     rng = np.random.default_rng(SEED)
     result = {}

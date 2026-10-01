@@ -71,36 +71,67 @@ addresses this; it is exploratory and does not change the verdict rule.
 
 | Step | Seeds |
 |---|---|
-| 2 Main test | 2026260001 – 2026260100 (n = 100, Step 1) |
-| 3 Robustness | 2026270001 – 2026270100 |
+| 2 Main test | 2026260001 – 2026260230 (n = 230; user decision, see Step 1 and Deviations) |
+| 3 Robustness | 2026270001 – 2026270230 |
 | 4 Spread sweep / 4b control | the first 40 Step 2 seeds, 2026260001 – 2026260040 (reuses their homogeneous and 120° runs) |
 
 ## Step 1 — number of seeds from existing data (no new runs)
 
-Data: H1a Step 4 (D = 0.01) τ for half-life 1000 and its neighbours 500 and 2000, paired by seed:
-pairs (1000, 500) and (1000, 2000), 40 pairs. These stand in for "two different conditions on the
-same seeds".
+Code: `scripts/h1b_power.py`; output `results/h1b_heterogeneity/power/` (`power.md` for n = 20–100,
+`power_extended.md` for n = 150–300).
 
-Simulation (`scripts/h1b_power.py`, `default_rng(20261001)`):
-1. For n ∈ {20, 30, 40, 50, 60, 70, 80, 90, 100}, repeat 1,000 times: draw n pairs with replacement
-   from the pool; randomly swap the two members of each pair (so the two "conditions" have no built-in
-   difference); call one member homo, the other hetero.
-2. Effect: hetero τ × 0.8 for recovered runs; non-recovered runs stay at 24,000 (conservative: the
-   effect cannot rescue a censored run).
-3. Paired bootstrap 95% CI of Δ = median τ(hetero) − median τ(homo), 1,000 resamples.
-   "Detected" = Δ < 0 and the CI excludes 0.
-4. Also with no effect (check that false detections ≈ 2.5%).
+### How the detection rate is estimated
 
-Choice: the smallest n whose detection rate is ≥ 0.8; if none reaches 0.8, n = 100 (cap) and the
-report states the expected detection rate. Sensitivity (reported, not used for the choice): the same
-calculation on the H1a Step 5 (D = 0.02) data.
+The question is: "if heterogeneity really made median τ 20% shorter, how often would an experiment
+with n paired seeds pass parts (a) and (b) of the verdict rule?" We cannot run H1b to find out, so we
+borrow the noise from H1a.
 
-**Chosen n = 100 per condition** (filled in 2026-10-01 by Step 1, before any simulation run;
-`results/h1b_heterogeneity/power/power.md`). No n reached 0.8: the estimated detection rate for a 20%
-shorter median τ is 0.12 at n = 20, 0.29 at n = 50 and **0.46 at n = 100** (D = 0.02 data: 0.23 at
-n = 100). False detections with no effect: ≤ 0.02. Reasons: paired τ differences are very wide
-(IQR −4,802 to 1,174 steps) and 25% of runs are censored at 24,000. Consequence for reading Step 2:
-a "not supported" verdict at n = 100 is weak evidence that heterogeneity has no effect.
+1. **Noise pool.** H1a Step 4 (D = 0.01, 20 seeds) τ for half-life 1000 paired by seed with each of its
+   neighbours, 500 and 2000: 40 pairs (τ at 1000, τ at neighbour) from the same seed. Each pair is
+   "two slightly different colonies run on the same seed", which is what homo vs het120 is.
+2. **Remove any real difference.** For each drawn pair, a coin flip decides which member is "homo" and
+   which is "hetero". The pool then has no systematic difference but keeps the real seed-to-seed
+   scatter and the real within-seed pairing.
+3. **Insert the effect.** Hetero τ × 0.8 for runs that recovered; runs censored at 24,000 stay at
+   24,000 (the effect cannot rescue a run that never recovers).
+4. **Run the analysis.** Draw n pairs with replacement, apply 2–3, compute Δ = median τ(hetero) −
+   median τ(homo) and its paired bootstrap 95% CI (1,000 resamples). "Detected" = Δ < 0 and the CI
+   excludes 0. Repeat 1,000 times per n (`default_rng(20261001)`; extension `default_rng(20261002)`).
+   The detection rate is the share of the 1,000 that were detected (Monte Carlo error about ±0.03).
+5. **Check.** With no effect (step 3 skipped) the false detection rate is ≤ 0.02 at n = 20–100.
+
+### Result
+
+| Data used for the noise pool | n = 20 | 50 | 100 | 150 | 200 | **230** | 250 | 300 |
+|---|---|---|---|---|---|---|---|---|
+| D = 0.01 (H1a Step 4; used) | 0.12 | 0.29 | 0.46 | 0.63 | 0.76 | **0.82** | 0.85 | 0.91 |
+| D = 0.02 (H1a Step 5; sensitivity only) | 0.08 | 0.17 | 0.23 | 0.29 | 0.35 | 0.40 | 0.44 | 0.47 |
+
+Why so many seeds: within-seed differences between neighbouring conditions are large (paired
+difference IQR −4,802 to +1,174 steps at D = 0.01; −4,280 to +9,735 at D = 0.02) and 25% of runs
+are censored at 24,000, so a 20% shift of the median is small relative to the scatter.
+
+### Assumptions that drive the number (to be repeated in the report)
+
+- **Noise borrowed from half-life pairs.** We assume homo vs het120 on the same seed differ as much as
+  half-life 1000 vs 500/2000 on the same seed. If het120 tracks homo more closely (its turns are
+  rescaled copies of homo's), the true detection rate is higher; if the two colonies diverge more
+  (they likely do after a few hundred steps, because trajectories are chaotic), it is lower.
+- **Only 40 pairs from 20 seeds** define the noise shape; a different 20 seeds could give a noticeably
+  different number. The D = 0.02 pool, with wider differences, gives 0.40 at n = 230.
+- **Effect model:** a 20% shorter τ for recovered runs only, no change in the non-recovery rate. An
+  effect that also rescues censored runs would be easier to detect.
+- **Only parts (a) and (b) of the verdict rule** are simulated; part (c) (efficiency ratio ≥ 0.8) is
+  assumed to pass.
+- 20% is a planning value chosen in the brief, not a prediction of the effect size.
+
+### Chosen n
+
+The pre-set rule (smallest n with detection rate ≥ 0.8, capped at 100) gave n = 100 (rate 0.46).
+**The user then set n = 230 per condition** (2026-10-01, before any H1b simulation run, having seen
+only the Step 1 table above): the smallest n in the extended table with an estimated detection rate
+≥ 0.8 (0.82) on the D = 0.01 pool. This exceeds the brief's cap of 100; listed under Deviations.
+Step 3 uses the same n.
 
 ## Step 2 — main test (paired)
 
@@ -120,11 +151,11 @@ a "not supported" verdict at n = 100 is weak evidence that heterogeneity has no 
 
 H1b is **supported** only if (a) median τ(het) < median τ(homo), (b) the 95% CI of Δ excludes 0, and
 (c) the median static-efficiency ratio is ≥ 0.8. Otherwise "**not supported**".
-The user must confirm or change this rule before Step 2 runs; any later change is disclosed in the report.
+Confirmed by the user on 2026-10-01 before Step 2 ran. Any later change is disclosed in the report.
 
 ## Step 3 — robustness at D = 0.02 (exploratory)
 
-Same as Step 2 at D = 0.02, thresholds 0.25 / 0.125, seeds 2026270001 – 2026270100.
+Same as Step 2 at D = 0.02, thresholds 0.25 / 0.125, seeds 2026270001 – 2026270230.
 "Conclusion holds" if Δ has the same sign as in Step 2 and the verdict rule gives the same verdict;
 otherwise the report says the result depends on the diffusion setting.
 
@@ -132,7 +163,7 @@ otherwise the report says the result depends on the diffusion setting.
 
 20 / 80 split, matched mean, D = 0.01: θ_scout ∈ {80°, 100°} → θ_recruit = 54.20°, 46.75°
 (plus 120° / 37.43° from Step 2 and 60° / 60° = homogeneous). First 40 Step 2 seeds.
-Report median τ, Δ vs homo with CI, efficiency ratio. No verdict.
+Report median τ, Δ vs homo with CI, efficiency ratio. No verdict (40 seeds: low power, descriptive only).
 
 **4b — control for colony spread (exploratory, only if time):** homogeneous colony at 37.432°
 (all ants recruit-like), same seeds. If it recovers as fast as or faster than `het120`, an advantage
@@ -143,9 +174,16 @@ of `het120` cannot be attributed to heterogeneity itself.
 - Runner `scripts/h1b_run.py` (save per run, resume, ≤ 4 workers, `nice 10`); summary
   `scripts/h1b_summarise.py`; results in `results/h1b_heterogeneity/<step>/`; write-up
   `results/h1b_heterogeneity/REPORT.md`.
-- Cost: ~70 s per 36,000-step run (H1a Steps 4–5 median 66–77 s). With 4 workers, Step 2 with
-  n = 100 is 200 runs ≈ 1 h; Step 3 the same; Step 4 + 4b ≈ 120 runs ≈ 35 min.
+- Cost: ~55–75 s per 36,000-step run (H1a Steps 4–5 median 66–77 s; reproduction check 53 s). With
+  4 workers, Step 2 with n = 230 is 460 runs ≈ 2–2.5 h; Step 3 the same; Step 4 + 4b ≈ 120 runs
+  ≈ 35 min.
 
 ## Deviations and post-result decisions
 
-_None yet._
+- 2026-10-01, **after Step 1, before any H1b simulation run** (only the H1a-based detection-rate table
+  had been seen): the user confirmed the default verdict rule and raised n from 100 (cap in the brief)
+  to **230 per condition**, the smallest n with estimated detection rate ≥ 0.8 (0.82 on the D = 0.01
+  pool; `power_extended.md`). Step 2 seeds 2026260001–230, Step 3 seeds 2026270001–230.
+- 2026-10-01: before Step 2, the homogeneous condition of `scripts/h1b_run.py` was run once on H1a
+  seed 2026240001 (half-life 1000) and reproduced the stored H1a delivery times and τ exactly
+  (`results/h1b_heterogeneity/check/`). Not an H1b data run.
