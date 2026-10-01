@@ -71,9 +71,9 @@ addresses this; it is exploratory and does not change the verdict rule.
 
 | Step | Seeds |
 |---|---|
-| 2 Main test | 2026260001 – 2026260000 + n (n from Step 1) |
-| 3 Robustness | 2026270001 – 2026270000 + n |
-| 4 Spread sweep / 4b control | the first min(n, 40) Step 2 seeds (reuses their homogeneous and 120° runs) |
+| 2 Main test | 2026260001 – 2026260100 (n = 100, Step 1) |
+| 3 Robustness | 2026270001 – 2026270100 |
+| 4 Spread sweep / 4b control | the first 40 Step 2 seeds, 2026260001 – 2026260040 (reuses their homogeneous and 120° runs) |
 
 ## Step 1 — number of seeds from existing data (no new runs)
 
@@ -95,7 +95,12 @@ Choice: the smallest n whose detection rate is ≥ 0.8; if none reaches 0.8, n =
 report states the expected detection rate. Sensitivity (reported, not used for the choice): the same
 calculation on the H1a Step 5 (D = 0.02) data.
 
-**Chosen n: _to be filled in by Step 1, before any simulation run._**
+**Chosen n = 100 per condition** (filled in 2026-10-01 by Step 1, before any simulation run;
+`results/h1b_heterogeneity/power/power.md`). No n reached 0.8: the estimated detection rate for a 20%
+shorter median τ is 0.12 at n = 20, 0.29 at n = 50 and **0.46 at n = 100** (D = 0.02 data: 0.23 at
+n = 100). False detections with no effect: ≤ 0.02. Reasons: paired τ differences are very wide
+(IQR −4,802 to 1,174 steps) and 25% of runs are censored at 24,000. Consequence for reading Step 2:
+a "not supported" verdict at n = 100 is weak evidence that heterogeneity has no effect.
 
 ## Step 2 — main test (paired)
 
@@ -119,14 +124,14 @@ The user must confirm or change this rule before Step 2 runs; any later change i
 
 ## Step 3 — robustness at D = 0.02 (exploratory)
 
-Same as Step 2 at D = 0.02, thresholds 0.25 / 0.125, seeds 2026270001 – 2026270000 + n.
+Same as Step 2 at D = 0.02, thresholds 0.25 / 0.125, seeds 2026270001 – 2026270100.
 "Conclusion holds" if Δ has the same sign as in Step 2 and the verdict rule gives the same verdict;
 otherwise the report says the result depends on the diffusion setting.
 
 ## Step 4 — spread sweep (exploratory, only if time)
 
 20 / 80 split, matched mean, D = 0.01: θ_scout ∈ {80°, 100°} → θ_recruit = 54.20°, 46.75°
-(plus 120° / 37.43° from Step 2 and 60° / 60° = homogeneous). First min(n, 40) Step 2 seeds.
+(plus 120° / 37.43° from Step 2 and 60° / 60° = homogeneous). First 40 Step 2 seeds.
 Report median τ, Δ vs homo with CI, efficiency ratio. No verdict.
 
 **4b — control for colony spread (exploratory, only if time):** homogeneous colony at 37.432°
