@@ -44,7 +44,7 @@ commit. Local `git push` over HTTPS is unreliable; large pushes may need to go c
   vs sensor spacing (1 unit) and detection threshold; they change with cell size and diffusion.
 - Open issues: trail physics (diffusion, threshold) not yet justified; path-integration error, nest
   perception radius (3), spiral spacing (4), landmark view radius (8) are assumptions; ants have no
-  food-vector memory; loaded ants deposit during spiral search.
+  food-vector memory.
 
 ## H1a status (done 2026-09-30)
 
@@ -62,9 +62,8 @@ _To fill in after the meeting._
 
 ## Next task
 
-_Update after the 2 Oct meeting._ Default: write the H1b brief (movement heterogeneity) on the
-H1a baseline, same process (plan file before runs, fresh seed blocks, <= 4 workers). Then H2 (LLM
-search) after fixing the five Stage 4 issues and getting the user's API choice. Deadline 15 Oct.
+Do `docs/TASK_BRIEF_H1B.md` (Part A: small H1a text fixes; Part B: H1b movement heterogeneity).
+Then H2 (LLM search) after fixing the five Stage 4 issues and getting the user's API choice. Deadline 15 Oct.
 
 **Done means:** tests pass (`python3 -m pytest -q`), results + REPORT.md written, committed on a branch,
 this file updated (status, what changed, next task).

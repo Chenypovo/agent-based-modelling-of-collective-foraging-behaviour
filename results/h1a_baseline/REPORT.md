@@ -29,8 +29,10 @@ food B (150,240), step 0.6), with these changes:
   assumptions, not calibrated values; compass noise 0.5 is a user decision, not tuned on results.
   This is "egocentric vs egocentric + landmark correction"; there is no landmark-only mode.
 - **No pheromone deposit during spiral search** (new option; "on" reproduces the old code, tested).
-- **Trail physics** (Step 2): diffusion D = 0.01 per step and detection thresholds on 0.25 / off 0.125
-  (half the validated values).
+- **Trail physics** (Step 2): diffusion D = 0.01 per step and detection thresholds on 0.25 / off 0.125.
+  The thresholds were **halved** from the validated model's on 0.5 / off 0.25. This was not a free
+  choice: the Step 2 selection rule (written before running) tried the original pair first, no D
+  passed all rules with it, so the rule moved to the halved pair and selected D = 0.01 there.
 - Decay: exponential, reference half-life 1000 steps (not tuned).
 
 ## Step 1 — what compass noise 0.5 means
@@ -138,6 +140,23 @@ Step 4 comparison with a CI excluding 0 keeps its sign, and the strict verdict i
 supported"), but the 2000-vs-4000 difference nearly disappears (−481). At half-life 250 trail
 following almost stops (follower share 0.011, R_pre median 6), so the fast-decay extreme is close to
 a no-recruitment colony at this D.
+
+## Food-B uptake after relocation (post-hoc description; not used for the H1a verdict)
+
+Added 2026-10-01 from the stored `runs.json` (no new simulation; `scripts/h1a_posthoc_food_b.py`,
+full tables in `posthoc_food_b.md`). Median [IQR] over 20 seeds; every seed delivered B at least once.
+
+| Half-life | D = 0.01: first B delivery after move | D = 0.01: B deliveries in [12,000, 18,000) | D = 0.02: first B delivery | D = 0.02: B deliveries in [12,000, 18,000) |
+|---|---|---|---|---|
+| 250 | 1,746 [736, 2,402] | 18 [4, 44] | 1,110 [602, 2,254] | 4 [3, 7] |
+| 500 | 1,196 [661, 2,764] | 72 [46, 167] | 1,332 [816, 3,039] | 12 [4, 42] |
+| 1000 | 2,128 [810, 2,816] | 118 [10, 171] | 2,310 [998, 3,010] | 29 [8, 71] |
+| 2000 | 2,414 [990, 4,296] | 14 [1, 38] | 3,038 [1,230, 4,436] | 10 [2, 24] |
+| 4000 | 3,044 [1,031, 4,132] | 2 [1, 3] | 2,244 [1,188, 3,723] | 4 [1, 6] |
+
+Unlike τ, these are absolute counts and times, not relative to each colony's own pre-move rate.
+At D = 0.01 the first B delivery comes later as half-life grows from 500 to 4000 (not at D = 0.02), and early B uptake is highest
+at intermediate half-lives (500–1000) and very low at 4000; the IQRs are wide and overlap.
 
 ## Limitations
 
