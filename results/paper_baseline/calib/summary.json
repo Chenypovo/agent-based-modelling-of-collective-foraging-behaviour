@@ -1,0 +1,781 @@
+{
+ "h1000_D0.01_t25": {
+  "c1": true,
+  "c2": true,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 8,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 1.0,
+   "trail_share": 0.0443186441118022,
+   "deliveries_window": 20.5,
+   "r2": 0.9598531401517207,
+   "psi": 0.6396892943033244,
+   "phi": -0.0011064628680789834,
+   "foragers": 6.49075
+  },
+  "median_psi_gain": -0.0010614362680790301,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 20.5,
+  "config": {
+   "field": "diffusing",
+   "half_life": 1000.0,
+   "D": 0.01,
+   "thr": "t25",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h1000_D0.01_t50": {
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 4,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.4097222222222222,
+   "trail_share": 0.02258818594732225,
+   "deliveries_window": 4.0,
+   "r2": 0.8584233223914638,
+   "psi": 0.6389407584742961,
+   "phi": 0.000960637462372286,
+   "foragers": 72.25525
+  },
+  "median_psi_gain": -0.002448994772156987,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 4.0,
+  "config": {
+   "field": "diffusing",
+   "half_life": 1000.0,
+   "D": 0.01,
+   "thr": "t50",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h1000_D0.02_t25": {
+  "c1": true,
+  "c2": true,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 9,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.873015873015873,
+   "trail_share": 0.02428383354079259,
+   "deliveries_window": 3.5,
+   "r2": 0.8537466588455183,
+   "psi": 0.6392123116614163,
+   "phi": 0.000893337170131223,
+   "foragers": 39.286500000000004
+  },
+  "median_psi_gain": -0.0016117152390578426,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 3.5,
+  "config": {
+   "field": "diffusing",
+   "half_life": 1000.0,
+   "D": 0.02,
+   "thr": "t25",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h1000_D0.02_t50": {
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 2,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.2,
+   "trail_share": 0.021852624932816724,
+   "deliveries_window": 2.5,
+   "r2": 0.7514837301384301,
+   "psi": 0.6395122618853739,
+   "phi": 0.0012013183186035613,
+   "foragers": 90.40100000000001
+  },
+  "median_psi_gain": -0.0021511944473697198,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 2.5,
+  "config": {
+   "field": "diffusing",
+   "half_life": 1000.0,
+   "D": 0.02,
+   "thr": "t50",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h1000_D0.0_t25": {
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 7,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.6333333333333333,
+   "trail_share": 0.03284407066385698,
+   "deliveries_window": 3.5,
+   "r2": 0.8499779637991507,
+   "psi": 0.6405484468822893,
+   "phi": -0.0019736404801595645,
+   "foragers": 72.73975
+  },
+  "median_psi_gain": 0.00024457285177514887,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 3.5,
+  "config": {
+   "field": "diffusing",
+   "half_life": 1000.0,
+   "D": 0.0,
+   "thr": "t25",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h1000_D0.0_t50": {
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 6,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.5277777777777778,
+   "trail_share": 0.03838448609123561,
+   "deliveries_window": 3.0,
+   "r2": 0.8318026087849555,
+   "psi": 0.6395568900412971,
+   "phi": 0.0008502157444927323,
+   "foragers": 82.58675
+  },
+  "median_psi_gain": -0.0006302996172206643,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 3.0,
+  "config": {
+   "field": "diffusing",
+   "half_life": 1000.0,
+   "D": 0.0,
+   "thr": "t50",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h2000_D0.01_t25": {
+  "c1": true,
+  "c2": true,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 10,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 1.0,
+   "trail_share": 0.04759908024060059,
+   "deliveries_window": 22.5,
+   "r2": 0.9450131573842467,
+   "psi": 0.640895195334226,
+   "phi": 0.005017824041229388,
+   "foragers": 2.79675
+  },
+  "median_psi_gain": 0.00040867968787888787,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 22.5,
+  "config": {
+   "field": "diffusing",
+   "half_life": 2000.0,
+   "D": 0.01,
+   "thr": "t25",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h2000_D0.01_t50": {
+  "c1": true,
+  "c2": true,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 8,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.7797101449275362,
+   "trail_share": 0.035035607338963964,
+   "deliveries_window": 6.5,
+   "r2": 0.9139997427225683,
+   "psi": 0.639305001645202,
+   "phi": -0.0017236444008671662,
+   "foragers": 39.52125
+  },
+  "median_psi_gain": -0.0019321073026594693,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 6.5,
+  "config": {
+   "field": "diffusing",
+   "half_life": 2000.0,
+   "D": 0.01,
+   "thr": "t50",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h2000_D0.02_t25": {
+  "c1": true,
+  "c2": true,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 9,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 1.0,
+   "trail_share": 0.02858183422988906,
+   "deliveries_window": 10.5,
+   "r2": 0.9358908822535645,
+   "psi": 0.638488218847088,
+   "phi": -0.0009922542033880908,
+   "foragers": 7.47175
+  },
+  "median_psi_gain": -0.000944820343392494,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 10.5,
+  "config": {
+   "field": "diffusing",
+   "half_life": 2000.0,
+   "D": 0.02,
+   "thr": "t25",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h2000_D0.02_t50": {
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 2,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.2857142857142857,
+   "trail_share": 0.022535614559657843,
+   "deliveries_window": 2.0,
+   "r2": 0.7254372060986923,
+   "psi": 0.6400882644944659,
+   "phi": 0.001775285138027632,
+   "foragers": 89.25675
+  },
+  "median_psi_gain": -0.00047610850055990195,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 2.0,
+  "config": {
+   "field": "diffusing",
+   "half_life": 2000.0,
+   "D": 0.02,
+   "thr": "t50",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h2000_D0.0_t25": {
+  "c1": true,
+  "c2": true,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 9,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.8257575757575758,
+   "trail_share": 0.04101979052123338,
+   "deliveries_window": 3.0,
+   "r2": 0.7202722480596198,
+   "psi": 0.6397010548482915,
+   "phi": 0.001559240194470207,
+   "foragers": 60.80075
+  },
+  "median_psi_gain": -0.0006433530439517998,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 3.0,
+  "config": {
+   "field": "diffusing",
+   "half_life": 2000.0,
+   "D": 0.0,
+   "thr": "t25",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h2000_D0.0_t50": {
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 7,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.6388888888888888,
+   "trail_share": 0.05266105524389056,
+   "deliveries_window": 3.0,
+   "r2": 0.7908614284766349,
+   "psi": 0.6398035781908268,
+   "phi": -0.00045504157574738244,
+   "foragers": 65.91475
+  },
+  "median_psi_gain": -0.0006155955690111403,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 3.0,
+  "config": {
+   "field": "diffusing",
+   "half_life": 2000.0,
+   "D": 0.0,
+   "thr": "t50",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h500_D0.01_t25": {
+  "c1": true,
+  "c2": true,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 8,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.6458333333333333,
+   "trail_share": 0.027177070188883684,
+   "deliveries_window": 5.5,
+   "r2": 0.8776668788412451,
+   "psi": 0.6432186878071662,
+   "phi": -2.25212130046628e-05,
+   "foragers": 58.805499999999995
+  },
+  "median_psi_gain": -0.0006389069836514327,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 5.5,
+  "config": {
+   "field": "diffusing",
+   "half_life": 500.0,
+   "D": 0.01,
+   "thr": "t25",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h500_D0.01_t50": {
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 4,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.3484848484848485,
+   "trail_share": 0.025861301879961007,
+   "deliveries_window": 3.0,
+   "r2": 0.8454817095787021,
+   "psi": 0.6395536499011243,
+   "phi": -0.0052017915873722445,
+   "foragers": 81.09375
+  },
+  "median_psi_gain": -0.0002464258508527162,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 3.0,
+  "config": {
+   "field": "diffusing",
+   "half_life": 500.0,
+   "D": 0.01,
+   "thr": "t50",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h500_D0.02_t25": {
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 4,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.3666666666666667,
+   "trail_share": 0.030001746670233906,
+   "deliveries_window": 2.5,
+   "r2": 0.7932177971819637,
+   "psi": 0.6426421634289773,
+   "phi": -0.002508014874836789,
+   "foragers": 74.38024999999999
+  },
+  "median_psi_gain": 0.0014674556176170195,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 2.5,
+  "config": {
+   "field": "diffusing",
+   "half_life": 500.0,
+   "D": 0.02,
+   "thr": "t25",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h500_D0.02_t50": {
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 0,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.0,
+   "trail_share": 0.025683105007699013,
+   "deliveries_window": 2.5,
+   "r2": 0.7946173627162327,
+   "psi": 0.6400860617475793,
+   "phi": -0.0007809828646048057,
+   "foragers": 90.6885
+  },
+  "median_psi_gain": -0.00048583498805532255,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 2.5,
+  "config": {
+   "field": "diffusing",
+   "half_life": 500.0,
+   "D": 0.02,
+   "thr": "t50",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h500_D0.0_t25": {
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 5,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.45833333333333337,
+   "trail_share": 0.01766389724951425,
+   "deliveries_window": 3.0,
+   "r2": 0.861092149275313,
+   "psi": 0.6399731798895905,
+   "phi": 0.0025262763186363287,
+   "foragers": 80.85725
+  },
+  "median_psi_gain": -8.070002285698319e-05,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 3.0,
+  "config": {
+   "field": "diffusing",
+   "half_life": 500.0,
+   "D": 0.0,
+   "thr": "t25",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "h500_D0.0_t50": {
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 1,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.225,
+   "trail_share": 0.024670221648271165,
+   "deliveries_window": 2.5,
+   "r2": 0.732428237271012,
+   "psi": 0.6399020725898495,
+   "phi": 0.0044446621835280645,
+   "foragers": 83.07425
+  },
+  "median_psi_gain": -0.0014554027984676199,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 2.5,
+  "config": {
+   "field": "diffusing",
+   "half_life": 500.0,
+   "D": 0.0,
+   "thr": "t50",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "off": {
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 0,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 918.5,
+   "recruitment": 0.0,
+   "trail_share": 0.0,
+   "deliveries_window": 2.5,
+   "r2": 0.8268733453767578,
+   "psi": 0.6403732932973308,
+   "phi": -0.0027884856033345996,
+   "foragers": 96.41775
+  },
+  "median_psi_gain": NaN,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 2.5,
+  "config": {
+   "field": "diffusing",
+   "half_life": 1000.0,
+   "D": 0.0,
+   "thr": "t50",
+   "walk": "fcrw",
+   "deposit": false,
+   "layout": "std",
+   "steps": 12000
+  }
+ }
+}
