@@ -28,8 +28,8 @@ nest as foragers with uniform random headings.
 **(clarification)** Rules in detail:
 - Forager (`fcrw` role): FCRW/ZW turn sequence pre-generated per ant (as now); becomes follower
   when max(left, right) ≥ on-threshold; becomes transporter on food contact.
-- Path memory = every vertex since the ant last left the nest (reset to [nest position] at
-  delivery). It is kept unchanged through forager ↔ follower switches. On food pickup the route is
+- Path memory = every vertex since the ant last left the nest (reset at delivery to the ant's
+  position, which is within the 0.75 nest radius — existing behaviour; corrected wording, Step 1). It is kept unchanged through forager ↔ follower switches. On food pickup the route is
   coarse-grained from this memory, so repeated trips straighten the route.
 - Transporter: follows the route, ends exactly at the nest vertex; on nest contact it delivers,
   memory resets, heading += 180°, role = follower, loss counter = 0. Transporters do not sense.
