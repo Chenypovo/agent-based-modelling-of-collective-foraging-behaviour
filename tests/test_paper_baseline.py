@@ -227,3 +227,79 @@ def test_condition_rules_full_basic_and_seed_share():
     assert not checks.condition_checks(runs, off)["c1"]
     runs = [run_metrics(s, first_pickup=5000 if s < 2 else 1000) for s in range(10)]  # 8/10 seeds
     assert checks.condition_checks(runs, off)["c1"]
+
+
+def test_home_vector_without_noise_walks_straight_home_and_lays_a_straight_trail():
+    cfg = config(arena_size=60.0, nest=(30.0, 30.0), food_a=(40.0, 40.0), food_b=(20.0, 40.0), steps=3000)
+    sim = PaperSimulation(cfg, baseline_options(0.0, homing="vector"))
+    ant = sim.ants[0]
+    # forager wanders far, then is handed the food: the integrated estimate equals the true position
+    for _ in range(400):
+        sim.time += 1
+        sim._move(ant)
+    assert math.dist(sim.estimate[0], ant.position) < 1e-9
+    start = ant.position
+    sim.ledger.pickup(0, "A", sim.time)
+    ant.role = "transporter"
+    sim.mode[0] = "home"
+    steps = 0
+    while ant.role == "transporter":
+        sim.time += 1
+        sim._move(ant)
+        sim._contacts(ant)
+        steps += 1
+    assert steps == math.ceil((math.dist(start, cfg.nest) - 0.75) / 0.6)
+    assert ant.role == "follower" and sim.search_starts == 0
+    assert sim.estimate[0] == ant.position
+
+
+def test_home_vector_trail_lies_on_nest_food_line():
+    cfg = config(arena_size=60.0, nest=(30.0, 30.0), food_a=(42.0, 42.0), food_b=(18.0, 42.0), steps=2500,
+                 n_ants=40, decay=DecayConfig(half_life_steps=1000))
+    sim = PaperSimulation(cfg, baseline_options(0.0, homing="vector"))
+    sim.run()
+    assert sim.ledger.deliveries["A"] > 0
+    share = checks.trail_share(sim.field.concentration, 1.0, cfg.nest, cfg.food_a, width=2.0)
+    assert share > 0.9  # every deposit is on a straight food -> nest leg
+
+
+def test_compass_noise_accumulates():
+    cfg = config(arena_size=200.0, nest=(100.0, 100.0), food_a=(160.0, 160.0), food_b=(40.0, 160.0), steps=3000)
+    sim = PaperSimulation(cfg, baseline_options(0.0, homing="vector", compass_noise=0.3))
+    for _ in range(1500):
+        sim.time += 1
+        sim._move(sim.ants[0])
+    assert math.dist(sim.estimate[0], sim.ants[0].position) > 1.0
+
+
+def test_wrong_estimate_triggers_spiral_search_without_deposit():
+    cfg = config(arena_size=200.0, nest=(100.0, 100.0), food_a=(160.0, 160.0), food_b=(40.0, 160.0), steps=3000)
+    sim = PaperSimulation(cfg, baseline_options(0.0, homing="vector"))
+    ant = sim.ants[0]
+    ant.position, ant.path = (130.0, 100.0), [(130.0, 100.0)]
+    sim.estimate[0] = (110.0, 100.0)  # believes it is 10 from the nest; really 30 away
+    sim.ledger.pickup(0, "A", 0)
+    ant.role, sim.mode[0] = "transporter", "home"
+    for _ in range(40):
+        sim.step()
+        if sim.mode.get(0) == "search":
+            break
+    assert sim.mode.get(0) == "search" and sim.search_starts == 1
+    assert math.isclose(ant.position[0], 120.0, abs_tol=1.0)  # walked ~10 units toward the nest, then searched
+    before = sim.field.concentration.sum()
+    sim.step()
+    assert 0 in sim._searched and math.isclose(sim.field.concentration.sum(), before * math.exp(-math.log(2) / 200),
+                                               rel_tol=1e-9)  # decayed, nothing added
+
+
+def test_home_vector_full_run_is_valid():
+    cfg = config(steps=1500)
+    sim = PaperSimulation(cfg, baseline_options(0.01, homing="vector", compass_noise=0.1), record=True)
+    sim.run()
+    assert sim.ledger.deliveries["A"] > 0
+    assert sim.counts.sum(axis=1).tolist() == [cfg.n_ants] * cfg.steps
+
+
+def test_options_reject_noise_without_vector():
+    with pytest.raises(ValueError):
+        PaperOptions(compass_noise=0.1)

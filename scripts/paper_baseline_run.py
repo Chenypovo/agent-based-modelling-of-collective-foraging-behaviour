@@ -2,8 +2,10 @@
 """Paper-baseline runs (docs/PAPER_BASELINE_PLAN.md Sec. 3).
 
 paper  - Step 2: paper-faithful (no decay, D = 0, FCRW, 0.5/0.25) + pheromone-off, 10 seeds
-calib  - Step 3: half-life x D x thresholds (18 cells) + pheromone-off, 10 seeds
-valid  - Step 4: chosen cell (results/paper_baseline/calib/selection.json); ZW; arena 600;
+calib  - Step 3: half-life x D x thresholds (18 cells) + pheromone-off, 10 seeds (stride-3 return; all failed)
+calib2 - Step 3b (user decision after Step 3): home-vector return, compass noise {0, 0.1, 0.3} x the
+         same 18 cells = 54 cells, + pheromone-off per noise level, 10 fresh seeds
+valid  - Step 4: chosen cell (results/paper_baseline/calib2/selection.json); ZW; arena 600;
          paper layout (20,000 steps); each with its own pheromone-off control, 20 seeds
 """
 
@@ -30,6 +32,7 @@ from paper_baseline.model import PaperOptions, PaperSimulation, baseline_options
 
 OUT = ROOT / "results" / "paper_baseline"
 SEEDS = {"paper": range(2026280001, 2026280011), "calib": range(2026290001, 2026290011),
+         "calib2": range(2026310001, 2026310011),
          "valid": range(2026300001, 2026300021)}
 N_ANTS, STEP, GAMMA, THETA = 100, 0.6, 0.1, math.radians(50)
 STATIC_STEPS, PAPER_STEPS = 12000, 20000
@@ -47,10 +50,13 @@ def layout(name: str) -> dict:
     return {"arena": arena, "nest": (c, c), "food_a": (c + d, c + d), "food_b": (c - d, c + d)}
 
 
+NOISES = (0.0, 0.1, 0.3)
+
+
 def cond(name, *, field="diffusing", half_life=1000.0, D=0.0, thr="t50", walk="fcrw", deposit=True,
-         where="std", steps=STATIC_STEPS):
+         where="std", steps=STATIC_STEPS, homing="route", noise=0.0):
     return {"name": name, "field": field, "half_life": half_life, "D": D, "thr": thr, "walk": walk,
-            "deposit": deposit, "layout": where, "steps": steps}
+            "deposit": deposit, "layout": where, "steps": steps, "homing": homing, "noise": noise}
 
 
 def conditions(step: str) -> list[dict]:
@@ -60,8 +66,12 @@ def conditions(step: str) -> list[dict]:
         cells = [cond(f"h{h}_D{D}_{t}", half_life=float(h), D=D, thr=t)
                  for h in (500, 1000, 2000) for D in (0.0, 0.01, 0.02) for t in THRESHOLDS]
         return cells + [cond("off", deposit=False)]
-    chosen = json.loads((OUT / "calib" / "selection.json").read_text())["chosen"]
-    base = {k: chosen[k] for k in ("half_life", "D", "thr")}
+    if step == "calib2":
+        cells = [cond(f"n{n}_h{h}_D{D}_{t}", half_life=float(h), D=D, thr=t, homing="vector", noise=n)
+                 for n in NOISES for h in (500, 1000, 2000) for D in (0.0, 0.01, 0.02) for t in THRESHOLDS]
+        return cells + [cond(f"n{n}_off", deposit=False, homing="vector", noise=n) for n in NOISES]
+    chosen = json.loads((OUT / "calib2" / "selection.json").read_text())["chosen"]
+    base = {k: chosen[k] for k in ("half_life", "D", "thr", "homing", "noise")}
     arms = [("base", {}), ("zw", {"walk": "zw"}), ("a600", {"where": "a600"}),
             ("paperlayout", {"where": "paper", "steps": PAPER_STEPS})]
     out = []
@@ -83,7 +93,8 @@ def build(c: dict, seed: int) -> PaperSimulation:
         opts = PaperOptions(walk=c["walk"], boundary="reflect", return_stride=3, after_delivery="follower",
                             deposit=c["deposit"], field="no_decay")
     else:
-        opts = baseline_options(c["D"], walk=c["walk"], deposit=c["deposit"])
+        opts = baseline_options(c["D"], walk=c["walk"], deposit=c["deposit"], homing=c.get("homing", "route"),
+                                compass_noise=c.get("noise", 0.0))
     return PaperSimulation(config, opts, record=True)
 
 
@@ -120,6 +131,8 @@ def run_one(task):
                      "F": sim.counts[k - 1::k, 0].tolist(), "T": sim.counts[k - 1::k, 1].tolist(),
                      "f": sim.counts[k - 1::k, 2].tolist()}
     row["snapshots"] = snaps
+    if sim.options.homing == "vector":
+        row["search_starts"] = sim.search_starts
     row["wall_seconds"] = time.perf_counter() - start
     return row
 

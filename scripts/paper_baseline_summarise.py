@@ -32,7 +32,8 @@ def load(step: str) -> dict[str, list[dict]]:
 def off_name(name: str, groups: dict) -> str | None:
     if name.endswith("off"):
         return None
-    for cand in (f"{name}_off", "off"):
+    noise_off = name.split("_")[0] + "_off" if name.startswith("n") else None  # calib2: n{noise}_off
+    for cand in (f"{name}_off", noise_off, "off"):
         if cand in groups:
             return cand
     return None
@@ -46,7 +47,9 @@ def evaluate(groups: dict) -> dict[str, dict]:
         res = checks.condition_checks(runs, off_psi)
         res["n"] = len(runs)
         res["deliveries_median"] = float(np.median([r["deliveries_window"] for r in runs]))
-        res["config"] = {k: runs[0][k] for k in ("field", "half_life", "D", "thr", "walk", "deposit", "layout", "steps")}
+        res["config"] = {k: runs[0].get(k, d) for k, d in (("field", None), ("half_life", None), ("D", None),
+                         ("thr", None), ("walk", None), ("deposit", None), ("layout", None), ("steps", None),
+                         ("homing", "route"), ("noise", 0.0))}
         out[name] = res
     return out
 
@@ -87,10 +90,10 @@ def main() -> int:
     text = [f"# Five static checks: step `{args.step}`", "",
             "Medians over seeds. Each check cell: ✓/✗ = condition-level pass (median meets it and ≥ 80% of "
             "seeds meet it), followed by the number of seeds meeting it.", "", table(results), ""]
-    if args.step == "calib":
+    if args.step in ("calib", "calib2"):
         sel = select(results)
         text += ["## Selection", "", json.dumps(sel, indent=1) if sel else "No cell reached basic pass: stop."]
-        (OUT / "calib" / "selection.json").write_text(json.dumps(sel, indent=1) + "\n")
+        (OUT / args.step / "selection.json").write_text(json.dumps(sel, indent=1) + "\n")
     (OUT / args.step / "summary.md").write_text("\n".join(text) + "\n")
     (OUT / args.step / "summary.json").write_text(json.dumps(results, indent=1, default=float) + "\n")
     print("\n".join(text))

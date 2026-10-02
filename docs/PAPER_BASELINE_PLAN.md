@@ -98,3 +98,42 @@ on hand-made inputs.
 
 Thresholds above can change only before Step 3. If no calibration cell reaches basic pass, the
 user decides what to relax. Step 2 and 3 are exploratory; only Step 4 is the validation.
+
+## 7. Amendment A (2026-10-02, user decision after Step 3 failed; written before any Step 3b run)
+
+**What happened.** Step 2 (paper-faithful, no decay) and Step 3 (18 Eq. (1) cells, stride-3
+coarse-grained return) both failed: no cell reached basic pass; ψ ≈ 0.64 in every cell (= random
+headings), trail share ≤ 5%, ≤ 22 deliveries in [6,000, 12,000). Diagnosis (seed 2026280001): the
+stride-3 return removes only small zigzags, so the return is ~95% as long as the outbound search
+(e.g. 823 vs 149 steps for a straight line); within 12,000 steps each ant makes too few trips for
+repeated coarse-graining to straighten anything, and the meandering returns lay pheromone over
+the arena (slow decay: 67% of the arena above the on-threshold) or too faintly (fast decay: < 1%).
+Step 2 and Step 3 results are kept and reported as failed (`results/paper_baseline/{paper,calib}/`).
+
+**Change (user, 2026-10-02).** Transporters return by **path integration**: each ant integrates its
+own displacement every step with Gaussian compass noise of SD σ (radians per step); a transporter
+walks straight toward its estimated nest. No landmarks. Implementation as Stage 5 / H1a
+(`stage5_navigation.path_integration`): the nest is perceived within 3 units; if the estimate says
+"home" but the nest is not perceived, the ant spiral-searches (spacing 4) and lays no pheromone
+while searching; on delivery the seen nest resets the estimate. All other rules unchanged
+(T → f with 180° turn, FCRW γ = 0.1 Θ = 50°, reflective walls, Eq. (1) field, bilateral sensing,
+follower → forager after 2 low steps). Implemented as option `homing="vector"`; "off" unchanged.
+
+**Why.**
+1. The paper itself (p. 6, Sec. IV) states that foraging ants can memorise the nest location "using
+   landmarks and path integration" and so travel home from the food "with little difficulty"; the
+   stride-3 memory is its simplification.
+2. The paper's own argument for the coarse-grained memory is its limit: repeated coarse-graining of a
+   path eventually leaves "a straight path connecting the nest and the food source". A straight home
+   vector is that end state reached directly; Step 2–3 show the limit is not reached in 12,000 steps.
+3. Supervisor: the Sep 2026 sketch shows a return path much straighter than the outbound search; his
+   teaching MATLAB model has transporters walk straight to the nest; and he asked us to study
+   egocentric (path integration) vs geocentric navigation, for which this is the egocentric baseline.
+
+**Step 3b calibration** (exploratory; replaces Step 3 for the selection): σ ∈ {0, 0.1, 0.3} ×
+the same 18 Eq. (1) cells = 54 cells, plus a pheromone-off run per σ (ψ_off for the basic tier is
+taken from the off-run with the same σ and seed), seeds **2026310001–010** (fresh), 570 runs.
+Checks, tiers and selection rule unchanged (full pass first, then basic; most median deliveries in
+[6,000, 12,000); ties within 5% → smaller D, then half-life 1000, then thresholds 0.5/0.25, then
+most deliveries). If no cell reaches basic pass: stop and report. Step 4 then uses the chosen
+(σ, half-life, D, thresholds) with seeds 2026300001–020 as planned.
