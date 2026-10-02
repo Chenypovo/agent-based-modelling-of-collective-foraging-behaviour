@@ -1,0 +1,21 @@
+0 of 20 runs already done; running 20
+[1/20] nodecay 2026280001 first=861 del=7 psi=0.640 phi=0.009 F=34 14s
+[2/20] nodecay 2026280004 first=941 del=4 psi=0.641 phi=0.000 F=47 14s
+[3/20] nodecay 2026280003 first=533 del=5 psi=0.635 phi=0.003 F=44 14s
+[4/20] nodecay 2026280002 first=2099 del=8 psi=0.645 phi=0.001 F=32 14s
+[5/20] nodecay 2026280005 first=1618 del=8 psi=0.640 phi=0.004 F=33 14s
+[6/20] nodecay 2026280006 first=3499 del=2 psi=0.636 phi=-0.001 F=41 14s
+[7/20] nodecay 2026280007 first=236 del=8 psi=0.639 phi=-0.000 F=33 15s
+[8/20] nodecay 2026280008 first=766 del=12 psi=0.641 phi=0.006 F=30 15s
+[9/20] nodecay 2026280009 first=742 del=3 psi=0.642 phi=-0.001 F=52 14s
+[10/20] nodecay 2026280010 first=2672 del=2 psi=0.639 phi=0.005 F=64 14s
+[11/20] off 2026280001 first=861 del=2 psi=0.639 phi=-0.005 F=96 14s
+[12/20] off 2026280002 first=2099 del=4 psi=0.638 phi=0.009 F=95 15s
+[13/20] off 2026280003 first=533 del=3 psi=0.638 phi=-0.002 F=98 17s
+[14/20] off 2026280004 first=941 del=1 psi=0.642 phi=0.004 F=99 17s
+[15/20] off 2026280005 first=1618 del=3 psi=0.641 phi=-0.000 F=98 17s
+[16/20] off 2026280006 first=3499 del=1 psi=0.637 phi=0.003 F=97 17s
+[17/20] off 2026280007 first=236 del=3 psi=0.636 phi=0.005 F=98 18s
+[18/20] off 2026280008 first=766 del=2 psi=0.642 phi=0.000 F=97 18s
+[19/20] off 2026280009 first=742 del=8 psi=0.642 phi=0.002 F=96 18s
+[20/20] off 2026280010 first=2672 del=1 psi=0.643 phi=0.004 F=96 19s

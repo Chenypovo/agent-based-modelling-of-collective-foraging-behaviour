@@ -1,0 +1,84 @@
+{
+ "nodecay": {
+  "c1": true,
+  "c2": true,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 10,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 901.0,
+   "recruitment": 0.9115384615384616,
+   "trail_share": 0.0580884804417444,
+   "deliveries_window": 6.0,
+   "r2": 0.8572724292200389,
+   "psi": 0.6400515646606721,
+   "phi": 0.001719802478002099,
+   "foragers": 37.295
+  },
+  "median_psi_gain": -0.0008337521557610916,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 6.0,
+  "config": {
+   "field": "no_decay",
+   "half_life": 1000.0,
+   "D": 0.0,
+   "thr": "t50",
+   "walk": "fcrw",
+   "deposit": true,
+   "layout": "std",
+   "steps": 12000
+  }
+ },
+ "off": {
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "c4": false,
+  "c5_full": false,
+  "c5_basic": false,
+  "seeds_meeting": {
+   "c1": 10,
+   "c2": 0,
+   "c3": 0,
+   "c4": 0,
+   "c5_full": 0,
+   "c5_basic": 0
+  },
+  "medians": {
+   "first_pickup": 901.0,
+   "recruitment": 0.0,
+   "trail_share": 0.0,
+   "deliveries_window": 2.5,
+   "r2": 0.768422720259363,
+   "psi": 0.640065730827782,
+   "phi": 0.0023531055945218366,
+   "foragers": 96.6605
+  },
+  "median_psi_gain": NaN,
+  "full_pass": false,
+  "basic_pass": false,
+  "n": 10,
+  "deliveries_median": 2.5,
+  "config": {
+   "field": "diffusing",
+   "half_life": 1000.0,
+   "D": 0.0,
+   "thr": "t50",
+   "walk": "fcrw",
+   "deposit": false,
+   "layout": "std",
+   "steps": 12000
+  }
+ }
+}
