@@ -137,3 +137,46 @@ Checks, tiers and selection rule unchanged (full pass first, then basic; most me
 [6,000, 12,000); ties within 5% → smaller D, then half-life 1000, then thresholds 0.5/0.25, then
 most deliveries). If no cell reaches basic pass: stop and report. Step 4 then uses the chosen
 (σ, half-life, D, thresholds) with seeds 2026300001–020 as planned.
+
+## 8. Amendment B (2026-10-03, user decision after Step 3b; written before any Step 3c run)
+
+**What happened (Step 3b, `results/paper_baseline/calib2/`).** With path-integration homing, checks
+1–4 passed in about 30 of 54 cells (best: ~1,300 deliveries in [6,000, 12,000), trail share
+0.55–0.87, ψ up to 0.88), but **no cell passed check 5 at either tier**. The binding criterion was φ:
+no cell median and no single run reached |φ − π/4| ≤ 0.1 (best median 0.616, best run 0.666; need
+≥ 0.685). ψ ≥ 0.8 was met by 16 cells and foragers ≤ 25 by 12. Step 3b is kept and reported as failed.
+
+**Two reasons, both recorded.**
+1. *Horizon.* The colony was still organising at 12,000 steps. Best cell (σ = 0, half-life 2000,
+   D = 0.01, 0.25/0.125), medians per 2,000-step block from 4,000 to 12,000: foragers 54 → 37 →
+   24 → 18, φ 0.33 → 0.46 → 0.57 → 0.62. Paper Fig. 4(d, e) runs to 20,000 steps.
+2. *Design flaw in the basic tier (our standard, not the model).* φ is the mean folded heading of all
+   N ants; searching foragers have random headings and pull φ toward 0, so φ ≈ (share of ants on the
+   trail) × π/4. |φ − π/4| ≤ 0.1 therefore needs roughly ≥ 87% of ants on the trail (≲ 13 foragers),
+   which is inconsistent with the basic tier's "foragers ≤ 25". The thresholds are **not** changed;
+   the inconsistency is reported.
+
+**Change (user).** All Step 3c and Step 4 runs last **20,000 steps**; every late window moves by
++8,000 steps; pass thresholds unchanged:
+
+| Check | 12,000-step version | 20,000-step version |
+|---|---|---|
+| 1 discovery | first pickup ≤ 4,000 | unchanged |
+| 2 recruitment window | [4,000, 12,000) | [4,000, 20,000) |
+| 3 trail share at | t = 10,000 | t = 18,000 |
+| 4 transport window | [6,000, 12,000) | [14,000, 20,000) |
+| 5 order / role means | [10,000, 12,000) | [18,000, 20,000) |
+
+**Step 3c calibration**: the full Step 3b grid (σ {0, 0.1, 0.3} × half-life {500, 1000, 2000} ×
+D {0, 0.01, 0.02} × thresholds {0.5/0.25, 0.25/0.125} = 54 cells, + pheromone-off per σ), 20,000
+steps, fresh seeds **2026320001–010**, 570 runs. Selection rule unchanged (full pass, then basic
+pass, most median deliveries in the transport window, same tie-breaks).
+
+**Fallback, fixed now (user).** If no cell reaches basic pass, choose among cells passing checks 1–4
+the one with the most median deliveries in [14,000, 20,000) (same tie-breaks), continue to Step 4,
+and state in the report that check 5 was **not passed**, with the actual ψ, φ and forager values.
+
+Step 4 (validation, seeds 2026300001–020) uses 20,000 steps and the same shifted windows for every
+arm; the paper-layout arm therefore uses the same windows as the others. Snapshots are saved at
+t = 1,000 / 4,000 / 10,000 / 18,000. Consequence for later briefs: H1a/H1b relocation must happen
+after the colony is organised, i.e. at 20,000 rather than 12,000 (to be fixed in those briefs).

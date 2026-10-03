@@ -11,6 +11,14 @@ RECRUIT_WINDOW, RECRUIT_MIN = (4000, 12000), 0.5
 TRAIL_TIME, TRAIL_WIDTH, TRAIL_MIN = 10000, 5.0, 0.5
 TRANSPORT_WINDOW, TRANSPORT_MIN, R2_MIN = (6000, 12000), 100, 0.95
 ORDER_WINDOW = (10000, 12000)
+# Amendment B (after Step 3b): 20,000-step runs, every late window shifted by 8,000 steps;
+# discovery limit and recruitment-window start unchanged, recruitment window ends at 20,000.
+WINDOWS = {
+    12000: {"recruit": RECRUIT_WINDOW, "trail_time": TRAIL_TIME, "transport": TRANSPORT_WINDOW,
+            "order": ORDER_WINDOW},
+    20000: {"recruit": (4000, 20000), "trail_time": 18000, "transport": (14000, 20000),
+            "order": (18000, 20000)},
+}
 PHI_TARGET, PHI_TOL = math.pi / 4, 0.1
 FULL = {"psi": 0.9, "foragers": 10}
 BASIC = {"psi": 0.8, "psi_gain": 0.1, "foragers": 25}

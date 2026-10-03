@@ -303,3 +303,28 @@ def test_home_vector_full_run_is_valid():
 def test_options_reject_noise_without_vector():
     with pytest.raises(ValueError):
         PaperOptions(compass_noise=0.1)
+
+
+def test_20k_windows_shift_late_windows_by_8000():
+    a, b = checks.WINDOWS[12000], checks.WINDOWS[20000]
+    assert b["trail_time"] == a["trail_time"] + 8000
+    assert b["transport"] == tuple(t + 8000 for t in a["transport"])
+    assert b["order"] == tuple(t + 8000 for t in a["order"])
+    assert b["recruit"] == (a["recruit"][0], 20000)
+    assert checks.DISCOVERY_MAX == 4000
+
+
+def test_fallback_selection_picks_most_deliveries_among_checks_1_to_4():
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+    from paper_baseline_summarise import select
+
+    def cell(c14, deliveries, D=0.01):
+        return {"full_pass": False, "basic_pass": False, "c1": True, "c2": True, "c3": True, "c4": c14,
+                "deliveries_median": deliveries, "medians": {"psi": 0.85, "phi": 0.6, "foragers": 15},
+                "config": {"D": D, "half_life": 2000.0, "thr": "t25"}}
+    results = {"a": cell(True, 1000), "b": cell(True, 1300), "c": cell(False, 2000), "n0.0_off": cell(False, 5)}
+    assert select(results) is None
+    sel = select(results, fallback=True)
+    assert sel["name"] == "b" and "FAILED" in sel["tier"]

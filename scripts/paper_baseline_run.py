@@ -4,9 +4,10 @@
 paper  - Step 2: paper-faithful (no decay, D = 0, FCRW, 0.5/0.25) + pheromone-off, 10 seeds
 calib  - Step 3: half-life x D x thresholds (18 cells) + pheromone-off, 10 seeds (stride-3 return; all failed)
 calib2 - Step 3b (user decision after Step 3): home-vector return, compass noise {0, 0.1, 0.3} x the
-         same 18 cells = 54 cells, + pheromone-off per noise level, 10 fresh seeds
-valid  - Step 4: chosen cell (results/paper_baseline/calib2/selection.json); ZW; arena 600;
-         paper layout (20,000 steps); each with its own pheromone-off control, 20 seeds
+         same 18 cells = 54 cells, + pheromone-off per noise level, 10 fresh seeds (no cell passed check 5)
+calib3 - Step 3c (Amendment B, after Step 3b): calib2 grid at 20,000 steps, late windows +8,000, fresh seeds
+valid  - Step 4: chosen cell (results/paper_baseline/calib3/selection.json); ZW; arena 600;
+         paper layout; each with its own pheromone-off control, 20 seeds, 20,000 steps
 """
 
 from __future__ import annotations
@@ -32,11 +33,11 @@ from paper_baseline.model import PaperOptions, PaperSimulation, baseline_options
 
 OUT = ROOT / "results" / "paper_baseline"
 SEEDS = {"paper": range(2026280001, 2026280011), "calib": range(2026290001, 2026290011),
-         "calib2": range(2026310001, 2026310011),
+         "calib2": range(2026310001, 2026310011), "calib3": range(2026320001, 2026320011),
          "valid": range(2026300001, 2026300021)}
 N_ANTS, STEP, GAMMA, THETA = 100, 0.6, 0.1, math.radians(50)
 STATIC_STEPS, PAPER_STEPS = 12000, 20000
-SNAP_TIMES, SERIES_EVERY, FIELD_SEEDS = (1000, 4000, 10000), 10, 3
+SNAP_TIMES, SERIES_EVERY, FIELD_SEEDS = (1000, 4000, 10000, 18000), 10, 3
 THRESHOLDS = {"t50": (0.5, 0.25), "t25": (0.25, 0.125)}
 
 
@@ -66,14 +67,15 @@ def conditions(step: str) -> list[dict]:
         cells = [cond(f"h{h}_D{D}_{t}", half_life=float(h), D=D, thr=t)
                  for h in (500, 1000, 2000) for D in (0.0, 0.01, 0.02) for t in THRESHOLDS]
         return cells + [cond("off", deposit=False)]
-    if step == "calib2":
-        cells = [cond(f"n{n}_h{h}_D{D}_{t}", half_life=float(h), D=D, thr=t, homing="vector", noise=n)
+    if step in ("calib2", "calib3"):
+        steps = STATIC_STEPS if step == "calib2" else PAPER_STEPS
+        cells = [cond(f"n{n}_h{h}_D{D}_{t}", half_life=float(h), D=D, thr=t, homing="vector", noise=n, steps=steps)
                  for n in NOISES for h in (500, 1000, 2000) for D in (0.0, 0.01, 0.02) for t in THRESHOLDS]
-        return cells + [cond(f"n{n}_off", deposit=False, homing="vector", noise=n) for n in NOISES]
-    chosen = json.loads((OUT / "calib2" / "selection.json").read_text())["chosen"]
+        return cells + [cond(f"n{n}_off", deposit=False, homing="vector", noise=n, steps=steps) for n in NOISES]
+    chosen = json.loads((OUT / "calib3" / "selection.json").read_text())["chosen"]
     base = {k: chosen[k] for k in ("half_life", "D", "thr", "homing", "noise")}
-    arms = [("base", {}), ("zw", {"walk": "zw"}), ("a600", {"where": "a600"}),
-            ("paperlayout", {"where": "paper", "steps": PAPER_STEPS})]
+    base["steps"] = PAPER_STEPS
+    arms = [("base", {}), ("zw", {"walk": "zw"}), ("a600", {"where": "a600"}), ("paperlayout", {"where": "paper"})]
     out = []
     for name, extra in arms:
         out.append(cond(name, **base, **extra))
@@ -104,11 +106,12 @@ def run_one(task):
     sim = build(c, seed)
     g = layout(c["layout"])
     snaps, trail = {}, None
+    win = checks.WINDOWS[c["steps"]]
     while sim.time < sim.config.steps:
         sim.step()
         if sim.time in SNAP_TIMES:
             snaps[sim.time] = [[round(a.position[0], 2), round(a.position[1], 2), a.role] for a in sim.ants]
-        if sim.time == checks.TRAIL_TIME:
+        if sim.time == win["trail_time"]:
             trail = checks.trail_share(sim.field.concentration, 1.0, g["nest"], g["food_a"])
             if seed - SEEDS_START[out_dir.parent.name] < FIELD_SEEDS:
                 np.savez_compressed(out_dir / f"field_{c['name']}_{seed}.npz",
@@ -116,15 +119,13 @@ def run_one(task):
     events = sim.ledger.events
     pickups = [e["time"] for e in events if e["event"] == "pickup"]
     deliveries = [e["time"] for e in events if e["event"] == "delivery"]
-    count, r2 = checks.transport(deliveries)
-    row = {**c, "seed": seed, "first_pickup": checks.first_pickup(pickups, c["steps"]),
-           "recruitment": checks.recruitment_share(sim.pickup_roles), "trail_share": trail,
-           "deliveries_window": count, "r2": r2, **checks.window_means(sim.phi, sim.psi, sim.counts),
+    count, r2 = checks.transport(deliveries, window=win["transport"])
+    row = {**c, "seed": seed, "windows": win, "first_pickup": checks.first_pickup(pickups, c["steps"]),
+           "recruitment": checks.recruitment_share(sim.pickup_roles, window=win["recruit"]), "trail_share": trail,
+           "deliveries_window": count, "r2": r2,
+           **checks.window_means(sim.phi, sim.psi, sim.counts, window=win["order"]),
            "deliveries_total": len(deliveries), "pickups_total": len(pickups),
            "pickup_roles": sim.pickup_roles, "delivery_times": deliveries}
-    if c["steps"] >= PAPER_STEPS:
-        late = checks.window_means(sim.phi, sim.psi, sim.counts, window=(18000, 20000))
-        row["late"] = late
     k = SERIES_EVERY
     row["series"] = {"time": list(range(k, c["steps"] + 1, k)),
                      "phi": np.round(sim.phi[k - 1::k], 4).tolist(), "psi": np.round(sim.psi[k - 1::k], 4).tolist(),

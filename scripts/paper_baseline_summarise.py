@@ -68,7 +68,7 @@ def table(results: dict) -> str:
     return "\n".join(lines)
 
 
-def select(results: dict) -> dict | None:
+def select(results: dict, fallback: bool = False) -> dict | None:
     cells = {k: v for k, v in results.items() if not k.endswith("off")}
     for tier in ("full_pass", "basic_pass"):
         ok = {k: v for k, v in cells.items() if v[tier]}
@@ -79,6 +79,16 @@ def select(results: dict) -> dict | None:
                                       kv[1]["config"]["thr"] != "t50", -kv[1]["deliveries_median"]))
             name, v = near[0]
             return {"tier": tier, "name": name, "chosen": v["config"], "tied": [k for k, _ in near]}
+    if fallback:  # Amendment B: no basic pass -> best of the cells passing checks 1-4; check 5 reported failed
+        ok = {k: v for k, v in cells.items() if v["c1"] and v["c2"] and v["c3"] and v["c4"]}
+        if ok:
+            best = max(v["deliveries_median"] for v in ok.values())
+            near = [(k, v) for k, v in ok.items() if v["deliveries_median"] >= 0.95 * best]
+            near.sort(key=lambda kv: (kv[1]["config"]["D"], kv[1]["config"]["half_life"] != 1000,
+                                      kv[1]["config"]["thr"] != "t50", -kv[1]["deliveries_median"]))
+            name, v = near[0]
+            return {"tier": "fallback_checks_1_to_4_only (check 5 FAILED)", "name": name, "chosen": v["config"],
+                    "tied": [k for k, _ in near], "check5_medians": {k: v["medians"][k] for k in ("psi", "phi", "foragers")}}
     return None
 
 
@@ -90,8 +100,8 @@ def main() -> int:
     text = [f"# Five static checks: step `{args.step}`", "",
             "Medians over seeds. Each check cell: ✓/✗ = condition-level pass (median meets it and ≥ 80% of "
             "seeds meet it), followed by the number of seeds meeting it.", "", table(results), ""]
-    if args.step in ("calib", "calib2"):
-        sel = select(results)
+    if args.step in ("calib", "calib2", "calib3"):
+        sel = select(results, fallback=args.step == "calib3")
         text += ["## Selection", "", json.dumps(sel, indent=1) if sel else "No cell reached basic pass: stop."]
         (OUT / args.step / "selection.json").write_text(json.dumps(sel, indent=1) + "\n")
     (OUT / args.step / "summary.md").write_text("\n".join(text) + "\n")
