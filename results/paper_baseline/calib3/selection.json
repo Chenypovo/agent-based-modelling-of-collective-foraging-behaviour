@@ -1,0 +1,26 @@
+{
+ "tier": "fallback_checks_1_to_4_only (check 5 FAILED)",
+ "name": "n0.1_h2000_D0.01_t25",
+ "chosen": {
+  "field": "diffusing",
+  "half_life": 2000.0,
+  "D": 0.01,
+  "thr": "t25",
+  "walk": "fcrw",
+  "deposit": true,
+  "layout": "std",
+  "steps": 20000,
+  "homing": "vector",
+  "noise": 0.1
+ },
+ "tied": [
+  "n0.1_h2000_D0.01_t25",
+  "n0.0_h2000_D0.01_t25",
+  "n0.1_h1000_D0.02_t25"
+ ],
+ "check5_medians": {
+  "psi": 0.9339913682683135,
+  "phi": 0.6930895659701231,
+  "foragers": 6.523
+ }
+}
