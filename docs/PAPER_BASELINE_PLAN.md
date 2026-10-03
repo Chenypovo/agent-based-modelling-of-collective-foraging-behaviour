@@ -180,3 +180,9 @@ Step 4 (validation, seeds 2026300001–020) uses 20,000 steps and the same shift
 arm; the paper-layout arm therefore uses the same windows as the others. Snapshots are saved at
 t = 1,000 / 4,000 / 10,000 / 18,000. Consequence for later briefs: H1a/H1b relocation must happen
 after the colony is organised, i.e. at 20,000 rather than 12,000 (to be fixed in those briefs).
+
+**Step 3c outcome (2026-10-03, recorded after the run).** No cell reached basic pass; fallback applied.
+Chosen: σ = 0.1, half-life 2000, D = 0.01, thresholds 0.25/0.125 (medians ψ 0.934, φ 0.693,
+foragers 6.5, deliveries 1,683; check 5 met by 7/10 seeds, 8 needed). Note for the report: the
+tie-break list did not cover compass noise; σ = 0 and σ = 0.1 (same pheromone settings, 1,664 vs
+1,683 deliveries) were separated by the last tie-break, most deliveries, so σ = 0.1 was chosen.
