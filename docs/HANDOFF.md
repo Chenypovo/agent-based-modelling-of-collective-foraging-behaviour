@@ -3,7 +3,7 @@
 New session: read this file first, then do **Next task** only. Keep process light: code + tests + a
 short REPORT.md, no new preregistration or receipt machinery unless the task says so.
 
-Last updated: 2026-09-30 evening (H1a done; supervisor meeting moved to 2 Oct).
+Last updated: 2026-10-03 (paper baseline done on branch `paper-baseline`; next: H1a/H1b reruns on it).
 
 ## Project in one paragraph
 
@@ -17,6 +17,7 @@ search-benchmark layer (Stage 4) is **paused** until the physics model is settle
 
 | Item | Location |
 |---|---|
+| **Paper baseline (current model)** | `src/paper_baseline/` (`model.py` options, `checks.py` five checks); plan `docs/PAPER_BASELINE_PLAN.md`; report `results/paper_baseline/REPORT.md`; scripts `scripts/paper_baseline_{run,summarise,figures}.py` |
 | Validated scalar model (do not edit) | `src/scalar_baseline/` |
 | Stage 5 navigation code | `src/stage5_navigation/` (`model.py` coarse return, `path_integration.py`, `diffusion.py`) |
 | Stage 5 tests | `tests/test_stage5_*.py` |
@@ -69,14 +70,32 @@ Branch `h1b-heterogeneity` (from `h1a-baseline`, not pushed). Plan `docs/H1B_ANA
   includes the homo-37.43° control for the colony-spread confound) — user to decide; Step 5 REPORT.md
   + this file.
 
+## Paper baseline status (done 2026-10-03, branch `paper-baseline`, not pushed)
+
+- Paper rules (stride-3 return) did not organise the colony with or without Eq. (1) decay/diffusion
+  (Steps 2–3, ψ = 0.64). User decisions after failures, recorded before the next run: Amendment A =
+  path-integration homing (no landmarks); Amendment B = 20,000-step runs, late windows +8,000.
+- **Baseline:** FCRW γ 0.1 Θ 50°, home vector with compass noise 0.1, T → f with 180° turn, half-life
+  2000, D = 0.01, thresholds 0.25/0.125, 300 × 300 reflective, nest (150, 150), food 90 away on 45°.
+  Chosen by the fallback rule (no cell reached basic pass in calibration).
+- **Validation (20 seeds):** checks 1–4 pass 20/20; check 5 medians at full level (ψ 0.940, φ 0.704,
+  5.9 foragers) but only 14/20 seeds (16 needed) → **check 5 formally not passed**. Pheromone-off
+  fails 2, 3, 5 (order comes from pheromone). ZW arm: full pass (16/20). Arena 600: check 5 fails
+  (depends on arena size). Paper layout: check 5 20/20, check 1 fails (food twice as far).
+- Basic tier has a design flaw (φ line needs ≲ 13 foragers, tier allows 25); reported, not changed.
+- Per-run JSON files are untracked (~230 MB); summaries, plan and report are committed.
+
 ## Supervisor feedback from 2 Oct meeting
 
 _To fill in after the meeting._
 
 ## Next task
 
-Do `docs/TASK_BRIEF_H1B.md` (Part A: small H1a text fixes; Part B: H1b movement heterogeneity).
-Then H2 (LLM search) after fixing the five Stage 4 issues and getting the user's API choice. Deadline 15 Oct.
+Paper baseline is done (`results/paper_baseline/REPORT.md`). Next: rerun **H1a/H1b on the paper
+baseline** (brief to be written by the master session), then H2. Deadline 15 Oct. Constraints from
+the baseline: relocate food at 20,000 steps (not 12,000); start from σ = 0.1 home vector without
+landmarks; report that the baseline did not formally pass check 5 (14/20 seeds). Supervisor asked
+for self-explanatory figures (line plots, one sentence each).
 
 **Done means:** tests pass (`python3 -m pytest -q`), results + REPORT.md written, committed on a branch,
 this file updated (status, what changed, next task).
